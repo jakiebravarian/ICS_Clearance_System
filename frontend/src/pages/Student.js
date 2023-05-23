@@ -5,7 +5,7 @@ export default function Student() {
     return (
         <div>
             <div className="header">
-                <h1>hello, world</h1>
+                <h3 className="centered">Institute of Computer Science - Clearance Approval System</h3>
             </div>
         </div>
     )
