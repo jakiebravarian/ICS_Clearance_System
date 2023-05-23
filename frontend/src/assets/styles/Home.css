@@ -1,0 +1,37 @@
+body {
+  font-family: Roboto, Roboto Slab;
+  color: #000;
+  background-color: #fff;
+}
+
+li {
+  font-family: Roboto;
+}
+
+h2 {
+  font-family: Roboto Slab;
+}
+
+h3 {
+  font-family: Roboto;
+}
+
+.wrapper {
+  margin: 0 auto  ;
+  padding-right: 10px; /* 3 */
+  padding-left:  10px; /* 3 */ 
+}
+
+ul{
+  padding: 0;
+  margin: 0;
+}
+
+ul li{
+  list-style: none;
+}
+
+nav ul li{
+  padding: 10px;
+  float: right;
+}
