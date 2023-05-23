@@ -1,4 +1,4 @@
-import "./assets/student.css"
+import "./assets/styles/student.css"
 
 function App() {
   return (
