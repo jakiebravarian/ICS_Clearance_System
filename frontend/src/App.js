@@ -1,3 +1,5 @@
+import "./assets/styles/student.css"
+  
 import './assets/styles/Home.css'
 
 function App() {
