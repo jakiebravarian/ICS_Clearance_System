@@ -10,9 +10,11 @@ const UserSchema = new mongoose.Schema({
   password: { type: String, required: true },
   studentNumber: { type: String, required: false },
   useType: { type: String, required: true },
-  adviser: { type: String, required: false },
+  adviser: { type: SchemaType.ObjectId, ref: user, required: false },
   application: [{ type: SchemaType.ObjectId, ref: application }],
 });
 
 const application = mongoose.model("application", AppSchema);
 const user = mongoose.model("user", UserSchema);
+
+export default user;
