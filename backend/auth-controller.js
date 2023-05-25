@@ -1,8 +1,8 @@
 import mongoose from "mongoose";
 import bcrypt from "bcrypt";
-import UserSchema from "./models/user.js";
+import {UserSchema} from "./models/user.js";
 
-const User = mongoose.model("user", UserSchema);
+const User = mongoose.model("User", UserSchema);
 
 const signUp = async (req, res) => {
     //add adviser and application
@@ -31,5 +31,4 @@ const signUp = async (req, res) => {
     })
 }
 
-
-export {signUp} ;
+export {signUp};
