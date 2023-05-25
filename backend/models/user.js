@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
-import bcrypt from "bcrypt";
-import AppSchema from "./application.";
+//import AppSchema from "./application.js";
+
+const {Schema} = mongoose;
 
 const UserSchema = new mongoose.Schema({
   firstName: { type: String, required: true },
@@ -9,12 +10,15 @@ const UserSchema = new mongoose.Schema({
   upMail: { type: String, required: true },
   password: { type: String, required: true },
   studentNumber: { type: String, required: false },
-  useType: { type: String, required: true },
-  adviser: { type: SchemaType.ObjectId, ref: user, required: false },
-  application: [{ type: SchemaType.ObjectId, ref: application }],
+  userType: { type: String, required: true },
+  adviser: { type: Schema.Types.ObjectId, ref: 'user', required: false },
+  //application: [{ type: Schema.Types.ObjectId, ref: 'application' }],
 });
 
-const application = mongoose.model("application", AppSchema);
+//register model name
+mongoose.model("user", UserSchema);
+
+//const application = mongoose.model("application", AppSchema);
 const user = mongoose.model("user", UserSchema);
 
-export default user;
+export default UserSchema;
