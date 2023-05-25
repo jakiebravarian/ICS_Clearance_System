@@ -10,9 +10,9 @@ const UserSchema = new Schema({
   studentNumber: { type: String, required: false },
   userType: { type: String, required: true },
   adviser: { type: Schema.Types.ObjectId, ref: "User", required: false },
-  application: [{ type: Schema.Types.ObjectId, ref: 'Application' }],
+  application: [{ type: Schema.Types.ObjectId, ref: "Application" }],
 });
 
-const User= mongoose.model("User", UserSchema);
+const User = mongoose.model("User", UserSchema);
 
-export{UserSchema};
+export { UserSchema, User };

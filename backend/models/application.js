@@ -1,6 +1,5 @@
 import mongoose from "mongoose";
 const { Schema } = mongoose;
-import { UserSchema } from "./user";
 
 const AppSchema = new Schema({
   status: { type: String, required: true },
@@ -19,7 +18,6 @@ const AppSchema = new Schema({
     stepGivenSubmission: { type: Number, required: true },
   },
 });
-const User = mongoose.model("User", UserSchema);
-const Application = mongoose.model("Application", AppSchema);
 
-export{AppSchema};
+
+export default AppSchema;

@@ -1,12 +1,13 @@
 import express from "express";
 import mongoose from "mongoose";
 import setUpRoutes from "./routes.js";
-
+import cookieParser from "cookie-parser";
 
 // initialize the server
 const app = express();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(cookieParser());
 
 // connect to MongoDB
 await mongoose.connect("mongodb://127.0.0.1:27017/ICS");
