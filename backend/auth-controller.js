@@ -11,7 +11,7 @@ const signUp = async (req, res) => {
     //check if upmail is already existing (findone)
     if(emailChecker)
     {
-        return res.send("Email already exists!") ;
+        return res.send({emailExist: true}) ;
     }
     else
     {
@@ -74,13 +74,34 @@ const login = async (req,res) => {
 
             // return the token to the client
             return res.send({ success: true, token, username: user.name });
-        
         }
     })
 
 }
 
-const checkifloggedin = async (res,req) => {
+const checkifloggedin = async (req, res) => {
+    if (!req.cookies || !req.cookies.authToken) {
+        // FAIL Scenario 1 - No cookies / no authToken cookie sent
+        return res.send({ isLoggedIn3: false });
+      }
     
+      try {
+        // try to verify the token
+        const tokenPayload = jwt.verify(req.cookies.authToken, 'THIS_IS_A_SECRET_STRING');
+    
+        // check if the _id in the payload is an existing user id
+        const user = await User.findById(tokenPayload._id)
+    
+        if (user) {
+          // SUCCESS Scenario - User is found
+          return res.send({ isLoggedIn: true })
+        } else {
+          // FAIL Scenario 2 - Token is valid but user id not found
+          return res.send({ isLoggedIn1: false })
+        }
+      } catch {
+        // FAIL Scenario 3 - Error in validating token / Token is not valid
+        return res.send({ isLoggedIn2: false });
+      }
 }
 export {signUp, login, checkifloggedin};
