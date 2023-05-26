@@ -17,7 +17,7 @@ class Home extends React.Component {
                         <div class="dropdown-content">
                             <a href="/login">Student</a>
                             <a href="/login-approver">Approver</a>
-                            <a href="#">Admin</a>
+                            {/* <a href="#">Admin</a> */}
                         </div>
                     </div>
                 </div>

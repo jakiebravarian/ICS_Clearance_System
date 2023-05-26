@@ -2,7 +2,7 @@ import React from "react";
 import logo from '../assets/ICS.png';
 import '../assets/styles/Home.css'
 
-class Login extends React.Component {
+class SignUpApprover extends React.Component {
 
     render() {
         return (
@@ -30,15 +30,17 @@ class Login extends React.Component {
                 </div>
                 {/* Right Side */}
                 <div className="form">
-                    <h1 id="login-h1">Welcome Back, Student!</h1>
-                    <input type="text" placeholder="UP Mail" id="email-login" required={true} /> <br />
-                    <input type="password" placeholder="Password" id="password-login" required={true} /> <br />
-                    <button id="login-button">Login</button>
-                    <p id="login-p">Don’t have an account yet? <span><a href="/signup" id="signup-link">Sign up</a></span></p>
+                    <h1 id="signup-h1">Create Approver Account</h1>
+                    <input type="text" placeholder="First Name" id="first-name" required={true} /> <br />
+                    <input type="text" placeholder="Middle Name" id="middle-name" /> <br />
+                    <input type="text" placeholder="Last Name" id="last-name" required={true} /> <br />
+                    <input type="text" placeholder="UP Mail" id="email" required={true} /> <br />
+                    <input type="password" placeholder="Password" id="password" required={true} /> <br />
+                    <button id="signup-button">Sign Up</button>
                 </div>
             </div>
         )
     }
 }
 
-export default Login
+export default SignUpApprover

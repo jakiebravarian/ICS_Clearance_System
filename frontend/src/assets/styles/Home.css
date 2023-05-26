@@ -1,4 +1,6 @@
+html,
 body {
+  height: 100%;
   font-family: Roboto;
   font-weight: normal;
   font-size: 20px;
@@ -7,20 +9,26 @@ body {
 }
 
 .wrapper {
+  height: 100%;
   margin: 0 auto;
-  padding: 0px 70px 0px 70px;
+  padding: 0px 70px 0px 0px;
 }
+
+/* -------------------------------------------------------------------------------------- */
 
 /* Navbar container */
 .navbar {
   margin: 32px 0px 0px 32px;
   float: right;
   overflow: hidden;
+  ;
 }
 
 /* Links inside the navbar */
 .navbar a {
+  position: relative;
   float: left;
+  z-index: 98;
   font-size: 18px;
   color: #000;
   text-align: center;
@@ -57,6 +65,8 @@ body {
   background-color: inherit;
   font-family: inherit;
   margin: 0;
+  position: relative;
+  z-index: 98;
 }
 
 i {
@@ -75,7 +85,7 @@ i {
   background-color: #f9f9f9;
   min-width: 120px;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-  z-index: 1;
+  z-index: 99;
 }
 
 /* Links inside the dropdown */
@@ -136,6 +146,8 @@ img {
   z-index: 2;
 }
 
+
+
 h2 {
   font-family: Roboto Slab;
   font-weight: bold;
@@ -151,4 +163,105 @@ h3 {
   color: #fff;
   letter-spacing: 1px;
   margin: 0 auto 0 auto;
+}
+
+/* -------------------------------------------------------------------------------------- */
+#login-container {
+  /* itself */
+  float: left;
+  background-color: #094C9F;
+  width: 92vh;
+  height: 100vh;
+  /* contents */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#login-img {
+  max-width: 250px;
+  height: auto;
+  position: unset;
+}
+
+#login-h2 {
+  font-family: Roboto Slab;
+  font-weight: bold;
+  font-size: 24px;
+  letter-spacing: 1.5px;
+  margin: 48px auto 0 auto;
+  color: #fff;
+}
+
+.form {
+  position: absolute;
+  top: 50%;
+  left: 75%;
+  transform: translate(-50%, -50%);
+  padding: 10px;
+  z-index: 1;
+}
+
+#login-h1,
+#signup-h1 {
+  font-family: Roboto Slab;
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 46px;
+  letter-spacing: 0em;
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+#signup-h1 {
+  margin-top: 64px;
+  margin-bottom: 16px;
+}
+
+#email-login,
+#password-login,
+#email-login-approver,
+#password-login-approver {
+  font-size: 16px;
+  padding: 14px 20px;
+  margin: 16px 0;
+  border-radius: 15px;
+}
+
+input {
+  width: 65vh;
+  font-size: 14px;
+  padding: 10px 20px;
+  margin: 6px 0;
+  box-sizing: border-box;
+  border-radius: 10px;
+  border: 1.5px solid #000000;
+}
+
+#login-button,
+#signup-button {
+  margin: 16px 0;
+  width: 100%;
+  border-radius: 15px;
+  background-color: #094C9F;
+  border: none;
+  color: #FFFFFF;
+  font-size: 16px;
+  font-weight: 700;
+  height: 40px;
+  cursor: pointer;
+}
+
+#login-p,
+#signup-link {
+  font-family: Roboto;
+  font-size: 16px;
+  font-weight: 100;
+  text-align: center;
+}
+
+#signup-link {
+  color: #094C9F;
+  text-decoration: none;
 }
