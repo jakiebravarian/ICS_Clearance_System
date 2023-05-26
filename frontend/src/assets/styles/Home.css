@@ -1,37 +1,154 @@
 body {
-  font-family: Roboto, Roboto Slab;
+  font-family: Roboto;
+  font-weight: normal;
+  font-size: 20px;
   color: #000;
   background-color: #fff;
 }
 
-li {
-  font-family: Roboto;
+.wrapper {
+  margin: 0 auto;
+  padding: 0px 70px 0px 70px;
+}
+
+/* Navbar container */
+.navbar {
+  margin: 32px 0px 0px 32px;
+  float: right;
+  overflow: hidden;
+}
+
+/* Links inside the navbar */
+.navbar a {
+  float: left;
+  font-size: 18px;
+  color: #000;
+  text-align: center;
+  padding: 10px 32px;
+  text-decoration: none;
+}
+
+.navbar #signup {
+  float: left;
+  font-size: 18px;
+  color: #fff;
+  background-color: #094C9F;
+  text-align: center;
+  padding: 10px 32px;
+  text-decoration: none;
+}
+
+/* The dropdown container */
+.dropdown {
+  float: left;
+  padding: 0px;
+  overflow: hidden;
+}
+
+/* Dropdown button */
+.dropdown .dropbtn {
+  text-align: left;
+  font-size: 18px;
+  border: none;
+  outline: none;
+  color: #000;
+  margin: 0;
+  padding: 10px 16px 10px 24px;
+  background-color: inherit;
+  font-family: inherit;
+  margin: 0;
+}
+
+i {
+  margin-left: 32px;
+}
+
+.navbar a:hover {
+  color: #fff;
+  background-color: #094C9F;
+}
+
+/* Dropdown content (hidden by default) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 120px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+  float: none;
+  color: black;
+  padding: 10px 16px 10px 24px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+.dropdown-content a:hover {
+  color: #fff;
+  background-color: #094C9F;
+}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+/* -------------------------------------------------------------------------------------- */
+.container {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.box {
+  /* positioning */
+  position: absolute;
+  top: 240px;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  z-index: 1;
+  /* itself */
+  background-color: #094C9F;
+  border-radius: 20px;
+  width: 46%;
+  height: 54%;
+  /* contents */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* align-items: center; */
+}
+
+img {
+  max-width: 250px;
+  height: auto;
+  position: absolute;
+  top: 128px;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  z-index: 2;
 }
 
 h2 {
   font-family: Roboto Slab;
+  font-weight: bold;
+  font-size: 24px;
+  letter-spacing: 1.5px;
+  margin: 112px auto 0 auto;
+  color: #fff;
 }
 
 h3 {
-  font-family: Roboto;
-}
-
-.wrapper {
-  margin: 0 auto  ;
-  padding-right: 10px; /* 3 */
-  padding-left:  10px; /* 3 */ 
-}
-
-ul{
-  padding: 0;
-  margin: 0;
-}
-
-ul li{
-  list-style: none;
-}
-
-nav ul li{
-  padding: 10px;
-  float: right;
+  font-weight: bold;
+  font-size: 24px;
+  color: #fff;
+  letter-spacing: 1px;
+  margin: 0 auto 0 auto;
 }
