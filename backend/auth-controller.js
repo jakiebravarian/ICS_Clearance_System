@@ -6,30 +6,39 @@ import jwt from 'jsonwebtoken';
 const User = mongoose.model("User", UserSchema);
 
 const signUp = async (req, res) => {
-
-    const {  firstName, middleName, lastName, upMail, password, studentNumber, userType, adviser, application } = req.body;
-    bcrypt.hash(password, 10).then((hash) => {
-        User.create({
-            firstName: firstName,
-            middleName: middleName,
-            lastName: lastName,
-            upMail: upMail,
-            password: hash,
-            studentNumber: studentNumber,
-            userType: userType,
-            adviser: adviser,
-            application: application
+    
+    const emailChecker =  await User.findOne({upMail: req.body.upMail});
+    //check if upmail is already existing (findone)
+    if(emailChecker)
+    {
+        return res.send("Email already exists!") ;
+    }
+    else
+    {
+        const {  firstName, middleName, lastName, upMail, password, studentNumber, userType, adviser, application } = req.body;
+        bcrypt.hash(password, 10).then((hash) => {
+            User.create({
+                firstName: firstName,
+                middleName: middleName,
+                lastName: lastName,
+                upMail: upMail,
+                password: hash,
+                studentNumber: studentNumber,
+                userType: userType,
+                adviser: adviser,
+                application: application
+            })
+                .then(() => {
+                    res.send({success : true});
+                })
+                .catch((err) => {
+                    if (err){
+                        res.send({success : false})
+                        console.log(err);
+                    }
+                })
         })
-            .then(() => {
-                res.send({success : true});
-            })
-            .catch((err) => {
-                if (err){
-                    res.send({success : false})
-                    console.log(err);
-                }
-            })
-    })
+    }
 }
 
 const login = async (req,res) => {
