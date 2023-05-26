@@ -1,11 +1,12 @@
 import mongoose from "mongoose";
 import bcrypt from "bcrypt";
 import {UserSchema} from "./models/user.js";
+import jwt from 'jsonwebtoken';
 
 const User = mongoose.model("User", UserSchema);
 
 const signUp = async (req, res) => {
-    //add adviser and application
+
     const {  firstName, middleName, lastName, upMail, password, studentNumber, userType, adviser, application } = req.body;
     bcrypt.hash(password, 10).then((hash) => {
         User.create({
@@ -33,7 +34,6 @@ const signUp = async (req, res) => {
 
 const login = async (req,res) => {
     //get email and password from the body
-    const name = req.body.firstName;
     const email = req.body.upMail.trim();
     const password = req.body.password;
 
@@ -56,14 +56,22 @@ const login = async (req,res) => {
         }
         else
         {
-            // Scenario 3: SUCCESS
-            return res.send({ success: true })
+        // Scenario 3: SUCCESS
+            const tokenPayload = {
+                _id: user._id
+            }
+        
+            const token = jwt.sign(tokenPayload, "THIS_IS_A_SECRET_STRING");
+
+            // return the token to the client
+            return res.send({ success: true, token, username: user.name });
+        
         }
     })
 
 }
 
 const checkifloggedin = async (res,req) => {
-
+    
 }
 export {signUp, login, checkifloggedin};
