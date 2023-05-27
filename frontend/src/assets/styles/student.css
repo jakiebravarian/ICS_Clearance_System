@@ -108,9 +108,9 @@ body {
 
 #name-container {
     background-color: white;
-    width: 42%;
+    width: 43%;
     height: 26px;
-    margin-left: 22px;
+    margin-left: 12px;
     margin-top: 5px;
     border-radius: 20px;
     position: absolute;
@@ -119,8 +119,8 @@ body {
 
 #studno-container {
     background-color: white;
-    width: 15%;
-    margin-left: 692px;
+    width: 17%;
+    margin-left: 686px;
     text-align: center;
     border-radius: 20px;
     height: 26px;
@@ -130,8 +130,8 @@ body {
 
 #course-container {
     background-color: white;
-    width: 12%;
-    margin-left: 945px;
+    width: 11%;
+    margin-left: 964px;
     text-align: center;
     border-radius: 20px;
     height: 26px;
@@ -141,8 +141,8 @@ body {
 
 #college-container {
     background-color: white;
-    width: 12%;
-    margin-left: 1155px;
+    width: 13%;
+    margin-left: 1148px;
     text-align: center;
     border-radius: 20px;
     height: 26px;
@@ -171,4 +171,26 @@ body {
 
 #college-label {
     margin-left: 152px;
+}
+
+.form-prompt {
+    font-weight: bold;
+    margin-top: 45px;
+    margin-left: 80px;
+}
+
+.form-section {
+    border: 1px solid #8C8C8C;
+    margin-left: 80px;
+    margin-right: 80px;
+    border-radius: 20px;
+}
+
+.row > div > input {
+    width: 400px;
+}
+
+.row > div {
+    font-size: 17px;
+    margin: 20px;
 }

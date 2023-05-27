@@ -1,10 +1,28 @@
 import React from "react";
-// import { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 // import other components
-import ProfileHeader from "./StudentComponents";
+import { ProfileHeader, Application } from "./StudentComponents";
 
 export default function Student() {
+    // list of applications
+    const [Applications, setApplications] = useState([])
+
+    // add to list of applications when user inputs data
+    function eventHandler() {
+        // get user inputs
+        var dateApplied = document.getElementById("date-applied").value;
+
+        // create a new application object
+        var newApplication = {
+            "dateApplied": dateApplied,
+            "status": "Pending"
+        }
+
+        // add new application to the list of applications
+        setApplications([...Applications, newApplication]);
+    }
+
     return (
         <div className="wrapper">
             {/* header */}
@@ -49,6 +67,8 @@ export default function Student() {
                 </div>
             </div>
 
+            {/* application (either form or list) */}
+            <Application data={Applications} eventHandler={eventHandler}/>
 
         </div>
     )

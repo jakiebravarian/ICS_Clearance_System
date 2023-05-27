@@ -22,4 +22,87 @@ function ProfileHeader(props) {
     )
 }
 
-export default ProfileHeader;
+// application component: returns a form if there are no applications yet
+function Application(props, {eventHandler}) {
+    let applications = props.data;
+    
+    // gets the number of applications
+    let appCount = applications.length;
+
+    // if there are no opened applications yet
+    if (appCount == 0) { 
+        return(
+            <div>
+                {/* prompt */}
+                <div>
+                    <p className="form-prompt">No applications yet. To start one, please fill out the form below.</p>
+                </div>
+
+                {/*form */}
+                <div className="form-section">
+                    {/* first row */}
+                    <div className="row">
+                        <div>
+                            <label for="first-name">First name</label><br/>
+                            <input id="first-name"/><br></br>
+                        </div>
+                        <div>
+                            <label for="middle-name">Middle name</label><br/>
+                            <input id="middle-name"/><br></br>
+                        </div>
+                        <div>
+                            <label for="Last-name">Last name</label><br/>
+                            <input id="last-name"/><br></br>
+                        </div>
+                    </div>
+
+                    {/* second row */}
+                    <div className="row">
+                        <div>
+                            <label for="student-number">Student number</label><br/>
+                            <input id="student-number"/><br></br>
+                        </div>
+                        <div>
+                            <label for="degree-program">Degree program</label><br/>
+                            <input id="degree-program"/><br></br>
+                        </div>
+                        <div>
+                            <label for="college">College</label><br/>
+                            <input id="college"/><br></br>
+                        </div>
+                    </div>
+
+                    {/* third row */}
+                    <div className="row">
+                        <div>
+                            <label for="github-link">Github link</label><br/>
+                            <input id="github-link"/><br></br>
+                        </div>
+                        <div>
+                            <label for="github-link">Date applied</label><br/>
+                            <input id="date-applied"/><br></br>
+                        </div>
+                        <div>
+                            <label for="remarks">Remarks</label><br/>
+                            <input id="remarks"/><br></br>
+                        </div>
+                    </div>
+                    
+                    {/* button */}
+                    <div>
+                        <button onClick={() => eventHandler()} type='submit' className='button'>POST NOW!</button>
+                    </div>
+                </div>
+            </div>
+        )
+    }
+
+    // if there are applications, go to the view applications page
+    return(
+        <div>
+
+        </div>
+    )
+}
+
+export { ProfileHeader, Application };
