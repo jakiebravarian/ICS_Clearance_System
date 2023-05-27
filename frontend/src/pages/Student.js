@@ -2,7 +2,7 @@ import React from "react";
 import { useEffect, useState } from "react";
 
 // import other components
-import { ProfileHeader, Application } from "./StudentComponents";
+import { ProfileHeader, Application, Footer } from "./StudentComponents";
 
 export default function Student() {
     // list of applications
@@ -70,6 +70,8 @@ export default function Student() {
             {/* application (either form or list) */}
             <Application data={Applications} eventHandler={eventHandler}/>
 
+            {/* footer */}
+            <Footer/>
         </div>
     )
 }

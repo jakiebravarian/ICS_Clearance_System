@@ -33,6 +33,7 @@ body {
     margin: auto;
     height: 50%;
     padding: 10px;
+    text-align: center;
 }
 
 .row {
@@ -59,8 +60,8 @@ body {
     color: white;
     max-width: 200px;
     position: absolute;
-    right: 120px;
-    top: 21px;
+    right: 100px;
+    top: 5px;
 }
 
 .classification {
@@ -68,8 +69,8 @@ body {
     font-style: italic;
     font-size: 15px;
     position: absolute;
-    top: 42px;
-    right: 120px;
+    top: 22px;
+    right: 100px;
 }
 
 .profile-icon-img {
@@ -184,13 +185,34 @@ body {
     margin-left: 80px;
     margin-right: 80px;
     border-radius: 20px;
+    margin-bottom: 80px;
 }
 
 .row > div > input {
-    width: 400px;
+    width: 418px;
 }
 
 .row > div {
     font-size: 17px;
     margin: 20px;
+}
+
+.button {
+    background-color: #094C9F;
+    color: white;
+    width: 220px;
+    height: 40px;
+    border: none;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 17px;
+}
+
+.footer {
+    background-color: black;
+    height: 80px;
+    color: white;
+    align-items: center;
+    display: flex;
+    padding-left: 20px;
 }

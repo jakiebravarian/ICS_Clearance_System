@@ -30,7 +30,7 @@ function Application(props, {eventHandler}) {
     let appCount = applications.length;
 
     // if there are no opened applications yet
-    if (appCount == 0) { 
+    if (appCount === 0) { 
         return(
             <div>
                 {/* prompt */}
@@ -89,8 +89,8 @@ function Application(props, {eventHandler}) {
                     </div>
                     
                     {/* button */}
-                    <div>
-                        <button onClick={() => eventHandler()} type='submit' className='button'>POST NOW!</button>
+                    <div className="centered">
+                        <button onClick={() => eventHandler()} type='submit' className='button'>SUBMIT APPLICATION</button>
                     </div>
                 </div>
             </div>
@@ -105,4 +105,12 @@ function Application(props, {eventHandler}) {
     )
 }
 
-export { ProfileHeader, Application };
+function Footer() {
+    return(
+        <div className="footer">
+            <p>All rights reserved. 2023</p>
+        </div>
+    )
+}
+
+export { ProfileHeader, Application, Footer };
