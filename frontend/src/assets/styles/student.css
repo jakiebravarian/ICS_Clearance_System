@@ -6,7 +6,7 @@ body {
 .header {
     background: #094C9F;
     color: white;
-    padding: 30px;
+    padding: 27px;
     text-align: left;
     height: 25px    ;
 }
@@ -17,6 +17,9 @@ body {
     font-size: 24px;
     font-weight: 500;
     color: white;
+    position: absolute;
+    left: 48px;
+    top: 24px;
 }
 
 .centered {
@@ -45,7 +48,7 @@ body {
     max-width: 200px;
     position: absolute;
     right: 120px;
-    top: 24px;
+    top: 21px;
 }
 
 .classification {
@@ -53,7 +56,7 @@ body {
     font-style: italic;
     font-size: 15px;
     position: absolute;
-    top: 45px;
+    top: 42px;
     right: 120px;
 }
 
@@ -62,7 +65,7 @@ body {
     height: 60px;
     margin: 2px;
     position: absolute;
-    top: 14px;
+    top: 7px;
     left: 93%;
     border-radius: 50%;
 }
