@@ -9,11 +9,10 @@ export default function Student() {
         <div>
             {/* header */}
             <div className="header row">
-                <h3 className="centered">Institute of Computer Science - Clearance Approval System</h3>
-                
-                {/* profile */}
-                <ProfileHeader name="Alexanda Siocon" icon="https://img.freepik.com/free-icon/pikachu_318-196537.jpg"/>
+                <h1 className="header-text">Institute of Computer Science - Clearance Approval System</h1>
             </div>
+                
+            <ProfileHeader name="Alexandra Siocon" classification="Student" icon="https://cdn.fansshare.com/image/pikachu/pikachu-wallpaper-540621355.jpg"/>
         </div>
     )
 }

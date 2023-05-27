@@ -6,10 +6,17 @@ body {
 .header {
     background: #094C9F;
     color: white;
-    padding: 50px;
+    padding: 30px;
     text-align: left;
-    font-size: 30px; 
-    height: 50px    ;
+    height: 25px    ;
+}
+
+.header-text {
+    margin: 0;
+    font-family: Roboto Slab;
+    font-size: 24px;
+    font-weight: 500;
+    color: white;
 }
 
 .centered {
@@ -21,4 +28,45 @@ body {
 .row {
     display: flex;
     flex-direction: row;
+}
+
+.inline-block {
+    display: inline-block;
+}
+
+.wrapped {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.profile-name {
+    color: white;
+    max-width: 200px;
+    position: absolute;
+    right: 120px;
+    top: 24px;
+}
+
+.classification {
+    color: rgb(217, 217, 217);
+    font-style: italic;
+    font-size: 15px;
+    position: absolute;
+    top: 45px;
+    right: 120px;
+}
+
+.profile-icon-img {
+    width: 60px;
+    height: 60px;
+    margin: 2px;
+    position: absolute;
+    top: 14px;
+    left: 93%;
+    border-radius: 50%;
+}
+
+#main-elements {
+    margin-top: 100px;
 }
