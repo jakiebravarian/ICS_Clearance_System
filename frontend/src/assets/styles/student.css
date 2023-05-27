@@ -1,5 +1,5 @@
 body {
-    font-family: 'Roboto Slab', serif;;
+    font-family: 'Roboto', serif;;
     margin: 0px;
 }
 
@@ -8,7 +8,8 @@ body {
     color: white;
     padding: 27px;
     text-align: left;
-    height: 25px    ;
+    height: 25px;
+    max-height: 40px;
 }
 
 .header-text {
@@ -20,6 +21,12 @@ body {
     position: absolute;
     left: 48px;
     top: 24px;
+}
+
+.flex-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
 }
 
 .centered {
@@ -41,6 +48,11 @@ body {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+}
+
+.wrapper {
+    height: 100%;
+    margin: 0 auto;
 }
 
 .profile-name {
@@ -70,6 +82,93 @@ body {
     border-radius: 50%;
 }
 
+.student-info-text {
+    font-weight: bold;
+    text-decoration: underline;
+    margin-top: 45px;
+    margin-left: 80px;
+    margin-bottom: 10px;
+}
+
+.student-info-box {
+    border: 1px solid black;
+    margin-left: 80px;
+    margin-right: 80px;
+}
+
 #main-elements {
     margin-top: 100px;
+}
+
+.info-container {
+    background-color: #094C9F;
+    height: 36.5px;
+    margin: 5px;
+}
+
+#name-container {
+    background-color: white;
+    width: 42%;
+    height: 26px;
+    margin-left: 22px;
+    margin-top: 5px;
+    border-radius: 20px;
+    position: absolute;
+    text-align: center;
+}
+
+#studno-container {
+    background-color: white;
+    width: 15%;
+    margin-left: 692px;
+    text-align: center;
+    border-radius: 20px;
+    height: 26px;
+    margin-top: 5px;
+    position: absolute;
+}
+
+#course-container {
+    background-color: white;
+    width: 12%;
+    margin-left: 945px;
+    text-align: center;
+    border-radius: 20px;
+    height: 26px;
+    margin-top: 5px;
+    position: absolute;
+}
+
+#college-container {
+    background-color: white;
+    width: 12%;
+    margin-left: 1155px;
+    text-align: center;
+    border-radius: 20px;
+    height: 26px;
+    margin-top: 5px;
+    position: absolute;
+}
+
+.labels > p {
+    margin-bottom: 2px;
+    margin-top: 2px;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+#name-label {
+    margin-left: 320px;
+}
+
+#studno-label {
+    margin-left: 382px;
+}
+
+#course-label {
+    margin-left: 139px;
+}
+
+#college-label {
+    margin-left: 152px;
 }
