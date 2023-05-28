@@ -8,6 +8,8 @@ const UserSchema = new Schema({
   upMail: { type: String, required: true },
   password: { type: String, required: true },
   studentNumber: { type: String, required: false },
+  college: {type: String},
+  degreeProgram: {type: String},
   userType: { type: String, required: true },
   adviser: { type: Schema.Types.ObjectId, ref: "User", required: false },
   application: [{ type: Schema.Types.ObjectId, ref: "Application" }],
