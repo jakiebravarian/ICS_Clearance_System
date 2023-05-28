@@ -60,7 +60,7 @@ body {
     color: white;
     max-width: 200px;
     position: absolute;
-    right: 6%;
+    right: 6.5%;
     top: 5px;
 }
 
@@ -70,7 +70,7 @@ body {
     font-size: 15px;
     position: absolute;
     top: 22px;
-    right: 6%;
+    right: 6.5%;
 }
 
 .profile-icon-img {
@@ -214,12 +214,16 @@ body {
 }
 
 .footer {
+    width: 98.9%;
     background-color: #094C9F;
     height: 80px;
     color: white;
     align-items: center;
     display: flex;
     padding-left: 20px;
+    position: absolute;
+    bottom: 0;
+    max-height: 80px;
 }
 
 .apps-container {
@@ -229,4 +233,35 @@ body {
     border-radius: 20px;
     margin-bottom: 80px;
     margin-top: 40px;
+}
+
+.label {
+    background-color: #094C9F;
+    color: white;
+    border-top-left-radius: 19px;
+    border-top-right-radius: 19px;
+}
+
+.date-label {
+    margin-left: 12%;
+}
+
+.status-label {
+    margin-left: 22%;
+}
+
+.status-value {
+    margin-left: 21.2%;
+}
+
+.app-button {
+    width: 150px;
+    margin-left: 40%;
+    margin-right: 5%;
+    margin-top: 1%;
+    margin-bottom: 1%;
+    border: none;
+    background-color: black;
+    color: white;
+    border-radius: 10px;
 }

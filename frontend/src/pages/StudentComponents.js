@@ -99,22 +99,21 @@ function Application(props, {eventHandler}) {
     }
 
     return(
-        <div>
+        <div className="apps-container">
+            <div className="row label">
+                <p className="date-label">Date applied</p>
+                <p className="status-label">Status</p>
+            </div>
             {
                 applications.map((application) => {
                     console.log(application)
                     return(
-                        <div className="apps-container">
-                            <div className="row">
-                                {/* date applied */}
-                                <div>
-                                    {application.dateApplied}
-                                </div>
-                                {/* status */}
-                                <div>
-                                    {application.status}
-                                </div>
-                            </div>
+                        <div className="row">
+                            {/* date applied */}
+                            <p className="date-label">{application.dateApplied}</p>
+                            {/* status */}
+                            <p className="status-value">{application.status}</p>
+                            <button className="app-button"> Close application </button>
                         </div>
                     )
                 })
