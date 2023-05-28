@@ -98,10 +98,27 @@ function Application(props, {eventHandler}) {
         )
     }
 
-    // if there are applications, go to the view applications page
     return(
         <div>
-
+            {
+                applications.map((application) => {
+                    console.log(application)
+                    return(
+                        <div className="apps-container">
+                            <div className="row">
+                                {/* date applied */}
+                                <div>
+                                    {application.dateApplied}
+                                </div>
+                                {/* status */}
+                                <div>
+                                    {application.status}
+                                </div>
+                            </div>
+                        </div>
+                    )
+                })
+            }
         </div>
     )
 }

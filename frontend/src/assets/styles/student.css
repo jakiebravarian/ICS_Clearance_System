@@ -60,7 +60,7 @@ body {
     color: white;
     max-width: 200px;
     position: absolute;
-    right: 100px;
+    right: 6%;
     top: 5px;
 }
 
@@ -70,7 +70,7 @@ body {
     font-size: 15px;
     position: absolute;
     top: 22px;
-    right: 100px;
+    right: 6%;
 }
 
 .profile-icon-img {
@@ -208,6 +208,11 @@ body {
     font-size: 17px;
 }
 
+.button:hover {
+    background-color: black;
+    color: white;
+}
+
 .footer {
     background-color: #094C9F;
     height: 80px;
@@ -215,4 +220,13 @@ body {
     align-items: center;
     display: flex;
     padding-left: 20px;
+}
+
+.apps-container {
+    border: 1px solid #8C8C8C;
+    margin-left: 80px;
+    margin-right: 80px;
+    border-radius: 20px;
+    margin-bottom: 80px;
+    margin-top: 40px;
 }

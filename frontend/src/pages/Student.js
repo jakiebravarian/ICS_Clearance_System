@@ -6,7 +6,14 @@ import { ProfileHeader, Application, Footer } from "./StudentComponents";
 
 export default function Student() {
     // list of applications
-    const [Applications, setApplications] = useState([])
+    const [Applications, setApplications] = useState([
+        // sample initial data
+        // {
+        //     "dateApplied": "May 29, 2023",
+        //     "status": "Pending"
+        // }
+
+    ])
 
     // add to list of applications when user inputs data
     function eventHandler() {
