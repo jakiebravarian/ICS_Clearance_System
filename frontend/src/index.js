@@ -7,7 +7,7 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import LoginAprrover from './pages/Login-Approver';
 import SignUp from './pages/SignUp';
-import SignUpApprover from './pages/SignUp-Approver';
+import CreateApproverAccount from './pages/Create-Approver';
 import Verify from './pages/Verify';
 import Student from './pages/Student';
 
@@ -18,7 +18,7 @@ const router = createBrowserRouter([
   { path: '/login', element: <Login /> },
   { path: '/login-approver', element: <LoginAprrover /> },
   { path: '/signup', element: <SignUp /> },
-  { path: '/signup-approver', element: <SignUpApprover /> },
+  { path: '/create-approver', element: <CreateApproverAccount /> },
   { path: '/verify', element: <Verify /> },
   { path: '/student', element: <Student /> }
 ])
