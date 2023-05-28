@@ -66,40 +66,39 @@ export default function Login() {
     };
   
     function handleLogin(e) {
-        e.preventDefault(); 
-      fetch('http://localhost:3001/login', {
-        method: 'POST',
+      e.preventDefault();
+      fetch("http://localhost:3001/login", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json'
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({
           upMail: upMail,
-          password: password
-        })
+          password: password,
+        }),
       })
-        .then(response => response.json())
-        .then(body => {
+        .then((response) => response.json())
+        .then((body) => {
           if (body.success) {
             setIsLoggedIn(true);
             // successful log in. store the token as a cookie
             const cookies = new Cookies();
-            cookies.set(
-              "authToken",
-              body.token,
-              {
-                path: "localhost:3001/",
-                age: 60 * 60,
-                sameSite: false
-              });
+            cookies.set("authToken", body.token, {
+              path: "localhost:3001/",
+              age: 60 * 60,
+              sameSite: false,
+            });
   
             localStorage.setItem("upMail", body.upMail);
-          }
-          else {
+            console.log(body.upMail);
+            // Check the adviser attribute
+            navigate("/verify");
+          } else {
             alert("Log in failed");
           }
         });
     }
-  
+
     return (
       <div className="wrapper">
         {/* Navigation Menu */}
