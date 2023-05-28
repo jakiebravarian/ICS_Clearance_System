@@ -1,0 +1,218 @@
+body {
+    font-family: 'Roboto', serif;;
+    margin: 0px;
+}
+
+.header {
+    background: #094C9F;
+    color: white;
+    padding: 27px;
+    text-align: left;
+    height: 25px;
+    max-height: 40px;
+}
+
+.header-text {
+    margin: 0;
+    font-family: Roboto Slab;
+    font-size: 24px;
+    font-weight: 500;
+    color: white;
+    position: absolute;
+    left: 48px;
+    top: 24px;
+}
+
+.flex-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.centered {
+    margin: auto;
+    height: 50%;
+    padding: 10px;
+    text-align: center;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+}
+
+.inline-block {
+    display: inline-block;
+}
+
+.wrapped {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.wrapper {
+    height: 100%;
+    margin: 0 auto;
+}
+
+.profile-name {
+    color: white;
+    max-width: 200px;
+    position: absolute;
+    right: 100px;
+    top: 5px;
+}
+
+.classification {
+    color: rgb(217, 217, 217);
+    font-style: italic;
+    font-size: 15px;
+    position: absolute;
+    top: 22px;
+    right: 100px;
+}
+
+.profile-icon-img {
+    width: 60px;
+    height: 60px;
+    margin: 2px;
+    position: absolute;
+    top: 7px;
+    left: 93%;
+    border-radius: 50%;
+}
+
+.student-info-text {
+    font-weight: bold;
+    text-decoration: underline;
+    margin-top: 45px;
+    margin-left: 80px;
+    margin-bottom: 10px;
+}
+
+.student-info-box {
+    border: 1px solid black;
+    margin-left: 80px;
+    margin-right: 80px;
+}
+
+#main-elements {
+    margin-top: 100px;
+}
+
+.info-container {
+    background-color: #094C9F;
+    height: 36.5px;
+    margin: 5px;
+}
+
+#name-container {
+    background-color: white;
+    width: 43%;
+    height: 26px;
+    margin-left: 12px;
+    margin-top: 5px;
+    border-radius: 20px;
+    position: absolute;
+    text-align: center;
+}
+
+#studno-container {
+    background-color: white;
+    width: 17%;
+    margin-left: 686px;
+    text-align: center;
+    border-radius: 20px;
+    height: 26px;
+    margin-top: 5px;
+    position: absolute;
+}
+
+#course-container {
+    background-color: white;
+    width: 11%;
+    margin-left: 964px;
+    text-align: center;
+    border-radius: 20px;
+    height: 26px;
+    margin-top: 5px;
+    position: absolute;
+}
+
+#college-container {
+    background-color: white;
+    width: 13%;
+    margin-left: 1148px;
+    text-align: center;
+    border-radius: 20px;
+    height: 26px;
+    margin-top: 5px;
+    position: absolute;
+}
+
+.labels > p {
+    margin-bottom: 2px;
+    margin-top: 2px;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+#name-label {
+    margin-left: 320px;
+}
+
+#studno-label {
+    margin-left: 382px;
+}
+
+#course-label {
+    margin-left: 139px;
+}
+
+#college-label {
+    margin-left: 152px;
+}
+
+.form-prompt {
+    font-weight: bold;
+    margin-top: 45px;
+    margin-left: 80px;
+}
+
+.form-section {
+    border: 1px solid #8C8C8C;
+    margin-left: 80px;
+    margin-right: 80px;
+    border-radius: 20px;
+    margin-bottom: 80px;
+}
+
+.row > div > input {
+    width: 418px;
+}
+
+.row > div {
+    font-size: 17px;
+    margin: 20px;
+}
+
+.button {
+    background-color: #094C9F;
+    color: white;
+    width: 220px;
+    height: 40px;
+    border: none;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 17px;
+}
+
+.footer {
+    background-color: black;
+    height: 80px;
+    color: white;
+    align-items: center;
+    display: flex;
+    padding-left: 20px;
+}
