@@ -178,6 +178,7 @@ body {
     font-weight: bold;
     margin-top: 45px;
     margin-left: 80px;
+    text-decoration: underline;
 }
 
 .form-section {
@@ -299,4 +300,15 @@ body {
     box-shadow: 2px 2px 5px 1px rgba(68, 68, 68, 0.8);
     background-color: white;
     color: #094C9F;
+}
+
+.remarks {
+    margin-top: 20px;
+    margin-left: 80px;
+    margin-right: 80px;
+    border-radius: 20px;
+    background-color: #094C9F;
+    padding: 20px;
+    color: white;
+    margin-bottom: 40px;
 }

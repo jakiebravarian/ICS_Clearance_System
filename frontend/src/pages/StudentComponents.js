@@ -77,78 +77,84 @@ function StudentInfo(props) {
     )
 }
 
+function Form({eventHandler}) {
+    return(
+        <div>
+            {/*form */}
+            <form>
+                <div className="form-section">
+                    {/* first row */}
+                    <div className="row">
+                        <div>
+                            <label for="first-name">First name</label><br/>
+                            <input placeholder="Juan" id="first-name"/><br></br>
+                        </div>
+                        <div>
+                            <label for="middle-name">Middle name</label><br/>
+                            <input placeholder="Martinez" id="middle-name"/><br></br>
+                        </div>
+                        <div>
+                            <label for="Last-name">Last name</label><br/>
+                            <input placeholder="dela Cruz" id="last-name"/><br></br>
+                        </div>
+                    </div>
+
+                    {/* second row */}
+                    <div className="row">
+                        <div>
+                            <label for="student-number">Student number</label><br/>
+                            <input placeholder="20xx-xxxx" id="student-number"/><br></br>
+                        </div>
+                        <div>
+                            <label for="degree-program">Degree program</label><br/>
+                            <input placeholder="e.g. BSCS" id="degree-program"/><br></br>
+                        </div>
+                        <div>
+                            <label for="college">College</label><br/>
+                            <input placeholder="e.g. CAS" id="college"/><br></br>
+                        </div>
+                    </div>
+
+                    {/* third row */}
+                    <div className="row">
+                        <div>
+                            <label for="github-link">Github link</label><br/>
+                            <input placeholder="github.com/username" id="github-link"/><br></br>
+                        </div>
+                        <div>
+                            <label for="github-link">Date applied</label><br/>
+                            <input id="date-applied"/><br></br>
+                        </div>
+                        <div>
+                            <label for="remarks">Remarks</label><br/>
+                            <input placeholder="Skip if not a returned application" id="remarks"/><br></br>
+                        </div>
+                    </div>
+                    {/* button */}
+                    <div className="centered">
+                        <button onClick={() => eventHandler()} type='submit' className='button'>SUBMIT APPLICATION</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    )
+}
+
 // application component: returns a form if there are no applications yet
-function Application(props, {eventHandler}) {
+function Application(props) {
     let applications = props.data;
     
     // gets the number of applications
     let appCount = applications.length;
 
     // if there are no opened applications yet, return a form
-    if (appCount === 0) { 
+    if (appCount === 0) {
         return(
             <div>
-                {/* prompt */}
                 <div>
                     <p className="form-prompt">No applications yet. To start one, please fill out the form below.</p>
                 </div>
-
-                {/*form */}
-                <form>
-                    <div className="form-section">
-                        {/* first row */}
-                        <div className="row">
-                            <div>
-                                <label for="first-name">First name</label><br/>
-                                <input placeholder="Juan" id="first-name"/><br></br>
-                            </div>
-                            <div>
-                                <label for="middle-name">Middle name</label><br/>
-                                <input placeholder="Martinez" id="middle-name"/><br></br>
-                            </div>
-                            <div>
-                                <label for="Last-name">Last name</label><br/>
-                                <input placeholder="dela Cruz" id="last-name"/><br></br>
-                            </div>
-                        </div>
-
-                        {/* second row */}
-                        <div className="row">
-                            <div>
-                                <label for="student-number">Student number</label><br/>
-                                <input placeholder="20xx-xxxx" id="student-number"/><br></br>
-                            </div>
-                            <div>
-                                <label for="degree-program">Degree program</label><br/>
-                                <input placeholder="e.g. BSCS" id="degree-program"/><br></br>
-                            </div>
-                            <div>
-                                <label for="college">College</label><br/>
-                                <input placeholder="e.g. CAS" id="college"/><br></br>
-                            </div>
-                        </div>
-
-                        {/* third row */}
-                        <div className="row">
-                            <div>
-                                <label for="github-link">Github link</label><br/>
-                                <input placeholder="github.com/username" id="github-link"/><br></br>
-                            </div>
-                            <div>
-                                <label for="github-link">Date applied</label><br/>
-                                <input id="date-applied"/><br></br>
-                            </div>
-                            <div>
-                                <label for="remarks">Remarks</label><br/>
-                                <input placeholder="Skip if not a returned application" id="remarks"/><br></br>
-                            </div>
-                        </div>
-                        {/* button */}
-                        <div className="centered">
-                            <button onClick={() => eventHandler()} type='submit' className='button'>SUBMIT APPLICATION</button>
-                        </div>
-                    </div>
-                </form>
+                <Form/>
             </div>
         )
     }
@@ -207,4 +213,4 @@ function Footer() {
     )
 }
 
-export { Header, StudentInfo, ProfileHeader, Application, Footer };
+export { Header, StudentInfo, Form, ProfileHeader, Application, Footer };
