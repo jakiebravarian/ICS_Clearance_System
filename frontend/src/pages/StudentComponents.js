@@ -39,60 +39,61 @@ function Application(props, {eventHandler}) {
                 </div>
 
                 {/*form */}
-                <div className="form-section">
-                    {/* first row */}
-                    <div className="row">
-                        <div>
-                            <label for="first-name">First name</label><br/>
-                            <input id="first-name"/><br></br>
+                <form>
+                    <div className="form-section">
+                        {/* first row */}
+                        <div className="row">
+                            <div>
+                                <label for="first-name">First name</label><br/>
+                                <input id="first-name"/><br></br>
+                            </div>
+                            <div>
+                                <label for="middle-name">Middle name</label><br/>
+                                <input id="middle-name"/><br></br>
+                            </div>
+                            <div>
+                                <label for="Last-name">Last name</label><br/>
+                                <input id="last-name"/><br></br>
+                            </div>
                         </div>
-                        <div>
-                            <label for="middle-name">Middle name</label><br/>
-                            <input id="middle-name"/><br></br>
-                        </div>
-                        <div>
-                            <label for="Last-name">Last name</label><br/>
-                            <input id="last-name"/><br></br>
-                        </div>
-                    </div>
 
-                    {/* second row */}
-                    <div className="row">
-                        <div>
-                            <label for="student-number">Student number</label><br/>
-                            <input id="student-number"/><br></br>
+                        {/* second row */}
+                        <div className="row">
+                            <div>
+                                <label for="student-number">Student number</label><br/>
+                                <input id="student-number"/><br></br>
+                            </div>
+                            <div>
+                                <label for="degree-program">Degree program</label><br/>
+                                <input id="degree-program"/><br></br>
+                            </div>
+                            <div>
+                                <label for="college">College</label><br/>
+                                <input id="college"/><br></br>
+                            </div>
                         </div>
-                        <div>
-                            <label for="degree-program">Degree program</label><br/>
-                            <input id="degree-program"/><br></br>
-                        </div>
-                        <div>
-                            <label for="college">College</label><br/>
-                            <input id="college"/><br></br>
-                        </div>
-                    </div>
 
-                    {/* third row */}
-                    <div className="row">
-                        <div>
-                            <label for="github-link">Github link</label><br/>
-                            <input id="github-link"/><br></br>
+                        {/* third row */}
+                        <div className="row">
+                            <div>
+                                <label for="github-link">Github link</label><br/>
+                                <input id="github-link"/><br></br>
+                            </div>
+                            <div>
+                                <label for="github-link">Date applied</label><br/>
+                                <input id="date-applied"/><br></br>
+                            </div>
+                            <div>
+                                <label for="remarks">Remarks</label><br/>
+                                <input id="remarks"/><br></br>
+                            </div>
                         </div>
-                        <div>
-                            <label for="github-link">Date applied</label><br/>
-                            <input id="date-applied"/><br></br>
-                        </div>
-                        <div>
-                            <label for="remarks">Remarks</label><br/>
-                            <input id="remarks"/><br></br>
+                        {/* button */}
+                        <div className="centered">
+                            <button onClick={() => eventHandler()} type='submit' className='button'>SUBMIT APPLICATION</button>
                         </div>
                     </div>
-                    
-                    {/* button */}
-                    <div className="centered">
-                        <button onClick={() => eventHandler()} type='submit' className='button'>SUBMIT APPLICATION</button>
-                    </div>
-                </div>
+                </form>
             </div>
         )
     }
