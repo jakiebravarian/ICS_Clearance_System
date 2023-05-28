@@ -20,7 +20,7 @@ export default function SignUp(){
     const application = null;
     
     //fetch from backend
-    function handleSubmit(){
+    function handleSignUp(){
         fetch('http://localhost:3001/signup', {
           method: 'POST',
           headers: {
@@ -111,7 +111,7 @@ export default function SignUp(){
                 <input type="text" placeholder="College" id="college" required={true} onChange={handleCollege}  /> <br />
                 <input type="text" placeholder="UP Mail" id="email" required={true} onChange={handleUpMail}/> <br />
                 <input type="password" placeholder="Password" id="password" required={true} onChange={handlepassword}/> <br />
-                <button type="reset"id="signup-button" onClick={()=> {handleSubmit()}}>Sign Up</button>
+                <button type="reset"id="signup-button" onClick={()=> {handleSignUp()}}>Sign Up</button>
             </form>
         </div>
     )
