@@ -113,7 +113,25 @@ function Application(props, {eventHandler}) {
                             <p className="date-label">{application.dateApplied}</p>
                             {/* status */}
                             <p className="status-value">{application.status}</p>
-                            <button className="app-button"> Close application </button>
+
+                            {/* if status is returned, add a view remarks button */}
+                            {
+                                application.status === "Returned" ? (
+                                    <button className="view-remarks-button"> View remarks </button>
+                                ) : (
+                                    <p></p>
+                                )
+                            }
+
+                            {/* if status is cleared, no buttons will be shown */}
+                            {
+                                application.status === "Cleared" ? (
+                                    <p id="closed-text">Closed</p>
+                                ) : (  
+                                    <button className="app-button"> Close application </button>
+                                )
+                            }
+                            
                         </div>
                     )
                 })

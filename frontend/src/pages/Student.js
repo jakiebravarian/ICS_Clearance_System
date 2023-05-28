@@ -8,12 +8,25 @@ export default function Student() {
     // list of applications
     const [Applications, setApplications] = useState([
         // sample initial data
-        // uncomment this to show the other screen
+        // uncomment the status to see what it renders to the screen
+
+        //  pending
         // {
         //     "dateApplied": "May 29, 2023",
         //     "status": "Pending"
-        // }
+        // },
+        
+        // returned
+        // {
+        //     "dateApplied": "May 29, 2023",
+        //     "status": "Returned"
+        // },
 
+        // cleared
+        // {
+        //     "dateApplied": "May 29, 2023",
+        //     "status": "Cleared"
+        // }
     ])
 
     // add to list of applications when user inputs data

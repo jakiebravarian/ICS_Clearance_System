@@ -255,13 +255,48 @@ body {
 }
 
 .app-button {
+    font-size: 17px;
     width: 150px;
-    margin-left: 40%;
-    margin-right: 5%;
     margin-top: 1%;
     margin-bottom: 1%;
     border: none;
     background-color: black;
     color: white;
     border-radius: 10px;
+    position: absolute;
+    right: 9.5%;
+    padding: 7px;
+}
+
+#closed-text {
+    font-size: 17px;
+    color: #8C8C8C;
+    position: absolute;
+    right: 10.5%;
+    margin-top: 21px;
+}
+
+.app-button:hover {
+    box-shadow: 2px 2px 5px 1px rgba(68, 68, 68, 0.8);
+    background-color: white;
+    color: #094C9F;
+}
+
+.view-remarks-button {
+    font-size: 17px;
+    height: 35px;
+    width: 150px;
+    margin-left: 32%;
+    margin-top: 1%;
+    margin-bottom: 1%;
+    border: none;
+    background-color:#094C9F;
+    color: white;
+    border-radius: 10px;
+}
+
+.view-remarks-button:hover {
+    box-shadow: 2px 2px 5px 1px rgba(68, 68, 68, 0.8);
+    background-color: white;
+    color: #094C9F;
 }
