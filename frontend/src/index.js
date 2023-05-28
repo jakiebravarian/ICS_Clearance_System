@@ -10,6 +10,7 @@ import SignUp from './pages/SignUp';
 import CreateApproverAccount from './pages/Create-Approver';
 import Verify from './pages/Verify';
 import Student from './pages/Student';
+import Returned from './pages/Returned';
 
 
 
@@ -20,7 +21,8 @@ const router = createBrowserRouter([
   { path: '/signup', element: <SignUp /> },
   { path: '/create-approver', element: <CreateApproverAccount /> },
   { path: '/verify', element: <Verify /> },
-  { path: '/student', element: <Student /> }
+  { path: '/student', element: <Student /> },
+  { path: '/returned', element: <Returned /> }
 ])
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

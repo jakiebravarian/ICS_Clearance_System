@@ -22,6 +22,61 @@ function ProfileHeader(props) {
     )
 }
 
+function Header(props) {
+    let userInfo = props.data;
+
+    return(
+        <div>
+            {/* header */}
+            <div className="header">
+                <h1 className="header-text">Institute of Computer Science - Clearance Approval System</h1>
+            </div>
+                
+            {/* profile indicator */}
+            <ProfileHeader name={userInfo.name} classification={userInfo.classification} icon={userInfo.icon}/>
+        </div>
+    )
+}
+
+function StudentInfo(props) {
+    let studentInfo = props.data; 
+
+    return(
+        <div>
+            <p className="student-info-text">Student info</p>
+            <div className="student-info-box">
+                {/* info container */}
+                <div className="info-container">
+                    {/* name */}
+                    <div id="name-container">
+                        {studentInfo.name}
+                    </div>
+                    {/* Student number */}
+                    <div id="studno-container">
+                        {studentInfo.studno}
+                    </div>
+                    {/* course */}
+                    <div id="course-container">
+                        {studentInfo.course}
+                    </div>
+                    {/* college */}
+                    <div id="college-container">
+                        {studentInfo.college}
+                    </div>
+                </div>
+                
+                {/* labels */}
+                <div className="row labels">
+                    <p id="name-label">Name</p>
+                    <p id="studno-label">Student number</p>
+                    <p id="course-label">Course</p>
+                    <p id="college-label">College</p>
+                </div>
+            </div>
+        </div>
+    )
+}
+
 // application component: returns a form if there are no applications yet
 function Application(props, {eventHandler}) {
     let applications = props.data;
@@ -29,7 +84,7 @@ function Application(props, {eventHandler}) {
     // gets the number of applications
     let appCount = applications.length;
 
-    // if there are no opened applications yet
+    // if there are no opened applications yet, return a form
     if (appCount === 0) { 
         return(
             <div>
@@ -98,6 +153,7 @@ function Application(props, {eventHandler}) {
         )
     }
 
+    // if there are applications show status and date
     return(
         <div className="apps-container">
             <div className="row label">
@@ -117,7 +173,10 @@ function Application(props, {eventHandler}) {
                             {/* if status is returned, add a view remarks button */}
                             {
                                 application.status === "Returned" ? (
-                                    <button className="view-remarks-button"> View remarks </button>
+                                    // when user clicks view remarks, goes to /returned
+                                    <form action="/returned">
+                                        <button type="submit"className="view-remarks-button"> View remarks </button>
+                                    </form>
                                 ) : (
                                     <p></p>
                                 )
@@ -148,4 +207,4 @@ function Footer() {
     )
 }
 
-export { ProfileHeader, Application, Footer };
+export { Header, StudentInfo, ProfileHeader, Application, Footer };
