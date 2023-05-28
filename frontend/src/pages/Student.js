@@ -8,10 +8,11 @@ export default function Student() {
     // list of applications
     const [Applications, setApplications] = useState([
         // sample initial data
-        {
-            "dateApplied": "May 29, 2023",
-            "status": "Pending"
-        }
+        // uncomment this to show the other screen
+        // {
+        //     "dateApplied": "May 29, 2023",
+        //     "status": "Pending"
+        // }
 
     ])
 

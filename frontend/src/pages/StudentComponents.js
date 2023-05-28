@@ -45,15 +45,15 @@ function Application(props, {eventHandler}) {
                         <div className="row">
                             <div>
                                 <label for="first-name">First name</label><br/>
-                                <input id="first-name"/><br></br>
+                                <input placeholder="Juan" id="first-name"/><br></br>
                             </div>
                             <div>
                                 <label for="middle-name">Middle name</label><br/>
-                                <input id="middle-name"/><br></br>
+                                <input placeholder="Martinez" id="middle-name"/><br></br>
                             </div>
                             <div>
                                 <label for="Last-name">Last name</label><br/>
-                                <input id="last-name"/><br></br>
+                                <input placeholder="dela Cruz" id="last-name"/><br></br>
                             </div>
                         </div>
 
@@ -61,15 +61,15 @@ function Application(props, {eventHandler}) {
                         <div className="row">
                             <div>
                                 <label for="student-number">Student number</label><br/>
-                                <input id="student-number"/><br></br>
+                                <input placeholder="20xx-xxxx" id="student-number"/><br></br>
                             </div>
                             <div>
                                 <label for="degree-program">Degree program</label><br/>
-                                <input id="degree-program"/><br></br>
+                                <input placeholder="e.g. BSCS" id="degree-program"/><br></br>
                             </div>
                             <div>
                                 <label for="college">College</label><br/>
-                                <input id="college"/><br></br>
+                                <input placeholder="e.g. CAS" id="college"/><br></br>
                             </div>
                         </div>
 
@@ -77,7 +77,7 @@ function Application(props, {eventHandler}) {
                         <div className="row">
                             <div>
                                 <label for="github-link">Github link</label><br/>
-                                <input id="github-link"/><br></br>
+                                <input placeholder="github.com/username" id="github-link"/><br></br>
                             </div>
                             <div>
                                 <label for="github-link">Date applied</label><br/>
@@ -85,7 +85,7 @@ function Application(props, {eventHandler}) {
                             </div>
                             <div>
                                 <label for="remarks">Remarks</label><br/>
-                                <input id="remarks"/><br></br>
+                                <input placeholder="Skip if not a returned application" id="remarks"/><br></br>
                             </div>
                         </div>
                         {/* button */}
