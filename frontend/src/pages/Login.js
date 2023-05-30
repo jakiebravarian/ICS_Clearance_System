@@ -61,8 +61,8 @@ export default function Login() {
           }
         });
     }
-        setPassword(e.target.value);
-    }
+        // setPassword(e.target.value);
+    // }
 
     // for form validation
     const {
