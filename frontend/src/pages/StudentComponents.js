@@ -8,7 +8,7 @@ function ProfileHeader(props) {
 
     return(
         // renders logged in user's name and icon
-        <div className="profile-header row">
+        <div className="profile-header">
             <div className="profile-name">
                 {name}
             </div>
@@ -27,12 +27,8 @@ function Header(props) {
     let userInfo = props.data;
 
     return(
-        <div>
-            {/* header */}
-            <div className="header">
-                <h1 className="header-text">Institute of Computer Science - Clearance Approval System</h1>
-            </div>
-                
+        <div id="page-header">
+            <h1 id="page-header-h1">Institute of Computer Science - Clearance Approval System</h1>
             {/* profile indicator */}
             <ProfileHeader name={userInfo.name} classification={userInfo.classification} icon={userInfo.icon}/>
         </div>

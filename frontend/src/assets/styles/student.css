@@ -4,6 +4,7 @@ body {
 }
 
 .header {
+    overflow: hidden;
     background: #094C9F;
     color: white;
     padding: 27px;
@@ -18,7 +19,7 @@ body {
     font-size: 24px;
     font-weight: 500;
     color: white;
-    position: absolute;
+    /* position: absolute; */
     left: 48px;
     top: 24px;
 }
@@ -56,30 +57,35 @@ body {
     margin: 0 auto;
 }
 
+.profile-header {
+    display: flex;
+    flex: row;
+}
+
 .profile-name {
     color: white;
     max-width: 200px;
-    position: absolute;
+    /* position: absolute;
     right: 6.5%;
-    top: 5px;
+    top: 5px; */
 }
 
 .classification {
     color: rgb(217, 217, 217);
     font-style: italic;
     font-size: 15px;
-    position: absolute;
+    /* position: absolute;
     top: 22px;
-    right: 6.5%;
+    right: 6.5%; */
 }
 
 .profile-icon-img {
     width: 60px;
     height: 60px;
-    margin: 2px;
-    position: absolute;
+    /* margin: 2px; */
+    /* position: absolute;
     top: 7px;
-    left: 93%;
+    left: 93%; */
     border-radius: 50%;
 }
 

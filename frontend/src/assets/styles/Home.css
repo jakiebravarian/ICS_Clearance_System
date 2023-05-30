@@ -129,7 +129,7 @@ i {
   justify-content: center;
 }
 
-img {
+img#ics-logo  {
   max-width: 250px;
   height: auto;
   position: absolute;
