@@ -5,7 +5,7 @@ import { Header } from "./StudentComponents";
 import { adminInfo } from "../data";
 import { Menu } from "./AdminComponents";
 
-export default function ManageAccounts() {
+export default function ManageApplications() {
     return(
         <div>
             <Header data={adminInfo}/>

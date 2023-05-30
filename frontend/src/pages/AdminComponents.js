@@ -18,7 +18,7 @@ function Menu(props) {
         <div className="row admin-menu">
             {/* option 1 */}
             <div>
-                <form action="/manage-accounts">
+                <form action="/manage-applications">
                     <button type="submit" className={manageApps}>Manage Student Account Applications</button>
                 </form>
             </div>

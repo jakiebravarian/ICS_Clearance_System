@@ -11,9 +11,8 @@ import CreateApproverAccount from './pages/Create-Approver';
 import Verify from './pages/Verify';
 import Student from './pages/Student';
 import Returned from './pages/Returned';
-import ManageAccounts from './pages/Manage-Accounts';
-
-
+import ManageApplications from './pages/Manage-Applications';
+import ManageApprovers from './pages/Manage-Approvers';
 
 const router = createBrowserRouter([
   { path: '/', element: <Home /> },
@@ -24,7 +23,8 @@ const router = createBrowserRouter([
   { path: '/verify', element: <Verify /> },
   { path: '/student', element: <Student /> },
   { path: '/returned', element: <Returned /> },
-  { path: '/manage-accounts', element: <ManageAccounts /> }
+  { path: '/manage-applications', element: <ManageApplications /> },
+  { path: '/manage-approvers', element: <ManageApprovers /> }
 ])
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
