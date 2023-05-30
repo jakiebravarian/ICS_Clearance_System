@@ -277,6 +277,9 @@ input {
 #page-header {
   padding: 24px 48px 24px 48px;
   background-color: #094C9F;
+  display: flex;
+  justify-content: space-between;
+  /* height: 30px; */
 }
 
 #page-header-h1 {

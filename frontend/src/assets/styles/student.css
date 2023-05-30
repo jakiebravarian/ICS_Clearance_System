@@ -60,11 +60,21 @@ body {
 .profile-header {
     display: flex;
     flex: row;
+    margin-top: -1%;  
+    max-height: 30px;  
+}
+
+#name-class-container {
+    /* display: flex; */
+    flex: column !important;
+    text-align: right;
+    margin-right: 1%;
+    padding: 1%;
 }
 
 .profile-name {
     color: white;
-    max-width: 200px;
+    width: 300px;
     /* position: absolute;
     right: 6.5%;
     top: 5px; */

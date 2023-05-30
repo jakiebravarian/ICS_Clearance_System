@@ -9,12 +9,15 @@ function ProfileHeader(props) {
     return(
         // renders logged in user's name and icon
         <div className="profile-header">
-            <div className="profile-name">
-                {name}
+            <div id="name-class-container">
+                <div className="profile-name">
+                    {name}
+                </div>
+                <div className="classification">
+                    {classification}
+                </div>
             </div>
-            <div className="classification">
-                {classification}
-            </div>
+
             <div>
                 <img className= "profile-icon-img" src={icon}></img>
             </div>
