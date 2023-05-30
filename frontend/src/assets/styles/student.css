@@ -4,6 +4,7 @@ body {
 }
 
 .header {
+    overflow: hidden;
     background: #094C9F;
     color: white;
     padding: 27px;
@@ -18,7 +19,7 @@ body {
     font-size: 24px;
     font-weight: 500;
     color: white;
-    position: absolute;
+    /* position: absolute; */
     left: 48px;
     top: 24px;
 }
@@ -56,30 +57,35 @@ body {
     margin: 0 auto;
 }
 
+.profile-header {
+    display: flex;
+    flex: row;
+}
+
 .profile-name {
     color: white;
     max-width: 200px;
-    position: absolute;
-    right: 100px;
-    top: 5px;
+    /* position: absolute;
+    right: 6.5%;
+    top: 5px; */
 }
 
 .classification {
     color: rgb(217, 217, 217);
     font-style: italic;
     font-size: 15px;
-    position: absolute;
+    /* position: absolute;
     top: 22px;
-    right: 100px;
+    right: 6.5%; */
 }
 
 .profile-icon-img {
     width: 60px;
     height: 60px;
-    margin: 2px;
-    position: absolute;
+    /* margin: 2px; */
+    /* position: absolute;
     top: 7px;
-    left: 93%;
+    left: 93%; */
     border-radius: 50%;
 }
 
@@ -109,9 +115,9 @@ body {
 
 #name-container {
     background-color: white;
-    width: 43%;
+    width: 40%;
     height: 26px;
-    margin-left: 12px;
+    margin-left: 1%;
     margin-top: 5px;
     border-radius: 20px;
     position: absolute;
@@ -121,7 +127,7 @@ body {
 #studno-container {
     background-color: white;
     width: 17%;
-    margin-left: 686px;
+    margin-left: 42.5%;
     text-align: center;
     border-radius: 20px;
     height: 26px;
@@ -132,7 +138,7 @@ body {
 #course-container {
     background-color: white;
     width: 11%;
-    margin-left: 964px;
+    margin-left: 61.5%;
     text-align: center;
     border-radius: 20px;
     height: 26px;
@@ -143,7 +149,7 @@ body {
 #college-container {
     background-color: white;
     width: 13%;
-    margin-left: 1148px;
+    margin-left: 74%;
     text-align: center;
     border-radius: 20px;
     height: 26px;
@@ -159,25 +165,26 @@ body {
 }
 
 #name-label {
-    margin-left: 320px;
+    margin-left: 24%;
 }
 
 #studno-label {
-    margin-left: 382px;
+    margin-left: 29%;
 }
 
 #course-label {
-    margin-left: 139px;
+    margin-left: 12.2%;
 }
 
 #college-label {
-    margin-left: 152px;
+    margin-left: 11.5%;
 }
 
 .form-prompt {
     font-weight: bold;
     margin-top: 45px;
     margin-left: 80px;
+    text-decoration: underline;
 }
 
 .form-section {
@@ -185,7 +192,6 @@ body {
     margin-left: 80px;
     margin-right: 80px;
     border-radius: 20px;
-    margin-bottom: 80px;
 }
 
 .row > div > input {
@@ -208,11 +214,93 @@ body {
     font-size: 17px;
 }
 
-.footer {
+.button:hover {
     background-color: black;
-    height: 80px;
     color: white;
-    align-items: center;
-    display: flex;
-    padding-left: 20px;
+}
+
+.apps-container {
+    border: 1px solid #8C8C8C;
+    margin-left: 80px;
+    margin-right: 80px;
+    border-radius: 20px;
+    margin-bottom: 80px;
+    margin-top: 40px;
+}
+
+.label {
+    background-color: #094C9F;
+    color: white;
+    border-top-left-radius: 19px;
+    border-top-right-radius: 19px;
+}
+
+.date-label {
+    margin-left: 12%;
+}
+
+.status-label {
+    margin-left: 22%;
+}
+
+.status-value {
+    margin-left: 21.2%;
+}
+
+.app-button {
+    font-size: 17px;
+    width: 150px;
+    margin-top: 1%;
+    margin-bottom: 1%;
+    border: none;
+    background-color: black;
+    color: white;
+    border-radius: 10px;
+    position: absolute;
+    right: 9.5%;
+    padding: 7px;
+}
+
+#closed-text {
+    font-size: 17px;
+    color: #8C8C8C;
+    position: absolute;
+    right: 10.5%;
+    margin-top: 21px;
+}
+
+.app-button:hover {
+    box-shadow: 2px 2px 5px 1px rgba(68, 68, 68, 0.8);
+    background-color: white;
+    color: #094C9F;
+}
+
+.view-remarks-button {
+    font-size: 17px;
+    height: 35px;
+    width: 150px;
+    margin-left: 310px;
+    margin-top: 15px;
+    margin-bottom: 1%;
+    border: none;
+    background-color:#094C9F;
+    color: white;
+    border-radius: 10px;
+}
+
+.view-remarks-button:hover {
+    box-shadow: 2px 2px 5px 1px rgba(68, 68, 68, 0.8);
+    background-color: white;
+    color: #094C9F;
+}
+
+.remarks {
+    margin-top: 20px;
+    margin-left: 80px;
+    margin-right: 80px;
+    border-radius: 20px;
+    background-color: #094C9F;
+    padding: 20px;
+    color: white;
+    margin-bottom: 40px;
 }

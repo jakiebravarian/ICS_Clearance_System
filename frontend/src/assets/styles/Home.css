@@ -1,5 +1,6 @@
 html,
 body {
+  min-height: 100vh;
   height: 100%;
   font-family: Roboto, sans-serif;
   font-weight: normal;
@@ -128,7 +129,7 @@ i {
   justify-content: center;
 }
 
-img {
+img#ics-logo  {
   max-width: 250px;
   height: auto;
   position: absolute;
@@ -186,13 +187,27 @@ h3 {
   color: #fff;
 }
 
+#error-message {
+  font-family: Roboto;
+  margin: 0;
+  font-size: 12px;
+  font-weight: 100;
+  color: red;
+}
+
 .form {
   position: absolute;
   top: 50%;
-  left: 75%;
   transform: translate(-50%, -50%);
+  left: 75%;
   padding: 10px;
-  z-index: 1;
+}
+
+#form-signup {
+  position: absolute;
+  top: 4vh;
+  left: 56vw;
+  transform: none;
 }
 
 #login-h1,
@@ -233,7 +248,7 @@ input {
 #login-button,
 #signup-button {
   margin: 16px 0;
-  width: 100%;
+  width: 35vw;
   border-radius: 15px;
   background-color: #094C9F;
   border: none;
