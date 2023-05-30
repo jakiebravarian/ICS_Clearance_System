@@ -1,38 +1,68 @@
 import React from "react";
 import logo from '../assets/ICS.png';
 import '../assets/styles/Home.css'
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
+import Cookies from 'universal-cookie';
+
 
 export default function Login() {
     // added use states
     const [upMail, setUpMail] = useState("");
-    const [password, setPassword] = useState("")
-
-    //fetch from backend
-    //incomplete, kulang pa yung sa cookies banda
-    function handleLogin() {
-        // fetch('http://localhost:3001/login', {
-        //     method: 'POST',
-        //     headers: {
-        //         'Content-Type': 'application/json'
-        //     },
-        //     body: JSON.stringify({
-        //         upMail: upMail,
-        //         password: password
-        //     })
-        // })
-        //     .then(console.log);
-    }
-
-    //functions that handle changes on each input
+    const [password, setPassword] = useState("");
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const navigate = useNavigate();
+  
+    useEffect(() => {
+      if (isLoggedIn) {
+        navigate("/verify");
+      }
+    }, [isLoggedIn, navigate]);
+  
     const handleUpMail = (e) => {
-        setUpMail(e.target.value);
-    }
-
+      setUpMail(e.target.value);
+    };
+  
     const handlePassword = (e) => {
-        setPassword(e.target.value);
+      setPassword(e.target.value);
+    };
+  
+    function handleLogin(e) {
+      e.preventDefault();
+      fetch("http://localhost:3001/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          upMail: upMail,
+          password: password,
+        }),
+      })
+        .then((response) => response.json())
+        .then((body) => {
+          if (body.success) {
+            setIsLoggedIn(true);
+            // successful log in. store the token as a cookie
+            const cookies = new Cookies();
+            cookies.set("authToken", body.token, {
+              path: "localhost:3001/",
+              age: 60 * 60,
+              sameSite: false,
+            });
+  
+            localStorage.setItem("upMail", body.upMail);
+            console.log(body.upMail);
+            // Check the adviser attribute
+            navigate("/verify");
+          } else {
+            alert("Log in failed");
+          }
+        });
     }
+        // setPassword(e.target.value);
+    // }
 
     // for form validation
     const {
@@ -52,10 +82,9 @@ export default function Login() {
         } catch (error) {
             console.log(error)
         }
+      }
 
-    };
-
-    return (
+  return (
         <div className="wrapper">
             {/* Navigation Menu */}
             <div className="navbar">
@@ -114,10 +143,10 @@ export default function Login() {
                 />
                 {errors.password && <p id="error-message">{errors.password.message}</p>}
 
-                <button type="submit" id="login-button">Login</button>
-
-                <p id="login-p">Don’t have an account yet? <span><a href="/signup" id="signup-link">Sign up</a></span></p>
-            </form>
-        </div>
+                <button onClick={handleLogin} id="login-button">Login</button>
+          <p id="login-p">Don’t have an account yet? <span><a href="/signup" id="signup-link">Sign up</a></span></p>
+        </form>
+      </div>
     )
+  
 }

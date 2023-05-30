@@ -1,25 +1,44 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import Cookies from 'universal-cookie';
 import gif from '../assets/hourglass.gif';
-import '../assets/styles/Home.css'
+import '../assets/styles/Home.css';
 
-class Verify extends React.Component {
+export default function Verify() {
+  const upMail = localStorage.getItem("upMail");
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const navigate = useNavigate();
 
-    render() {
-        return (
-            <div className="wrapper">
-                <div id="page-header">
-                    <h1 id="page-header-h1">Institute of Computer Science - Clearance Approval System</h1>
-                </div>
-                <div id="verify-container">
-                    <h3 id="verify-h3">Wait for your account to be verified.</h3>
-                    <img src={gif} alt="" id="verify-gif"></img>
-                    <p id="verify-p">Your account is still under review.</p>
-                    <p id="verify-p">Please wait for the Administrator to verify your account.</p>
-                    <a href="/" id="back-button">Back</a>
-                </div>
-            </div>
-        )
+  useEffect(() => {
+    const authToken = new Cookies().get("authToken");
+    if (!authToken) {
+      navigate("/");
+    } else {
+      setIsLoggedIn(true);
     }
-}
+  }, [navigate]);
 
-export default Verify
+  function logout() {
+    const cookies = new Cookies();
+    cookies.remove("authToken");
+    localStorage.removeItem("upMail");
+    setIsLoggedIn(false);
+    navigate("/");
+  }
+
+  return (
+    <div className="wrapper">
+      <div id="page-header">
+        <h1 id="page-header-h1">Institute of Computer Science - Clearance Approval System</h1>
+      </div>
+      <div id="verify-container">
+        <h3 id="verify-h3">Wait for your account to be verified.</h3>
+        <img src={gif} alt="" id="verify-gif" />
+        <p id="verify-p">Please wait for the Administrator to verify your account.</p>
+        {isLoggedIn && (
+          <a href="/" id="back-button" onClick={logout}>Log Out</a>
+        )}
+      </div>
+    </div>
+  );
+}
