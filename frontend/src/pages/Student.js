@@ -22,10 +22,10 @@ export default function Student() {
         // },
         
         // returned
-        {
-            "dateApplied": "May 29, 2023",
-            "status": "Returned"
-        },
+        // {
+        //     "dateApplied": "May 29, 2023",
+        //     "status": "Returned"
+        // },
 
         // cleared
         // {

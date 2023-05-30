@@ -84,7 +84,7 @@ function Form({eventHandler}) {
     return(
         <div>
             {/*form */}
-            <form>
+            <form action="">
                 <div className="form-section">
                     {/* first row */}
                     <div className="row">
@@ -139,6 +139,7 @@ function Form({eventHandler}) {
                     </div>
                 </div>
             </form>
+            <br></br>
         </div>
     )
 }
