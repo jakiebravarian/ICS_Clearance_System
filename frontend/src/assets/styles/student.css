@@ -109,7 +109,7 @@ body {
 
 #name-container {
     background-color: white;
-    width: 43%;
+    width: 40%;
     height: 26px;
     margin-left: 1%;
     margin-top: 5px;
@@ -121,7 +121,7 @@ body {
 #studno-container {
     background-color: white;
     width: 17%;
-    margin-left: 45.5%;
+    margin-left: 42.5%;
     text-align: center;
     border-radius: 20px;
     height: 26px;
@@ -132,7 +132,7 @@ body {
 #course-container {
     background-color: white;
     width: 11%;
-    margin-left: 64.5%;
+    margin-left: 61.5%;
     text-align: center;
     border-radius: 20px;
     height: 26px;
@@ -143,7 +143,7 @@ body {
 #college-container {
     background-color: white;
     width: 13%;
-    margin-left: 77%;
+    margin-left: 74%;
     text-align: center;
     border-radius: 20px;
     height: 26px;
