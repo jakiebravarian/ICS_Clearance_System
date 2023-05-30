@@ -215,14 +215,14 @@ body {
 }
 
 .footer {
-    width: 98.9%;
+    /* TODO */
+    width: 98.7%;       
     background-color: #094C9F;
     height: 80px;
     color: white;
     align-items: center;
     display: flex;
     padding-left: 20px;
-    position: absolute;
     bottom: 0;
     max-height: 80px;
 }
