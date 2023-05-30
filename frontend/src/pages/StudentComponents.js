@@ -22,6 +22,7 @@ function ProfileHeader(props) {
     )
 }
 
+// renders header on the page
 function Header(props) {
     let userInfo = props.data;
 
@@ -38,6 +39,7 @@ function Header(props) {
     )
 }
 
+// renders student info
 function StudentInfo(props) {
     let studentInfo = props.data; 
 
@@ -77,6 +79,7 @@ function StudentInfo(props) {
     )
 }
 
+// renders form on the homepage
 function Form({eventHandler}) {
     return(
         <div>
@@ -140,6 +143,7 @@ function Form({eventHandler}) {
     )
 }
 
+// renders either a form or a list of applications
 // application component: returns a form if there are no applications yet
 function Application(props) {
     let applications = props.data;
