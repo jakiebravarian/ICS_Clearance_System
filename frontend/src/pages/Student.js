@@ -50,7 +50,8 @@ export default function Student() {
     }
 
     return (
-        <div className="wrapper">
+        <div>
+            
             <Header data={userInfo}/>
 
             {/* APPLICATION PROPER */}
@@ -60,9 +61,6 @@ export default function Student() {
 
             {/* application (either form or list) */}
             <Application data={Applications} eventHandler={eventHandler}/>
-
-            {/* footer */}
-            <Footer/>
         </div>
     )
 }

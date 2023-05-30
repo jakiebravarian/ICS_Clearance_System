@@ -21,9 +21,6 @@ export default function Returned() {
 
             {/* form */}
             <Form/>
-
-            {/* footer */}
-            <Footer/>
         </div>
     )
 }

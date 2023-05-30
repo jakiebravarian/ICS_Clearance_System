@@ -214,19 +214,6 @@ body {
     color: white;
 }
 
-.footer {
-    /* TODO */
-    width: 98.7%;       
-    background-color: #094C9F;
-    height: 80px;
-    color: white;
-    align-items: center;
-    display: flex;
-    padding-left: 20px;
-    bottom: 0;
-    max-height: 80px;
-}
-
 .apps-container {
     border: 1px solid #8C8C8C;
     margin-left: 80px;
