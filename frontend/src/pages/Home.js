@@ -22,7 +22,7 @@ class Home extends React.Component {
                     </div>
                 </div>
                 <div className="container">
-                    <img src={logo} alt="" />
+                    <img id="ics-logo" src={logo} alt="" />
                     <div className="box">
                         <h2>Institute of Computer Science</h2>
                         <h3>CLEARANCE APPROVAL SYSTEM</h3>

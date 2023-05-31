@@ -1,0 +1,20 @@
+.admin-menu {
+    margin-left: 80px;
+}
+
+/* background colors for the buttons */
+.blue-background {
+    background-color: #094C9F;
+    color: white;
+    padding: 8px;
+    font-size: 15px;
+    border: none;
+}
+
+.white-background {
+    background-color: white;
+    color: #094C9F;
+    padding: 8px;
+    font-size: 15px;
+    border: 1px solid #094C9F;
+}
