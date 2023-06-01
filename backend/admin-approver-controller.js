@@ -3,7 +3,19 @@ import bcrypt from "bcrypt";
 import { UserSchema } from "./models/user.js";
 import jwt from "jsonwebtoken";
 
-const User = mongoose.model("User", UserSchema);
+
+//create virtual schema for user
+UserSchema.virtual('fullName').get(function()
+  {return `${this.firstName} ${this.lastName}`;}).set(function(v){
+    const firstName = v.substring(0, v.indexOf(' '));
+    const lastName = v.substring(v.indexOf(' ') + 1);
+    this.set({firstName, lastName});
+  });
+
+const User = mongoose.model("user", UserSchema);
+
+const doc = new User();
+
 
 const createApproverAccount = async (req, res) => {
   const emailChecker = await User.findOne({
@@ -67,27 +79,56 @@ const createApproverAccount = async (req, res) => {
 const searchApproverByName = async (req, res) => {
   //subject to change
   // https://mongoosejs.com/docs/tutorials/virtuals.html
-  const searchName = await User.findMany({
-    firstName: req.body.firstName,
-    middleName: req.body.middleName,
-    lastName: req.body.lastName,
-  });
+    // var user = mongoose.collection('user')
+    const searchName = req.body.search;
+    
+    db.users.createIndex({ "firstName": "text", "middleName": "text", "lastName": "text" });
+    
 
-  try {
-    if (!searchName) {
-      res.send("not found");
-    } else {
-      res.send(searchName);
+    const searchedApprover = await User.find({ $text: { $search: searchName } });
+    // const searchedApprover = db.collection.find({
+    //   $or: [
+    //     { firstname: { $regex: searchName, $options: 'i' } }, // Case-insensitive match on firstname
+    //     { lastname: { $regex: searchName, $options: 'i' } }   // Case-insensitive match on lastname
+    //   ]
+    // })
+
+    res.send(searchedApprover);
+};
+
+const filterNameAscending = async (req, res) => {
+    const sortAppNameAsc = await User.find({userType: "Approver"}).sort({firstName: 'asc', lastName:'asc'})
+    
+    if(!sortAppNameAsc){
+      res.send({found: false});
     }
-  } catch (err) {
-    if (err) {
-      res.send({ success: false });
+    else{
+      res.send(sortAppNameAsc);
     }
+};
+
+const filterNameDescending = async (req, res) => {
+  const sortAppNameDesc = await User.find({userType: "Approver"}).sort({firstName: 'desc', lastName:'desc'})
+  
+  if(!sortAppNameDesc){
+    res.send({found: false});
+  }
+  else{
+    res.send(sortAppNameDesc);
   }
 };
 
-const filterNameAscending = async (req, res) => {};
+const deleteApprover = async (req, res) => {
+	const { upMail } = req.body
 
-const filterNameDescending = async (req, res) => {};
+	const result = await User.deleteOne({ upMail})
 
-export { createApproverAccount };
+	if (result.deletedCount == 1) {
+		res.send({ success: true })
+	} else { 
+		res.send({ success: false })
+	}
+	
+}
+
+export { createApproverAccount, searchApproverByName, filterNameAscending, filterNameDescending};
