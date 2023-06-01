@@ -52,6 +52,23 @@ const getAllStudents = async (req, res) => {
         res.status(500).send("Internal Server Error");
       }
   }
+
+  const viewStudentClearanceStatus = async (req, res) => {
+    try {
+      const upMail = req.query.upMail; // Get the user email from the query parameter
+      const student = await Student.findOne({ upMail: upMail }).populate('application', 'status');
+  
+      if (!student) {
+        return res.status(404).send('Student not found');
+      }
+  
+      res.send(student.application);
+    } catch (error) {
+      console.error(error);
+      res.status(500).send('Internal Server Error');
+    }
+  };
+  
   
 
 export {getAllStudents,getCurrentStudent};
