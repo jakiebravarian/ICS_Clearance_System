@@ -6,22 +6,39 @@ import Pikachu from '../assets/pikachu.png';
 import { Header, StudentInfo, ProfileHeader, Application, Footer } from "./StudentComponents";
 
 // import data
-import { userInfo } from '../data.js';
+import { getCurrentStudent } from "../data";
 
-export default function Student() {
+
+export default  function Student() {
 
     // list of applications
     const [Applications, setApplications] = useState([])
-    const [student, setStudent] = useState([])
+    const [student, setStudent] = useState([]);
+    const [userInfo, setUserInfo] = useState({}); // Define userInfo state
 
     useEffect(() => {
         const upMail1 = localStorage.getItem("upMail");
-        fetch("http://localhost:3001/get-current-student?"+"upMail="+upMail1)
-          .then((response) => response.json())
-          .then((body) => {
-            setStudent(body);
-          });
+      
+        const fetchData = async () => {
+          const studentData = await getCurrentStudent(upMail1);
+          console.log(studentData.firstName);
+          if (studentData) {
+            setStudent(studentData);
+      
+            setUserInfo({
+              name: studentData.firstName + " " + studentData.middleName + " " + studentData.lastName,
+              studno: studentData.studentNumber,
+              course: studentData.course,
+              college: studentData.college,
+              classification: studentData.userType,
+              icon: Pikachu,
+            });
+          }
+        };
+      
+        fetchData();
       }, []);
+    
     
     // add to list of applications when user inputs data
     function eventHandler() {

@@ -3,15 +3,26 @@
 // placeholder image
 import Pikachu from './assets/pikachu.png';
 import AdminIcon from './assets/admin_icon.jpg';
+import { useEffect, useState } from "react";
 
 // user info ; changes depending on who is logged in
-export const userInfo = {
-    name: "Alexandra Siocon",
-    studno: "2020-12345",
-    course: "BSCS",
-    college: "CAS",
-    classification: "Student",
-    icon: Pikachu
+// export const userInfo = {
+//     name: "Alexandra Siocon",
+//     studno: "2020-12345",
+//     course: "BSCS",
+//     college: "CAS",
+//     classification: "Student",
+//     icon: Pikachu
+// }    
+export async function getCurrentStudent(upMail) {
+  try {
+    const response = await fetch("http://localhost:3001/get-current-student?" + "upMail=" + upMail);
+    const body = await response.json();
+    return body;
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    return null;
+  }
 }
 
 export const adminInfo = {
