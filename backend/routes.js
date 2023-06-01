@@ -1,5 +1,5 @@
 import { signUp, login, checkIfLoggedIn } from "./auth-controller.js";
-import { getAllStudents, getCurrentStudent, submitApplication, viewStudentClearanceStatus, updateStep, updateStudentSubmission } from "./student-controller.js";
+import { getAllStudents, getCurrentStudent, submitApplication, viewStudentClearanceStatus, updateStep, updateStudentSubmission,closeApplication } from "./student-controller.js";
 
 const setUpRoutes = (app) => {
   app.get("/", (req, res) => {
@@ -18,6 +18,8 @@ const setUpRoutes = (app) => {
   app.get("/view-student-clearance-status", viewStudentClearanceStatus);
   app.put("/update-step", updateStep);
   app.put("/update-student-submission", updateStudentSubmission);
+  app.put("/close-application", closeApplication); 
+
 };
 
 export default setUpRoutes;
