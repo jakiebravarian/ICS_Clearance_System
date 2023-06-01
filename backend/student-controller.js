@@ -26,6 +26,32 @@ const getAllStudents = async (req, res) => {
       res.status(500).send("Internal Server Error");
     }
   };
+
+  const submitApplication = async (req,res) =>{
+    try {
+        const { userId, status, step, remarks, studentSubmission } = req.body; // Get the necessary data from the request body
+    
+        const application = new Application({
+          status,
+          step,
+          remarks,
+          studentSubmission,
+        });
+    
+        // Save the application to the database
+        await application.save();
+    
+        // Find the user and push the newly created application to their application array
+        const user = await User.findById(userId);
+        user.application.push(application);
+        await user.save();
+    
+        res.send(application);
+      } catch (error) {
+        console.error(error);
+        res.status(500).send("Internal Server Error");
+      }
+  }
   
 
 export {getAllStudents,getCurrentStudent};

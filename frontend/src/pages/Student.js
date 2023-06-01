@@ -26,6 +26,7 @@ export default  function Student() {
             setStudent(studentData);
       
             setUserInfo({
+                userId: studentData._id,
               name: studentData.firstName + " " + studentData.middleName + " " + studentData.lastName,
               studno: studentData.studentNumber,
               course: studentData.course,
