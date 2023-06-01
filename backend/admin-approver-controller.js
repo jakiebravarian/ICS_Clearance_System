@@ -3,18 +3,7 @@ import bcrypt from "bcrypt";
 import { UserSchema } from "./models/user.js";
 import jwt from "jsonwebtoken";
 
-
-//create virtual schema for user
-UserSchema.virtual('fullName').get(function()
-  {return `${this.firstName} ${this.lastName}`;}).set(function(v){
-    const firstName = v.substring(0, v.indexOf(' '));
-    const lastName = v.substring(v.indexOf(' ') + 1);
-    this.set({firstName, lastName});
-  });
-
 const User = mongoose.model("user", UserSchema);
-
-const doc = new User();
 
 
 const createApproverAccount = async (req, res) => {
@@ -77,23 +66,24 @@ const createApproverAccount = async (req, res) => {
 };
 
 const searchApproverByName = async (req, res) => {
-  //subject to change
-  // https://mongoosejs.com/docs/tutorials/virtuals.html
-    // var user = mongoose.collection('user')
-    const searchName = req.body.search;
-    
-    db.users.createIndex({ "firstName": "text", "middleName": "text", "lastName": "text" });
-    
 
-    const searchedApprover = await User.find({ $text: { $search: searchName } });
-    // const searchedApprover = db.collection.find({
-    //   $or: [
-    //     { firstname: { $regex: searchName, $options: 'i' } }, // Case-insensitive match on firstname
-    //     { lastname: { $regex: searchName, $options: 'i' } }   // Case-insensitive match on lastname
-    //   ]
-    // })
+    try {
+      const searchName = req.body.search;
+  
+      // Assuming you have a User model imported and defined correctly
+  
+      // Create the text index (if it doesn't exist yet)
+      await User.collection.createIndex({ firstName: 'text', middleName: 'text', lastName: 'text' });
+  
+      // Perform the text search
+      const searchedApprover = await User.find({ $text: { $search: searchName } });
+  
+      res.send(searchedApprover);
+    } catch (error) {
+      console.error('An error occurred:', error);
+      res.status(500).send('An error occurred');
+    }
 
-    res.send(searchedApprover);
 };
 
 const filterNameAscending = async (req, res) => {
