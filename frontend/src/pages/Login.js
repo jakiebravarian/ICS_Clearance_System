@@ -16,7 +16,7 @@ export default function Login() {
   
     useEffect(() => {
       if (isLoggedIn) {
-        navigate("/verify");
+        navigate("/student");
       }
     }, [isLoggedIn, navigate]);
   
@@ -51,11 +51,9 @@ export default function Login() {
               age: 60 * 60,
               sameSite: false,
             });
-  
-            localStorage.setItem("upMail", body.upMail);
-            console.log(body.upMail);
+            localStorage.setItem("upMail", upMail);  
             // Check the adviser attribute
-            navigate("/verify");
+            navigate("/student");
           } else {
             alert("Log in failed");
           }

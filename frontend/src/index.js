@@ -25,7 +25,7 @@ const checkIfLoggedInOnHome = async () => {
   const payload = await res.json();
   
     if (payload.isLoggedIn) {
-      return redirect("/verify")
+      return redirect("/student")
     } else {
       return 0
     }
@@ -48,12 +48,11 @@ const checkIfLoggedInOnDash = async () => {
     }
 }
 
-
 const router = createBrowserRouter([
-  { path: '/', element: <Home />,loader: checkIfLoggedInOnHome },
-  { path: '/login', element: <Login />, loader: checkIfLoggedInOnHome},
+  { path: '/', element: <Home /> }, 
+  { path: '/login', element: <Login />},
   { path: '/login-approver', element: <LoginAprrover /> },
-  { path: '/signup', element: <SignUp />,loader: checkIfLoggedInOnHome },
+  { path: '/signup', element: <SignUp /> },
   { path: '/create-approver', element: <CreateApproverAccount /> },
   { path: '/verify', element: <Verify />, loader: checkIfLoggedInOnDash },
   { path: '/student', element: <Student />, loader: checkIfLoggedInOnDash },

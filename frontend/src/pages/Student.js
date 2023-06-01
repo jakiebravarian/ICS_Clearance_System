@@ -11,29 +11,18 @@ import { userInfo } from '../data.js';
 export default function Student() {
 
     // list of applications
-    const [Applications, setApplications] = useState([
-        // sample initial data
-        // uncomment the status to see what it renders to the screen
+    const [Applications, setApplications] = useState([])
+    const [student, setStudent] = useState([])
 
-        //  pending
-        // {
-        //     "dateApplied": "May 29, 2023",
-        //     "status": "Pending"
-        // },
-        
-        // returned
-        // {
-        //     "dateApplied": "May 29, 2023",
-        //     "status": "Returned"
-        // },
-
-        // cleared
-        // {
-        //     "dateApplied": "May 29, 2023",
-        //     "status": "Cleared"
-        // }
-    ])
-
+    useEffect(() => {
+        const upMail1 = localStorage.getItem("upMail");
+        fetch("http://localhost:3001/get-current-student?"+"upMail="+upMail1)
+          .then((response) => response.json())
+          .then((body) => {
+            setStudent(body);
+          });
+      }, []);
+    
     // add to list of applications when user inputs data
     function eventHandler() {
         // get user inputs
