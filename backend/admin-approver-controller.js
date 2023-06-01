@@ -87,6 +87,7 @@ const searchApproverByName = async (req, res) => {
 };
 
 const filterNameAscending = async (req, res) => {
+  try{
     const sortAppNameAsc = await User.find({userType: "Approver"}).sort({firstName: 'asc', lastName:'asc'})
     
     if(!sortAppNameAsc){
@@ -95,29 +96,40 @@ const filterNameAscending = async (req, res) => {
     else{
       res.send(sortAppNameAsc);
     }
+  }catch(err){
+    res.status(500).send('An error occurred');
+  }
 };
 
 const filterNameDescending = async (req, res) => {
-  const sortAppNameDesc = await User.find({userType: "Approver"}).sort({firstName: 'desc', lastName:'desc'})
+  try{
+    const sortAppNameDesc = await User.find({userType: "Approver"}).sort({firstName: 'desc', lastName:'desc'})
   
-  if(!sortAppNameDesc){
-    res.send({found: false});
-  }
-  else{
-    res.send(sortAppNameDesc);
+    if(!sortAppNameDesc){
+      res.send({found: false});
+    }
+    else{
+      res.send(sortAppNameDesc);
+    }
+  }catch(err){
+    res.status(500).send('An error occurred');
   }
 };
 
 const deleteApprover = async (req, res) => {
-	const { upMail } = req.body
+  try{
+    const { upMail } = req.body
 
-	const result = await User.deleteOne({ upMail})
+    const result = await User.deleteOne({ upMail})
 
-	if (result.deletedCount == 1) {
-		res.send({ success: true })
-	} else { 
-		res.send({ success: false })
-	}
+    if (result.deletedCount == 1) {
+      res.send({ success: true })
+    } else { 
+      res.send({ success: false })
+    }
+  }catch(err){
+    res.status(500).send('An error occurred');
+  }
 	
 }
 
