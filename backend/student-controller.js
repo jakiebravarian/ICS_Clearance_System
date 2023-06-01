@@ -68,6 +68,49 @@ const getAllStudents = async (req, res) => {
       res.status(500).send('Internal Server Error');
     }
   };
+
+  const updateStep = async (req, res) => {
+    try {
+      const { applicationId, step } = req.body; // Get the applicationId and new step value from the request body
+  
+      // Find the application by applicationId
+      const application = await Application.findById(applicationId);
+      if (!application) {
+        return res.status(404).send('Application not found');
+      }
+  
+      // Update the step of the application
+      application.step = step;
+      await application.save();
+  
+      res.send('Step updated successfully');
+    } catch (error) {
+      console.error(error);
+      res.status(500).send('Internal Server Error');
+    }
+  };
+  
+  const updateStudentSubmission = async (req, res) => {
+    try {
+      const { applicationId, studentSubmission } = req.body; // Get the applicationId and new studentSubmission value from the request body
+  
+      // Find the application by applicationId
+      const application = await Application.findById(applicationId);
+      if (!application) {
+        return res.status(404).send('Application not found');
+      }
+  
+      // Update the studentSubmission of the application
+      application.studentSubmission = studentSubmission;
+      await application.save();
+  
+      res.send('Student submission updated successfully');
+    } catch (error) {
+      console.error(error);
+      res.status(500).send('Internal Server Error');
+    }
+  };
+  
   
   
 
