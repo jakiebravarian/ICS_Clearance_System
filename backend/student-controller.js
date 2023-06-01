@@ -3,7 +3,7 @@ import { UserSchema } from './models/user.js';
 
 const Student = mongoose.model("users",UserSchema);
 
-const getAllStudents = async (req, res) => {
+export const getAllStudents = async (req, res) => {
     try {
       const userType = req.query.userType; // Get the user type from the query parameter
       const students = await Student.find({ userType: userType }); // Query the students with the specified user type
@@ -15,7 +15,7 @@ const getAllStudents = async (req, res) => {
     }
   };
   
-  const getCurrentStudent = async (req, res) => {
+  export const getCurrentStudent = async (req, res) => {
     try {
       const upMail = req.query.upMail; // Get the user email from the query parameter
       const student = await Student.findOne({ upMail: upMail }); // Query the student with the specified email
@@ -27,7 +27,7 @@ const getAllStudents = async (req, res) => {
     }
   };
 
-  const submitApplication = async (req,res) =>{
+  export const submitApplication = async (req,res) =>{
     try {
         const { userId, status, step, remarks, studentSubmission } = req.body; // Get the necessary data from the request body
     
@@ -53,7 +53,7 @@ const getAllStudents = async (req, res) => {
       }
   }
 
-  const viewStudentClearanceStatus = async (req, res) => {
+  export const viewStudentClearanceStatus = async (req, res) => {
     try {
       const upMail = req.query.upMail; // Get the user email from the query parameter
       const student = await Student.findOne({ upMail: upMail }).populate('application', 'status');
@@ -69,7 +69,7 @@ const getAllStudents = async (req, res) => {
     }
   };
 
-  const updateStep = async (req, res) => {
+  export const updateStep = async (req, res) => {
     try {
       const { applicationId, step } = req.body; // Get the applicationId and new step value from the request body
   
@@ -90,7 +90,7 @@ const getAllStudents = async (req, res) => {
     }
   };
   
-  const updateStudentSubmission = async (req, res) => {
+  export const updateStudentSubmission = async (req, res) => {
     try {
       const { applicationId, studentSubmission } = req.body; // Get the applicationId and new studentSubmission value from the request body
   
@@ -111,7 +111,26 @@ const getAllStudents = async (req, res) => {
     }
   };
   
+  export const closeApplication = async (req, res) => {
+    try {
+      const { applicationId } = req.body; // Get the applicationId from the request body
+  
+      // Find the application by applicationId
+      const application = await Application.findById(applicationId);
+      if (!application) {
+        return res.status(404).send('Application not found');
+      }
+  
+      // Update the status of the application to "closed"
+      application.status = 'closed';
+      await application.save();
+  
+      res.send('Application closed successfully');
+    } catch (error) {
+      console.error(error);
+      res.status(500).send('Internal Server Error');
+    }
+  };
   
   
 
-export {getAllStudents,getCurrentStudent};
