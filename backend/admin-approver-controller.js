@@ -124,33 +124,71 @@ const searchApproverByName = async (req, res) => {
 };
 
 const filterNameAscending = async (req, res) => {
-  try{
-    const searchName = req.body.search;
+    function returnResult(sortAppNameAsc){
+      if(!sortAppNameAsc)
+      {
+          res.send({found: false});
+      }
+      else
+      {
+          res.send(sortAppNameAsc);
+      }
+  };
 
-    const sortAppNameAsc = await User.find({userType: "Approver",  $text: { $search: searchName } }).sort({firstName: 'asc', lastName:'asc'})
-    
-    if(!sortAppNameAsc){
-      res.send({found: false});
+  try{
+      //check first if search name is not empty
+      const searchName = req.body.search;
+      
+      if(searchName == ""){
+          const sortAppNameAsc = await User.find({userType: "Approver"}).sort({firstName: 'desc', lastName:'desc'})
+          returnResult(sortAppNameAsc)
+      }
+      else
+      {
+          const sortAppNameAsc = await User.find({userType: "Approver", $text: { $search: searchName }}).sort({firstName: 'desc', lastName:'desc'})
+          if(!sortAppNameAsc){
+              res.send({found: false});
+          }
+          else{
+              returnResult(sortAppNameAsc)
+          }
+      } 
+    }catch(err){
+      res.status(500).send('An error occurred');
     }
-    else{
-      res.send(sortAppNameAsc);
-    }
-  }catch(err){
-    res.status(500).send('An error occurred');
-  }
 };
 
 const filterNameDescending = async (req, res) => {
-  try{
+
+  function returnResult(sortAppNameDesc){
+    if(!sortAppNameDesc)
+    {
+        res.send({found: false});
+    }
+    else
+    {
+        res.send(sortAppNameDesc);
+    }
+};
+
+try{
+    //check first if search name is not empty
     const searchName = req.body.search;
-    const sortAppNameDesc = await User.find({userType: "Approver", $text: { $search: searchName }}).sort({firstName: 'desc', lastName:'desc'})
-  
-    if(!sortAppNameDesc){
-      res.send({found: false});
+    
+    if(searchName == ""){
+        const sortAppNameDesc = await User.find({userType: "Approver"}).sort({firstName: 'desc', lastName:'desc'})
+        returnResult(sortAppNameDesc)
     }
-    else{
-      res.send(sortAppNameDesc);
-    }
+    else
+    {
+        const sortAppNameDesc = await User.find({userType: "Approver", $text: { $search: searchName }}).sort({firstName: 'desc', lastName:'desc'})
+        if(!sortAppNameDesc){
+            res.send({found: false});
+        }
+        else{
+            returnResult(sortAppNameDesc)
+        }
+    } 
   }catch(err){
     res.status(500).send('An error occurred');
   }
