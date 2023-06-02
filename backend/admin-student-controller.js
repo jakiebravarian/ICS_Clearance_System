@@ -1,26 +1,55 @@
 import mongoose from "mongoose";
 import { UserSchema } from "./models/user.js";
+import { AppSchema } from "./models/application.js";
 
 const User = mongoose.model("user", UserSchema);
+const Application = mongoose.model("application", AppSchema);
 
 const getPendingStudent = async (req,res) => {
+    try
+    {
+        const pendingApplication = await Application.find({status: "Pending"});
+        const getPendingStudent = await User.find({application: {$elemMatch: pendingApplication._id}})
 
+        res.send(getPendingStudent);
+    }
+    catch(err){
+        res.status(500).send('An error occurred'); 
+    }
 }
 
 const assignAdviser = async (req,res) => {
+    try{
+        const assignedAdviser = await User.findOne({firstName: req.body.firstName, middleName: req.body.middleName, lastName: req.body.lastName});
+        
+        if(!assignedAdviser || assignedAdviser.title == "Clearance Office"){
+            res.send({success: false});
+        }
+        else
+        {
+            const student = await User.findOne({studentNumber: req.body.studentNumber});
 
-}
+            student.adviser = assignedAdviser._id;
 
-const approveApplication = async (req,res) => {
+            student.save();
 
-}
+            res.send({success: true});
+        }
 
-const rejectApplication = async (req,res) => {
-
+    }
+    catch(err)
+    {
+        res.status(500).send('An error occurred'); 
+    }
 }
 
 const sortStudentByStudentNum = async (req,res) => {
-
+    try{
+        const sortByStudNum =  await User.find({}).sort({studentNumber: "desc"});
+        res.send(sortByStudNum);
+    }catch(err){
+        res.status(500).send('An error occurred');
+    }
 }
 
 const sortStudentByName = async (req,res) => {
@@ -59,4 +88,4 @@ const sortStudentByName = async (req,res) => {
       }
 }
 
-export {sortStudentByName}
+export {sortStudentByName, getPendingStudent, assignAdviser, sortStudentByStudentNum}
