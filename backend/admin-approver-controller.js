@@ -65,6 +65,43 @@ const createApproverAccount = async (req, res) => {
   }
 };
 
+const approverLogin = async (req, res) =>{
+   //get email and password from the body
+   const email = req.body.upMail.trim();
+   const password = req.body.password;
+
+   // Check if email exists, and if it is an approver
+   const user = await User.findOne({upMail: email, userType: "Approver"});
+
+    //  Scenario 1: FAIL - User doesn't exist
+   if(!user){
+       return res.send({ success: false })  
+   }
+
+   //check if password is correct
+   const dbPassword = user.password;
+   //compare using bcrypt, get pass from database and from input
+   bcrypt.compare(password, dbPassword).then((match) => {
+        // Scenario 2: FAIL - Wrong password
+       if(!match) 
+       {
+           return res.send({ success: false })  
+       }
+       else
+       {
+       // Scenario 3: SUCCESS
+           const tokenPayload = {
+               _id: user._id
+           }
+       
+           const token = jwt.sign(tokenPayload, "THIS_IS_A_SECRET_STRING");
+
+           // return the token to the client
+           return res.send({ success: true, token, username: user.name });
+       }
+   })
+}
+
 const searchApproverByName = async (req, res) => {
 
     try {
@@ -88,7 +125,9 @@ const searchApproverByName = async (req, res) => {
 
 const filterNameAscending = async (req, res) => {
   try{
-    const sortAppNameAsc = await User.find({userType: "Approver"}).sort({firstName: 'asc', lastName:'asc'})
+    const searchName = req.body.search;
+
+    const sortAppNameAsc = await User.find({userType: "Approver",  $text: { $search: searchName } }).sort({firstName: 'asc', lastName:'asc'})
     
     if(!sortAppNameAsc){
       res.send({found: false});
@@ -103,7 +142,8 @@ const filterNameAscending = async (req, res) => {
 
 const filterNameDescending = async (req, res) => {
   try{
-    const sortAppNameDesc = await User.find({userType: "Approver"}).sort({firstName: 'desc', lastName:'desc'})
+    const searchName = req.body.search;
+    const sortAppNameDesc = await User.find({userType: "Approver", $text: { $search: searchName }}).sort({firstName: 'desc', lastName:'desc'})
   
     if(!sortAppNameDesc){
       res.send({found: false});
@@ -133,4 +173,31 @@ const deleteApprover = async (req, res) => {
 	
 }
 
-export { createApproverAccount, searchApproverByName, filterNameAscending, filterNameDescending};
+const editApprover = async (req,res) => {
+  function matchRegex(email){
+    return /^([a-z0-9]+)@up\.edu\.ph$/i.test(email)
+}
+  try{
+    const editApp = await User.findOne({upMail: req.body.upMail});
+  
+    //check if new email is a upmail
+    if(!matchRegex(req.body.newUpMail)){
+      res.send({success: false});
+    }
+    else{
+      editApp.firstName = req.body.firstName;
+      editApp.middleName = req.body.middleName;
+      editApp.lastName = req.body.lastName;
+      editApp.upMail = req.body.newUpMail;
+      editApp.password = req.body.password;
+  
+      let updatedInfo = await editApp.save();
+      res.send(updatedInfo);
+    }
+
+  }catch(err){
+    res.status(500).send('An error occurred');
+  }
+}
+
+export { createApproverAccount, searchApproverByName, filterNameAscending, filterNameDescending, deleteApprover, editApprover, approverLogin};
