@@ -5,66 +5,6 @@ import jwt from "jsonwebtoken";
 
 const User = mongoose.model("user", UserSchema);
 
-
-const createApproverAccount = async (req, res) => {
-  const emailChecker = await User.findOne({
-    upMail: req.body.upMail.toLowerCase(),
-  });
-
-  //function for validationg upmail
-  function matchRegex(email) {
-    return /^([a-z0-9]+)@up\.edu\.ph$/i.test(email);
-  }
-
-  //check if upmail is already existing (findone)
-  if (emailChecker) {
-    return res.send({ emailExist: true });
-  } else {
-    //check if follows regex
-    if (!matchRegex(req.body.upMail.toLowerCase())) {
-      res.send({ success: false });
-    } else {
-      const {
-        firstName,
-        middleName,
-        lastName,
-        upMail,
-        password,
-        studentNumber,
-        degreeProgram,
-        college,
-        userType,
-        adviser,
-        application,
-      } = req.body;
-      bcrypt.hash(password, 10).then((hash) => {
-        User.create({
-          firstName: firstName,
-          middleName: middleName,
-          lastName: lastName,
-          upMail: upMail,
-          password: hash,
-          studentNumber: studentNumber,
-          college: college,
-          degreeProgram: degreeProgram,
-          userType: userType,
-          adviser: adviser,
-          application: application,
-        })
-          .then(() => {
-            res.send({ success: true });
-          })
-          .catch((err) => {
-            if (err) {
-              res.send({ success: false });
-              console.log(err);
-            }
-          });
-      });
-    }
-  }
-};
-
 const approverLogin = async (req, res) =>{
    //get email and password from the body
    const email = req.body.upMail.trim();
@@ -229,8 +169,8 @@ const editApprover = async (req,res) => {
       editApp.upMail = req.body.newUpMail;
       editApp.password = req.body.password;
   
-      let updatedInfo = await editApp.save();
-      res.send(updatedInfo);
+      await editApp.save();
+      res.send({success: true});
     }
 
   }catch(err){
@@ -238,4 +178,4 @@ const editApprover = async (req,res) => {
   }
 }
 
-export { createApproverAccount, searchApproverByName, filterNameAscending, filterNameDescending, deleteApprover, editApprover, approverLogin};
+export {searchApproverByName, filterNameAscending, filterNameDescending, deleteApprover, editApprover, approverLogin};
