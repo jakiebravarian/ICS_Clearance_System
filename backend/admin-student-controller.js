@@ -72,7 +72,7 @@ const assignAdviser = async (req,res) => {
 
 const sortStudentByStudentNum = async (req,res) => {
     try{
-        const sortByStudNum =  await User.find({}).sort({studentNumber: "desc"});
+        const sortByStudNum =  await User.find({}).sort({studentNumber: "asc"});
         res.send(sortByStudNum);
     }catch(err){
         res.status(500).send('An error occurred');
@@ -82,13 +82,13 @@ const sortStudentByStudentNum = async (req,res) => {
 const sortStudentByName = async (req,res) => {
 
     function returnResult(student){
-        if(!sortAppNameDesc)
+        if(!student)
         {
             res.send({found: false});
         }
         else
         {
-            res.send(sortAppNameDesc);
+            res.send(student);
         }
     };
 
@@ -97,17 +97,17 @@ const sortStudentByName = async (req,res) => {
         const searchName = req.body.search;
         
         if(searchName == ""){
-            const sortStudentName = await User.find({userType: "Student"}).sort({firstName: 'desc', lastName:'desc'})
+            const sortStudentName = await User.find({userType: "Student"}).sort({firstName: 'desc', lastName: 'desc'})
             returnResult(sortStudentName)
         }
         else
         {
-            const sortStudentName = await User.find({userType: "Student", $text: { $search: searchName }}).sort({firstName: 'desc', lastName:'desc'})
+            const sortStudentName = await User.find({userType: "Student", $text: { $search: searchName }}).sort({firstName: 'desc', lastName: 'desc'})
             if(!sortStudentName){
                 res.send({found: false});
             }
             else{
-                returnResult(sortStudentName)
+                returnResult(sortStudentName);
             }
         } 
       }catch(err){
