@@ -29,7 +29,7 @@ const signUp = async (req, res) => {
         }
         else
         {
-            const {  firstName, middleName, lastName, upMail, password, studentNumber,degreeProgram, college, userType, adviser, application } = req.body;
+            const {  firstName, middleName, lastName, upMail, password, studentNumber,degreeProgram, college, userType, title, adviser, application } = req.body;
             bcrypt.hash(password, 10).then((hash) => {
                 User.create({
                     firstName: firstName,
@@ -41,6 +41,7 @@ const signUp = async (req, res) => {
                     college: college,
                     degreeProgram: degreeProgram,
                     userType: userType,
+                    title: title,
                     adviser: adviser,
                     application: application
                 })
