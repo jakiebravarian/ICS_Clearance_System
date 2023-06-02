@@ -3,24 +3,24 @@ import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import App from './App';
 
-import Home from './pages/Home';
-import Login from './pages/Login';
-import LoginAprrover from './pages/Login-Approver';
-import SignUp from './pages/SignUp';
-import CreateApproverAccount from './pages/Create-Approver';
-import Verify from './pages/Verify';
-import Student from './pages/Student';
-import Returned from './pages/Returned';
-import ManageApplications from './pages/Manage-Applications';
-import ManageApprovers from './pages/Manage-Approvers';
+import Home from './pages/Login-Signup/Home';
+import Login from './pages/Login-Signup/Login';
+import LoginAprrover from './pages/Login-Signup/Login-Approver';
+import SignUp from './pages/Login-Signup/SignUp';
+import Verify from './pages/Login-Signup/Verify';
+import MainScreen from './pages/Approver/MainScreen';
+import Student from './pages/Student/Student';
+import Returned from './pages/Student/Returned';
+import ManageApplications from './pages/Admin/Manage-Applications';
+import ManageApprovers from './pages/Admin/Manage-Approvers';
 
 const router = createBrowserRouter([
   { path: '/', element: <Home /> },
   { path: '/login', element: <Login /> },
   { path: '/login-approver', element: <LoginAprrover /> },
   { path: '/signup', element: <SignUp /> },
-  { path: '/create-approver', element: <CreateApproverAccount /> },
   { path: '/verify', element: <Verify /> },
+  { path: '/approver', element: <MainScreen /> },
   { path: '/student', element: <Student /> },
   { path: '/returned', element: <Returned /> },
   { path: '/manage-applications', element: <ManageApplications /> },

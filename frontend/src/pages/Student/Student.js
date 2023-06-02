@@ -1,12 +1,12 @@
 import React from "react";
 import { useEffect, useState } from "react";
-import Pikachu from '../assets/pikachu.png';
+import Pikachu from '../../assets/pikachu.png';
 
 // import other components
 import { Header, StudentInfo, ProfileHeader, Application, Footer } from "./StudentComponents";
 
 // import data
-import { userInfo } from '../data.js';
+import { userInfo } from '../../data.js';
 
 export default function Student() {
 
@@ -20,7 +20,7 @@ export default function Student() {
         //     "dateApplied": "May 29, 2023",
         //     "status": "Pending"
         // },
-        
+
         // returned
         // {
         //     "dateApplied": "May 29, 2023",
@@ -51,16 +51,16 @@ export default function Student() {
 
     return (
         <div>
-            
-            <Header data={userInfo}/>
+
+            <Header data={userInfo} />
 
             {/* APPLICATION PROPER */}
             {/* student info */}
 
-            <StudentInfo data={userInfo}/>
+            <StudentInfo data={userInfo} />
 
             {/* application (either form or list) */}
-            <Application data={Applications} eventHandler={eventHandler}/>
+            <Application data={Applications} eventHandler={eventHandler} />
         </div>
     )
 }

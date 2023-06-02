@@ -1,0 +1,226 @@
+#login-container {
+    /* itself */
+    float: left;
+    background-color: #094C9F;
+    width: 50vw;
+    height: 100vh;
+    /* contents */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#login-img {
+    max-width: 250px;
+    height: auto;
+    position: unset;
+}
+
+#login-h2 {
+    font-family: Roboto Slab;
+    font-weight: bold;
+    font-size: 24px;
+    letter-spacing: 1.5px;
+    margin: 48px auto 0 auto;
+    color: #fff;
+}
+
+#error-message {
+    font-family: Roboto;
+    margin: 0;
+    font-size: 12px;
+    font-weight: 100;
+    color: red;
+}
+
+.form {
+    position: absolute;
+    padding: 10px;
+}
+
+#form-signup {
+    position: absolute;
+    padding: 10px;
+}
+
+#login-h1,
+#signup-h1 {
+    font-family: Roboto Slab;
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 46px;
+    letter-spacing: 0em;
+    margin-bottom: 32px;
+}
+
+#signup-h1 {
+    margin-top: 64px;
+    margin-bottom: 16px;
+}
+
+#email-login,
+#password-login,
+#email-login-approver,
+#password-login-approver {
+    font-size: 16px;
+    padding: 14px 20px;
+    margin: 16px 0;
+    border-radius: 15px;
+}
+
+input {
+    font-size: 14px;
+    padding: 10px 20px;
+    margin: 6px 0;
+    box-sizing: border-box;
+    border-radius: 10px;
+    border: 1.5px solid #000000;
+}
+
+#login-button,
+#signup-button {
+    margin: 16px 0;
+    width: 35vw;
+    border-radius: 15px;
+    background-color: #094C9F;
+    border: none;
+    color: #FFFFFF;
+    font-size: 16px;
+    font-weight: 700;
+    height: 40px;
+    cursor: pointer;
+}
+
+#login-p,
+#signup-link {
+    font-family: Roboto;
+    font-size: 16px;
+    font-weight: 100;
+    text-align: center;
+}
+
+#signup-link {
+    color: #094C9F;
+    text-decoration: none;
+}
+
+@media screen and (max-width: 600px) {
+    #login-container {
+        height: auto;
+        padding: 16px 0 16px 0;
+        width: 100%;
+    }
+
+    #navbar-login {
+        margin: 0;
+    }
+
+    .form {
+        top: 95%;
+        transform: translate(-50%, -50%);
+        left: 50%;
+    }
+
+    #form-signup {
+        top: 110%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    input,
+    #login-button,
+    #signup-button {
+        min-width: 394px;
+    }
+
+    #login-footer {
+        position: absolute;
+        top: 125%;
+    }
+
+    #sign-up-footer {
+        position: absolute;
+        top: 165%;
+    }
+}
+
+@media screen and (min-width: 600px) {
+    #login-container {
+        height: auto;
+        padding: 16px 0 16px 0;
+        width: 100%;
+    }
+
+    #navbar-login {
+        margin: 0;
+    }
+
+    .form {
+        top: 95%;
+        transform: translate(-50%, -50%);
+        left: 50%;
+    }
+
+    #form-signup {
+        top: 110%;
+        left: 50%;
+        /* transform: translate(-50%, -50%); */
+    }
+
+    input,
+    #login-button,
+    #signup-button {
+        min-width: 394px;
+        width: 50vw;
+    }
+
+    #login-footer {
+        position: absolute;
+        top: 125%;
+    }
+
+    #sign-up-footer {
+        position: absolute;
+        top: 165%;
+    }
+}
+
+@media screen and (min-width: 884px) {
+    #login-container {
+        height: 100vh;
+        width: 50%;
+    }
+
+    #navbar-login {
+        margin: 32px 32px 0px 32px;
+    }
+
+    .form {
+        top: 50%;
+        transform: translate(-50%, -50%);
+        left: 75%;
+    }
+
+    #form-signup {
+        top: 50vh;
+        left: 75%;
+        transform: translate(-50%, -50%);
+    }
+
+    input,
+    #login-button,
+    #signup-button {
+        width: 35vw;
+    }
+
+    #login-footer {
+        position: absolute;
+        top: 100%;
+    }
+
+    #sign-up-footer {
+        position: absolute;
+        top: 100%;
+    }
+}
