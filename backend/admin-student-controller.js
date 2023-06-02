@@ -20,21 +20,48 @@ const getPendingStudent = async (req,res) => {
 
 const assignAdviser = async (req,res) => {
     try{
-        const assignedAdviser = await User.findOne({firstName: req.body.firstName, middleName: req.body.middleName, lastName: req.body.lastName});
-        
-        if(!assignedAdviser || assignedAdviser.title == "Clearance Office"){
-            res.send({success: false});
-        }
-        else
+
+        if(req.body.middleName == "") //if no middle name
         {
-            const student = await User.findOne({studentNumber: req.body.studentNumber});
-
-            student.adviser = assignedAdviser._id;
-
-            student.save();
-
-            res.send({success: true});
+            const assignedAdviser = await User.findOne({firstName: req.body.firstName, lastName: req.body.lastName});
+            
+            if(!assignedAdviser || assignedAdviser.title == "Clearance Office")
+            {
+                res.send({success: false});
+            }
+            else
+            {
+                const student = await User.findOne({studentNumber: req.body.studentNumber});
+    
+                student.adviser = assignedAdviser._id;
+    
+                student.save();
+    
+                res.send({success: true});
+            }
         }
+        else //if theres middle name
+        {
+            const assignedAdviser = await User.findOne({firstName: req.body.firstName, middleName: req.body.middleName, lastName: req.body.lastName});
+            
+            if(!assignedAdviser || assignedAdviser.title == "Clearance Office"){
+                res.send({success: false});
+            }
+            else
+            {
+                const student = await User.findOne({studentNumber: req.body.studentNumber});
+    
+                student.adviser = assignedAdviser._id;
+    
+                student.save();
+    
+                res.send({success: true});
+            }
+
+        }
+        
+        
+        
 
     }
     catch(err)
