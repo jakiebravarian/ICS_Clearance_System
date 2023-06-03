@@ -12,6 +12,8 @@
     margin-top: auto;
     text-align: center;
     color: #000;
+    font-family: Roboto slab;
+    letter-spacing: -0.5px;
     font-size: 28px;
     font-weight: 700;
 }
@@ -39,11 +41,11 @@
 }
 
 @media screen and (max-width: 600px) {
-    #page-header-h1 {
+    #page-header-h1-verify {
         display: none;
     }
 
-    #page-header-h1-M {
+    #page-header-h1-M-verify {
         display: contents;
     }
 
@@ -54,11 +56,11 @@
 }
 
 @media screen and (min-width: 600px) {
-    #page-header-h1 {
+    #page-header-h1-verify {
         display: none;
     }
 
-    #page-header-h1-M {
+    #page-header-h1-M-verify {
         display: contents;
     }
 
@@ -69,11 +71,11 @@
 }
 
 @media screen and (min-width: 768px) {
-    #page-header-h1 {
+    #page-header-h1-verify {
         display: contents;
     }
 
-    #page-header-h1-M {
+    #page-header-h1-M-verify {
         display: none;
     }
 
@@ -84,11 +86,11 @@
 }
 
 @media screen and (min-width: 884px) {
-    #page-header-h1 {
+    #page-header-h1-verify {
         display: contents;
     }
 
-    #page-header-h1-M {
+    #page-header-h1-M-verify {
         display: none;
     }
 
