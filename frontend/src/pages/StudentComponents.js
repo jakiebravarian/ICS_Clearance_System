@@ -255,7 +255,7 @@ function Application(props) {
                         {/* if status is returned, add a view remarks button */}
                         {application.status === "Returned" ? (
                           // when user clicks view remarks, goes to /returned
-                          <form action="/returned">
+                        <form action={`/returned/${application._id}`}>
                             <button type="submit" className="view-remarks-button">
                               View remarks
                             </button>

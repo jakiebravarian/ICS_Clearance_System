@@ -56,7 +56,7 @@ const router = createBrowserRouter([
   { path: '/create-approver', element: <CreateApproverAccount /> },
   { path: '/verify', element: <Verify /> },
   { path: '/student', element: <Student />},
-  { path: '/returned', element: <Returned /> },
+    { path: '/returned/:appId', element: <Returned /> },
   { path: '/manage-applications', element: <ManageApplications /> },
   { path: '/manage-approvers', element: <ManageApprovers /> },
 ])

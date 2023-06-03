@@ -15,7 +15,6 @@ export default  function Student() {
     const [Applications, setApplications] = useState([])
     const [student, setStudent] = useState([]);
     const [userInfo, setUserInfo] = useState({}); // Define userInfo state
-
     useEffect(() => {
         const upMail1 = localStorage.getItem("upMail");
       
