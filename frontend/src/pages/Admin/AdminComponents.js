@@ -362,9 +362,9 @@ function EditApproverModal(props) {
                         <input type="text" name="middleName" value={formData.middleName || ''} onChange={handleChange} placeholder="Middle Name"/><br></br>
                         <input type="text" name="lastName" value={formData.lastName || ''} onChange={handleChange} placeholder="Last Name"/><br></br>
                         <input type="text" name="email" value={formData.email || ''} onChange={handleChange} placeholder="Email"/><br></br>
-                        <input type="password" name="email" value={formData.password || ''} onChange={handleChange} placeholder="Password"/><br></br>
-                        <input type="text" name="email" value={formData.approverType || ''} onChange={handleChange} placeholder="Approver Type"/><br></br>
-                        <button className="assign-button" type="submit">Create Account</button>
+                        <input type="password" name="password" value={formData.password || ''} onChange={handleChange} placeholder="Password"/><br></br>
+                        <input type="text" name="approverType" value={formData.approverType || ''} onChange={handleChange} placeholder="Approver Type"/><br></br>
+                        <button className="assign-button" type="submit">Confirm</button>
                     </form>
                 </div>
             </Modal>
