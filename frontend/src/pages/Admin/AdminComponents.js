@@ -127,11 +127,12 @@ function AssignAdviserModal() {
     // resizing of the modal
     const modalStyle = {
         content: {
-            width: '50%', // Set your desired width
+            width: '40%', // Set your desired width
             height: '50%', // Set your desired height
             top: '50%',
             left: '50%',
             transform: 'translate(-50%, -50%)',
+            borderRadius: "20px"
         },
     };
 
@@ -143,7 +144,7 @@ function AssignAdviserModal() {
                 <div className="modal-heading">
                     <p>Assign Adviser</p>
                 </div>
-                <div className="centered">
+                <div className="centered modal-form-div">
                     <form onSubmit={handleSubmit} className="modal-form">
                         <input type="text" name="firstName" value={formData.firstName || ''} onChange={handleChange} placeholder="Adviser's First Name"/><br></br>
                         <input type="text" name="middleName" value={formData.middleName || ''} onChange={handleChange} placeholder="Adviser's Middle Name"/><br></br>
