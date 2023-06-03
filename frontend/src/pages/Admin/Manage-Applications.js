@@ -1,9 +1,10 @@
 import React from "react";
+import { studentApps } from "../../data";
 
 // import components from student components
-import { Header } from "../ScreenComponents";
+import { Header, Footer } from "../ScreenComponents";
 import { adminInfo } from "../../data";
-import { Menu } from "./AdminComponents";
+import { Menu, StudentSort, StudentAppsList, AssignAdviserModal } from "./AdminComponents";
 
 export default function ManageApplications() {
     return (
@@ -11,7 +12,21 @@ export default function ManageApplications() {
             <Header data={adminInfo} />
 
             {/* Menu */}
-            <Menu option="ManageStudentApps" />
+            <div className="admin-menu">
+                <Menu option="ManageStudentApps" />
+            </div>
+
+            <div className="row student-sort-section">
+                {/* text */}
+                <div>
+                    <p className="roboto-slab section-name-text">Pending Student Account Application Requests</p>
+                </div>
+                {/* name sort */}
+                <StudentSort/>
+            </div>
+
+            {/* list of students */}
+            <StudentAppsList data={studentApps}/>
         </div>
     )
 }
