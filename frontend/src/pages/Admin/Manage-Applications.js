@@ -4,7 +4,7 @@ import { studentApps } from "../../data";
 // import components from student components
 import { Header, Footer } from "../ScreenComponents";
 import { adminInfo } from "../../data";
-import { Menu, StudentSort, StudentAppsList } from "./AdminComponents";
+import { Menu, StudentSort, StudentAppsList, AssignAdviserModal } from "./AdminComponents";
 
 export default function ManageApplications() {
     return (

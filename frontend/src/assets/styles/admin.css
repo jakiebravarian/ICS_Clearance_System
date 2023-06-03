@@ -112,7 +112,7 @@
     min-width: 20px;
 }
 
-.admin-buttons > button {
+.admin-buttons > button, .approve-button {
     width: 150px;
     height: 40px;
     border-radius: 20px;
@@ -123,4 +123,20 @@
     .first-col {
         flex: 0 0 100%;
     }
+}
+
+.exit-button {
+    color: gray;
+    background-color: white;
+    border: none;
+}
+
+.modal-heading {
+    font-weight: bold;
+    font-family: Roboto Slab;
+    text-align: center;
+}
+
+.modal-window {
+    border-radius: 20px;
 }

@@ -1,4 +1,5 @@
-import React from "react";
+import React, {useState} from "react";
+import Modal from 'react-modal';
 
 // renders a menu with 2 options
 function Menu(props) {
@@ -42,8 +43,8 @@ function StudentSort() {
             <form className="sort-form">
                 <input class="sort-radio" name="sort" type="radio" id="studno-sort-input"></input>
                 <label class="radio-label" for="studno-sort-input">Student number</label>
-                <input class="sort-radio" name="sort" type="radio" id="studnum-sort-input"></input>
-                <label class="radio-label" for="studnum-sort-input">Student number</label>
+                <input class="sort-radio" name="sort" type="radio" id="studname-sort-input"></input>
+                <label class="radio-label" for="studname-sort-input">Student name</label>
             </form>
         </div>
     )
@@ -69,7 +70,7 @@ function StudentAppsList(props) {
                         
                         {/* buttons */}
                         <div className="row admin-buttons">
-                            <button class="approve-button">Approve</button>
+                            <AssignAdviserModal/>
                             <button className="reject-button">Reject</button>
                         </div>
                     </div>
@@ -79,4 +80,81 @@ function StudentAppsList(props) {
     )
 }
 
-export { Menu, StudentSort, StudentAppsList }
+function AssignAdviserModal() {
+    const [isOpen, setIsOpen] = useState(false);
+    const [formData, setFormData] = useState({
+        firstName: '',
+        middleName: '',
+        lastName: '',
+        studno: ''
+    }); // initially empty strings
+
+    // opens the modal when called
+    const openModal = () => {
+        setIsOpen(true);
+    }
+
+    // closes the modal when called
+    const closeModal = () => {
+        setIsOpen(false);
+    }
+
+    const handleChange = (event) => {
+        const { name, value } = event.target;
+        setFormData((prevData) => ({
+        ...prevData,
+        [name]: value,
+        }));
+    };
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        
+        // send data to backend
+
+        // reset the form data
+        setFormData({
+            firstName: '',
+            middleName: '',
+            lastName: '',
+            studno: ''
+        });
+
+        // close the modal
+        setIsOpen(false);
+    };
+
+    // resizing of the modal
+    const modalStyle = {
+        content: {
+            width: '50%', // Set your desired width
+            height: '50%', // Set your desired height
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+        },
+    };
+
+    return(
+        <div className="modal-window">
+            <button class="approve-button" onClick={openModal}>Approve</button>
+            <Modal style={modalStyle} isOpen={isOpen} onRequestClose={closeModal}>
+                <button className="exit-button" onClick={closeModal}>X</button>
+                <div className="modal-heading">
+                    <p>Assign Adviser</p>
+                </div>
+                <div className="centered">
+                    <form onSubmit={handleSubmit}>
+                        <input type="text" name="firstName" value={formData.firstName || ''} onChange={handleChange} placeholder="Adviser's First Name"/><br></br>
+                        <input type="text" name="middleName" value={formData.middleName || ''} onChange={handleChange} placeholder="Adviser's Middle Name"/><br></br>
+                        <input type="text" name="lastName" value={formData.lastName || ''} onChange={handleChange} placeholder="Adviser's Last Name"/><br></br>
+                        <input type="text" name="studno" value={formData.studno || ''} onChange={handleChange} placeholder="Student number"/><br></br>
+                        <button type="submit">Submit</button>
+                    </form>
+                </div>
+            </Modal>
+        </div>
+    )
+}
+
+export { Menu, StudentSort, StudentAppsList, AssignAdviserModal }
