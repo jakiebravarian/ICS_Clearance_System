@@ -20,4 +20,4 @@ const AppSchema = new Schema({
 });
 
 
-export default AppSchema;
+export {AppSchema};
