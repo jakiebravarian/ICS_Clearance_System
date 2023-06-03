@@ -36,3 +36,18 @@ export const adminInfo = {
 export const remarks = {
     remarks: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis ."
 }
+
+export const studentApps = [
+    {
+        studentNumber: "2020-xxxxx",
+        studentName: "BRABANTE, Jakie Ashley, Cacho"
+    },
+    {
+        studentNumber: "2020-xxxxx",
+        studentName: "DELA ROSA, Maria, Hernandez"
+    },
+    {
+        studentNumber: "2020-xxxxx",
+        studentName: "JEPSEN, Carly Rae"
+    }
+]

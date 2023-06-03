@@ -49,7 +49,9 @@ function StudentSort() {
     )
 }
 
-function StudentAppsList() {
+function StudentAppsList(props) {
+    var studentsList = props.data;
+
     return (
         <div className="column student-apps-list">
             {/* header */}
@@ -59,6 +61,14 @@ function StudentAppsList() {
                     <p>Student name</p>
                 </div>
             </div>
+            {
+                studentsList.map((student) => (
+                    <div className="row col-labels">
+                        <p className="first-col">{student.studentNumber}</p>
+                        <p>{student.studentName}</p>
+                    </div>
+                ))
+            }
         </div>
     )
 }

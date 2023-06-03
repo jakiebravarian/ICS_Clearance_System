@@ -1,4 +1,5 @@
 import React from "react";
+import { studentApps } from "../../data";
 
 // import components from student components
 import { Header, Footer } from "../ScreenComponents";
@@ -25,7 +26,7 @@ export default function ManageApplications() {
             </div>
 
             {/* list of students */}
-            <StudentAppsList/>
+            <StudentAppsList data={studentApps}/>
         </div>
     )
 }
