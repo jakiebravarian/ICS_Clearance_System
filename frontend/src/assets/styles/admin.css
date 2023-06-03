@@ -104,11 +104,23 @@
     flex: 0 0 auto;
 }
 
+.approve-button:hover {
+    background-color: white;
+    color: black;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
 .reject-button {
     font-size: 17px;
     background-color: black;
     color: white;
     flex: 0 0 auto;
+}
+
+.reject-button:hover {
+    background-color: white;
+    color: black;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .admin-buttons {
