@@ -1,10 +1,12 @@
 import React from "react";
-import logo from '../assets/ICS.png';
-import '../assets/styles/Home.css'
+import logo from '../../assets/ICS.png';
+import '../../assets/styles/Home.css'
+import '../../assets/styles/LoginSignup.css'
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { Footer } from '../ScreenComponents';
 
-export default function LoginApprover() {
+export default function Login() {
     // added use states
     const [upMail, setUpMail] = useState("");
     const [password, setPassword] = useState("")
@@ -58,7 +60,7 @@ export default function LoginApprover() {
     return (
         <div className="wrapper">
             {/* Navigation Menu */}
-            <div className="navbar">
+            <div className="navbar" id="navbar-login">
                 <a href="/">Home</a>
                 <a href="/signup">Sign Up</a>
                 <div class="dropdown">
@@ -68,7 +70,6 @@ export default function LoginApprover() {
                     <div class="dropdown-content">
                         <a href="/login">Student</a>
                         <a href="/login-approver">Approver</a>
-                        {/* <a href="#">Admin</a> */}
                     </div>
                 </div>
             </div>
@@ -80,14 +81,14 @@ export default function LoginApprover() {
             </div>
             {/* Right Side */}
             <form className="form" onSubmit={handleSubmit(onSubmit)}>
-                <h1 id="login-h1">Welcome Back, Approver!</h1>
+                <h1 id="login-h1">Welcome Back, Student!</h1>
 
                 {/* UP Mail Input */}
                 <input
                     type="email"
                     id="email-login"
                     placeholder="UP Mail"
-                    {...register("firstName", {
+                    {...register("email", {
                         onChange: handleUpMail,
                         required: "Please enter your UP Mail",
                         pattern: {
@@ -96,7 +97,7 @@ export default function LoginApprover() {
                         }
                     })}
                 />
-                {errors.firstName && <p id="error-message">{errors.firstName.message}</p>}
+                {errors.email && <p id="error-message">{errors.email.message}</p>}
 
                 {/* Password Input */}
                 <input
@@ -115,9 +116,10 @@ export default function LoginApprover() {
                 {errors.password && <p id="error-message">{errors.password.message}</p>}
 
                 <button type="submit" id="login-button">Login</button>
+
+                <p id="login-p">Don’t have an account yet? <span><a href="/signup" id="signup-link">Sign up</a></span></p>
             </form>
+            <Footer data="login-footer" />
         </div>
     )
-
 }
-

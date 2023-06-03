@@ -1,10 +1,12 @@
 import React from "react";
-import logo from '../assets/ICS.png';
-import '../assets/styles/Home.css'
+import logo from '../../assets/ICS.png';
+import '../../assets/styles/Home.css'
+import '../../assets/styles/LoginSignup.css'
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { Footer } from '../ScreenComponents';
 
-export default function Login() {
+export default function LoginApprover() {
     // added use states
     const [upMail, setUpMail] = useState("");
     const [password, setPassword] = useState("")
@@ -58,7 +60,7 @@ export default function Login() {
     return (
         <div className="wrapper">
             {/* Navigation Menu */}
-            <div className="navbar">
+            <div className="navbar" id="navbar-login">
                 <a href="/">Home</a>
                 <a href="/signup">Sign Up</a>
                 <div class="dropdown">
@@ -80,14 +82,14 @@ export default function Login() {
             </div>
             {/* Right Side */}
             <form className="form" onSubmit={handleSubmit(onSubmit)}>
-                <h1 id="login-h1">Welcome Back, Student!</h1>
+                <h1 id="login-h1">Welcome Back, Approver!</h1>
 
                 {/* UP Mail Input */}
                 <input
                     type="email"
                     id="email-login"
                     placeholder="UP Mail"
-                    {...register("email", {
+                    {...register("firstName", {
                         onChange: handleUpMail,
                         required: "Please enter your UP Mail",
                         pattern: {
@@ -96,7 +98,7 @@ export default function Login() {
                         }
                     })}
                 />
-                {errors.email && <p id="error-message">{errors.email.message}</p>}
+                {errors.firstName && <p id="error-message">{errors.firstName.message}</p>}
 
                 {/* Password Input */}
                 <input
@@ -115,9 +117,10 @@ export default function Login() {
                 {errors.password && <p id="error-message">{errors.password.message}</p>}
 
                 <button type="submit" id="login-button">Login</button>
-
-                <p id="login-p">Don’t have an account yet? <span><a href="/signup" id="signup-link">Sign up</a></span></p>
             </form>
+            <Footer data="login-footer" />
         </div>
     )
+
 }
+

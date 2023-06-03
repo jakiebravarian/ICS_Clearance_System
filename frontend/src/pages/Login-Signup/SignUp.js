@@ -1,8 +1,10 @@
 import React from "react";
-import logo from '../assets/ICS.png';
-import '../assets/styles/Home.css'
+import logo from '../../assets/ICS.png';
+import '../../assets/styles/Home.css'
+import '../../assets/styles/LoginSignup.css'
 import { useState } from 'react';
 import { useForm } from "react-hook-form";
+import { Footer } from '../ScreenComponents';
 
 export default function SignUp() {
     // added use states
@@ -102,7 +104,7 @@ export default function SignUp() {
     return (
         <div className="wrapper">
             {/* Navigation Menu */}
-            <div className="navbar">
+            <div className="navbar" id="navbar-login">
                 <a href="/">Home</a>
                 <a href="/signup">Sign Up</a>
                 <div class="dropdown">
@@ -245,6 +247,7 @@ export default function SignUp() {
 
                 <button type="submit" id="signup-button">Sign Up</button>
             </form>
+            <Footer data="sign-up-footer" />
         </div>
     )
 }

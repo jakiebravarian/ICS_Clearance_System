@@ -3,6 +3,7 @@
 // placeholder image
 import Pikachu from './assets/pikachu.png';
 import AdminIcon from './assets/admin_icon.jpg';
+import ApproverIcon from './assets/approver.png';
 
 // user info ; changes depending on who is logged in
 export const userInfo = {
@@ -13,6 +14,18 @@ export const userInfo = {
     classification: "Student",
     icon: Pikachu
 }
+
+export const approverInfo = {
+    name: "Juan Dela Cruz",
+    classification: "Adviser",
+    icon: ApproverIcon
+}
+
+// export const approverInfo = {
+//     name: "Juan Dela Cruz",
+//     classification: "Clearance Officer",
+//     icon: ApproverIcon
+// }
 
 export const adminInfo = {
     name: "Juan Dela Cruz",

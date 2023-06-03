@@ -1,17 +1,17 @@
 import React from "react";
 
 // import components from student components
-import { Header } from "./StudentComponents";
-import { adminInfo } from "../data";
+import { Header } from "../ScreenComponents";
+import { adminInfo } from "../../data";
 import { Menu } from "./AdminComponents";
 
 export default function ManageApplications() {
-    return(
+    return (
         <div>
-            <Header data={adminInfo}/>
+            <Header data={adminInfo} />
 
             {/* Menu */}
-            <Menu option="ManageStudentApps"/>
+            <Menu option="ManageStudentApps" />
         </div>
     )
 }

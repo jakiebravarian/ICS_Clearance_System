@@ -2,13 +2,13 @@ import React from "react";
 
 // import components from student components
 import { Header, StudentInfo, ProfileHeader, Application, Footer, Form } from "./StudentComponents";
-import { userInfo, remarks } from "../data";
+import { userInfo, remarks } from "../../data";
 
 export default function Returned() {
-    return(
+    return (
         <div>
             {/* header */}
-            <Header data={userInfo}/>
+            <Header data={userInfo} />
 
             {/* remarks */}
             <div>
@@ -20,7 +20,7 @@ export default function Returned() {
             </div>
 
             {/* form */}
-            <Form/>
+            <Form />
         </div>
     )
 }
