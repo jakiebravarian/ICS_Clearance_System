@@ -51,3 +51,22 @@ export const studentApps = [
         studentName: "JEPSEN, Carly Rae"
     }
 ]
+
+export const approversList = [
+    {
+        firstName: "Jakie",
+        middleName: "Hernandez",
+        lastName: "Bravante",
+        email: "jhbravante@up.edu.ph",
+        password: "hello, world",
+        approverType: "Clearance Officer"
+    },
+    {
+        firstName: "Peter",
+        middleName: "Johnson",
+        lastName: "Parker",
+        email: "pjparker@up.edu.ph",
+        password: "hello, world",
+        approverType: "Clearance Officer"
+    }
+]

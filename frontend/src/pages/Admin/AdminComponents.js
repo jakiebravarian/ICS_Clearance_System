@@ -96,6 +96,34 @@ function StudentAppsList(props) {
     )
 }
 
+function ApproversList(props) {
+    var approversList = props.data;
+
+    return (
+        <div className="column student-apps-list">
+            {/* header */}
+            <div className="row list-header">
+                <div className="row col-labels">
+                    <p className="first-col-label">Approver Name</p>
+                </div>
+            </div>
+            {
+                approversList.map((approver) => (
+                    <div className="row apps-list">
+                        <p className="first-col">{approver.lastName}, {approver.firstName} {approver.middleName}</p>
+                        
+                        {/* buttons */}
+                        <div className="row admin-buttons">
+                            <EditApproverModal data={approver}/>
+                            <button className="reject-button">Delete</button>
+                        </div>
+                    </div>
+                ))
+            }
+        </div>
+    )
+}
+
 function AssignAdviserModal() {
     const [isOpen, setIsOpen] = useState(false);
     const [formData, setFormData] = useState({
@@ -248,6 +276,92 @@ function CreateApproverModal() {
                         <input type="text" name="middleName" value={formData.middleName || ''} onChange={handleChange} placeholder="Middle Name"/><br></br>
                         <input type="text" name="lastName" value={formData.lastName || ''} onChange={handleChange} placeholder="Last Name"/><br></br>
                         <input type="text" name="email" value={formData.email || ''} onChange={handleChange} placeholder="Email"/><br></br>
+                        <input type="password" name="password" value={formData.password || ''} onChange={handleChange} placeholder="Password"/><br></br>
+                        <input type="text" name="approverType" value={formData.approverType || ''} onChange={handleChange} placeholder="Approver Type"/><br></br>
+                        <button className="assign-button" type="submit">Create Account</button>
+                    </form>
+                </div>
+            </Modal>
+        </div>
+    )
+}
+
+function EditApproverModal(props) {
+    let approver = props.data;
+
+    const [isOpen, setIsOpen] = useState(false);
+    const [formData, setFormData] = useState({
+        firstName: approver.firstName,
+        middleName: approver.middleName,
+        lastName: approver.lastName,
+        email: approver.email,
+        password: approver.password,
+        approverType: approver.approverType
+    }); 
+
+    // opens the modal when called
+    const openModal = () => {
+        setIsOpen(true);
+    }
+
+    // closes the modal when called
+    const closeModal = () => {
+        setIsOpen(false);
+    }
+
+    const handleChange = (event) => {
+        const { name, value } = event.target;
+        setFormData((prevData) => ({
+        ...prevData,
+        [name]: value,
+        }));
+    };
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        
+        // send data to backend
+
+        // reset the form data
+        setFormData({
+            firstName: approver.firstName,
+            middleName: approver.middleName,
+            lastName: approver.lastName,
+            email: approver.email,
+            password: approver.password,
+            approverType: approver.approverType
+        });
+
+        // close the modal
+        setIsOpen(false);
+    };
+
+    // resizing of the modal
+    const modalStyle = {
+        content: {
+            width: '40%', // Set your desired width
+            height: '70%', // Set your desired height
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+            borderRadius: "20px"
+        },
+    };
+
+    return(
+        <div className="modal-window">
+            <button class="approve-button" onClick={openModal}>Edit</button>
+            <Modal style={modalStyle} isOpen={isOpen} onRequestClose={closeModal}>
+                <button className="exit-button" onClick={closeModal}>X</button>
+                <div className="modal-heading">
+                    <p>Edit Approver Account</p>
+                </div>
+                <div className="centered modal-form-div">
+                    <form onSubmit={handleSubmit} className="modal-form">
+                        <input type="text" name="firstName" value={formData.firstName || ''} onChange={handleChange} placeholder="First Name"/><br></br>
+                        <input type="text" name="middleName" value={formData.middleName || ''} onChange={handleChange} placeholder="Middle Name"/><br></br>
+                        <input type="text" name="lastName" value={formData.lastName || ''} onChange={handleChange} placeholder="Last Name"/><br></br>
+                        <input type="text" name="email" value={formData.email || ''} onChange={handleChange} placeholder="Email"/><br></br>
                         <input type="password" name="email" value={formData.password || ''} onChange={handleChange} placeholder="Password"/><br></br>
                         <input type="text" name="email" value={formData.approverType || ''} onChange={handleChange} placeholder="Approver Type"/><br></br>
                         <button className="assign-button" type="submit">Create Account</button>
@@ -258,4 +372,4 @@ function CreateApproverModal() {
     )
 }
 
-export { Menu, StudentSort, StudentAppsList, AssignAdviserModal, CreateApproverModal, ApproverSort }
+export { Menu, StudentSort, StudentAppsList, AssignAdviserModal, CreateApproverModal, ApproverSort, ApproversList }

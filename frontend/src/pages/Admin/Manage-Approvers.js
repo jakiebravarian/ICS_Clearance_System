@@ -2,8 +2,8 @@ import React from "react";
 
 // import components from student components
 import { Header } from "../ScreenComponents";
-import { adminInfo } from "../../data";
-import { Menu, CreateApproverModal, ApproverSort } from "./AdminComponents";
+import { adminInfo, approversList } from "../../data";
+import { Menu, CreateApproverModal, ApproverSort, ApproversList } from "./AdminComponents";
 
 export default function ManageApprovers() {
     return (
@@ -39,6 +39,9 @@ export default function ManageApprovers() {
                 {/* sort options */}
                 <ApproverSort/>
             </div>
+
+            {/* list of approvers */}
+            <ApproversList data={approversList}/>
         </div>
     )
 }

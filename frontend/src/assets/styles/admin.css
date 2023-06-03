@@ -122,6 +122,12 @@
     flex: 0 0 auto;
 }
 
+.create-approver-button:hover{
+    background-color: white;
+    color: black;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
 .reject-button:hover {
     background-color: white;
     color: black;
