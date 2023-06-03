@@ -1,7 +1,8 @@
 import mongoose from 'mongoose';
 import { UserSchema } from './models/user.js';
 import { AppSchema } from './models/application.js';
-
+import { application } from 'express';
+import { ObjectId } from 'mongoose';
 const Student = mongoose.model("users",UserSchema);
 const Application = mongoose.model("application",AppSchema);
 
@@ -150,5 +151,22 @@ export const getAllStudents = async (req, res) => {
     }
   };
   
+  export const getCurrentApplication = async (req, res) => {
+    try {
+      const applicationId  = req.query.applicationId; // Get the applicationId from the request parameters
+      // Find the application by applicationId
+      console.log(req.query);
+      const application = await Application.findById(applicationId);
+      console.log(application);
+      if (!application) {
+        return res.status(404).send('Application not found');
+      }
+
+      res.send(application);
+    } catch (error) {
+      console.error(error);
+      res.status(500).send('Internal Server Error');
+    }
+  };
   
 

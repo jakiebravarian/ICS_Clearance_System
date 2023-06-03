@@ -17,8 +17,19 @@ import { useEffect, useState } from "react";
 export async function getCurrentStudent(upMail) {
   try {
     const response = await fetch("http://localhost:3001/get-current-student?" + "upMail=" + upMail);
-    const body = await response.json();
-    return body;
+
+    const studentData = await response.json();
+    const populatedApplications = await Promise.all(studentData.application.map(async (applicationId) => {
+      const applicationResponse = await fetch("http://localhost:3001/get-current-application?applicationId="+applicationId);
+      if (applicationResponse.ok) {
+        const application = await applicationResponse.json();
+        return application;
+      }
+      return null;
+    }));
+    // Replace the application IDs with the populated application objects
+    studentData.application = populatedApplications.filter(application => application !== null);
+    return studentData;
   } catch (error) {
     console.error("Error fetching data:", error);
     return null;

@@ -18,7 +18,7 @@ console.log("Connected to MongoDB");
 // allow CORS
 app.use((req, res, next) => {
     res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
-    res.setHeader("Access-Control-Allow-Methods", "GET,OPTIONS,POST");
+    res.setHeader("Access-Control-Allow-Methods", "GET,OPTIONS,POST,PUT");
     res.setHeader("Access-Control-Allow-Headers", "Access-Control-Allow-Headers,Access-Control-Allow-Methods,Origin,Accept,Content-Type,X-Requested-With,Cookie");
     res.setHeader("Access-Control-Allow-Credentials","true");
     next();
