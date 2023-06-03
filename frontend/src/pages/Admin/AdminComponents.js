@@ -50,6 +50,22 @@ function StudentSort() {
     )
 }
 
+function ApproverSort() {
+    return(
+        <div className="row approver-sort">
+            <div>
+                <p><b>Sort by: </b></p>
+            </div>
+            <form className="sort-form">
+                <input class="sort-radio" name="sort" type="radio" id="name-asc"></input>
+                <label class="radio-label" for="name-asc">Name (Ascending)</label>
+                <input class="sort-radio" name="sort" type="radio" id="name-desc"></input>
+                <label class="radio-label" for="name-desc">Name (Descending)</label>
+            </form>
+        </div>
+    )
+}
+
 function StudentAppsList(props) {
     var studentsList = props.data;
 
@@ -242,4 +258,4 @@ function CreateApproverModal() {
     )
 }
 
-export { Menu, StudentSort, StudentAppsList, AssignAdviserModal, CreateApproverModal }
+export { Menu, StudentSort, StudentAppsList, AssignAdviserModal, CreateApproverModal, ApproverSort }

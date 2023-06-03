@@ -60,6 +60,11 @@
     margin-right: 90px;
 }
 
+.approver-sort {
+    margin-left: auto;
+    margin-right: 66px;
+}
+
 .sort-form {
     margin-top: 20px;
     margin-left: 20px;
@@ -182,4 +187,20 @@
 .create-approver-div {
     margin-left: auto;
     margin-right: 80px;
+}
+
+.search-input {
+    border-radius: 0px;
+}
+
+.search-button {
+    height: 38.5px;
+    width: 85px;
+    background-color: #094C9F;
+    color: white;
+    border: none;
+}
+
+.search-bar {
+    margin-left: 65px;
 }
