@@ -144,12 +144,12 @@ function AssignAdviserModal() {
                     <p>Assign Adviser</p>
                 </div>
                 <div className="centered">
-                    <form onSubmit={handleSubmit}>
+                    <form onSubmit={handleSubmit} className="modal-form">
                         <input type="text" name="firstName" value={formData.firstName || ''} onChange={handleChange} placeholder="Adviser's First Name"/><br></br>
                         <input type="text" name="middleName" value={formData.middleName || ''} onChange={handleChange} placeholder="Adviser's Middle Name"/><br></br>
                         <input type="text" name="lastName" value={formData.lastName || ''} onChange={handleChange} placeholder="Adviser's Last Name"/><br></br>
                         <input type="text" name="studno" value={formData.studno || ''} onChange={handleChange} placeholder="Student number"/><br></br>
-                        <button type="submit">Submit</button>
+                        <button className="assign-button" type="submit">Assign</button>
                     </form>
                 </div>
             </Modal>

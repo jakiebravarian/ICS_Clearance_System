@@ -140,3 +140,16 @@
 .modal-window {
     border-radius: 20px;
 }
+
+.modal-form > input {
+    min-width: 100px;
+}
+
+.assign-button {
+    background-color: #094C9F;
+    color: white;
+    border: none;
+    width: 72%;
+    height: 35px;
+    border-radius: 15px;
+}
