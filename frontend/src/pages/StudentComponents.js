@@ -148,7 +148,6 @@ function Application(props) {
     
     // gets the number of applications
     // let appCount = applications.length;
-
     // if there are no opened applications yet, return a form
     if (applications.length === 0) {
         return(
@@ -160,9 +159,11 @@ function Application(props) {
             </div>
         )
     }
-
+    
     async function closeApplication(applicationId) {
         try {
+            console.log(applications);
+
           const response = await fetch('http://localhost:3001/close-application', {
             method: 'PUT',
             headers: {
@@ -215,7 +216,7 @@ function Application(props) {
                         {application.status === "Cleared" ? (
                           <p id="closed-text">Closed</p>
                         ) : (
-                          <button className="app-button" onClick = {closeApplication}>Close application</button>
+                        <button className="app-button" onClick={() => closeApplication(application)}>Close application</button>
                         )}
                       </div>
                     );
