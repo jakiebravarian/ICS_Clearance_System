@@ -6,16 +6,16 @@ const AppSchema = new Schema({
   step: { type: Number, required: true },
   remarks: [
     {
-      remark: { type: String, required: true },
-      dateRemark: { type: String, required: true },
-      commenter: { type: Schema.Types.ObjectId, ref: "User", required: true },
-      stepGivenRemark: { type: Number, required: true },
+      remark: { type: String, required: false },
+      dateRemark: { type: String, required: false },
+      commenter: { type: Schema.Types.ObjectId, ref: "User", required: false },
+      stepGivenRemark: { type: Number, required: false },
     },
   ],
   studentSubmission: {
-    remarkSubmission: { type: String, required: true },
-    dateSubmission: { type: Date, required: true },
-    stepGivenSubmission: { type: Number, required: true },
+    remarkSubmission: { type: String, required: false },
+    dateSubmission: { type: String, required: false },
+    stepGivenSubmission: { type: Number, required: false },
   },
 });
 

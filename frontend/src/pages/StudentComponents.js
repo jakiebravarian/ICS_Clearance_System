@@ -38,7 +38,7 @@ function Header(props) {
 // renders student info
 function StudentInfo(props) {
     let studentInfo = props.data; 
-
+    console.log(studentInfo);
     return(
         <div>
             <p className="student-info-text">Student info</p>
@@ -76,7 +76,8 @@ function StudentInfo(props) {
 }
 
 // renders form on the homepage
-function Form({eventHandler}) {
+function Form({onClick}) {
+
     return(
         <div>
             {/*form */}
@@ -85,15 +86,15 @@ function Form({eventHandler}) {
                     {/* first row */}
                     <div className="row">
                         <div>
-                            <label for="first-name">First name</label><br/>
+                            <label htmlFor="first-name">First name</label><br/>
                             <input placeholder="Juan" id="first-name"/><br></br>
                         </div>
                         <div>
-                            <label for="middle-name">Middle name</label><br/>
+                            <label htmlFor="middle-name">Middle name</label><br/>
                             <input placeholder="Martinez" id="middle-name"/><br></br>
                         </div>
                         <div>
-                            <label for="Last-name">Last name</label><br/>
+                            <label htmlFor="Last-name">Last name</label><br/>
                             <input placeholder="dela Cruz" id="last-name"/><br></br>
                         </div>
                     </div>
@@ -101,15 +102,15 @@ function Form({eventHandler}) {
                     {/* second row */}
                     <div className="row">
                         <div>
-                            <label for="student-number">Student number</label><br/>
+                            <label htmlFor="student-number">Student number</label><br/>
                             <input placeholder="20xx-xxxx" id="student-number"/><br></br>
                         </div>
                         <div>
-                            <label for="degree-program">Degree program</label><br/>
+                            <label htmlFor="degree-program">Degree program</label><br/>
                             <input placeholder="e.g. BSCS" id="degree-program"/><br></br>
                         </div>
                         <div>
-                            <label for="college">College</label><br/>
+                            <label htmlFor="college">College</label><br/>
                             <input placeholder="e.g. CAS" id="college"/><br></br>
                         </div>
                     </div>
@@ -117,21 +118,21 @@ function Form({eventHandler}) {
                     {/* third row */}
                     <div className="row">
                         <div>
-                            <label for="github-link">Github link</label><br/>
+                            <label htmlFor="github-link">Github link</label><br/>
                             <input placeholder="github.com/username" id="github-link"/><br></br>
                         </div>
                         <div>
-                            <label for="github-link">Date applied</label><br/>
+                            <label htmlFor="github-link">Date applied</label><br/>
                             <input id="date-applied"/><br></br>
                         </div>
                         <div>
-                            <label for="remarks">Remarks</label><br/>
+                            <label htmlFor="remarks">Remarks</label><br/>
                             <input placeholder="Skip if not a returned application" id="remarks"/><br></br>
                         </div>
                     </div>
                     {/* button */}
                     <div className="centered">
-                        <button onClick={() => eventHandler()} type='submit' className='button'>SUBMIT APPLICATION</button>
+                        <button type='submit' className='button' onClick={onClick}>SUBMIT APPLICATION</button>
                     </div>
                 </div>
             </form>
@@ -146,20 +147,42 @@ function Application(props) {
     let applications = props.data;
     
     // gets the number of applications
-    let appCount = applications.length;
+    // let appCount = applications.length;
 
     // if there are no opened applications yet, return a form
-    if (appCount === 0) {
+    if (applications.length === 0) {
         return(
             <div>
                 <div>
                     <p className="form-prompt">No applications yet. To start one, please fill out the form below.</p>
                 </div>
-                <Form/>
+                <Form onClick={props.onClick}/>
             </div>
         )
     }
 
+    async function closeApplication(applicationId) {
+        try {
+          const response = await fetch('http://localhost:3001/close-application', {
+            method: 'PUT',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ applicationId }),
+          });
+    
+          if (response.ok) {
+            console.log('Application closed successfully');
+            // Perform any necessary actions after closing the application
+          } else {
+            console.error('Failed to close application');
+            // Handle the error if needed
+          }
+        } catch (error) {
+          console.error(error);
+          // Handle any network or other errors
+        }
+      }
     // if there are applications show status and date
     return(
         <div className="apps-container">
@@ -168,39 +191,35 @@ function Application(props) {
                 <p className="status-label">Status</p>
             </div>
             {
-                applications.map((application) => {
-                    console.log(application)
-                    return(
-                        <div className="row">
-                            {/* date applied */}
-                            <p className="date-label">{application.dateApplied}</p>
-                            {/* status */}
-                            <p className="status-value">{application.status}</p>
-
-                            {/* if status is returned, add a view remarks button */}
-                            {
-                                application.status === "Returned" ? (
-                                    // when user clicks view remarks, goes to /returned
-                                    <form action="/returned">
-                                        <button type="submit"className="view-remarks-button"> View remarks </button>
-                                    </form>
-                                ) : (
-                                    <p></p>
-                                )
-                            }
-
-                            {/* if status is cleared, no buttons will be shown */}
-                            {
-                                application.status === "Cleared" ? (
-                                    <p id="closed-text">Closed</p>
-                                ) : (  
-                                    <button className="app-button"> Close application </button>
-                                )
-                            }
-                            
-                        </div>
-                    )
-                })
+                applications.map((application, index) => {
+                    return (
+                      <div className="row" key={index}>
+                        {/* date applied */}
+                        <p className="date-label">{application.dateApplied}</p>
+                        {/* status */}
+                        <p className="status-value">{application.status}</p>
+                  
+                        {/* if status is returned, add a view remarks button */}
+                        {application.status === "Returned" ? (
+                          // when user clicks view remarks, goes to /returned
+                          <form action="/returned">
+                            <button type="submit" className="view-remarks-button">
+                              View remarks
+                            </button>
+                          </form>
+                        ) : (
+                          <p></p>
+                        )}
+                  
+                        {/* if status is cleared, no buttons will be shown */}
+                        {application.status === "Cleared" ? (
+                          <p id="closed-text">Closed</p>
+                        ) : (
+                          <button className="app-button" onClick = {closeApplication}>Close application</button>
+                        )}
+                      </div>
+                    );
+                  })
             }
         </div>
     )

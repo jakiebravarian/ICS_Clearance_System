@@ -43,7 +43,7 @@ const signUp = async (req, res) => {
                     userType: userType,
                     title: title,
                     adviser: adviser,
-                    application: application
+                    application: []
                 })
                     .then(() => {
                         res.send({success : true});
@@ -62,6 +62,7 @@ const signUp = async (req, res) => {
 
 const login = async (req,res) => {
     //get email and password from the body
+    console.log(req.body);
     const email = req.body.upMail.trim();
     const password = req.body.password;
 

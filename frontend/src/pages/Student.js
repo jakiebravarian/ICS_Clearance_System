@@ -21,19 +21,18 @@ export default  function Student() {
       
         const fetchData = async () => {
           const studentData = await getCurrentStudent(upMail1);
-          console.log(studentData.firstName);
           if (studentData) {
             setStudent(studentData);
-      
             setUserInfo({
                 userId: studentData._id,
               name: studentData.firstName + " " + studentData.middleName + " " + studentData.lastName,
               studno: studentData.studentNumber,
-              course: studentData.course,
+              course: studentData.degreeProgram,
               college: studentData.college,
               classification: studentData.userType,
               icon: Pikachu,
             });
+             setApplications(studentData.application);
           }
         };
       
@@ -42,20 +41,47 @@ export default  function Student() {
     
     
     // add to list of applications when user inputs data
-    function eventHandler() {
-        // get user inputs
-        var dateApplied = document.getElementById("date-applied").value;
+    function eventHandler(event) {
+      event.preventDefault(); // prevent the form from submitting and refreshing the page
+      
+      console.log('onClick executed');
+      var dateApplied = document.getElementById("date-applied").value;
+      var githubLink = document.getElementById("github-link").value;
 
-        // create a new application object
-        var newApplication = {
-            "dateApplied": dateApplied,
-            "status": "Pending"
-        }
-
-        // add new application to the list of applications
-        setApplications([...Applications, newApplication]);
+      var newApplication = {
+        upMail: student.upMail,
+        dateApplied: dateApplied,
+        status: "Pending",
+        step: 1, // Set the initial value for the step field
+        remarks: [], // Initialize an empty array for remarks
+        studentSubmission: {
+          remarkSubmission: githubLink,
+          dateSubmission: "",
+          stepGivenSubmission: 1,
+        },
+      };
+    
+      // Make a POST request to the backend API endpoint
+      fetch("http://localhost:3001/submit-application", {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(newApplication),
+      })
+        .then(response => response.json())
+        .then(data => {
+          // Handle the response if needed
+          console.log(data);
+          // Update the state or perform any other actions
+          setApplications([...Applications, data]);
+        })
+        .catch(error => {
+          // Handle errors if needed
+          console.error(error);
+        });
     }
-
+    
     return (
         <div>
             
@@ -67,7 +93,7 @@ export default  function Student() {
             <StudentInfo data={userInfo}/>
 
             {/* application (either form or list) */}
-            <Application data={Applications} eventHandler={eventHandler}/>
+            <Application data={Applications} onClick={eventHandler}/>
         </div>
     )
 }

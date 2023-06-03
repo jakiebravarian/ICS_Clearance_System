@@ -54,8 +54,8 @@ const router = createBrowserRouter([
   { path: '/login-approver', element: <LoginAprrover /> },
   { path: '/signup', element: <SignUp /> },
   { path: '/create-approver', element: <CreateApproverAccount /> },
-  { path: '/verify', element: <Verify />, loader: checkIfLoggedInOnDash },
-  { path: '/student', element: <Student />, loader: checkIfLoggedInOnDash },
+  { path: '/verify', element: <Verify /> },
+  { path: '/student', element: <Student />},
   { path: '/returned', element: <Returned /> },
   { path: '/manage-applications', element: <ManageApplications /> },
   { path: '/manage-approvers', element: <ManageApprovers /> }

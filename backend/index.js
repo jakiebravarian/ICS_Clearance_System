@@ -2,9 +2,11 @@ import express from "express";
 import mongoose from "mongoose";
 import setUpRoutes from "./routes.js";
 import cookieParser from "cookie-parser";
+import bodyParser from "body-parser";
 
 // initialize the server
 const app = express();
+
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cookieParser());
