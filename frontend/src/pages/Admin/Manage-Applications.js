@@ -1,7 +1,7 @@
 import React from "react";
 
 // import components from student components
-import { Header } from "../ScreenComponents";
+import { Header, Footer } from "../ScreenComponents";
 import { adminInfo } from "../../data";
 import { Menu } from "./AdminComponents";
 
@@ -12,6 +12,8 @@ export default function ManageApplications() {
 
             {/* Menu */}
             <Menu option="ManageStudentApps" />
+
+            
         </div>
     )
 }

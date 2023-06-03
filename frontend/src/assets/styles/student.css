@@ -61,7 +61,7 @@ body {
     display: flex;
     flex: row;
     margin-top: -1%;  
-    max-height: 30px;  
+    max-height: 30px;
 }
 
 #name-class-container {
@@ -74,7 +74,8 @@ body {
 
 .profile-name {
     color: white;
-    width: 300px;
+    width: 150px;
+    text-align: right;
     /* position: absolute;
     right: 6.5%;
     top: 5px; */
@@ -84,6 +85,7 @@ body {
     color: rgb(217, 217, 217);
     font-style: italic;
     font-size: 15px;
+    text-align: right;
     /* position: absolute;
     top: 22px;
     right: 6.5%; */
