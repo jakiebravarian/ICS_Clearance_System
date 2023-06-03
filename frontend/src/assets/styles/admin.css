@@ -81,8 +81,46 @@
 
 .col-labels {
     margin-left: 30px;
+    min-width: 200px;
+    flex-wrap: wrap;
+    align-items: center;
 }
 
 .first-col {
     margin-right: 122px;
+}
+
+.approve-button {
+    margin-right: 20px;
+    background-color: #094C9F;
+    color: white;
+    font-size: 17px;
+    flex: 0 0 auto;
+}
+
+.reject-button {
+    font-size: 17px;
+    background-color: black;
+    color: white;
+    flex: 0 0 auto;
+}
+
+.admin-buttons {
+    margin-left: auto;
+    margin-top: 15px;
+    margin-right: 30px;
+    min-width: 20px;
+}
+
+.admin-buttons > button {
+    width: 150px;
+    height: 40px;
+    border-radius: 20px;
+    border: none;
+}
+
+@media (max-width: 768px) {
+    .first-col {
+        flex: 0 0 100%;
+    }
 }

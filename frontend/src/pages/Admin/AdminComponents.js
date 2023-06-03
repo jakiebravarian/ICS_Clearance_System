@@ -66,6 +66,12 @@ function StudentAppsList(props) {
                     <div className="row col-labels">
                         <p className="first-col">{student.studentNumber}</p>
                         <p>{student.studentName}</p>
+                        
+                        {/* buttons */}
+                        <div className="row admin-buttons">
+                            <button class="approve-button">Approve</button>
+                            <button className="reject-button">Reject</button>
+                        </div>
                     </div>
                 ))
             }
