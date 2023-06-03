@@ -11,7 +11,9 @@ export default function ManageApprovers() {
             <Header data={adminInfo} />
 
             {/* Menu */}
-            <Menu option="ManageApprovers" />
+            <div className="admin-menu">
+                <Menu option="ManageApprovers" />
+            </div>
         </div>
     )
 }

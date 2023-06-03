@@ -33,4 +33,34 @@ function Menu(props) {
     )
 }
 
-export { Menu }
+function StudentSort() {
+    return(
+        <div className="row student-sort">
+            <div>
+                <p><b>Sort by: </b></p>
+            </div>
+            <form className="sort-form">
+                <input class="sort-radio" name="sort" type="radio" id="studno-sort-input"></input>
+                <label class="radio-label" for="studno-sort-input">Student number</label>
+                <input class="sort-radio" name="sort" type="radio" id="studnum-sort-input"></input>
+                <label class="radio-label" for="studnum-sort-input">Student number</label>
+            </form>
+        </div>
+    )
+}
+
+function StudentAppsList() {
+    return (
+        <div className="column student-apps-list">
+            {/* header */}
+            <div className="row list-header">
+                <div className="row col-labels">
+                    <p className="first-col-label">Student number</p>
+                    <p>Student name</p>
+                </div>
+            </div>
+        </div>
+    )
+}
+
+export { Menu, StudentSort, StudentAppsList }

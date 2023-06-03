@@ -87,15 +87,15 @@ function Form({eventHandler}) {
                 <div className="form-section">
                     {/* first row */}
                     <div className="row">
-                        <div>
+                        <div className="form-input">
                             <label for="first-name">First name</label><br/>
                             <input placeholder="Juan" id="first-name"/><br></br>
                         </div>
-                        <div>
+                        <div className="form-input">
                             <label for="middle-name">Middle name</label><br/>
                             <input placeholder="Martinez" id="middle-name"/><br></br>
                         </div>
-                        <div>
+                        <div className="form-input">
                             <label for="Last-name">Last name</label><br/>
                             <input placeholder="dela Cruz" id="last-name"/><br></br>
                         </div>
@@ -103,15 +103,15 @@ function Form({eventHandler}) {
 
                     {/* second row */}
                     <div className="row">
-                        <div>
+                        <div className="form-input">
                             <label for="student-number">Student number</label><br/>
                             <input placeholder="20xx-xxxx" id="student-number"/><br></br>
                         </div>
-                        <div>
+                        <div className="form-input">
                             <label for="degree-program">Degree program</label><br/>
                             <input placeholder="e.g. BSCS" id="degree-program"/><br></br>
                         </div>
-                        <div>
+                        <div className="form-input">
                             <label for="college">College</label><br/>
                             <input placeholder="e.g. CAS" id="college"/><br></br>
                         </div>
@@ -119,15 +119,15 @@ function Form({eventHandler}) {
 
                     {/* third row */}
                     <div className="row">
-                        <div>
+                        <div className="form-input">
                             <label for="github-link">Github link</label><br/>
                             <input placeholder="github.com/username" id="github-link"/><br></br>
                         </div>
-                        <div>
+                        <div className="form-input">
                             <label for="github-link">Date applied</label><br/>
                             <input id="date-applied"/><br></br>
                         </div>
-                        <div>
+                        <div className="form-input">
                             <label for="remarks">Remarks</label><br/>
                             <input placeholder="Skip if not a returned application" id="remarks"/><br></br>
                         </div>

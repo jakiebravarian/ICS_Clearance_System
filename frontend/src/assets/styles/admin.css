@@ -2,6 +2,10 @@
     margin-left: 80px;
 }
 
+.roboto-slab {
+    font-family: Roboto Slab;
+}
+
 /* background colors for the buttons */
 .blue-background {
     background-color: #094C9F;
@@ -9,6 +13,7 @@
     padding: 8px;
     font-size: 15px;
     border: none;
+    border: 1px solid #094C9F;
 }
 
 .white-background {
@@ -17,4 +22,63 @@
     padding: 8px;
     font-size: 15px;
     border: 1px solid #094C9F;
+}
+
+.admin-menu {
+    margin-top: 60px;
+    margin-left: 30px;
+}
+
+.section-name-text {
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.sort-text {
+    font-size: 20px;    
+    width: 200px;
+}
+
+.sort-radio {
+    min-width: 20px;
+    width: 20px;
+    margin-right: 5px;
+}
+
+.radio-label {
+    margin-right: 10px;
+}
+
+.student-sort-section {
+    margin-top: 40px;
+    justify-content: space-between;
+    margin-left: 63px;
+}
+
+.student-sort {
+    margin-top: 16px;
+    margin-right: 90px;
+}
+
+.sort-form {
+    margin-top: 20px;
+    margin-left: 20px;
+}
+
+.first-col-label {
+    margin-right: 80px;
+}
+
+.student-apps-list {
+    margin-left: 63px;
+    margin-right: 63px;
+}
+
+.list-header {
+    background-color: #094C9F;
+    color: white;
+}
+
+.col-labels {
+    margin-left: 30px;
 }

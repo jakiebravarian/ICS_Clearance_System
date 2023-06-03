@@ -74,7 +74,7 @@ body {
 
 .profile-name {
     color: white;
-    width: 150px;
+    width: 200px;
     text-align: right;
     /* position: absolute;
     right: 6.5%;
@@ -206,11 +206,11 @@ body {
     border-radius: 20px;
 }
 
-.row > div > input {
-    width: 418px;
+#first-name, #middle-name, #last-name, #student-number, #degree-program, #college, #github-link, #date-applied, #remarks {
+    width: 400px;
 }
 
-.row > div {
+.form-input {
     font-size: 17px;
     margin: 20px;
 }
