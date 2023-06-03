@@ -1,4 +1,5 @@
 import React from "react";
+import {useState,useEffect} from "react";
 
 // header profile component
 function ProfileHeader(props) {
@@ -38,7 +39,7 @@ function Header(props) {
 // renders student info
 function StudentInfo(props) {
     let studentInfo = props.data; 
-    console.log(studentInfo);
+    
     return(
         <div>
             <p className="student-info-text">Student info</p>
@@ -77,7 +78,16 @@ function StudentInfo(props) {
 
 // renders form on the homepage
 function Form({onClick}) {
-
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        
+        // Retrieve form input values
+        const githubLink = document.getElementById("github-link").value;
+        const dateApplied = document.getElementById("date-applied").value;
+    
+        // Call the onClick event handler and pass the values as parameters
+        onClick(event,githubLink, dateApplied);
+      };
     return(
         <div>
             {/*form */}
@@ -132,7 +142,7 @@ function Form({onClick}) {
                     </div>
                     {/* button */}
                     <div className="centered">
-                        <button type='submit' className='button' onClick={onClick}>SUBMIT APPLICATION</button>
+                        <button type='submit' className='button' onClick={handleSubmit}>SUBMIT APPLICATION</button>
                     </div>
                 </div>
             </form>
@@ -144,46 +154,88 @@ function Form({onClick}) {
 // renders either a form or a list of applications
 // application component: returns a form if there are no applications yet
 function Application(props) {
-    let applications = props.data;
-    
-    // gets the number of applications
-    // let appCount = applications.length;
-    // if there are no opened applications yet, return a form
-    if (applications.length === 0) {
-        return(
-            <div>
-                <div>
-                    <p className="form-prompt">No applications yet. To start one, please fill out the form below.</p>
-                </div>
-                <Form onClick={props.onClick}/>
-            </div>
-        )
-    }
-    
-    async function closeApplication(applicationId) {
+    const [applications, setApplications] = useState(props.data);
+    const [allClosed,setAllApplicationsClosed]=useState(false);
+    useEffect(() => {
+      const upMail1 = localStorage.getItem("upMail");
+  
+      const fetchData = async () => {
         try {
-            console.log(applications);
-
-          const response = await fetch('http://localhost:3001/close-application', {
-            method: 'PUT',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ applicationId }),
-          });
-    
+          const response = await fetch(
+            "http://localhost:3001/get-current-applications?upMail=" + upMail1
+          );
           if (response.ok) {
-            console.log('Application closed successfully');
-            // Perform any necessary actions after closing the application
+            const data = await response.json();
+            setApplications(data);
+            const allClosed = data.every((app) => app.status === "Closed");
+            setAllApplicationsClosed(allClosed);
+            console.log(allClosed);
           } else {
-            console.error('Failed to close application');
-            // Handle the error if needed
+            console.error("Failed to fetch applications");
           }
         } catch (error) {
           console.error(error);
-          // Handle any network or other errors
         }
+      };
+  
+      fetchData();
+    });
+  
+    if (applications.length === 0) {
+      return (
+        <div>
+          <div>
+            <p className="form-prompt">
+              No applications yet. To start one, please fill out the form below.
+            </p>
+          </div>
+          <Form onClick={props.onClick} />
+        </div>
+      );
+    }
+
+    if(allClosed){
+        return (
+            <div>
+              <div>
+                <p className="form-prompt">
+                 You only have closed applications. To start a new application, please fill out the form below.
+                </p>
+              </div>
+              <Form onClick={props.onClick} />
+            </div>
+          );
+    }
+  
+    async function closeApplication(application) {
+      try {
+        const applicationId = application._id;
+        const response = await fetch("http://localhost:3001/close-application", {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ applicationId }),
+        });
+  
+        if (response.ok) {
+          console.log("Application closed successfully");
+          const updatedApplications = applications.map(app => {
+            if (app.id === applicationId) {
+              return { ...app, status: "Closed" };
+            }
+            return app;
+          });
+  
+          setApplications(updatedApplications);
+        } else {
+          console.error("Failed to close application");
+        }
+      } catch (error) {
+        console.error(error);
       }
+    }
+      
     // if there are applications show status and date
     return(
         <div className="apps-container">
@@ -196,7 +248,7 @@ function Application(props) {
                     return (
                       <div className="row" key={index}>
                         {/* date applied */}
-                        <p className="date-label">{application.dateApplied}</p>
+                        <p className="date-label">{application.studentSubmission.dateSubmission}</p>
                         {/* status */}
                         <p className="status-value">{application.status}</p>
                   
@@ -213,7 +265,7 @@ function Application(props) {
                         )}
                   
                         {/* if status is cleared, no buttons will be shown */}
-                        {application.status === "Cleared" ? (
+                        {application.status === "Closed" ? (
                           <p id="closed-text">Closed</p>
                         ) : (
                         <button className="app-button" onClick={() => closeApplication(application)}>Close application</button>

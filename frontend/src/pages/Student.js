@@ -41,12 +41,10 @@ export default  function Student() {
     
     
     // add to list of applications when user inputs data
-    function eventHandler(event) {
+    function eventHandler(event,githubLink,dateApplied) {
       event.preventDefault(); // prevent the form from submitting and refreshing the page
       
       console.log('onClick executed');
-      var dateApplied = document.getElementById("date-applied").value;
-      var githubLink = document.getElementById("github-link").value;
 
       var newApplication = {
         upMail: student.upMail,
@@ -56,7 +54,7 @@ export default  function Student() {
         remarks: [], // Initialize an empty array for remarks
         studentSubmission: {
           remarkSubmission: githubLink,
-          dateSubmission: "",
+          dateSubmission: dateApplied,
           stepGivenSubmission: 1,
         },
       };
@@ -93,7 +91,7 @@ export default  function Student() {
             <StudentInfo data={userInfo}/>
 
             {/* application (either form or list) */}
-            <Application data={Applications} onClick={eventHandler}/>
+            <Application data={Applications} onClick={eventHandler} setApplications={setApplications} student={userInfo}/>
         </div>
     )
 }

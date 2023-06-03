@@ -4,7 +4,7 @@ import { AppSchema } from './models/application.js';
 import { application } from 'express';
 import { ObjectId } from 'mongoose';
 const Student = mongoose.model("users",UserSchema);
-const Application = mongoose.model("application",AppSchema);
+const Application = mongoose.model("Application",AppSchema);
 
 
 export const getAllStudents = async (req, res) => {
@@ -21,7 +21,7 @@ export const getAllStudents = async (req, res) => {
   export const getCurrentStudent = async (req, res) => {
     try {
       const upMail = req.query.upMail; // Get the user email from the query parameter
-      const student = await Student.findOne({ upMail: upMail }); // Query the student with the specified email
+      const student = await Student.findOne({ upMail: upMail }).populate(); // Query the student with the specified email
       res.send(student);
     } catch (error) {
       console.error(error);
@@ -60,7 +60,6 @@ export const getAllStudents = async (req, res) => {
   
       user.application.push(application);
       await user.save();
-  
       console.log("User application updated:", user); // Log the updated user object
   
       res.send(application);
@@ -74,7 +73,7 @@ export const getAllStudents = async (req, res) => {
   export const viewStudentClearanceStatus = async (req, res) => {
     try {
       const upMail = req.query.upMail; // Get the user email from the query parameter
-      const student = await Student.findOne({ upMail: upMail }).populate('application', 'status');
+      const student = await Student.findOne({ upMail: upMail }).populate('application');
   
       if (!student) {
         return res.status(404).json({error:'Student not found'});
@@ -166,6 +165,17 @@ export const getAllStudents = async (req, res) => {
     } catch (error) {
       console.error(error);
       res.status(500).send('Internal Server Error');
+    }
+  };
+
+  export const getCurrentApplications = async (req, res) => {
+    try {
+      const upMail = req.query.upMail; // Get the user email from the query parameter
+      const student = await Student.findOne({ upMail: upMail }).populate('application'); // Query the student with the specified email
+      res.send(student.application);
+    } catch (error) {
+      console.error(error);
+      res.status(500).send("Internal Server Error");
     }
   };
   
