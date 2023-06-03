@@ -64,7 +64,7 @@ function StudentAppsList(props) {
             </div>
             {
                 studentsList.map((student) => (
-                    <div className="row col-labels">
+                    <div className="row apps-list">
                         <p className="first-col">{student.studentNumber}</p>
                         <p>{student.studentName}</p>
                         

@@ -72,6 +72,7 @@
 .student-apps-list {
     margin-left: 63px;
     margin-right: 63px;
+    border: 1px solid black;
 }
 
 .list-header {
@@ -84,6 +85,11 @@
     min-width: 200px;
     flex-wrap: wrap;
     align-items: center;
+}
+
+.apps-list {
+    border: 1px solid;
+    padding-left: 32px;
 }
 
 .first-col {
