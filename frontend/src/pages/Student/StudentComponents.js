@@ -192,10 +192,10 @@ function Application(props) {
                                 )
                             }
 
-                            {/* if status is cleared, no buttons will be shown */}
+                            {/* if status is cleared, a print pdf button will be shown */}
                             {
                                 application.status === "Cleared" ? (
-                                    <p id="closed-text">Closed</p>
+                                    <button className="print-button"> Print PDF </button>
                                 ) : (  
                                     <button className="app-button"> Close application </button>
                                 )
