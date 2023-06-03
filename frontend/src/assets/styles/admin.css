@@ -169,3 +169,17 @@
     border-radius: 15px;
 }
 
+.create-approver-button {
+    width: 270px;
+    border-radius: 12px;
+    background-color: #094C9F;
+    color: white;
+    height: 40px;
+    border: none;
+    font-size: 17px;
+}
+
+.create-approver-div {
+    margin-left: auto;
+    margin-right: 80px;
+}

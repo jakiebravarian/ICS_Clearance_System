@@ -3,7 +3,7 @@ import React from "react";
 // import components from student components
 import { Header } from "../ScreenComponents";
 import { adminInfo } from "../../data";
-import { Menu } from "./AdminComponents";
+import { Menu, CreateApproverModal } from "./AdminComponents";
 
 export default function ManageApprovers() {
     return (
@@ -15,18 +15,17 @@ export default function ManageApprovers() {
                 <Menu option="ManageApprovers" />
             </div>
 
-            {/* sorting section */}
+            {/* heading */}
             <div className="row student-sort-section">
                 {/* text */}
                 <div>
                     <p className="roboto-slab section-name-text">Approver Accounts</p>
                 </div>
 
-                {/* create approver button */}
-                <div>
-                    
+                {/* add approver button */}
+                <div className="create-approver-div">
+                    <CreateApproverModal/>
                 </div>
-                {/* name sort */}
                 
             </div>
         </div>
