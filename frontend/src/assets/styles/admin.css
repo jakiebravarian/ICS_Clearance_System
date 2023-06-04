@@ -216,5 +216,10 @@
 }
 
 .approver-type-dropdown {
-    height: 30px;
+    flex-wrap: wrap;
+    margin-top: 6px;
+    border-radius: 10px;
+    height: 38px;
+    width: 477.5px;
+    min-width: 50px;
 }
