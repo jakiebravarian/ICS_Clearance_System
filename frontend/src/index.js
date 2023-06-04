@@ -4,16 +4,16 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import App from './App';
 import { redirect } from 'react-router-dom';
 
-import Home from './pages/Home';
-import Login from './pages/Login';
-import LoginAprrover from './pages/Login-Approver';
-import SignUp from './pages/SignUp';
-import CreateApproverAccount from './pages/Create-Approver';
-import Verify from './pages/Verify';
-import Student from './pages/Student';
-import Returned from './pages/Returned';
-import ManageApplications from './pages/Manage-Applications';
-import ManageApprovers from './pages/Manage-Approvers';
+import Home from './Login-Signup/Home';
+import Login from './Login-Signup/Login';
+import LoginAprrover from './Login-Signup/Login-Approver';
+import SignUp from './Login-Signup/SignUp';
+import CreateApproverAccount from './Admin/Create-Approver';
+import Verify from './Login-Signup/Verify';
+import Student from './Student/Student';
+import Returned from './Student/Returned';
+import ManageApplications from './Admin/Manage-Applications';
+import ManageApprovers from './Admin/Manage-Approvers';
 
 const checkIfLoggedInOnHome = async () => {
   const res = await fetch("http://localhost:3001/checkifloggedin",
