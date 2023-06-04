@@ -12,7 +12,7 @@ export default function ManageApprovers() {
 
             {/* Menu */}
             <div className="admin-menu">
-                <Menu option="ManageApprovers" />
+                {/* <Menu option="ManageApprovers" /> */}
             </div>
 
             {/* heading */}
@@ -24,7 +24,7 @@ export default function ManageApprovers() {
 
                 {/* add approver button */}
                 <div className="create-approver-div">
-                    <CreateApproverModal/>
+                    {/* <CreateApproverModal/> */}
                 </div>
             </div>
 
@@ -37,7 +37,7 @@ export default function ManageApprovers() {
                 </div>
 
                 {/* sort options */}
-                <ApproverSort/>
+                {/* <ApproverSort/> */}
             </div>
 
             {/* Menu */}

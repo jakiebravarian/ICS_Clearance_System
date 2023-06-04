@@ -88,7 +88,7 @@ function Form({onClick}) {
         const studentSubmission = {
           dateSubmission: dateApplied,
         }
-        if(remarkValue.length == 0){
+        if(remarkValue.length === 0){
           studentSubmission.remarkSubmission = githubLink;
           studentSubmission.stepGivenSubmission = 1;
         }else{
