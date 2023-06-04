@@ -44,7 +44,7 @@ const Table = (props) => {
                             <td>{item.step}</td>
                             <td>{item.status}</td>
                             <td>{item.date}</td>
-                            <td>{item.application}</td>
+                            <td><button id="view-button">View</button></td>
                         </tr>
                     ))}
                 </tbody>

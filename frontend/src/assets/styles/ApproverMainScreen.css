@@ -24,7 +24,7 @@
     margin: 4px;
 }
 
-#option {
+.option {
     margin: 0 0 0 24px;
     display: flex;
     flex-direction: row;
@@ -69,15 +69,13 @@ input[type=radio] {
     width: 100%;
 }
 
+#reset-btn {
+    background-color: black;
+}
 
 hr {
     margin-left: 0;
     margin-right: 0;
-}
-
-#date {
-    display: flex;
-    flex-direction: row;
 }
 
 input#month,
@@ -110,12 +108,7 @@ input#year {
     -moz-appearance: textfield;
 }
 
-#date-filter,
-#adviser-filter,
-#step-filter,
-#status-filter {
-    display: flex;
-    flex-direction: column;
+.filters {
     margin: 4px 0;
 }
 
@@ -140,7 +133,51 @@ input#adviser-name {
 #approver-search-sort {
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
 }
+
+.search-bar {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-items: start;
+}
+
+input#search {
+    padding: 10px;
+    text-align: left;
+    position: none;
+    border-radius: 0;
+    width: 15vw;
+    height: 37px;
+    min-width: 100%;
+    margin: 0;
+}
+
+button#search-btn {
+    cursor: pointer;
+    height: 37px;
+    margin: 0;
+    background-color: #094C9F;
+    color: white;
+    border: none;
+    box-shadow: none;
+}
+
+.sort-button {
+    cursor: pointer;
+    margin: 4px 0;
+    font-size: 11px;
+    background-color: #094C9F;
+    color: white;
+    border-radius: 20px;
+    border: none;
+    padding: 8px 0;
+    width: 50px;
+    margin: 4px;
+}
+
+
 
 #approver-list {}
 
@@ -186,6 +223,18 @@ td:nth-child(2) {
 
 #approver-table #table-items:hover {
     background-color: #ddd;
+}
+
+button#view-button {
+    cursor: pointer;
+    margin: 0;
+    background-color: #094C9F;
+    color: white;
+    border: none;
+    box-shadow: none;
+    border-radius: 12px;
+    padding: 6px 24px;
+    font-size: 11px;
 }
 
 @media screen and (max-width: 600px) {}
