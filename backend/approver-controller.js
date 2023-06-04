@@ -194,8 +194,6 @@ export const getAllPendingApplications = async (req, res) => {
         }
     };
 
-    import Application from 'path/to/application/model';
-
     export const approveApplicationAtCurrentStep = async (req, res) => {
     try {
         const { applicationId } = req.body;
