@@ -28,10 +28,10 @@ export default function Student() {
         // },
 
         // cleared
-        // {
-        //     "dateApplied": "May 29, 2023",
-        //     "status": "Cleared"
-        // }
+        {
+            "dateApplied": "May 29, 2023",
+            "status": "Cleared"
+        }
     ])
 
     // add to list of applications when user inputs data
