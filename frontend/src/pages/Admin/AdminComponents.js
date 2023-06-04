@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import Modal from 'react-modal';
 
 // renders a menu with 2 options
@@ -15,7 +15,7 @@ function Menu(props) {
         manageApprovers = "white-background";
     }
 
-    return(
+    return (
         <div className="row admin-menu">
             {/* option 1 */}
             <div>
@@ -35,32 +35,32 @@ function Menu(props) {
 }
 
 function StudentSort() {
-    return(
+    return (
         <div className="row student-sort">
             <div>
                 <p><b>Sort by: </b></p>
             </div>
             <form className="sort-form">
-                <input class="sort-radio" name="sort" type="radio" id="studno-sort-input"></input>
-                <label class="radio-label" for="studno-sort-input">Student number</label>
-                <input class="sort-radio" name="sort" type="radio" id="studname-sort-input"></input>
-                <label class="radio-label" for="studname-sort-input">Student name</label>
+                <input className="sort-radio" name="sort" type="radio" id="studno-sort-input"></input>
+                <label className="radio-label" htmlFor="studno-sort-input">Student number</label>
+                <input className="sort-radio" name="sort" type="radio" id="studname-sort-input"></input>
+                <label className="radio-label" htmlFor="studname-sort-input">Student name</label>
             </form>
         </div>
     )
 }
 
 function ApproverSort() {
-    return(
+    return (
         <div className="row approver-sort">
             <div>
                 <p><b>Sort by: </b></p>
             </div>
             <form className="sort-form">
-                <input class="sort-radio" name="sort" type="radio" id="name-asc"></input>
-                <label class="radio-label" for="name-asc">Name (Ascending)</label>
-                <input class="sort-radio" name="sort" type="radio" id="name-desc"></input>
-                <label class="radio-label" for="name-desc">Name (Descending)</label>
+                <input className="sort-radio" name="sort" type="radio" id="name-asc"></input>
+                <label className="radio-label" htmlFor="name-asc">Name (Ascending)</label>
+                <input className="sort-radio" name="sort" type="radio" id="name-desc"></input>
+                <label className="radio-label" htmlFor="name-desc">Name (Descending)</label>
             </form>
         </div>
     )
@@ -83,10 +83,10 @@ function StudentAppsList(props) {
                     <div className="row apps-list">
                         <p className="first-col">{student.studentNumber}</p>
                         <p>{student.studentName}</p>
-                        
+
                         {/* buttons */}
                         <div className="row admin-buttons">
-                            <AssignAdviserModal/>
+                            <AssignAdviserModal />
                             <button className="reject-button">Reject</button>
                         </div>
                     </div>
@@ -111,10 +111,10 @@ function ApproversList(props) {
                 approversList.map((approver) => (
                     <div className="row apps-list">
                         <p className="first-col">{approver.lastName}, {approver.firstName} {approver.middleName}</p>
-                        
+
                         {/* buttons */}
                         <div className="row admin-buttons">
-                            <EditApproverModal data={approver}/>
+                            <EditApproverModal data={approver} />
                             <button className="reject-button">Delete</button>
                         </div>
                     </div>
@@ -146,14 +146,14 @@ function AssignAdviserModal() {
     const handleChange = (event) => {
         const { name, value } = event.target;
         setFormData((prevData) => ({
-        ...prevData,
-        [name]: value,
+            ...prevData,
+            [name]: value,
         }));
     };
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        
+
         // send data to backend
 
         // reset the form data
@@ -180,9 +180,9 @@ function AssignAdviserModal() {
         },
     };
 
-    return(
+    return (
         <div className="modal-window">
-            <button class="approve-button" onClick={openModal}>Approve</button>
+            <button className="approve-button" onClick={openModal}>Approve</button>
             <Modal style={modalStyle} isOpen={isOpen} onRequestClose={closeModal}>
                 <button className="exit-button" onClick={closeModal}>X</button>
                 <div className="modal-heading">
@@ -190,10 +190,10 @@ function AssignAdviserModal() {
                 </div>
                 <div className="centered modal-form-div">
                     <form onSubmit={handleSubmit} className="modal-form">
-                        <input type="text" name="firstName" value={formData.firstName || ''} onChange={handleChange} placeholder="Adviser's First Name"/><br></br>
-                        <input type="text" name="middleName" value={formData.middleName || ''} onChange={handleChange} placeholder="Adviser's Middle Name"/><br></br>
-                        <input type="text" name="lastName" value={formData.lastName || ''} onChange={handleChange} placeholder="Adviser's Last Name"/><br></br>
-                        <input type="text" name="studno" value={formData.studno || ''} onChange={handleChange} placeholder="Student number"/><br></br>
+                        <input type="text" name="firstName" value={formData.firstName || ''} onChange={handleChange} placeholder="Adviser's First Name" /><br></br>
+                        <input type="text" name="middleName" value={formData.middleName || ''} onChange={handleChange} placeholder="Adviser's Middle Name" /><br></br>
+                        <input type="text" name="lastName" value={formData.lastName || ''} onChange={handleChange} placeholder="Adviser's Last Name" /><br></br>
+                        <input type="text" name="studno" value={formData.studno || ''} onChange={handleChange} placeholder="Student number" /><br></br>
                         <button className="assign-button" type="submit">Assign</button>
                     </form>
                 </div>
@@ -226,14 +226,14 @@ function CreateApproverModal() {
     const handleChange = (event) => {
         const { name, value } = event.target;
         setFormData((prevData) => ({
-        ...prevData,
-        [name]: value,
+            ...prevData,
+            [name]: value,
         }));
     };
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        
+
         // send data to backend
 
         // reset the form data
@@ -262,9 +262,9 @@ function CreateApproverModal() {
         },
     };
 
-    return(
+    return (
         <div className="modal-window">
-            <button class="create-approver-button" onClick={openModal}>Create Approver Account</button>
+            <button className="create-approver-button" onClick={openModal}>Create Approver Account</button>
             <Modal style={modalStyle} isOpen={isOpen} onRequestClose={closeModal}>
                 <button className="exit-button" onClick={closeModal}>X</button>
                 <div className="modal-heading">
@@ -272,12 +272,12 @@ function CreateApproverModal() {
                 </div>
                 <div className="centered modal-form-div">
                     <form onSubmit={handleSubmit} className="modal-form">
-                        <input type="text" name="firstName" value={formData.firstName || ''} onChange={handleChange} placeholder="First Name"/><br></br>
-                        <input type="text" name="middleName" value={formData.middleName || ''} onChange={handleChange} placeholder="Middle Name"/><br></br>
-                        <input type="text" name="lastName" value={formData.lastName || ''} onChange={handleChange} placeholder="Last Name"/><br></br>
-                        <input type="text" name="email" value={formData.email || ''} onChange={handleChange} placeholder="Email"/><br></br>
-                        <input type="password" name="password" value={formData.password || ''} onChange={handleChange} placeholder="Password"/><br></br>
-                        <input type="text" name="approverType" value={formData.approverType || ''} onChange={handleChange} placeholder="Approver Type"/><br></br>
+                        <input type="text" name="firstName" value={formData.firstName || ''} onChange={handleChange} placeholder="First Name" /><br></br>
+                        <input type="text" name="middleName" value={formData.middleName || ''} onChange={handleChange} placeholder="Middle Name" /><br></br>
+                        <input type="text" name="lastName" value={formData.lastName || ''} onChange={handleChange} placeholder="Last Name" /><br></br>
+                        <input type="text" name="email" value={formData.email || ''} onChange={handleChange} placeholder="Email" /><br></br>
+                        <input type="password" name="password" value={formData.password || ''} onChange={handleChange} placeholder="Password" /><br></br>
+                        <input type="text" name="approverType" value={formData.approverType || ''} onChange={handleChange} placeholder="Approver Type" /><br></br>
                         <button className="assign-button" type="submit">Create Account</button>
                     </form>
                 </div>
@@ -297,7 +297,7 @@ function EditApproverModal(props) {
         email: approver.email,
         password: approver.password,
         approverType: approver.approverType
-    }); 
+    });
 
     // opens the modal when called
     const openModal = () => {
@@ -312,14 +312,14 @@ function EditApproverModal(props) {
     const handleChange = (event) => {
         const { name, value } = event.target;
         setFormData((prevData) => ({
-        ...prevData,
-        [name]: value,
+            ...prevData,
+            [name]: value,
         }));
     };
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        
+
         // send data to backend
 
         // reset the form data
@@ -348,9 +348,9 @@ function EditApproverModal(props) {
         },
     };
 
-    return(
+    return (
         <div className="modal-window">
-            <button class="approve-button" onClick={openModal}>Edit</button>
+            <button className="approve-button" onClick={openModal}>Edit</button>
             <Modal style={modalStyle} isOpen={isOpen} onRequestClose={closeModal}>
                 <button className="exit-button" onClick={closeModal}>X</button>
                 <div className="modal-heading">
@@ -358,12 +358,12 @@ function EditApproverModal(props) {
                 </div>
                 <div className="centered modal-form-div">
                     <form onSubmit={handleSubmit} className="modal-form">
-                        <input type="text" name="firstName" value={formData.firstName || ''} onChange={handleChange} placeholder="First Name"/><br></br>
-                        <input type="text" name="middleName" value={formData.middleName || ''} onChange={handleChange} placeholder="Middle Name"/><br></br>
-                        <input type="text" name="lastName" value={formData.lastName || ''} onChange={handleChange} placeholder="Last Name"/><br></br>
-                        <input type="text" name="email" value={formData.email || ''} onChange={handleChange} placeholder="Email"/><br></br>
-                        <input type="password" name="password" value={formData.password || ''} onChange={handleChange} placeholder="Password"/><br></br>
-                        <input type="text" name="approverType" value={formData.approverType || ''} onChange={handleChange} placeholder="Approver Type"/><br></br>
+                        <input type="text" name="firstName" value={formData.firstName || ''} onChange={handleChange} placeholder="First Name" /><br></br>
+                        <input type="text" name="middleName" value={formData.middleName || ''} onChange={handleChange} placeholder="Middle Name" /><br></br>
+                        <input type="text" name="lastName" value={formData.lastName || ''} onChange={handleChange} placeholder="Last Name" /><br></br>
+                        <input type="text" name="email" value={formData.email || ''} onChange={handleChange} placeholder="Email" /><br></br>
+                        <input type="password" name="password" value={formData.password || ''} onChange={handleChange} placeholder="Password" /><br></br>
+                        <input type="text" name="approverType" value={formData.approverType || ''} onChange={handleChange} placeholder="Approver Type" /><br></br>
                         <button className="assign-button" type="submit">Confirm</button>
                     </form>
                 </div>

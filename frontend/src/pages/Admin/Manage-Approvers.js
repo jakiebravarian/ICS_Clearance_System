@@ -24,7 +24,7 @@ export default function ManageApprovers() {
 
                 {/* add approver button */}
                 <div className="create-approver-div">
-                    <CreateApproverModal/>
+                    <CreateApproverModal />
                 </div>
             </div>
 
@@ -32,16 +32,16 @@ export default function ManageApprovers() {
             <div className="row">
                 {/* search bar */}
                 <div className="search-bar">
-                    <input class="search-input" type="text" placeholder="Search.." name="search"/>
-                    <button class="search-button" type="submit"><i class="search-icon" className="fa fa-search"></i></button>
+                    <input className="search-input" type="text" placeholder="Search.." name="search" />
+                    <button className="search-button" type="submit"><i className="fa fa-search"></i></button>
                 </div>
 
                 {/* sort options */}
-                <ApproverSort/>
+                <ApproverSort />
             </div>
 
             {/* list of approvers */}
-            <ApproversList data={approversList}/>
+            <ApproversList data={approversList} />
         </div>
     )
 }
