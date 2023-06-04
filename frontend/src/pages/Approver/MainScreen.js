@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react';
 import { useForm, Controller } from "react-hook-form";
 import { Header, Footer } from '../ScreenComponents';
 import { approverInfo } from '../../data.js';
+import { step, status, date, name, colourStyles } from './ApproverDropdownValues';
 import { Table } from './Table.js';
 
 export default function MainScreen() {
@@ -21,41 +22,25 @@ export default function MainScreen() {
     const [dateValue, setDateValue] = useState('');
     const [nameValue, setNameValue] = useState('');
 
-    // values for dropdown menu
-    let step = [
-        { label: "1 - Pre Adviser", value: "1" },
-        { label: "2 - Adviser", value: "2" },
-        { label: "3 - Clearance Officer", value: "3" },
-    ];
-
-    let status = [
-        { label: "Open", value: "Open" },
-        { label: "Pending", value: "Pending" },
-        { label: "Closed", value: "Closed" },
-        { label: "Cleared", value: "Cleared" },
-    ];
-
-    let date = [
-        { label: "Date: Ascending", value: "Ascending" },
-        { label: "Date: Descending", value: "Descending" },
-    ]
-
-    let name = [
-        { label: "Name: Ascending", value: "Ascending" },
-        { label: "Name: Descending", value: "Descending" },
-    ]
-
-    // styling for Dropdown menu
-    const colourStyles = {
-        control: styles => ({ ...styles, backgroundColor: 'white', fontSize: 14, borderColor: 'black' }),
-        option: (styles) => {
-            return {
-                ...styles,
-                fontSize: 14,
-                color: 'black',
-            };
+    const data = [
+        {
+            studentNumber: '2023-12345',
+            studentName: 'John Doe',
+            step: '1',
+            status: 'In Progress',
+            date: '2023-05-30',
         },
-    };
+        {
+            studentNumber: '2021-45698',
+            studentName: 'Jane Smith',
+            step: '2',
+            status: 'Completed',
+            date: '2023-05-31',
+        },
+    ];
+
+    const attributeName = ['studentNumber', 'studentName', 'step', 'status', 'date']
+    const columns = ['Student Number', 'Student Name', 'Step', 'Status', 'Date', 'Application']
 
     //functions that handle changes on each input
     const handleSearch = (e) => {
@@ -78,24 +63,8 @@ export default function MainScreen() {
         setAdviserValue(e.target.value);
     }
 
-    const handleStep = (e) => {
-        setStepValue(e.step.value);
-    }
-
-    const handleStatus = (e) => {
-        setStatusValue(e.status.value);
-    }
-
     const handleSearchBar = (e) => {
         setSearchBar(e.target.value)
-    }
-
-    const handleDate = (e) => {
-        setDateValue(e.date.value);
-    }
-
-    const handleName = (e) => {
-        setNameValue(e.name.value);
     }
 
     // for form validation
@@ -107,8 +76,6 @@ export default function MainScreen() {
 
     const onSubmit = (data) => {
         try {
-            handleStep(data);
-            handleStatus(data);
             console.log(JSON.stringify(data));
         } catch (error) {
             console.log(error)
@@ -125,8 +92,6 @@ export default function MainScreen() {
 
     const onSort = (data) => {
         try {
-            handleDate(data);
-            handleName(data);
             console.log(JSON.stringify(data));
         } catch (error) {
             console.log(error)
@@ -160,6 +125,7 @@ export default function MainScreen() {
                         <p id="sidebar-title">Filter by:</p>
                         <form key={1} onSubmit={handleSubmit(onSubmit)}>
                             <div className="filters">
+                                {/* Month */}
                                 <Controller
                                     render={({ field }) =>
                                         <input type="number" id="month" placeholder="MM" {...field} />}
@@ -180,6 +146,7 @@ export default function MainScreen() {
                                 />
                                 {errors.month && <p id="error-message">{errors.month.message}</p>}
 
+                                {/* Day */}
                                 <Controller
                                     render={({ field }) =>
                                         <input type="number" id="day" placeholder="DD" {...field} />}
@@ -200,6 +167,7 @@ export default function MainScreen() {
                                 />
                                 {errors.day && <p id="error-message">{errors.day.message}</p>}
 
+                                {/* Year */}
                                 <Controller
                                     render={({ field }) =>
                                         <input type="number" id="year" placeholder="YYYY" {...field} />}
@@ -221,6 +189,7 @@ export default function MainScreen() {
                                 {errors.year && <p id="error-message">{errors.year.message}</p>}
                             </div>
 
+                            {/* Adviser Name */}
                             <div className="filters">
                                 <Controller
                                     render={({ field }) =>
@@ -235,6 +204,7 @@ export default function MainScreen() {
                                 {errors.adviserName && <p id="error-message">{errors.adviserName.message}</p>}
                             </div>
 
+                            {/* Status */}
                             <div className="filters">
                                 {<Controller
                                     name="status"
@@ -248,12 +218,15 @@ export default function MainScreen() {
                                             {...field}
                                             placeholder="Status"
                                             styles={colourStyles}
+                                            value={field.value}
+                                            onChange={value => (field.onChange(value), setStatusValue(value.value))}
                                         />
 
                                     )}
                                 />}
                             </div>
 
+                            {/* Step */}
                             <div className="filters">
                                 {<Controller
                                     name="step"
@@ -266,10 +239,14 @@ export default function MainScreen() {
                                             {...field}
                                             placeholder="Step"
                                             styles={colourStyles}
+                                            value={field.value}
+                                            onChange={value => (field.onChange(value), setStepValue(value.value))}
                                         />
                                     )}
                                 />}
                             </div>
+
+                            {/* Reset & Apply Buttons */}
                             <button className="filter-button" id="reset-btn" onClick={reset} >Reset Filters</button>
                             <button className="filter-button" type="submit">Apply Filters</button>
                         </form>
@@ -280,6 +257,8 @@ export default function MainScreen() {
                 <div id="approver-main">
                     {/* Search Bar & Sort By */}
                     <div id="approver-search-sort">
+
+                        {/* Search Bar */}
                         <form className="search-bar" key={2} onSubmit={handleSubmit2(onSearch)}>
                             <Controller
                                 render={({ field }) =>
@@ -296,11 +275,10 @@ export default function MainScreen() {
                             <button id="search-btn" type="submit"><i className="fa fa-search" /></button>
                         </form>
 
-
+                        {/* Sort By */}
                         <form className="search-bar" key={3} onSubmit={handleSubmit3(onSort)}>
-
                             <p id="sidebar-title"> Sort by: </p>
-
+                            {/* Date */}
                             {<Controller
                                 name="date"
                                 control={control3}
@@ -313,11 +291,14 @@ export default function MainScreen() {
                                             {...field}
                                             placeholder="Date"
                                             styles={colourStyles}
+                                            value={field.value}
+                                            onChange={value => (field.onChange(value), setDateValue(value.value))}
                                         />
                                     </div>
                                 )}
                             />}
 
+                            {/* Name */}
                             {<Controller
                                 name="name"
                                 control={control3}
@@ -330,11 +311,14 @@ export default function MainScreen() {
                                             {...field}
                                             placeholder="Name"
                                             styles={colourStyles}
+                                            value={field.value}
+                                            onChange={value => (field.onChange(value), setNameValue(value.value))}
                                         />
                                     </div>
                                 )}
                             />}
 
+                            {/* Reset & Apply */}
                             <button className="sort-button" id="reset-btn" onClick={reset3} >Reset</button>
                             <button className="sort-button" type="submit">Apply</button>
                         </form>
@@ -343,7 +327,7 @@ export default function MainScreen() {
 
                     {/* Table of Students */}
                     <div id="approver-list">
-                        <Table />
+                        <Table data={data} columns={columns} attributes={attributeName} />
                     </div>
                 </div>
             </div>
