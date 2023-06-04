@@ -71,10 +71,9 @@ const assignAdviser = async (req,res) => {
     }
 }
 
-// mali
 const sortStudentByStudentNum = async (req,res) => {
     try{
-        const sortByStudNum =  await User.find({}).sort({studentNumber: "desc"});
+        const sortByStudNum =  await User.find({userType: "Student"}).sort({studentNumber: "desc"});
         res.send(sortByStudNum);
         // console.log("sn" + sortByStudNum);
     }catch(err){
@@ -87,7 +86,7 @@ const sortStudentByName = async (req,res) => {
 
 
     try{
-        const sortbyName =  await User.find({}).sort({lastName: "asc"});
+        const sortbyName =  await User.find({userType: "Student"}).sort({lastName: "asc"});
         // res.send(sortbyName);
         // console.log(sortbyName);
         res.send(sortbyName)
@@ -99,7 +98,7 @@ const sortStudentByName = async (req,res) => {
 
 const getStudent = async (req, res) => {
     try{
-        const student =  await User.find({});
+        const student =  await User.find({userType: "Student"});
         res.send(student)
       }catch(err){
        // res.status(500).send('An error occurred');
