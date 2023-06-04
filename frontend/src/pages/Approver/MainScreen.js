@@ -146,11 +146,11 @@ export default function MainScreen() {
                         <p id="sidebar-title">Search by:</p>
                         <div className="option">
                             <input type="radio" value="Student Number" onChange={handleSearch} name="search" id="stud-num" checked={searchOption === "Student Number"} />
-                            <label for="stud-num" id="search-option">Student Number</label>
+                            <label htmlFor="stud-num" id="search-option">Student Number</label>
                         </div>
                         <div className="option">
                             <input type="radio" value="Student Name" onChange={handleSearch} name="search" id="stud-name" />
-                            <label for="stud-name" id="search-option">Student Name</label>
+                            <label htmlFor="stud-name" id="search-option">Student Name</label>
                         </div>
                         <hr />
                     </div>

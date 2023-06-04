@@ -63,11 +63,11 @@ export default function LoginApprover() {
             <div className="navbar" id="navbar-login">
                 <a href="/">Home</a>
                 <a href="/signup">Sign Up</a>
-                <div class="dropdown">
-                    <button class="dropbtn">Log in
-                        <i class="fa fa-angle-down"></i>
+                <div className="dropdown">
+                    <button className="dropbtn">Log in
+                        <i className="fa fa-angle-down"></i>
                     </button>
-                    <div class="dropdown-content">
+                    <div className="dropdown-content">
                         <a href="/login">Student</a>
                         <a href="/login-approver">Approver</a>
                         {/* <a href="#">Admin</a> */}
