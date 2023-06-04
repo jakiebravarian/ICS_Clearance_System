@@ -11,8 +11,29 @@ export default function ManageApplications() {
     const [sortBy, setSortBy] = useState("");
     const [result, setResult] = useState([]);
 
-    //Add default
+    
+    // Fetch data from API on component mount
+    useEffect(() => {
+        fetchData();
+    }, []);
 
+    //Display default
+    const fetchData = async () => {
+        try {
+            fetch('http://localhost:3001/get-student', 
+            {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })  .then(response => response.json())
+                .then((body) => {
+                    setResult(body) 
+                })
+        } catch (error) {
+        console.error('Error fetching data:', error);
+        }
+  };
     
     const changeSortOption = (e) => {
         setSortBy(e.target.value);
