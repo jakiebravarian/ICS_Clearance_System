@@ -8,7 +8,7 @@ import Home from './pages/Login-Signup/Home';
 import Login from './pages/Login-Signup/Login';
 import LoginAprrover from './pages/Login-Signup/Login-Approver';
 import SignUp from './pages/Login-Signup/SignUp';
-import CreateApproverAccount from './pages/Admin/Create-Approver';
+// import CreateApproverAccount from './pages/Admin/Create-Approver';
 import Verify from './pages/Login-Signup/Verify';
 import Student from './pages/Student/Student';
 import Returned from './pages/Student/Returned';
