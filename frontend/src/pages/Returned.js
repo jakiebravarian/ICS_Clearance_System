@@ -6,12 +6,13 @@ import {getCurrentStudent, remarks } from "../data";
 import { useEffect, useState } from "react";
 import { useParams } from 'react-router-dom';
 import Pikachu from '../assets/pikachu.png';
-
+import {useNavigate} from 'react-router-dom';
 
 
 export default function Returned() {
     // const userInfo = StudentUserInfo();
     const { appId } = useParams();
+    console.log(appId);
 
     // Use the appId parameter as needed
     
@@ -19,7 +20,8 @@ export default function Returned() {
     const [userInfo, setUserInfo] = useState({}); // Define userInfo state
     const [Applications, setApplications] = useState([])
     const [currentApplication, setCurrentApplication] = useState()
-     useEffect(() => {
+    const navigate = useNavigate();
+    useEffect(() => {
         const upMail1 = localStorage.getItem("upMail");
       
         const fetchData = async () => {
@@ -36,11 +38,36 @@ export default function Returned() {
               icon: Pikachu,
             });
              setApplications(studentData.application);
+
+             const currentApp = studentData.application.find(app => app._id   === appId);
+             setCurrentApplication(currentApp);
           }
-        };
-      
+        };  
+
         fetchData();
       }, []);
+
+      async function resubmitApplication(event,studentSubmission) {
+        currentApplication.updatedStudentSubmission = studentSubmission;
+        try {
+          const response = await fetch("http://localhost:3001/update-student-submission", {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ currentApplication}),
+          });
+    
+          if (response.ok) {
+            console.log("Succesfully resubmitted application!");
+            navigate("/student");
+          } else {
+            console.error("Failed to resubmit application");
+          }
+        } catch (error) {
+          console.error(error);
+        }
+      }
     
     return(
         <div>
@@ -55,9 +82,8 @@ export default function Returned() {
             <div className="remarks">
                 Remarks: {remarks.remarks}
             </div>
-
             {/* form */}
-            <Form/>
+            <Form onClick={resubmitApplication}/>
         </div>
     )
 }

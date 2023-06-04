@@ -40,21 +40,21 @@ export default  function Student() {
     
     
     // add to list of applications when user inputs data
-    function eventHandler(event,githubLink,dateApplied) {
+    function eventHandler(event,studentSubmission) {
       event.preventDefault(); // prevent the form from submitting and refreshing the page
       
       console.log('onClick executed');
 
       var newApplication = {
         upMail: student.upMail,
-        dateApplied: dateApplied,
+        dateApplied: studentSubmission.dateSubmission,
         status: "Pending",
         step: 1, // Set the initial value for the step field
         remarks: [], // Initialize an empty array for remarks
         studentSubmission: {
-          remarkSubmission: githubLink,
-          dateSubmission: dateApplied,
-          stepGivenSubmission: 1,
+          remarkSubmission: studentSubmission.remarkSubmission,
+          dateSubmission: studentSubmission.dateSubmission,
+          stepGivenSubmission: studentSubmission.stepGivenSubmission,
         },
       };
     

@@ -84,9 +84,20 @@ function Form({onClick}) {
         // Retrieve form input values
         const githubLink = document.getElementById("github-link").value;
         const dateApplied = document.getElementById("date-applied").value;
-    
+        const remarkValue = document.getElementById("remarks").value;
+        const studentSubmission = {
+          dateSubmission: dateApplied,
+        }
+        if(remarkValue.length == 0){
+          studentSubmission.remarkSubmission = githubLink;
+          studentSubmission.stepGivenSubmission = 1;
+        }else{
+          studentSubmission.remarkSubmission = remarkValue;
+          studentSubmission.stepGivenSubmission = 2;
+        }
+        console.log(studentSubmission);
         // Call the onClick event handler and pass the values as parameters
-        onClick(event,githubLink, dateApplied);
+        onClick(event,studentSubmission);
       };
     return(
         <div>
@@ -132,7 +143,7 @@ function Form({onClick}) {
                             <input placeholder="github.com/username" id="github-link"/><br></br>
                         </div>
                         <div>
-                            <label htmlFor="github-link">Date applied</label><br/>
+                            <label htmlFor="date-applied">Date applied</label><br/>
                             <input id="date-applied"/><br></br>
                         </div>
                         <div>

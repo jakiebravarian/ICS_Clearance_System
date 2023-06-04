@@ -21,7 +21,7 @@ export const getAllStudents = async (req, res) => {
   export const getCurrentStudent = async (req, res) => {
     try {
       const upMail = req.query.upMail; // Get the user email from the query parameter
-      const student = await Student.findOne({ upMail: upMail }).populate(); // Query the student with the specified email
+      const student = await Student.findOne({ upMail: upMail }).populate('application'); // Query the student with the specified email
       res.send(student);
     } catch (error) {
       console.error(error);
@@ -110,18 +110,17 @@ export const getAllStudents = async (req, res) => {
   
   export const updateStudentSubmission = async (req, res) => {
     try {
-      const { applicationId, studentSubmission } = req.body; // Get the applicationId and new studentSubmission value from the request body
-  
-      // Find the application by applicationId
-      const application = await Application.findById(applicationId);
+      const app = req.body.currentApplication; // Get the applicationId and new studentSubmission value from the request body
+      // Update the studentSubmission of the application
+      console.log(app._id);
+      const application = await Application.findById(app._id);
       if (!application) {
         return res.status(404).send('Application not found');
       }
-  
-      // Update the studentSubmission of the application
-      application.studentSubmission = studentSubmission;
-      await application.save();
-  
+      application.status = "Pending";
+      application.studentSubmission = app.updatedStudentSubmission;  
+      application.save();
+
       res.send('Student submission updated successfully');
     } catch (error) {
       console.error(error);
