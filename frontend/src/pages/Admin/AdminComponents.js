@@ -34,21 +34,6 @@ function Menu(props) {
     )
 }
 
-function StudentSort() {
-    return(
-        <div className="row student-sort">
-            <div>
-                <p><b>Sort by: </b></p>
-            </div>
-            <form className="sort-form">
-                <input class="sort-radio" name="sort" type="radio" id="studno-sort-input"></input>
-                <label class="radio-label" for="studno-sort-input">Student number</label>
-                <input class="sort-radio" name="sort" type="radio" id="studname-sort-input"></input>
-                <label class="radio-label" for="studname-sort-input">Student name</label>
-            </form>
-        </div>
-    )
-}
 
 function ApproverSort() {
     return(
@@ -57,18 +42,22 @@ function ApproverSort() {
                 <p><b>Sort by: </b></p>
             </div>
             <form className="sort-form">
-                <input class="sort-radio" name="sort" type="radio" id="name-asc"></input>
-                <label class="radio-label" for="name-asc">Name (Ascending)</label>
-                <input class="sort-radio" name="sort" type="radio" id="name-desc"></input>
-                <label class="radio-label" for="name-desc">Name (Descending)</label>
+                <input className="sort-radio" name="sort" type="radio" id="name-asc"></input>
+                <label className="radio-label" for="name-asc">Name (Ascending)</label>
+                <input className="sort-radio" name="sort" type="radio" id="name-desc"></input>
+                <label classNames="radio-label" for="name-desc">Name (Descending)</label>
             </form>
         </div>
     )
 }
 
 function StudentAppsList(props) {
+    //console.log(props)
     var studentsList = props.data;
-
+    // console.log("PROPS.DATA!!")
+    // console.log( props.data);
+    // console.log("STUDENTLIST")
+    // console.log(studentsList);
     return (
         <div className="column student-apps-list">
             {/* header */}
@@ -79,10 +68,10 @@ function StudentAppsList(props) {
                 </div>
             </div>
             {
-                studentsList.map((student) => (
-                    <div className="row apps-list">
+                studentsList.map((student, index) => (
+                    <div className="row apps-list" key = {index}>
                         <p className="first-col">{student.studentNumber}</p>
-                        <p>{student.studentName}</p>
+                        <p>{student.lastName} {student.firstName} {student.middleName}</p>
                         
                         {/* buttons */}
                         <div className="row admin-buttons">
@@ -182,7 +171,7 @@ function AssignAdviserModal() {
 
     return(
         <div className="modal-window">
-            <button class="approve-button" onClick={openModal}>Approve</button>
+            <button className="approve-button" onClick={openModal}>Approve</button>
             <Modal style={modalStyle} isOpen={isOpen} onRequestClose={closeModal}>
                 <button className="exit-button" onClick={closeModal}>X</button>
                 <div className="modal-heading">
@@ -350,7 +339,7 @@ function EditApproverModal(props) {
 
     return(
         <div className="modal-window">
-            <button class="approve-button" onClick={openModal}>Edit</button>
+            <button className="approve-button" onClick={openModal}>Edit</button>
             <Modal style={modalStyle} isOpen={isOpen} onRequestClose={closeModal}>
                 <button className="exit-button" onClick={closeModal}>X</button>
                 <div className="modal-heading">
@@ -372,4 +361,4 @@ function EditApproverModal(props) {
     )
 }
 
-export { Menu, StudentSort, StudentAppsList, AssignAdviserModal, CreateApproverModal, ApproverSort, ApproversList }
+export { Menu, StudentAppsList, AssignAdviserModal, CreateApproverModal, ApproverSort, ApproversList }
