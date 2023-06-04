@@ -1,8 +1,6 @@
 import mongoose from 'mongoose';
 import { UserSchema } from './models/user.js';
 import { AppSchema } from './models/application.js';
-import { application } from 'express';
-import { ObjectId } from 'mongoose';
 const Student = mongoose.model("users",UserSchema);
 const Application = mongoose.model("Application",AppSchema);
 
