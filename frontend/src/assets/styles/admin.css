@@ -210,3 +210,11 @@
 .search-bar {
     margin-left: 65px;
 }
+
+.approver-type-label {
+    font-size: 17px;
+}
+
+.approver-type-dropdown {
+    height: 30px;
+}
