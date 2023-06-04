@@ -176,20 +176,21 @@ body {
     font-size: 18px;
 }
 
-#name-label {
+.name-label {
     margin-left: 24%;
 }
 
-#studno-label {
-    margin-left: 29%;
+.studno-label {
+    margin-left: 25.5%;
 }
 
-#course-label {
-    margin-left: 12.2%;
+.course-label {
+    margin-left: 11%;
 }
 
-#college-label {
-    margin-left: 11.5%;
+.college-label {
+    margin-left: auto;
+    margin-right: 101px;
 }
 
 .form-prompt {
@@ -326,4 +327,8 @@ body {
     padding: 20px;
     color: white;
     margin-bottom: 40px;
+}
+
+.student-form {
+    flex-wrap: wrap;
 }
