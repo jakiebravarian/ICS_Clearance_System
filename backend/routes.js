@@ -1,6 +1,6 @@
 import { signUp, login, checkifloggedin } from "./auth-controller.js";
 import { getAllStudents, getCurrentStudent, submitApplication, viewStudentClearanceStatus, updateStep, updateStudentSubmission,closeApplication,getCurrentApplication, getCurrentApplications} from "./student-controller.js";
-import { searchApproverByName, filterNameAscending, filterNameDescending, deleteApprover, editApprover, approverLogin} from "./admin-approver-controller.js"
+import { searchApproverByName, filterNameAscending, filterNameDescending, deleteApprover, editApprover, approverLogin, getApprover} from "./admin-approver-controller.js"
 import { sortStudentByStudentNum, assignAdviser, sortStudentByName, getPendingStudent, getStudent} from "./admin-student-controller.js";
 
 const setUpRoutes = (app) => {
@@ -27,14 +27,15 @@ const setUpRoutes = (app) => {
   app.get("/get-student", getStudent);
 
   //approver routes
-  app.get("/search-approver-by-name", searchApproverByName);
-  app.get("/sort-approver-by-name-asc", filterNameAscending);
-  app.get("/sort-approver-by-name-desc", filterNameDescending);
+  app.post("/search-approver-by-name", searchApproverByName);
+  app.post("/sort-approver-by-name-asc", filterNameAscending);
+  app.post("/sort-approver-by-name-desc", filterNameDescending);
   app.get("/get-current-application",getCurrentApplication);
   app.get("/get-current-applications",getCurrentApplications);
   app.post("/delete-approver", deleteApprover);
   app.post("/edit-approver", editApprover); 
   app.post("/approver-login", approverLogin);  
+  app.get("/get-approver", getApprover);
   
   //admin routes
   app.post("/assign-adviser", assignAdviser);
