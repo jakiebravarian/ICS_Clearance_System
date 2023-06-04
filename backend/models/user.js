@@ -11,6 +11,7 @@ const UserSchema = new Schema({
   college: {type: String},
   degreeProgram: {type: String},
   userType: { type: String, required: true },
+  title: {type: String},
   adviser: { type: Schema.Types.ObjectId, ref: "User", required: false },
   application: [{ type: Schema.Types.ObjectId, ref: "Application" }],
 });

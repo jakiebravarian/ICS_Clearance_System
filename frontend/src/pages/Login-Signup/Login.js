@@ -1,61 +1,76 @@
-import React from "react";
-import logo from '../../assets/ICS.png';
-import '../../assets/styles/Home.css'
-import '../../assets/styles/LoginSignup.css'
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { Footer } from '../ScreenComponents';
+import { useNavigate } from "react-router-dom";
+import Cookies from 'universal-cookie';
+import logo from '../../assets/ICS.png';
+import '../../assets/styles/Home.css';
 
 export default function Login() {
-    // added use states
-    const [upMail, setUpMail] = useState("");
-    const [password, setPassword] = useState("")
+  const [upMail, setUpMail] = useState("");
+  const [password, setPassword] = useState("");
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const navigate = useNavigate();
 
-    //fetch from backend
-    //incomplete, kulang pa yung sa cookies banda
-    function handleLogin() {
-        // fetch('http://localhost:3001/login', {
-        //     method: 'POST',
-        //     headers: {
-        //         'Content-Type': 'application/json'
-        //     },
-        //     body: JSON.stringify({
-        //         upMail: upMail,
-        //         password: password
-        //     })
-        // })
-        //     .then(console.log);
+  useEffect(() => {
+    if (isLoggedIn) {
+      navigate("/student");
     }
+  }, [isLoggedIn, navigate]);
 
-    //functions that handle changes on each input
-    const handleUpMail = (e) => {
-        setUpMail(e.target.value);
-    }
+  const handleUpMail = (e) => {
+    setUpMail(e.target.value);
+  };
 
-    const handlePassword = (e) => {
-        setPassword(e.target.value);
-    }
+  const handlePassword = (e) => {
+    setPassword(e.target.value);
+  };
 
-    // for form validation
-    const {
-        register,
-        reset,
-        formState: { errors },
-        handleSubmit
-    } = useForm({
-        mode: "onChange"
-    });
-
-    const onSubmit = (data) => {
-        // console.log(JSON.stringify(data));
-        try {
-            handleLogin();
-            reset();
-        } catch (error) {
-            console.log(error)
+  function handleLogin(e) {
+    e.preventDefault();
+    fetch("http://localhost:3001/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        upMail: upMail,
+        password: password,
+      }),
+    })
+      .then((response) => response.json())
+      .then((body) => {
+        if (body.success) {
+          setIsLoggedIn(true);
+          const cookies = new Cookies();
+          cookies.set("authToken", body.token, {
+            path: "/localhost:3001/",
+            maxAge: 60 * 60,
+            sameSite: false,
+          });
+          localStorage.setItem("upMail", upMail);
+          navigate("/student");
+        } else {
+          alert("Log in failed");
         }
+      });
+  }
 
-    };
+  const {
+    register,
+    reset,
+    formState: { errors },
+    handleSubmit
+  } = useForm({
+    mode: "onChange"
+  });
+
+  const onSubmit = (data) => {
+    try {
+      reset();
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
     return (
         <div className="wrapper">

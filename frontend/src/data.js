@@ -3,29 +3,22 @@
 // placeholder image
 import Pikachu from './assets/pikachu.png';
 import AdminIcon from './assets/admin_icon.jpg';
+import { useEffect, useState } from "react";
 import ApproverIcon from './assets/approver.png';
 
 // user info ; changes depending on who is logged in
-export const userInfo = {
-    name: "Alexandra Siocon",
-    studno: "2020-12345",
-    course: "BSCS",
-    college: "CAS",
-    classification: "Student",
-    icon: Pikachu
-}
-
-export const approverInfo = {
-    name: "Juan Dela Cruz",
-    classification: "Adviser",
-    icon: ApproverIcon
-}
-
-// export const approverInfo = {
-//     name: "Juan Dela Cruz",
-//     classification: "Clearance Officer",
-//     icon: ApproverIcon
-// }
+export async function getCurrentStudent(upMail) {
+    try {
+      const response = await fetch("http://localhost:3001/get-current-student?" + "upMail=" + upMail);
+  
+      const studentData = await response.json();
+      
+      return studentData;
+    } catch (error) {
+      console.error("Error fetching data:", error);
+      return null;
+    }
+  }
 
 export const adminInfo = {
     name: "Juan Dela Cruz",
@@ -70,3 +63,9 @@ export const approversList = [
         approverType: "Clearance Officer"
     }
 ]
+
+export const approverInfo = {
+    name: "Juan Dela Cruz",
+    classification: "Clearance Officer",
+    icon: ApproverIcon
+}

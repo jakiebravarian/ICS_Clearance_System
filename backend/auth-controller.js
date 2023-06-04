@@ -29,7 +29,7 @@ const signUp = async (req, res) => {
         }
         else
         {
-            const {  firstName, middleName, lastName, upMail, password, studentNumber,degreeProgram, college, userType, adviser, application } = req.body;
+            const {  firstName, middleName, lastName, upMail, password, studentNumber,degreeProgram, college, userType, title, adviser, application } = req.body;
             bcrypt.hash(password, 10).then((hash) => {
                 User.create({
                     firstName: firstName,
@@ -41,8 +41,9 @@ const signUp = async (req, res) => {
                     college: college,
                     degreeProgram: degreeProgram,
                     userType: userType,
+                    title: title,
                     adviser: adviser,
-                    application: application
+                    application: []
                 })
                     .then(() => {
                         res.send({success : true});
@@ -61,6 +62,7 @@ const signUp = async (req, res) => {
 
 const login = async (req,res) => {
     //get email and password from the body
+    console.log(req.body);
     const email = req.body.upMail.trim();
     const password = req.body.password;
 
