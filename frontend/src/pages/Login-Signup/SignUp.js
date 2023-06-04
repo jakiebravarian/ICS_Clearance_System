@@ -1,10 +1,12 @@
 import React from "react";
+import Select from 'react-select';
 import logo from '../../assets/ICS.png';
 import '../../assets/styles/Home.css'
 import '../../assets/styles/LoginSignup.css'
-import { useState } from 'react';
-import { useForm } from "react-hook-form";
+import { useState, useMemo } from 'react';
+import { useForm, Controller } from "react-hook-form";
 import { Footer } from '../ScreenComponents';
+import { colleges, CAFS, CAS, CDC, CEM, CEAT, CFNR, CHE, CPAf, CVM, SESAM, colourStyles } from './DropdownValues';
 
 export default function SignUp() {
     // added use states
@@ -16,6 +18,7 @@ export default function SignUp() {
     const [degreeProgram, setDegreeProgram] = useState("");
     const [upMail, setUpMail] = useState("");
     const [password, setPassword] = useState("");
+    // const [selectValue, setSelectValue] = useState(null);
 
     //other attributes in database; initally null; student signup usertype is default student
     const userType = "Student";
@@ -84,6 +87,7 @@ export default function SignUp() {
     const {
         register,
         reset,
+        control,
         formState: { errors },
         handleSubmit
     } = useForm({
@@ -99,6 +103,32 @@ export default function SignUp() {
         }
 
     };
+
+    const select2Options = useMemo(() => {
+        if (college === 'CAFS') {
+            return CAFS
+        } else if (college === 'SESAM') {
+            return SESAM
+        } else if (college === 'CDC') {
+            return CDC
+        } else if (college === 'CEM') {
+            return CEM
+        } else if (college === 'CEAT') {
+            return CEAT
+        } else if (college === 'CFNR') {
+            return CFNR
+        } else if (college === 'CHE') {
+            return CHE
+        } else if (college === 'CPAf') {
+            return CPAf
+        } else if (college === 'CVM') {
+            return CVM
+        }
+
+
+        return CAS // update pointer
+    }, [college]) // rerun function in useMemo on college changes
+
 
     return (
         <div className="wrapper">
@@ -188,29 +218,53 @@ export default function SignUp() {
                 />
                 {errors.studentNumber && <p id="error-message">{errors.studentNumber.message}</p>}
 
-                {/* Degree Program Input */}
-                <input
-                    type="text"
-                    id="degree-program"
-                    placeholder="Degree Program (e.g. BS Computer Science)"
-                    {...register("degreeProgram", {
-                        onChange: handleDegProg,
-                        required: "Please enter your Degree Program",
-                    })}
-                />
-                {errors.degreeProgram && <p id="error-message">{errors.degreeProgram.message}</p>}
-
                 {/* College Input */}
-                <input
-                    type="text"
+                {<Controller
+                    name="college"
                     id="college"
-                    placeholder="College (e.g. College of Arts and Sciences)"
-                    {...register("college", {
-                        onChange: handleCollege,
+                    control={control}
+                    defaultValue=""
+                    render={({ field }) => (
+                        <Select
+                            className="filter-dropdown"
+                            id="college"
+                            options={colleges}
+                            {...field}
+                            placeholder="College"
+                            styles={colourStyles}
+                            value={field.value}
+                            onChange={value => (field.onChange(value), setCollege(value.value))}
+                        />
+                    )}
+                    rules={{
                         required: "Please enter your College",
-                    })}
-                />
+                    }}
+                />}
                 {errors.college && <p id="error-message">{errors.college.message}</p>}
+
+                {/* Degree Program Input */}
+                {<Controller
+                    name="degree-program"
+                    id="degree-program"
+                    control={control}
+                    defaultValue=""
+                    render={({ field }) => (
+                        <Select
+                            className="filter-dropdown"
+                            id="deg-prog"
+                            options={select2Options}
+                            {...field}
+                            placeholder="Degree Program"
+                            styles={colourStyles}
+                            value={field.value}
+                            onChange={value => (field.onChange(value), setDegreeProgram(value.value))}
+                        />
+                    )}
+                    rules={{
+                        required: "Please enter your Degree Program",
+                    }}
+                />}
+                {errors.degreeProgram && <p id="error-message">{errors.degreeProgram.message}</p>}
 
                 {/* UP Mail Input */}
                 <input

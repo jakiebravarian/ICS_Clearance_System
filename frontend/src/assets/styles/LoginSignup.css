@@ -76,6 +76,13 @@ input {
     box-sizing: border-box;
     border-radius: 10px;
     border: 1.5px solid #000000;
+    width: 100% !important;
+}
+
+.filter-dropdown#college,
+.filter-dropdown#deg-prog {
+    padding: 8px 0;
+    width: 100% !important;
 }
 
 #login-button,

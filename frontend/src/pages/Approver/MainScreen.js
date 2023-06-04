@@ -1,7 +1,7 @@
 import React from "react";
-import Select from 'react-select'
-import '../../assets/styles/Home.css'
-import '../../assets/styles/ApproverMainScreen.css'
+import Select from 'react-select';
+import '../../assets/styles/Home.css';
+import '../../assets/styles/ApproverMainScreen.css';
 import { useEffect, useState } from 'react';
 import { useForm, Controller } from "react-hook-form";
 import { Header, Footer } from '../ScreenComponents';
