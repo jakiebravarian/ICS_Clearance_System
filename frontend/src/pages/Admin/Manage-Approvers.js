@@ -1,9 +1,9 @@
 import React from "react";
 
 // import components from student components
-import { Header } from "../Student/StudentComponents";
-import { adminInfo } from "../../data";
-import { Menu } from "./AdminComponents";
+import { Header } from "../ScreenComponents";
+import { adminInfo, approversList } from "../../data";
+import { Menu, CreateApproverModal, ApproverSort, ApproversList } from "./AdminComponents";
 
 export default function ManageApprovers() {
     return (
@@ -12,7 +12,7 @@ export default function ManageApprovers() {
 
             {/* Menu */}
             <div className="admin-menu">
-                {/* <Menu option="ManageApprovers" /> */}
+                <Menu option="ManageApprovers" />
             </div>
 
             {/* heading */}
@@ -24,7 +24,7 @@ export default function ManageApprovers() {
 
                 {/* add approver button */}
                 <div className="create-approver-div">
-                    {/* <CreateApproverModal/> */}
+                    <CreateApproverModal/>
                 </div>
             </div>
 
@@ -37,11 +37,11 @@ export default function ManageApprovers() {
                 </div>
 
                 {/* sort options */}
-                {/* <ApproverSort/> */}
+                <ApproverSort/>
             </div>
 
-            {/* Menu */}
-            <Menu option="ManageApprovers"/>
+            {/* list of approvers */}
+            <ApproversList data={approversList}/>
         </div>
     )
 }
