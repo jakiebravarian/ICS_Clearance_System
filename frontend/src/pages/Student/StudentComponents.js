@@ -1,7 +1,7 @@
 import React from "react";
 import {useState,useEffect} from "react";
 import { Document, Page, Text, View, PDFViewer } from '@react-pdf/renderer';
-import { styles } from './styles';
+import { styles } from './pdfStyles';
 
 // header profile component
 function ProfileHeader(props) {
@@ -169,6 +169,7 @@ function Form({onClick}) {
 function Application(props) {
     const [applications, setApplications] = useState(props.data);
     const [allClosed,setAllApplicationsClosed]=useState(false);
+
     useEffect(() => {
       const upMail1 = localStorage.getItem("upMail");
   
@@ -283,8 +284,15 @@ function Application(props) {
                         ) : (
                         <button className="app-button" onClick={() => closeApplication(application)}>Close application</button>
                         )}
-                        {application.status === "Cleared" && (
-                          <button className="print-button">Print PDF</button>
+                        {application.status === 'Cleared' ? (
+                          <form action={`/pdf-generator`}>
+                             <button className="print-button">
+                                Print PDF
+                             </button>   
+                          </form>
+                         
+                        ):(
+                          <p></p>
                         )}
                       </div>
                     );
@@ -294,8 +302,14 @@ function Application(props) {
     )
 }
 
-export function PDFGenerator({ application }) {
+export function PDFGenerator() {
   const dateGenerated = new Date().toLocaleDateString();
+  const application = {
+    name: 'John Doe',
+    studentNumber: '12345',
+    academicAdviser: 'Jane Smith',
+    clearanceOfficer: 'John Smith',
+  };
 
   const handlePrintPDF = () => {
     window.print();
@@ -306,7 +320,7 @@ export function PDFGenerator({ application }) {
       <button className="print-button" onClick={handlePrintPDF}>
         Print PDF
       </button>
-      <PDFViewer width="100%" height="500px">
+      <PDFViewer width="100%" height="700px">
         <Document>
           <Page style={styles.page}>
             <View style={styles.header}>

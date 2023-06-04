@@ -8,7 +8,6 @@ import Home from './pages/Login-Signup/Home';
 import Login from './pages/Login-Signup/Login';
 import LoginAprrover from './pages/Login-Signup/Login-Approver';
 import SignUp from './pages/Login-Signup/SignUp';
-import CreateApproverAccount from './pages/Admin/Create-Approver';
 import Verify from './pages/Login-Signup/Verify';
 import Student from './pages/Student/Student';
 import Returned from './pages/Student/Returned';
@@ -16,7 +15,7 @@ import ManageApplications from './pages/Admin/Manage-Applications';
 import ManageApprovers from './pages/Admin/Manage-Approvers';
 import Reject from './pages/Login-Signup/Reject';
 import MainScreen from './pages/Approver/MainScreen';
-
+import { PDFGenerator } from './pages/Student/StudentComponents';
 const checkIfLoggedInOnHome = async () => {
   const res = await fetch("http://localhost:3001/checkifloggedin",
     {
@@ -62,6 +61,7 @@ const router = createBrowserRouter([
     { path: '/returned/:appId', element: <Returned /> },
   { path: '/manage-applications', element: <ManageApplications /> },
   { path: '/manage-approvers', element: <ManageApprovers /> },
+  { path: '/pdf-generator', element: <PDFGenerator /> },
 ])
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
