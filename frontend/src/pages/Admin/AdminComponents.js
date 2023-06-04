@@ -36,28 +36,25 @@ function Menu(props) {
 
 
 function ApproverSort() {
-    return(
-        <div className="row approver-sort">
-            <div>
-                <p><b>Sort by: </b></p>
-            </div>
-            <form className="sort-form">
-                <input className="sort-radio" name="sort" type="radio" id="name-asc"></input>
-                <label className="radio-label" for="name-asc">Name (Ascending)</label>
-                <input className="sort-radio" name="sort" type="radio" id="name-desc"></input>
-                <label classNames="radio-label" for="name-desc">Name (Descending)</label>
-            </form>
-        </div>
-    )
+    // return(
+    //     <div className="row approver-sort">
+    //         <div>
+    //             <p><b>Sort by: </b></p>
+    //         </div>
+    //         <form className="sort-form">
+    //             <input className="sort-radio" name="sort" type="radio" id="name-asc"></input>
+    //             <label className="radio-label" for="name-asc">Name (Ascending)</label>
+    //             <input className="sort-radio" name="sort" type="radio" id="name-desc"></input>
+    //             <label classNames="radio-label" for="name-desc">Name (Descending)</label>
+    //         </form>
+    //     </div>
+    // )
 }
 
 function StudentAppsList(props) {
-    //console.log(props)
+
     var studentsList = props.data;
-    // console.log("PROPS.DATA!!")
-    // console.log( props.data);
-    // console.log("STUDENTLIST")
-    // console.log(studentsList);
+  
     return (
         <div className="column student-apps-list">
             {/* header */}
@@ -71,7 +68,7 @@ function StudentAppsList(props) {
                 studentsList.map((student, index) => (
                     <div className="row apps-list" key = {index}>
                         <p className="first-col">{student.studentNumber}</p>
-                        <p>{student.lastName} {student.firstName} {student.middleName}</p>
+                        <p>{student.lastName.toUpperCase()}, {student.firstName} {student.middleName}</p>
                         
                         {/* buttons */}
                         <div className="row admin-buttons">
@@ -97,9 +94,9 @@ function ApproversList(props) {
                 </div>
             </div>
             {
-                approversList.map((approver) => (
-                    <div className="row apps-list">
-                        <p className="first-col">{approver.lastName}, {approver.firstName} {approver.middleName}</p>
+                approversList.map((approver, index) => (
+                    <div className="row apps-list"  key= {index}>
+                        <p className="first-col">{approver.lastName.toUpperCase()}, {approver.firstName} {approver.middleName}</p>
                         
                         {/* buttons */}
                         <div className="row admin-buttons">
@@ -253,7 +250,7 @@ function CreateApproverModal() {
 
     return(
         <div className="modal-window">
-            <button class="create-approver-button" onClick={openModal}>Create Approver Account</button>
+            <button className="create-approver-button" onClick={openModal}>Create Approver Account</button>
             <Modal style={modalStyle} isOpen={isOpen} onRequestClose={closeModal}>
                 <button className="exit-button" onClick={closeModal}>X</button>
                 <div className="modal-heading">
@@ -266,7 +263,12 @@ function CreateApproverModal() {
                         <input type="text" name="lastName" value={formData.lastName || ''} onChange={handleChange} placeholder="Last Name"/><br></br>
                         <input type="text" name="email" value={formData.email || ''} onChange={handleChange} placeholder="Email"/><br></br>
                         <input type="password" name="password" value={formData.password || ''} onChange={handleChange} placeholder="Password"/><br></br>
-                        <input type="text" name="approverType" value={formData.approverType || ''} onChange={handleChange} placeholder="Approver Type"/><br></br>
+                         {/* should be a dropdown */}
+                         <label for="approver-type" className="approver-type-label">Approver Type:  </label>
+                        <select className="approver-type-dropdown" id="approver-type" name="approverType">
+                            <option  name="approverType" value="Adviser" onChange={handleChange}>Adviser</option>
+                            <option name="approverType" value="Clearance Officer" onChange={handleChange}>Clearance Officer</option>
+                        </select>
                         <button className="assign-button" type="submit">Create Account</button>
                     </form>
                 </div>
