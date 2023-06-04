@@ -1,5 +1,34 @@
 import React from 'react';
 
+// data = data/rows of table ----------------------------------------
+// e.g.
+// const approverRemark = [
+//     {
+//         date: '06-01-2023',
+//         step: '1',
+//         commenter: 'Juan H. Dela Cruz',
+//         remark: 'ngi'
+//     },
+//     {
+//         date: '06-05-2023',
+//         step: '3',
+//         commenter: 'Juan H. Dela Cruz',
+//         remark: 'yuck'
+//     },
+// ];
+
+// columns = table headers ------------------------------------------
+// e.g.
+// const approverRemarkColumns = ['Date', 'Step', 'Commenter', 'Remark']
+
+// attributes = attributes of data ----------------------------------
+// e.g.
+// const approverRemarkAttributes = ['date', 'step', 'commenter', 'remark']
+
+// id = for creating specific ids of table, header, data ------------
+// e.g.
+// id={"approver-remark"}
+
 const Table = ({ data, columns, attributes, id }) => {
 
     return (
