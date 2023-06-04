@@ -22,6 +22,7 @@ export default function MainScreen() {
     const [dateValue, setDateValue] = useState('');
     const [nameValue, setNameValue] = useState('');
 
+    // data for table
     const data = [
         {
             studentNumber: '2023-12345',
@@ -40,6 +41,7 @@ export default function MainScreen() {
     ];
 
     const attributeName = ['studentNumber', 'studentName', 'step', 'status', 'date']
+
     const columns = ['Student Number', 'Student Name', 'Step', 'Status', 'Date', 'Application']
 
     //functions that handle changes on each input
@@ -327,7 +329,7 @@ export default function MainScreen() {
 
                     {/* Table of Students */}
                     <div id="approver-list">
-                        <Table data={data} columns={columns} attributes={attributeName} />
+                        <Table data={data} columns={columns} attributes={attributeName} id={"approver"} />
                     </div>
                 </div>
             </div>

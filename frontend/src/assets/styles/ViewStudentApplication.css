@@ -1,0 +1,118 @@
+.content {
+    padding: 16px 32px;
+}
+
+.section-title {
+    font-family: Roboto Slab;
+    font-size: 16px;
+    letter-spacing: -0.25px;
+    color: #094C9F;
+}
+
+.header-title {
+    font: Roboto;
+    font-size: 11px;
+    font-weight: bold;
+}
+
+#application-information-table th,
+#student-information-table th {
+    padding: 8px 0px 4px 0px;
+    font-weight: bold;
+}
+
+#student-information-table td,
+#application-information-table td {
+    padding: 4px 0;
+}
+
+#student-information-table th:nth-child(1),
+#student-information-table td:nth-child(1),
+#application-information-table th:nth-child(1),
+#application-information-table td:nth-child(1) {
+    width: 30%;
+}
+
+#student-information-table th:nth-child(2),
+#student-information-table td:nth-child(2),
+#application-information-table th:nth-child(2),
+#application-information-table td:nth-child(2) {
+    width: 15%
+}
+
+#student-information-table th:nth-child(3),
+#student-information-table td:nth-child(3) {
+    width: 30%;
+}
+
+#student-information-table-header,
+#application-information-table-header {
+    border: none;
+    background-color: white;
+    font: Roboto;
+    font-size: 11px;
+    color: black;
+}
+
+#student-information-table-items,
+#application-information-table-items {
+    border: none;
+    font-size: 14px;
+}
+
+#student-information-table-items,
+#application-information-table-items:hover {
+    background-color: white;
+}
+
+.application-information {
+    margin: 16px 0;
+}
+
+#student-remark-table td,
+#student-remark-table th,
+#approver-remark-table td,
+#approver-remark-table th {
+    padding: 8px 16px;
+}
+
+#student-remark-table th:nth-child(1),
+#student-remark-table td:nth-child(1),
+#approver-remark-table th:nth-child(1),
+#approver-remark-table td:nth-child(1) {
+    width: 10%;
+}
+
+#student-remark-table th:nth-child(2),
+#student-remark-table td:nth-child(2),
+#approver-remark-table th:nth-child(2),
+#approver-remark-table td:nth-child(2) {
+    text-align: center;
+    width: 10%
+}
+
+#approver-remark-table th:nth-child(3),
+#approver-remark-table td:nth-child(3) {
+    width: 25%;
+}
+
+#student-remark-table-items,
+#approver-remark-table-items {
+    font-size: 11px;
+}
+
+.buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+}
+
+#approve-btn {
+    width: 10%
+}
+
+#return-btn {
+    width: 10%;
+    margin-left: 24px;
+    background-color: black;
+}

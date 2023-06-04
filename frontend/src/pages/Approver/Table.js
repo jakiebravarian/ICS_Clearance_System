@@ -1,29 +1,27 @@
 import React from 'react';
 
-const Table = ({ data, columns, attributes }) => {
+const Table = ({ data, columns, attributes, id }) => {
 
     return (
-        <div id="table">
-            <table id="approver-table">
-                <thead>
-                    <tr id="table-header">
-                        {columns.map((column, index) => (
-                            <th key={index}>{column}</th>
-                        ))}
-                    </tr>
-                </thead>
-                <tbody>
-                    {data.map((row, index) => (
-                        <tr key={index} id="table-items">
-                            {attributes.map((attributes, index) => (
-                                <td key={index}>{row[attributes]}</td>
-                            ))}
-
-                        </tr>
+        <table className="table" id={id + "-table"}>
+            <thead>
+                <tr className="table-header" id={id + "-table-header"}>
+                    {columns.map((column, index) => (
+                        <th key={index}>{column}</th>
                     ))}
-                </tbody>
-            </table>
-        </div>
+                </tr>
+            </thead>
+            <tbody>
+                {data.map((row, index) => (
+                    <tr className="table-items" key={index} id={id + "-table-items"}>
+                        {attributes.map((attributes, index) => (
+                            <td key={index}>{row[attributes]}</td>
+                        ))}
+
+                    </tr>
+                ))}
+            </tbody>
+        </table>
     );
 };
 

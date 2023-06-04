@@ -14,6 +14,7 @@ import Student from './pages/Student/Student';
 import Returned from './pages/Student/Returned';
 import ManageApplications from './pages/Admin/Manage-Applications';
 import ManageApprovers from './pages/Admin/Manage-Approvers';
+import ViewStudentApplication from './pages/Approver/ViewStudentApplication';
 
 const router = createBrowserRouter([
   { path: '/', element: <Home /> },
@@ -23,6 +24,7 @@ const router = createBrowserRouter([
   { path: '/verify', element: <Verify /> },
   { path: '/reject', element: <Reject /> },
   { path: '/approver', element: <MainScreen /> },
+  { path: '/view', element: <ViewStudentApplication /> },
   { path: '/student', element: <Student /> },
   { path: '/returned', element: <Returned /> },
   { path: '/manage-applications', element: <ManageApplications /> },

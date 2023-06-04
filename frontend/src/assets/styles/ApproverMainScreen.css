@@ -181,51 +181,54 @@ button#search-btn {
     margin: 4px;
 }
 
-
-
-#approver-list {}
-
-#approver-table {
+.table {
     font-family: Roboto;
     border-collapse: collapse;
     width: 100%;
+}
+
+#approver-table {
     margin-top: 24px;
+}
+
+td,
+th {
+    font-weight: normal;
 }
 
 #approver-table td,
 #approver-table th {
-    font-weight: normal;
     padding: 12px 24px 12px 24px;
 }
 
-#table-header {
+.table-header {
     border: 1px solid #094C9F;
+    background-color: #094C9F;
     font-size: 14px;
     text-align: left;
-    background-color: #094C9F;
     color: white;
 }
 
-#table-items {
+.table-items {
     font-size: 12px;
     border: 1px solid #000;
     max-width: 100px;
 }
 
-th:nth-child(1),
-td:nth-child(1),
-th:nth-child(3),
-td:nth-child(3),
-th:nth-child(6),
-td:nth-child(6) {
+#approver-table th:nth-child(1),
+#approver-table td:nth-child(1),
+#approver-table th:nth-child(3),
+#approver-table td:nth-child(3),
+#approver-table th:nth-child(6),
+#approver-table td:nth-child(6) {
     text-align: center;
 }
 
-td:nth-child(2) {
+#approver-table td:nth-child(2) {
     width: 30%;
 }
 
-#approver-table #table-items:hover {
+.table .table-items:hover {
     background-color: #ddd;
 }
 
