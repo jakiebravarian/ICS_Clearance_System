@@ -14,6 +14,8 @@ import Student from './pages/Student/Student';
 import Returned from './pages/Student/Returned';
 import ManageApplications from './pages/Admin/Manage-Applications';
 import ManageApprovers from './pages/Admin/Manage-Approvers';
+import Reject from './pages/Login-Signup/Reject';
+import MainScreen from './pages/Approver/MainScreen';
 
 const checkIfLoggedInOnHome = async () => {
   const res = await fetch("http://localhost:3001/checkifloggedin",
