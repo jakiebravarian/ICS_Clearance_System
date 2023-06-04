@@ -2,10 +2,10 @@ import React from "react";
 
 // import components from student components
 import { Header, StudentInfo, ProfileHeader, Application, Footer, Form } from "./StudentComponents";
-import {getCurrentStudent, remarks } from "../data";
+import {getCurrentStudent, remarks } from "../../data";
 import { useEffect, useState } from "react";
 import { useParams } from 'react-router-dom';
-import Pikachu from '../assets/pikachu.png';
+import Pikachu from '../../assets/pikachu.png';
 import {useNavigate} from 'react-router-dom';
 
 

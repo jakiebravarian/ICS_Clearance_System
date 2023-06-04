@@ -1,12 +1,12 @@
 import React from "react";
 import { useEffect, useState } from "react";
-import Pikachu from '../assets/pikachu.png';
+import Pikachu from '../../assets/pikachu.png';
 
 // import other components
 import { Header, StudentInfo, ProfileHeader, Application, Footer } from "./StudentComponents";
 
 // import data
-import { getCurrentStudent } from "../data";
+import { getCurrentStudent } from "../../data";
 
 
 export default  function Student() {

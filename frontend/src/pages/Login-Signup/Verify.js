@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Cookies from 'universal-cookie';
-import gif from '../assets/hourglass.gif';
-import '../assets/styles/Home.css';
+import gif from '../../assets/hourglass.gif';
+import '../../assets/styles/Home.css';
 
 export default function Verify() {
   const upMail = localStorage.getItem("upMail");

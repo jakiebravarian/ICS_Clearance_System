@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import Cookies from 'universal-cookie';
-import logo from '../assets/ICS.png';
-import '../assets/styles/Home.css';
+import logo from '../../assets/ICS.png';
+import '../../assets/styles/Home.css';
 
 export default function Login() {
   const [upMail, setUpMail] = useState("");

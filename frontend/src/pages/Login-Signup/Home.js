@@ -1,6 +1,6 @@
 import React from "react";
-import logo from '../assets/ICS.png';
-import '../assets/styles/Home.css'
+import logo from '../../assets/ICS.png';
+import '../../assets/styles/Home.css'
 
 class Home extends React.Component {
 
