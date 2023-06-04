@@ -2,6 +2,10 @@
     margin-left: 80px;
 }
 
+.roboto-slab {
+    font-family: Roboto Slab;
+}
+
 /* background colors for the buttons */
 .blue-background {
     background-color: #094C9F;
@@ -9,6 +13,7 @@
     padding: 8px;
     font-size: 15px;
     border: none;
+    border: 1px solid #094C9F;
 }
 
 .white-background {
@@ -17,4 +22,191 @@
     padding: 8px;
     font-size: 15px;
     border: 1px solid #094C9F;
+}
+
+.admin-menu {
+    margin-top: 60px;
+    margin-left: 30px;
+}
+
+.section-name-text {
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.sort-text {
+    font-size: 20px;    
+    width: 200px;
+}
+
+.sort-radio {
+    min-width: 20px;
+    width: 20px;
+    margin-right: 5px;
+}
+
+.radio-label {
+    margin-right: 10px;
+}
+
+.student-sort-section {
+    margin-top: 40px;
+    justify-content: space-between;
+    margin-left: 63px;
+}
+
+.student-sort {
+    margin-top: 16px;
+    margin-right: 90px;
+}
+
+.approver-sort {
+    margin-left: auto;
+    margin-right: 66px;
+}
+
+.sort-form {
+    margin-top: 20px;
+    margin-left: 20px;
+}
+
+.first-col-label {
+    margin-right: 80px;
+}
+
+.student-apps-list {
+    margin-left: 63px;
+    margin-right: 63px;
+    border: 1px solid black;
+}
+
+.list-header {
+    background-color: #094C9F;
+    color: white;
+}
+
+.col-labels {
+    margin-left: 30px;
+    min-width: 200px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.apps-list {
+    border: 1px solid;
+    padding-left: 32px;
+}
+
+.first-col {
+    margin-right: 122px;
+}
+
+.approve-button {
+    margin-right: 20px;
+    background-color: #094C9F;
+    color: white;
+    font-size: 17px;
+    flex: 0 0 auto;
+}
+
+.approve-button:hover {
+    background-color: white;
+    color: black;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.reject-button {
+    font-size: 17px;
+    background-color: black;
+    color: white;
+    flex: 0 0 auto;
+}
+
+.create-approver-button:hover{
+    background-color: white;
+    color: black;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.reject-button:hover {
+    background-color: white;
+    color: black;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.admin-buttons {
+    margin-left: auto;
+    margin-top: 15px;
+    margin-right: 30px;
+    min-width: 20px;
+}
+
+.admin-buttons > button, .approve-button {
+    width: 150px;
+    height: 40px;
+    border-radius: 20px;
+    border: none;
+}
+
+@media (max-width: 768px) {
+    .first-col {
+        flex: 0 0 100%;
+    }
+}
+
+.exit-button {
+    color: gray;
+    background-color: white;
+    border: none;
+}
+
+.modal-heading {
+    font-weight: bold;
+    font-family: Roboto Slab;
+    text-align: center;
+}
+
+.modal-form > input {
+    min-width: 100px;
+}
+
+.assign-button {
+    margin-top: 20px;
+    background-color: #094C9F;
+    color: white;
+    border: none;
+    width: 72%;
+    height: 35px;
+    border-radius: 15px;
+}
+
+.create-approver-button {
+    width: 270px;
+    border-radius: 12px;
+    background-color: #094C9F;
+    color: white;
+    height: 40px;
+    border: none;
+    font-size: 17px;
+}
+
+.create-approver-div {
+    margin-left: auto;
+    margin-right: 80px;
+}
+
+.search-input {
+    border-radius: 0px;
+}
+
+.search-button {
+    height: 38.5px;
+    width: 85px;
+    background-color: #094C9F;
+    color: white;
+    border: none;
+}
+
+.search-bar {
+    margin-left: 65px;
 }

@@ -1,14 +1,29 @@
 import React from "react";
+import { studentApps } from "../../data";
 
 // import components from student components
-import { Header } from "../Student/StudentComponents";
+import { Header, Footer } from "../ScreenComponents";
 import { adminInfo } from "../../data";
-import { Menu } from "./AdminComponents";
+import { Menu, StudentSort, StudentAppsList, AssignAdviserModal } from "./AdminComponents";
 
 export default function ManageApplications() {
-    return(
+    return (
         <div>
-            <Header data={adminInfo}/>
+            <Header data={adminInfo} />
+
+            {/* Menu */}
+            <div className="admin-menu">
+                <Menu option="ManageStudentApps" />
+            </div>
+
+            <div className="row student-sort-section">
+                {/* text */}
+                <div>
+                    <p className="roboto-slab section-name-text">Pending Student Account Application Requests</p>
+                </div>
+                {/* name sort */}
+                <StudentSort/>
+            </div>
 
             {/* Menu */}
             <Menu option="ManageStudentApps"/>

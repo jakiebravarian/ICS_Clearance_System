@@ -1,8 +1,10 @@
 import React from "react";
 import logo from '../../assets/ICS.png';
 import '../../assets/styles/Home.css'
+import '../assets/styles/LoginSignup.css'
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { Footer } from '../ScreenComponents';
 
 export default function LoginApprover() {
     // added use states
@@ -58,7 +60,7 @@ export default function LoginApprover() {
     return (
         <div className="wrapper">
             {/* Navigation Menu */}
-            <div className="navbar">
+            <div className="navbar" id="navbar-login">
                 <a href="/">Home</a>
                 <a href="/signup">Sign Up</a>
                 <div class="dropdown">
@@ -116,6 +118,7 @@ export default function LoginApprover() {
 
                 <button type="submit" id="login-button">Login</button>
             </form>
+            <Footer data="login-footer" />
         </div>
     )
 

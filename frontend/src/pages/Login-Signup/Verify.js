@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from "react";
+import gif from '../../assets/hourglass.gif';
+import '../../assets/styles/Home.css'
+import '../../assets/styles/VerifyDeny.css'
+import { Footer } from '../ScreenComponents';
 import { useNavigate } from "react-router-dom";
 import Cookies from 'universal-cookie';
-import gif from '../../assets/hourglass.gif';
-import '../../assets/styles/Home.css';
+
 
 export default function Verify() {
   const upMail = localStorage.getItem("upMail");
@@ -25,7 +28,7 @@ export default function Verify() {
     setIsLoggedIn(false);
     navigate("/");
   }
-
+  
   return (
     <div className="wrapper">
       <div id="page-header">
@@ -41,4 +44,6 @@ export default function Verify() {
       </div>
     </div>
   );
+    
 }
+

@@ -4,27 +4,16 @@
 import Pikachu from './assets/pikachu.png';
 import AdminIcon from './assets/admin_icon.jpg';
 import { useEffect, useState } from "react";
+import ApproverIcon from './assets/approver.png';
 
 // user info ; changes depending on who is logged in
-// export const userInfo = {
-//     name: "Alexandra Siocon",
-//     studno: "2020-12345",
-//     course: "BSCS",
-//     college: "CAS",
-//     classification: "Student",
-//     icon: Pikachu
-// }    
-export async function getCurrentStudent(upMail) {
-  try {
-    const response = await fetch("http://localhost:3001/get-current-student?" + "upMail=" + upMail);
-
-    const studentData = await response.json();
-    
-    return studentData;
-  } catch (error) {
-    console.error("Error fetching data:", error);
-    return null;
-  }
+export const userInfo = {
+    name: "Alexandra Siocon",
+    studno: "2020-12345",
+    course: "BSCS",
+    college: "CAS",
+    classification: "Student",
+    icon: Pikachu
 }
 
 export const adminInfo = {
@@ -36,3 +25,37 @@ export const adminInfo = {
 export const remarks = {
     remarks: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis ."
 }
+
+export const studentApps = [
+    {
+        studentNumber: "2020-xxxxx",
+        studentName: "BRABANTE, Jakie Ashley, Cacho"
+    },
+    {
+        studentNumber: "2020-xxxxx",
+        studentName: "DELA ROSA, Maria, Hernandez"
+    },
+    {
+        studentNumber: "2020-xxxxx",
+        studentName: "JEPSEN, Carly Rae"
+    }
+]
+
+export const approversList = [
+    {
+        firstName: "Jakie",
+        middleName: "Hernandez",
+        lastName: "Bravante",
+        email: "jhbravante@up.edu.ph",
+        password: "hello, world",
+        approverType: "Clearance Officer"
+    },
+    {
+        firstName: "Peter",
+        middleName: "Johnson",
+        lastName: "Parker",
+        email: "pjparker@up.edu.ph",
+        password: "hello, world",
+        approverType: "Clearance Officer"
+    }
+]
