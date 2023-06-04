@@ -25,8 +25,8 @@ export default function ManageApplications() {
                 <StudentSort/>
             </div>
 
-            {/* Menu */}
-            <Menu option="ManageStudentApps"/>
+            {/* list of students */}
+            <StudentAppsList data={studentApps}/>
         </div>
     )
 }
