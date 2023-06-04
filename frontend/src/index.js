@@ -8,6 +8,7 @@ import Login from './pages/Login-Signup/Login';
 import LoginAprrover from './pages/Login-Signup/Login-Approver';
 import SignUp from './pages/Login-Signup/SignUp';
 import Verify from './pages/Login-Signup/Verify';
+import Reject from './pages/Login-Signup/Reject';
 import MainScreen from './pages/Approver/MainScreen';
 import Student from './pages/Student/Student';
 import Returned from './pages/Student/Returned';
@@ -20,6 +21,7 @@ const router = createBrowserRouter([
   { path: '/login-approver', element: <LoginAprrover /> },
   { path: '/signup', element: <SignUp /> },
   { path: '/verify', element: <Verify /> },
+  { path: '/reject', element: <Reject /> },
   { path: '/approver', element: <MainScreen /> },
   { path: '/student', element: <Student /> },
   { path: '/returned', element: <Returned /> },

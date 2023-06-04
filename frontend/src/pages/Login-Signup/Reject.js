@@ -1,10 +1,10 @@
 import React from "react";
-import gif from '../../assets/hourglass.gif';
+import png from '../../assets/rejected-rubber-stamp.png';
 import '../../assets/styles/Home.css'
 import '../../assets/styles/VerifyDeny.css'
 import { Footer } from '../ScreenComponents';
 
-class Verify extends React.Component {
+class Reject extends React.Component {
 
     render() {
         return (
@@ -14,10 +14,8 @@ class Verify extends React.Component {
                     <h1 id="page-header-h1-M-verify">ICS - Clearance Approval System</h1>
                 </div>
                 <div id="verify-container">
-                    <h3 id="verify-h3">Wait for your account to be verified.</h3>
-                    <img src={gif} alt="" id="verify-gif"></img>
-                    <p id="verify-p">Your account is still under review.</p>
-                    <p id="verify-p">Please wait for the Administrator to verify your account.</p>
+                    <h3 id="verify-h3">Your account application has been rejected.</h3>
+                    <img src={png} alt="" id="verify-gif"></img>
                     <a href="/" id="back-button">Back</a>
                 </div>
                 <Footer data="verify-footer" />
@@ -26,4 +24,4 @@ class Verify extends React.Component {
     }
 }
 
-export default Verify
+export default Reject

@@ -91,7 +91,6 @@ export default function SignUp() {
     });
 
     const onSubmit = (data) => {
-        // console.log(JSON.stringify(data));
         try {
             handleSignUp();
             reset()

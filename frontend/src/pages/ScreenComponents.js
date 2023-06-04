@@ -8,17 +8,17 @@ function ProfileHeader(props) {
 
     return (
         // renders logged in user's name and icon
-        <div className="profile-header">
-            <div className="column centered">
-                <div className="profile-name">
+        <div id="profile-header">
+            <div id="profile-text">
+                <div id="profile-name">
                     {name}
                 </div>
-                <div className="classification">
+                <div id="classification">
                     {classification}
                 </div>
             </div>
             <div>
-                <img className="profile-icon-img" src={icon} alt=""></img>
+                <img id="profile-icon-img" src={icon} alt=""></img>
             </div>
         </div>
     )
@@ -29,7 +29,7 @@ function Header(props) {
     let userInfo = props.data;
 
     return (
-        <div id="page-header">
+        <div id="page-header-user">
             <h1 id="page-header-h1">Institute of Computer Science - Clearance Approval System</h1>
             <h1 id="page-header-h1-M">ICS - Clearance Approval System</h1>
             {/* profile indicator */}
