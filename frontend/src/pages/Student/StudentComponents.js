@@ -1,5 +1,7 @@
 import React from "react";
 import {useState,useEffect} from "react";
+import { Document, Page, Text, View, PDFViewer } from '@react-pdf/renderer';
+import { styles } from './styles';
 
 // header profile component
 function ProfileHeader(props) {
@@ -237,7 +239,7 @@ function Application(props) {
             }
             return app;
           });
-  
+            
           setApplications(updatedApplications);
         } else {
           console.error("Failed to close application");
@@ -281,12 +283,54 @@ function Application(props) {
                         ) : (
                         <button className="app-button" onClick={() => closeApplication(application)}>Close application</button>
                         )}
+                        {application.status === "Cleared" && (
+                          <button className="print-button">Print PDF</button>
+                        )}
                       </div>
                     );
                   })
             }
         </div>
     )
+}
+
+export function PDFGenerator({ application }) {
+  const dateGenerated = new Date().toLocaleDateString();
+
+  const handlePrintPDF = () => {
+    window.print();
+  };
+
+  return (
+    <div>
+      <button className="print-button" onClick={handlePrintPDF}>
+        Print PDF
+      </button>
+      <PDFViewer width="100%" height="500px">
+        <Document>
+          <Page style={styles.page}>
+            <View style={styles.header}>
+              <Text style={styles.title}>University of the Philippines Los Baños</Text>
+              <Text style={styles.subtitle}>College of Arts and Sciences</Text>
+              <Text style={styles.subtitle}>Institute of Computer Science</Text>
+              <Text>{dateGenerated}</Text>
+            </View>
+            <View style={styles.content}>
+              <Text>
+                This document certifies that {application.name}, {application.studentNumber} has satisfied
+                the clearance requirements of the institute.
+              </Text>
+            </View>
+            <View style={styles.footer}>
+              <Text>Verified:</Text>
+              <Text>Academic Adviser: {application.academicAdviser}</Text>
+              <Text>Clearance Officer: {application.clearanceOfficer}</Text>
+            </View>
+          </Page>
+        </Document>
+      </PDFViewer>
+    </div>
+  );
 }
 
 function Footer() {
