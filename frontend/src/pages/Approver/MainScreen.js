@@ -24,34 +24,60 @@ export default function MainScreen() {
 
     const upMail1 = localStorage.getItem("upMail");
     const [currentPendingApplications, setCurrentPendingApplications] = useState([]);
-   
+    const [searchedStudent, setSearchedStudent] = useState('');
+
     // Fetch all pending applications
     useEffect(() => {
         console.log(upMail1);
         const fetchPendingApplications = () => {
-          fetch(`http://localhost:3001/get-all-pending-applications?upMail=${upMail1}`, {
-            method: 'GET',
-            headers: {
-              'Content-Type': 'application/json',
-            }
-          })
-            .then(response => response.json())
-            .then(data => {
-              // Handle the response if needed
-              console.log(data);
-              // Update the state or perform any other actions
-              setCurrentPendingApplications([...currentPendingApplications, ...data]);
-              console.log(currentPendingApplications);
+            fetch(`http://localhost:3001/get-all-pending-applications?upMail=${upMail1}`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                }
             })
-            .catch(error => {
-              // Handle errors if needed
-              console.error(error);
-            });
+                .then(response => response.json())
+                .then(data => {
+                    // Handle the response if needed
+                    console.log(data);
+                    // Update the state or perform any other actions
+                    setCurrentPendingApplications([...currentPendingApplications, ...data]);
+                    console.log(currentPendingApplications);
+                })
+                .catch(error => {
+                    // Handle errors if needed
+                    console.error(error);
+                });
         };
-      
+
         fetchPendingApplications();
-      }, []);
-      
+
+        // const searchStudentViaName = () => {
+        //     fetch('http://localhost:3001/search-student-by-name', {
+        //         method: 'GET',
+        //         headers: {
+        //             'Content-Type': 'application/json',
+        //         },
+        //         body: JSON.stringify({
+        //             search: searchBar
+        //         })
+        //     })
+        //         .then(response => response.json())
+        //         .then(data => {
+        //             // Handle the response if needed
+        //             console.log(data);
+        //             // Update the state or perform any other actions
+        //             setSearchedStudent([...searchedStudent, ...data]);
+        //             console.log(setSearchedStudent);
+        //         })
+        //         .catch(error => {
+        //             // Handle errors if needed
+        //             console.error(error);
+        //         });
+        // };
+    }, []);
+
+
 
     //   fetchPendingApplications();
 
@@ -62,7 +88,7 @@ export default function MainScreen() {
         { label: "3 - Clearance Officer", value: "3" },
     ];
 
-    const attributeName = ['studentNumber', 'studentName', 'step', 'status', 'date']
+    const attributeName = ['studentNumber', 'studentName', 'step', 'status', 'studentSubmission[dateSubmission]']
 
     const columns = ['Student Number', 'Student Name', 'Step', 'Status', 'Date', 'Application']
 
@@ -122,22 +148,22 @@ export default function MainScreen() {
         }
     }
 
-    const data = [
-        {
-            studentNumber: '2023-12345',
-            studentName: 'John Doe',
-            step: '1',
-            status: 'In Progress',
-            date: '2023-05-30',
-        },
-        {
-            studentNumber: '2021-45698',
-            studentName: 'Jane Smith',
-            step: '2',
-            status: 'Completed',
-            date: '2023-05-31',
-        },
-    ];
+    // const data = [
+    //     {
+    //         studentNumber: '2023-12345',
+    //         studentName: 'John Doe',
+    //         step: '1',
+    //         status: 'In Progress',
+    //         date: '2023-05-30',
+    //     },
+    //     {
+    //         studentNumber: '2021-45698',
+    //         studentName: 'Jane Smith',
+    //         step: '2',
+    //         status: 'Completed',
+    //         date: '2023-05-31',
+    //     },
+    // ];
 
     return (
         <div className="wrapper">
@@ -368,7 +394,7 @@ export default function MainScreen() {
 
                     {/* Table of Students */}
                     <div id="approver-list">
-                        <Table data={data} columns={columns} attributes={attributeName} id={"approver"} />
+                        <Table data={currentPendingApplications} columns={columns} attributes={attributeName} id={"approver"} />
                     </div>
                 </div>
             </div>
