@@ -98,7 +98,7 @@ const sortStudentByName = async (req,res) => {
 
 const getStudent = async (req, res) => {
     try{
-        const student =  await User.find({userType: "Student"});
+        const student =  await User.find({userType: "Student", adviser: null});
         res.send(student)
       }catch(err){
        // res.status(500).send('An error occurred');
