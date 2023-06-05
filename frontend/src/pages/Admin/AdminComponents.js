@@ -389,15 +389,11 @@ function EditApproverModal(props) {
     console.log(approversList)
 
     const [isOpen, setIsOpen] = useState(false);
-    const [formData, setFormData] = useState({
-        firstName: approver.firstName,
-        middleName: approver.middleName,
-        lastName: approver.lastName,
-        upMail: approver.upMail,
-        password: approver.password,
-        title: approver.title
-    }); 
-    
+    const [formData, setFormData] = useState([]); 
+
+    useEffect(()=>{
+        setFormData(approver);
+    },[props.data])
     // opens the modal when called
     const openModal = () => {
         setIsOpen(true);
@@ -488,10 +484,10 @@ function EditApproverModal(props) {
                 <div className="centered modal-form-div">
                     <form className="modal-form" onSubmit={handleSubmit}>
                         <input type="text" name="firstName" value={formData.firstName || ''} onChange={handleChange} placeholder="First Name"/><br></br>
-                        <input type="text" name="middleName" value={approver.middleName || ''} onChange={handleChange} placeholder="Middle Name"/><br></br>
-                        <input type="text" name="lastName" value={approver.lastName || ''} onChange={handleChange} placeholder="Last Name"/><br></br>
-                        <input type="text" name="upMail" value={approver.upMail || ''} onChange={handleChange} placeholder="UP Mmail"/><br></br>
-                        <input type="password" name="password" value={approver.password || ''} onChange={handleChange} placeholder="Password"/><br></br>
+                        <input type="text" name="middleName" value={formData.middleName || ''} onChange={handleChange} placeholder="Middle Name"/><br></br>
+                        <input type="text" name="lastName" value={formData.lastName || ''} onChange={handleChange} placeholder="Last Name"/><br></br>
+                        <input type="text" name="upMail" value={formData.upMail || ''} onChange={handleChange} placeholder="UP Mmail"/><br></br>
+                        <input type="password" name="password" value={formData.password || ''} onChange={handleChange} placeholder="Password"/><br></br>
                          {/* should be a dropdown */}
                          {/* to fix css */}
                         <label for="approver-type" className="approver-type-label">Approver Type:  </label>

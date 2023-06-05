@@ -168,9 +168,9 @@ const editApprover = async (req,res) => {
       editApp.lastName = req.body.lastName;
       editApp.upMail = req.body.newUpMail;
       editApp.password = req.body.password;
-  
+      
       await editApp.save();
-      res.send({success: true});
+      res.send(editApp);
     }
 
   }catch(err){
