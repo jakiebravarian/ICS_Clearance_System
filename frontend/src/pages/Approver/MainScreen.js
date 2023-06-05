@@ -70,7 +70,7 @@ export default function MainScreen() {
     }
 
     // for form validation
-    const { reset, formState: { errors }, control, handleSubmit } = useForm({ mode: 'onChange' });
+    const { reset, formState: { errors }, control, handleSubmit, watch } = useForm({ mode: 'onChange' });
 
     const { reset: reset2, formState: { errors: errors2 }, control: control2, handleSubmit: handleSubmit2 } = useForm({ mode: 'onChange' });
 
@@ -98,6 +98,70 @@ export default function MainScreen() {
         } catch (error) {
             console.log(error)
         }
+    }
+
+    const onReset = (formNumber) => {
+        if (formNumber == 1) {
+            reset();
+            setMonthValue('');
+            setDayValue('');
+            setYearValue('');
+            setAdviserValue('');
+            setStatusValue('');
+            setStepValue('');
+        } else if (formNumber == 3) {
+            reset3();
+            setDateValue('');
+            setNameValue('');
+        }
+    }
+
+    // disables other filter options when a selection is made
+    const filterValue = (inputName) => {
+        if (monthValue.length > 0 || dayValue.length > 0 || yearValue.length > 0) {
+            if (inputName == "date") {
+                return false;
+            } else {
+                return true;
+            }
+        } else if (adviserValue.length > 0) {
+            if (inputName == "adviser") {
+                return false;
+            } else {
+                return true;
+            }
+        } else if (statusValue.length > 0) {
+            if (inputName == "status") {
+                return false;
+            } else {
+                return true;
+            }
+        } else if (stepValue.length > 0) {
+            if (inputName == "step") {
+                return false;
+            } else {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    // disables other sort option when a selection is made
+    const sortValue = (inputName) => {
+        if (dateValue.length > 0) {
+            if (inputName == "date") {
+                return false;
+            } else {
+                return true;
+            }
+        } else if (nameValue.length > 0) {
+            if (inputName == "name") {
+                return false;
+            } else {
+                return true;
+            }
+        }
+        return false;
     }
 
     return (
@@ -130,7 +194,7 @@ export default function MainScreen() {
                                 {/* Month */}
                                 <Controller
                                     render={({ field }) =>
-                                        <input type="number" id="month" placeholder="MM" {...field} />}
+                                        <input type="number" id="month" placeholder="MM" disabled={filterValue("date")} {...field} />}
                                     name="month"
                                     control={control}
                                     rules={{
@@ -151,7 +215,7 @@ export default function MainScreen() {
                                 {/* Day */}
                                 <Controller
                                     render={({ field }) =>
-                                        <input type="number" id="day" placeholder="DD" {...field} />}
+                                        <input type="number" id="day" placeholder="DD" disabled={filterValue("date")} {...field} />}
                                     name="day"
                                     control={control}
                                     rules={{
@@ -172,7 +236,7 @@ export default function MainScreen() {
                                 {/* Year */}
                                 <Controller
                                     render={({ field }) =>
-                                        <input type="number" id="year" placeholder="YYYY" {...field} />}
+                                        <input type="number" id="year" placeholder="YYYY" disabled={filterValue("date")} {...field} />}
                                     name="year"
                                     control={control}
                                     rules={{
@@ -195,11 +259,11 @@ export default function MainScreen() {
                             <div className="filters">
                                 <Controller
                                     render={({ field }) =>
-                                        <input type="text" id="adviser-name" placeholder="Adviser Name" {...field} />}
+                                        <input type="text" id="adviser-name" placeholder="Adviser Name" disabled={filterValue("adviser")} {...field} />}
                                     name="adviser-name"
                                     control={control}
                                     rules={{
-                                        onChange: handleAdviser
+                                        onChange: handleAdviser,
                                     }}
                                     defaultValue=""
                                 />
@@ -217,6 +281,7 @@ export default function MainScreen() {
                                         <Select
                                             className="filter-dropdown"
                                             options={status}
+                                            isDisabled={filterValue("status")}
                                             {...field}
                                             placeholder="Status"
                                             styles={colourStyles}
@@ -238,6 +303,7 @@ export default function MainScreen() {
                                         <Select
                                             className="filter-dropdown"
                                             options={step}
+                                            isDisabled={filterValue("step")}
                                             {...field}
                                             placeholder="Step"
                                             styles={colourStyles}
@@ -249,7 +315,7 @@ export default function MainScreen() {
                             </div>
 
                             {/* Reset & Apply Buttons */}
-                            <button className="filter-button" id="reset-btn" onClick={reset} >Reset Filters</button>
+                            <button className="filter-button" id="reset-btn" onClick={() => onReset(1)} >Reset Filters</button>
                             <button className="filter-button" type="submit">Apply Filters</button>
                         </form>
                     </div>
@@ -290,6 +356,7 @@ export default function MainScreen() {
                                         <Select
                                             className="filter-dropdown"
                                             options={date}
+                                            isDisabled={sortValue("date")}
                                             {...field}
                                             placeholder="Date"
                                             styles={colourStyles}
@@ -310,6 +377,7 @@ export default function MainScreen() {
                                         <Select
                                             className="filter-dropdown"
                                             options={name}
+                                            isDisabled={sortValue("name")}
                                             {...field}
                                             placeholder="Name"
                                             styles={colourStyles}
@@ -321,7 +389,7 @@ export default function MainScreen() {
                             />}
 
                             {/* Reset & Apply */}
-                            <button className="sort-button" id="reset-btn" onClick={reset3} >Reset</button>
+                            <button className="sort-button" id="reset-btn" onClick={() => onReset("3")} >Reset</button>
                             <button className="sort-button" type="submit">Apply</button>
                         </form>
 
