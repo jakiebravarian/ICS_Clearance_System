@@ -43,7 +43,7 @@ function Header(props) {
 // renders student info
 function StudentInfo(props) {
     let studentInfo = props.data;
-
+    console.log(studentInfo);
     return (
         <div>
             <p className="student-info-text">Student info</p>
@@ -55,7 +55,7 @@ function StudentInfo(props) {
 
                 {/* student number */}
                 <div id="studno-container">
-                    Student number: {studentInfo.studentNumber}
+                    Student number: {studentInfo.studno}
                 </div>
 
                 {/* course */}
