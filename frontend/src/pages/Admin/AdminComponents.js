@@ -42,14 +42,11 @@ function ApproverSort(prop) {
     const changeSortOption = (e) => {
         if(e.target.value === "desc")
         {
-            fetch('http://localhost:3001/sort-approver-by-name-desc', {
-            method: 'POST',
+            fetch(`http://localhost:3001/sort-approver-by-name-desc${search}`, {
+            method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
             },
-                body: JSON.stringify({
-                    search: search
-                })
             })
             .then(response => response.json())
             .then((body) => {
@@ -61,15 +58,12 @@ function ApproverSort(prop) {
         }
         else
         {
-            fetch('http://localhost:3001/sort-approver-by-name-asc', 
+            fetch(`http://localhost:3001/sort-approver-by-name-asc${search}`, 
             {
-                method: 'POST',
+                method: 'GET',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                    body: JSON.stringify({
-                        search: search
-                    })
             })  .then(response => response.json())
                 .then((body) => {
                     console.log("asc")
@@ -115,7 +109,7 @@ function StudentAppsList(props) {
                         
                         {/* buttons */}
                         <div className="row admin-buttons">
-                            <AssignAdviserModal/>
+                            <AssignAdviserModal student = {student}/>
                             <button className="reject-button">Reject</button>
                         </div>
                     </div>
@@ -169,14 +163,16 @@ function ApproversList(props) {
     )
 }
 
-function AssignAdviserModal() {
+function AssignAdviserModal(prop) {
+    let student = prop.student;
     const [isOpen, setIsOpen] = useState(false);
     const [formData, setFormData] = useState({
         firstName: '',
         middleName: '',
         lastName: '',
-        studno: ''
+        studentNumber: student.studentNumber
     }); // initially empty strings
+
 
     // opens the modal when called
     const openModal = () => {
@@ -206,7 +202,7 @@ function AssignAdviserModal() {
             firstName: '',
             middleName: '',
             lastName: '',
-            studno: ''
+            studentNumber: student.studentNumber
         });
 
         // close the modal
@@ -225,6 +221,26 @@ function AssignAdviserModal() {
         },
     };
 
+    function handleAsssign(){
+        fetch('http://localhost:3001/assign-adviser', 
+        {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+                body: JSON.stringify({
+                    firstName: formData.firstName,
+                    middleName: formData.middleName ,
+                    lastName: formData.lastName,
+                    studentNumber: student.studentNumber
+
+                })
+        }) .then(response => response.json())
+            .then((body) => {
+            console.log(body);
+        }) 
+    }
+
     return(
         <div className="modal-window">
             <button className="approve-button" onClick={openModal}>Approve</button>
@@ -238,8 +254,8 @@ function AssignAdviserModal() {
                         <input type="text" name="firstName" value={formData.firstName || ''} onChange={handleChange} placeholder="Adviser's First Name"/><br></br>
                         <input type="text" name="middleName" value={formData.middleName || ''} onChange={handleChange} placeholder="Adviser's Middle Name"/><br></br>
                         <input type="text" name="lastName" value={formData.lastName || ''} onChange={handleChange} placeholder="Adviser's Last Name"/><br></br>
-                        <input type="text" name="studno" value={formData.studno || ''} onChange={handleChange} placeholder="Student number"/><br></br>
-                        <button className="assign-button" type="submit">Assign</button>
+                        <input type="text" name="studno" value={formData.studentNumber || ''} onChange={handleChange} placeholder="Student number"/><br></br>
+                        <button className="assign-button" type="submit" onClick={handleAsssign}>Assign</button>
                     </form>
                 </div>
             </Modal>
