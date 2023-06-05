@@ -9,17 +9,23 @@ export const getAllPendingApplications = async (req, res) => {
         const approver = await User.findOne({ upMail: upMail });
         let currentPendingApplications = [];
         if (approver.title === "Adviser") {
-            const users = await User.find({ adviser: approver._id });
-            for (const user of users) {
-                const applicationIds = user.application.map(app => app._id);
-            
-                const applications = await Application.find({
-                status: "Pending",
-                _id: { $in: applicationIds }
-                }).populate("remarks.commenter", "firstName lastName");
-                currentPendingApplications = currentPendingApplications.concat(applications);
-            }
-            res.send(currentPendingApplications);
+          const applicationsQuery = Application.find({ status: "Open" }).populate("student");
+          applicationsQuery
+            .then((applications) => {
+              // Handle the applications array
+              if(applications.student.adviser === approver._id){
+                  // Push the applications to the array
+                currentPendingApplications.push(...applications);
+                // Send the response
+                res.send(currentPendingApplications);
+              }
+            })
+            .catch((error) => {
+              // Handle the error
+              console.error(error);
+              // Send an error response
+              res.status(500).send('Internal Server Error');
+            });
         }else{
           const applicationsQuery = Application.find({ status: "Open" });
           applicationsQuery
