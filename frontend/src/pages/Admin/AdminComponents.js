@@ -269,9 +269,9 @@ function CreateApproverModal() {
         firstName: '',
         middleName: '',
         lastName: '',
-        email: '',
+        upMail: '',
         password: '',
-        approverType: ''
+        title: 'Adviser'
     }); // initially empty strings
 
     // opens the modal when called
@@ -302,9 +302,9 @@ function CreateApproverModal() {
             firstName: '',
             middleName: '',
             lastName: '',
-            email: '',
+            upMail: '',
             password: '',
-            approverType: ''
+            title: ''
         });
 
         // close the modal
@@ -323,6 +323,27 @@ function CreateApproverModal() {
         },
     };
 
+    function createApprover () {
+        console.log("isCLicked")
+        fetch('http://localhost:3001/create-approver', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                firstName: formData.firstName,
+                middleName: formData.middleName,
+                lastName: formData.lastName,
+                upMail: formData.upMail,
+                password:formData.password,
+                userType: "Approver",
+                title: formData.title
+            })
+        }).then(response => response.json())
+            .then((body) => {
+            console.log(body);
+    }) 
+    }
     return(
         <div className="modal-window">
             <button className="create-approver-button" onClick={openModal}>Create Approver Account</button>
@@ -336,15 +357,15 @@ function CreateApproverModal() {
                         <input type="text" name="firstName" value={formData.firstName || ''} onChange={handleChange} placeholder="First Name"/><br></br>
                         <input type="text" name="middleName" value={formData.middleName || ''} onChange={handleChange} placeholder="Middle Name"/><br></br>
                         <input type="text" name="lastName" value={formData.lastName || ''} onChange={handleChange} placeholder="Last Name"/><br></br>
-                        <input type="text" name="email" value={formData.email || ''} onChange={handleChange} placeholder="Email"/><br></br>
+                        <input type="text" name="upMail" value={formData.upMail || ''} onChange={handleChange} placeholder="Email"/><br></br>
                         <input type="password" name="password" value={formData.password || ''} onChange={handleChange} placeholder="Password"/><br></br>
                          {/* should be a dropdown */}
-                         <label for="approver-type" className="approver-type-label">Approver Type:  </label>
+                         <label className="approver-type-label">Approver Type:  </label>
                         <select className="approver-type-dropdown" id="approver-type" name="approverType">
-                            <option  name="approverType" value="Adviser" onChange={handleChange}>Adviser</option>
-                            <option name="approverType" value="Clearance Officer" onChange={handleChange}>Clearance Officer</option>
+                            <option  name="title" value="Adviser" onChange={handleChange}>Adviser</option>
+                            <option name="title" value="Clearance Officer" onChange={handleChange}>Clearance Officer</option>
                         </select>
-                        <button className="assign-button" type="submit">Create Account</button>
+                        <button className="assign-button" type="submit" onClick={createApprover}>Create Account</button>
                     </form>
                 </div>
             </Modal>

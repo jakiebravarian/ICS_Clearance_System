@@ -15,7 +15,7 @@ export default function ManageApplications() {
     // Fetch data from API on component mount
     useEffect(() => {
         fetchData();
-    }, []);
+    }, [result]);
 
     //Display default
     const fetchData = async () => {
