@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 const { Schema } = mongoose;
 
 const AppSchema = new Schema({
+  student: {type: Schema.Types.ObjectId, ref: "User"},
   status: { type: String, required: true },
   step: { type: Number, required: true },
   remarks: [
@@ -19,5 +20,7 @@ const AppSchema = new Schema({
   },
 });
 
+const Application = mongoose.model("Application", AppSchema);
 
-export {AppSchema};
+
+export {AppSchema,Application};

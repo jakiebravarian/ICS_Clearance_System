@@ -9,7 +9,9 @@ function ProfileHeader(props) {
     let icon = props.icon;      // icon of the logged in user
     let classification = props.classification // classification of the user
 
-    return (
+    
+
+    return(
         // renders logged in user's name and icon
         <div className="profile-header">
             <div className="profile-name">
@@ -76,9 +78,9 @@ function Form({ onClick }) {
         event.preventDefault();
 
         // Retrieve form input values
-        const githubLink = document.getElementById("github-link").value;
-        const dateApplied = document.getElementById("date-applied").value;
-        const remarkValue = document.getElementById("remarks").value;
+        const githubLink = document.getElementById("github-link-input").value;
+        const dateApplied = new Date().toLocaleDateString();
+        const remarkValue = document.getElementById("remarks-input").value;
         const studentSubmission = {
             dateSubmission: dateApplied,
         }
@@ -189,7 +191,7 @@ function Application(props) {
                 },
                 body: JSON.stringify({ applicationId }),
             });
-
+            
             if (response.ok) {
                 console.log("Application closed successfully");
                 const updatedApplications = applications.map(app => {
@@ -218,41 +220,41 @@ function Application(props) {
             {
                 applications.map((application, index) => {
                     return (
-                        <div className="row" key={index}>
-                            {/* date applied */}
-                            <p className="date-label">{application.studentSubmission.dateSubmission}</p>
-                            {/* status */}
-                            <p className="status-value">{application.status}</p>
-
-                            {/* if status is returned, add a view remarks button */}
-                            {application.status === "Returned" ? (
-                                // when user clicks view remarks, goes to /returned
-                                <form action={`/returned/${application._id}`}>
-                                    <button type="submit" className="view-remarks-button">
-                                        View remarks
-                                    </button>
-                                </form>
-                            ) : (
-                                <p></p>
-                            )}
-
-                            {/* if status is cleared, no buttons will be shown */}
-                            {application.status === "Closed" ? (
-                                <p id="closed-text">Closed</p>
-                            ) : (
-                                <button className="app-button" onClick={() => closeApplication(application)}>Close application</button>
-                            )}
-                            {application.status === 'Cleared' ? (
-                                <form action={`/pdf-generator`}>
-                                    <button className="print-button">
-                                        Print PDF
-                                    </button>
-                                </form>
-
-                            ) : (
-                                <p></p>
-                            )}
-                        </div>
+                      <div className="row" key={index}>
+                        {/* date applied */}
+                        <p className="date-label">{application.studentSubmission.dateSubmission}</p>
+                        {/* status */}
+                        <p className="status-value">{application.status}</p>
+                  
+                        {/* if status is returned, add a view remarks button */}
+                        {application.status === "Pending" ? (
+                          // when user clicks view remarks, goes to /returned
+                        <form action={`/returned/${application._id}`}>
+                            <button type="submit" className="view-remarks-button">
+                              View remarks
+                            </button>
+                          </form>
+                        ) : (
+                          <p></p>
+                        )}
+                  
+                        {/* if status is cleared, no buttons will be shown */}
+                        {application.status === "Closed" ? (
+                          <p id="closed-text">Closed</p>
+                        ) : (
+                        <button className="app-button" onClick={() => closeApplication(application)}>Close application</button>
+                        )}
+                        {application.status === 'Cleared' ? (
+                          <form action={`/pdf-generator`}>
+                             <button className="print-button">
+                                Print PDF
+                             </button>   
+                          </form>
+                         
+                        ):(
+                          <p></p>
+                        )}
+                      </div>
                     );
                 })
             }
