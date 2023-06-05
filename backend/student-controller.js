@@ -1,6 +1,8 @@
 import mongoose from 'mongoose';
 import { UserSchema } from './models/user.js';
 import { AppSchema } from './models/application.js';
+import jwt from 'jsonwebtoken';
+
 const Student = mongoose.model("users",UserSchema);
 const Application = mongoose.model("Application",AppSchema);
 
@@ -35,24 +37,26 @@ export const getAllStudents = async (req, res) => {
       const { upMail, status, step, remarks, studentSubmission } = req.body; // Get the necessary data from the request body
   
       console.log("Received data:", { upMail, status, step, remarks, studentSubmission }); // Log the received data
-  
+      
+       // Find the user and push the newly created application to their application array
+       const user = await Student.findOne({ upMail: upMail });
+       if (!user) {
+         return res.status(404).send("User not found");
+       }
+      
+      
       const application = new Application({
-        status,
-        step,
-        remarks,
-        studentSubmission,
+        student: user._id,
+        status: status,
+        step: step,
+        remarks: remarks,
+        studentSubmission: studentSubmission,
       });
-  
+      console.log(application);
       // Save the application to the database
       await application.save();
   
       console.log("Application saved:", application); // Log the saved application object
-  
-      // Find the user and push the newly created application to their application array
-      const user = await Student.findOne({ upMail: upMail });
-      if (!user) {
-        return res.status(404).send("User not found");
-      }
   
       user.application = user.application || []; // Set user.application to an empty array if it is null
   
@@ -115,7 +119,7 @@ export const getAllStudents = async (req, res) => {
       if (!application) {
         return res.status(404).send('Application not found');
       }
-      application.status = "Pending";
+      application.status = "Open";
       application.studentSubmission = app.updatedStudentSubmission;  
       application.save();
 

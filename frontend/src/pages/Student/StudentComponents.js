@@ -9,6 +9,8 @@ function ProfileHeader(props) {
     let icon = props.icon;      // icon of the logged in user
     let classification = props.classification // classification of the user
 
+    
+
     return(
         // renders logged in user's name and icon
         <div className="profile-header">
@@ -267,7 +269,7 @@ function Application(props) {
                         <p className="status-value">{application.status}</p>
                   
                         {/* if status is returned, add a view remarks button */}
-                        {application.status === "Returned" ? (
+                        {application.status === "Pending" ? (
                           // when user clicks view remarks, goes to /returned
                         <form action={`/returned/${application._id}`}>
                             <button type="submit" className="view-remarks-button">
