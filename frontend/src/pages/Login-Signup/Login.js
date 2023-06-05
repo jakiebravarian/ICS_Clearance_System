@@ -72,69 +72,59 @@ export default function Login() {
     }
   }
 
-    return (
-        <div className="wrapper">
-            {/* Navigation Menu */}
-            <div className="navbar" id="navbar-login">
-                <a href="/">Home</a>
-                <a href="/signup">Sign Up</a>
-                <div className="dropdown">
-                    <button className="dropbtn">Log in
-                        <i className="fa fa-angle-down"></i>
-                    </button>
-                    <div className="dropdown-content">
-                        <a href="/login">Student</a>
-                        <a href="/login-approver">Approver</a>
-                    </div>
-                </div>
-            </div>
-            {/* Left Side */}
-            <div className="container" id="login-container">
-                <img src={logo} alt="" id="login-img" />
-                <h2 id="login-h2">Institute of Computer Science</h2>
-                <h3>CLEARANCE APPROVAL SYSTEM</h3>
-            </div>
-            {/* Right Side */}
-            <form className="form" onSubmit={handleSubmit(onSubmit)}>
-                <h1 id="login-h1">Welcome Back, Student!</h1>
-
-                {/* UP Mail Input */}
-                <input
-                    type="email"
-                    id="email-login"
-                    placeholder="UP Mail"
-                    {...register("email", {
-                        onChange: handleUpMail,
-                        required: "Please enter your UP Mail",
-                        pattern: {
-                            value: /^([a-z0-9]+)@up\.edu\.ph$/i,
-                            message: "Invalid UP Mail"
-                        }
-                    })}
-                />
-                {errors.email && <p id="error-message">{errors.email.message}</p>}
-
-                {/* Password Input */}
-                <input
-                    type="password"
-                    id="password-login"
-                    placeholder="Password"
-                    {...register("password", {
-                        onChange: handlePassword,
-                        required: "Please enter your Password",
-                        minLength: {
-                            value: 8,
-                            message: "Password must have at least 8 characters"
-                        }
-                    })}
-                />
-                {errors.password && <p id="error-message">{errors.password.message}</p>}
-
-                <button type="submit" id="login-button">Login</button>
-
-                <p id="login-p">Don’t have an account yet? <span><a href="/signup" id="signup-link">Sign up</a></span></p>
-            </form>
-            <Footer data="login-footer" />
+  return (
+    <div className="wrapper">
+      <div className="navbar">
+        <a href="/">Home</a>
+        <a href="/signup">Sign Up</a>
+        <div className="dropdown">
+          <button className="dropbtn">Log in
+            <i className="fa fa-angle-down"></i>
+          </button>
+          <div className="dropdown-content">
+            <a href="/login">Student</a>
+            <a href="/login-approver">Approver</a>
+          </div>
         </div>
-    )
+      </div>
+      <div className="container" id="login-container">
+        <img src={logo} alt="" id="login-img" />
+        <h2 id="login-h2">Institute of Computer Science</h2>
+        <h3>CLEARANCE APPROVAL SYSTEM</h3>
+      </div>
+      <form className="form" onSubmit={handleSubmit(onSubmit)}>
+        <h1 id="login-h1">Welcome Back, Student!</h1>
+        <input
+          type="email"
+          id="email-login"
+          placeholder="UP Mail"
+          {...register("email", {
+            onChange: handleUpMail,
+            required: "Please enter your UP Mail",
+            pattern: {
+              value: /^([a-z0-9]+)@up\.edu\.ph$/i,
+              message: "Invalid UP Mail"
+            }
+          })}
+        />
+        {errors.email && <p id="error-message">{errors.email.message}</p>}
+        <input
+          type="password"
+          id="password-login"
+          placeholder="Password"
+          {...register("password", {
+            onChange: handlePassword,
+            required: "Please enter your Password",
+            minLength: {
+              value: 8,
+              message: "Password must have at least 8 characters"
+            }
+          })}
+        />
+        {errors.password && <p id="error-message">{errors.password.message}</p>}
+        <button onClick={handleLogin} id="login-button">Login</button>
+        <p id="login-p">Don’t have an account yet? <span><a href="/signup" id="signup-link">Sign up</a></span></p>
+      </form>
+    </div>
+  );
 }
