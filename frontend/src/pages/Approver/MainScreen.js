@@ -373,7 +373,7 @@ export default function MainScreen() {
                                 control={control3}
                                 defaultValue=""
                                 render={({ field }) => (
-                                    <div style={{ width: '170px' }}>
+                                    <div style={{ width: '180px' }}>
                                         <Select
                                             className="filter-dropdown"
                                             options={name}
@@ -402,7 +402,7 @@ export default function MainScreen() {
 
                     {/* Table of Students */}
                     <div id="approver-list">
-                        <Table data={currentPendingApplications} columns={columns} attributes={attributeName} id={"approver"} />
+                        <Table data={currentPendingApplications} columns={columns} attributes={attributeName} id={"approver"} purpose={"view"} />
                     </div>
                 </div>
             </div>

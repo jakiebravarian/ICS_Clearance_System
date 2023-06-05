@@ -31,6 +31,14 @@
     align-items: center;
 }
 
+input {
+    cursor: pointer;
+}
+
+input:disabled {
+    background-color: #D3D3D3;
+}
+
 input[type=radio] {
     cursor: pointer;
     box-sizing: border-box;
@@ -215,8 +223,9 @@ th {
     background-color: #ddd;
 }
 
-button#view-button {
+#view-button {
     cursor: pointer;
+    text-decoration: none;
     margin: 0;
     background-color: #094C9F;
     color: white;
