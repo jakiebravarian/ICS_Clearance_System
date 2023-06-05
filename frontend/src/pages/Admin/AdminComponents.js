@@ -53,8 +53,8 @@ function ApproverSort(prop) {
             })
             .then(response => response.json())
             .then((body) => {
-                // console.log("desc")
-                // console.log(body)
+                console.log("desc")
+                console.log(body)
                 setApprover(body)
             })
             
@@ -72,8 +72,8 @@ function ApproverSort(prop) {
                     })
             })  .then(response => response.json())
                 .then((body) => {
-                    // console.log("asc")
-                    // console.log(body)
+                    console.log("asc")
+                    console.log(body)
                     setApprover(body) 
                 })
         }

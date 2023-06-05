@@ -53,7 +53,7 @@ const searchApproverByName = async (req, res) => {
       await User.collection.createIndex({ firstName: 'text', middleName: 'text', lastName: 'text' });
   
       // Perform the text search
-      const searchedApprover = await User.find({ $text: { $search: searchName } });
+      const searchedApprover = await User.find({userType: "Approver" ,$text: { $search: searchName } });
   
       res.send(searchedApprover);
     } catch (error) {
@@ -157,6 +157,7 @@ const editApprover = async (req,res) => {
 }
   try{
     const editApp = await User.findOne({upMail: req.body.upMail});
+    console.log(req.body);
   
     //check if new email is a upmail
     if(!matchRegex(req.body.newUpMail)){
