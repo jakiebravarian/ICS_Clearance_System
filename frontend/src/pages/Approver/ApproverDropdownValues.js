@@ -24,7 +24,7 @@ export const name = [
 
 // styling for Dropdown menu
 export const colourStyles = {
-    control: styles => ({ ...styles, backgroundColor: 'white', fontSize: 14, borderColor: 'black' }),
+    control: (styles, { isDisabled }) => ({ ...styles, backgroundColor: isDisabled ? '#D3D3D3' : 'white', fontSize: 14, borderColor: 'black', cursor: 'pointer' }),
     option: (styles) => {
         return {
             ...styles,

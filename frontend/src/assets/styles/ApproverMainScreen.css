@@ -31,6 +31,14 @@
     align-items: center;
 }
 
+input {
+    cursor: pointer;
+}
+
+input:disabled {
+    background-color: #D3D3D3;
+}
+
 input[type=radio] {
     cursor: pointer;
     box-sizing: border-box;
@@ -78,37 +86,20 @@ hr {
     margin-right: 0;
 }
 
-input#month,
-input#day {
-    padding: 0 0 0 0;
-    text-align: center;
-    position: none;
-    border-radius: 0;
-    width: 23% !important;
-    height: 2.5em;
-    min-width: 22%;
-    margin: 2px
-}
-
-input#month {
-    margin: 2px 2px 2px 0px;
-}
-
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
 }
 
-input#year {
-    padding: 0;
-    text-align: center;
+input#dateFilter {
+    padding: 10px;
     position: none;
     border-radius: 0;
-    width: 49% !important;
+    width: 100% !important;
     height: 2.5em;
-    min-width: 49%;
-    margin: 2px 0 2px 2px;
+    min-width: 100%;
+    margin: 0;
     -moz-appearance: textfield;
 }
 
@@ -140,11 +131,15 @@ input#adviser-name {
     justify-content: space-between;
 }
 
-.search-bar {
+.approver-search-bar {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-items: start;
+}
+
+#search-bar {
+    margin: 0 32px 0 0;
 }
 
 input#search {
@@ -152,7 +147,7 @@ input#search {
     text-align: left;
     position: none;
     border-radius: 0;
-    width: 15vw;
+    width: 26vw !important;
     height: 37px;
     min-width: 100%;
     margin: 0;
@@ -232,8 +227,9 @@ th {
     background-color: #ddd;
 }
 
-button#view-button {
+#view-button {
     cursor: pointer;
+    text-decoration: none;
     margin: 0;
     background-color: #094C9F;
     color: white;

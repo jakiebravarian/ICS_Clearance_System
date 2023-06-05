@@ -5,108 +5,83 @@ import '../../assets/styles/ApproverMainScreen.css';
 import { useEffect, useState } from 'react';
 import { useForm, Controller } from "react-hook-form";
 import { Header, Footer } from '../ScreenComponents';
-import { approverInfo } from '../../data.js';
 import { step, status, date, name, colourStyles } from './ApproverDropdownValues';
 import { Table } from './Table.js';
+import ApproverIcon from '../../assets/approver.png';
+
+// import data
+import { getCurrentStudent } from "../../data";
 
 export default function MainScreen() {
-    // use states
+    // use states for input
     const [searchOption, setSearchOption] = useState('Student Number');
     const [adviserValue, setAdviserValue] = useState('');
-    const [monthValue, setMonthValue] = useState('');
-    const [dayValue, setDayValue] = useState('');
-    const [yearValue, setYearValue] = useState('');
+    const [dateFilterValue, setDateFilterValue] = useState('');
     const [stepValue, setStepValue] = useState('');
     const [statusValue, setStatusValue] = useState('');
     const [searchBar, setSearchBar] = useState('');
     const [dateValue, setDateValue] = useState('');
     const [nameValue, setNameValue] = useState('');
 
+    // use states for userInfo and current pending applications
     const upMail1 = localStorage.getItem("upMail");
-    const [currentPendingApplications, setCurrentPendingApplications] = useState([]);
-    const [searchedStudent, setSearchedStudent] = useState('');
+    const [userInfo, setUserInfo] = useState({}); // Define userInfo state
+    const [currentPendingApplications, setCurrentPendingApplications] = useState([]); // List of applications
 
     // Fetch all pending applications
-    useEffect(() => {
-        console.log(upMail1);
-        const fetchPendingApplications = () => {
-            fetch(`http://localhost:3001/get-all-pending-applications?upMail=${upMail1}`, {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                }
+    const fetchPendingApplications = () => {
+        fetch(`http://localhost:3001/get-all-pending-applications?upMail=${upMail1}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        })
+            .then(response => response.json())
+            .then(data => {
+                // Handle the response if needed
+                console.log(data);
+                // Update the state or perform any other actions
+                setCurrentPendingApplications(data);
+                console.log(currentPendingApplications);
             })
-                .then(response => response.json())
-                .then(data => {
-                    // Handle the response if needed
-                    console.log(data);
-                    // Update the state or perform any other actions
-                    setCurrentPendingApplications([...currentPendingApplications, ...data]);
-                    console.log(currentPendingApplications);
-                })
-                .catch(error => {
-                    // Handle errors if needed
-                    console.error(error);
+            .catch(error => {
+                // Handle errors if needed
+                console.error(error);
+            });
+        console.log(JSON.stringify(currentPendingApplications));
+    };
+
+
+    useEffect(() => {
+        // Fetch user data
+        const fetchData = async () => {
+            const userData = await getCurrentStudent(upMail1);
+            if (userData) {
+                setUserInfo({
+                    userId: userData._id,
+                    name: userData.firstName + " " + userData.middleName + " " + userData.lastName,
+                    studno: userData.studentNumber,
+                    course: userData.degreeProgram,
+                    college: userData.college,
+                    classification: userData.userType,
+                    icon: ApproverIcon,
                 });
+            }
         };
+
+        fetchData();
 
         fetchPendingApplications();
 
-        // const searchStudentViaName = () => {
-        //     fetch('http://localhost:3001/search-student-by-name', {
-        //         method: 'GET',
-        //         headers: {
-        //             'Content-Type': 'application/json',
-        //         },
-        //         body: JSON.stringify({
-        //             search: searchBar
-        //         })
-        //     })
-        //         .then(response => response.json())
-        //         .then(data => {
-        //             // Handle the response if needed
-        //             console.log(data);
-        //             // Update the state or perform any other actions
-        //             setSearchedStudent([...searchedStudent, ...data]);
-        //             console.log(setSearchedStudent);
-        //         })
-        //         .catch(error => {
-        //             // Handle errors if needed
-        //             console.error(error);
-        //         });
-        // };
     }, []);
-
-
-
-    //   fetchPendingApplications();
-
-    // values for dropdown menu
-    let step = [
-        { label: "1 - Pre Adviser", value: "1" },
-        { label: "2 - Adviser", value: "2" },
-        { label: "3 - Clearance Officer", value: "3" },
-    ];
-
-    const attributeName = ['studentNumber', 'studentName', 'step', 'status', 'studentSubmission[dateSubmission]']
-
-    const columns = ['Student Number', 'Student Name', 'Step', 'Status', 'Date', 'Application']
 
     //functions that handle changes on each input
     const handleSearch = (e) => {
         setSearchOption(e.target.value);
     }
 
-    const handleMonth = (e) => {
-        setMonthValue(e.target.value);
-    }
-
-    const handleDay = (e) => {
-        setDayValue(e.target.value);
-    }
-
-    const handleYear = (e) => {
-        setYearValue(e.target.value);
+    const handleDateFilter = (e) => {
+        setDateFilterValue(e.target.value);
     }
 
     const handleAdviser = (e) => {
@@ -120,54 +95,164 @@ export default function MainScreen() {
     // for form validation
     const { reset, formState: { errors }, control, handleSubmit } = useForm({ mode: 'onChange' });
 
-    const { reset: reset2, formState: { errors: errors2 }, control: control2, handleSubmit: handleSubmit2 } = useForm({ mode: 'onChange' });
+    const { formState: { errors: errors2 }, control: control2, handleSubmit: handleSubmit2 } = useForm({ mode: 'onChange' });
 
-    const { reset: reset3, formState: { errors: errors3 }, control: control3, handleSubmit: handleSubmit3 } = useForm({ mode: 'onChange' });
+    const { reset: reset3, control: control3, handleSubmit: handleSubmit3 } = useForm({ mode: 'onChange' });
 
-    const onSubmit = (data) => {
-        try {
-            console.log(JSON.stringify(data));
-        } catch (error) {
-            console.log(error)
+    // for value of isDisbled or disabled in filter input
+    const filterValue = (inputName) => {
+        if (dateFilterValue.length > 0) {
+            return inputName !== "date";
+        } else if (adviserValue.length > 0) {
+            return inputName !== "adviser";
+        } else if (statusValue.length > 0) {
+            return inputName !== "status";
+        } else if (stepValue.length > 0) {
+            return inputName !== "step";
         }
+        return false;
     };
 
+    // for value of isDisbled or disabled in sort input
+    const sortValue = (inputName) => {
+        if (dateValue.length > 0) {
+            return inputName !== "date";
+        } else if (nameValue.length > 0) {
+            return inputName !== "name";
+        }
+        return false;
+    };
+
+    const onSubmit = (data) => {
+        // Extract the filter values from the form data
+        const { dateFilter, "adviser-name": adviserName, status, step } = data;
+
+        // Filter the applications based on the selected filters
+        let filteredApplications = currentPendingApplications;
+
+        // Apply the date filter if a value is provided
+        if (dateFilter) {
+            filteredApplications = filteredApplications.filter(
+                (application) => application.studentSubmission.dateSubmission === dateFilter
+            );
+        }
+
+        // Apply the adviser name filter if a value is provided
+        if (adviserName) {
+            filteredApplications = filteredApplications.filter(
+                (application) =>
+                    application.student.adviser &&
+                    application.student.adviser.fullName
+                        .toLowerCase()
+                        .includes(adviserName.toLowerCase())
+            );
+        }
+
+        // Apply the status filter if a value is selected
+        if (status) {
+            filteredApplications = filteredApplications.filter(
+                (application) => application.status === status
+            );
+        }
+
+        // Apply the step filter if a value is selected
+        if (step) {
+            filteredApplications = filteredApplications.filter(
+                (application) => application.step === step
+            );
+        }
+
+        // Update the state with the filtered applications
+        setCurrentPendingApplications(filteredApplications);
+
+    };
+
+
+    //  Retrieves the value of a nested attribute from an object.
+    const getObjectValue = (object, attribute) => {
+        const attributes = attribute.split('.');
+        let value = object;
+
+        for (const attr of attributes) {
+            if (value && value[attr] !== undefined) {
+                value = value[attr];
+            } else {
+                value = undefined;
+                break;
+            }
+        }
+        return value;
+    };
+
+
+    //  Handles the search functionality based on the selected search option and the provided search input.
     const onSearch = (data) => {
-        try {
-            console.log(JSON.stringify(data));
-        } catch (error) {
-            console.log(error)
-        }
-    }
+        const { search } = data;
+        let searchAttribute = '';
 
+        if (searchOption === 'Student Number') {
+            searchAttribute = 'student.studentNumber';
+        } else if (searchOption === 'Student Name') {
+            searchAttribute = 'student';
+        }
+
+        let filteredApplications = [];
+
+        if (searchAttribute && Array.isArray(currentPendingApplications)) {
+            filteredApplications = currentPendingApplications.filter((application) => {
+                if (searchAttribute === 'student') {
+                    const { firstName, middleName, lastName } = application.student;
+                    const fullName = `${lastName}, ${firstName}, ${middleName}`;
+                    return fullName.toLowerCase().includes(search.toLowerCase());
+                } else {
+                    const attributeValue = getObjectValue(application, searchAttribute);
+                    return attributeValue && attributeValue.includes(search);
+                }
+            });
+        }
+
+        setCurrentPendingApplications(filteredApplications);
+    };
+
+
+    // Handles the sorting functionality based on the selected sorting options.
     const onSort = (data) => {
-        try {
-            console.log(JSON.stringify(data));
-        } catch (error) {
-            console.log(error)
-        }
-    }
+        const { date, name } = data;
+        let sortedApplications = [...currentPendingApplications];
 
-    // const data = [
-    //     {
-    //         studentNumber: '2023-12345',
-    //         studentName: 'John Doe',
-    //         step: '1',
-    //         status: 'In Progress',
-    //         date: '2023-05-30',
-    //     },
-    //     {
-    //         studentNumber: '2021-45698',
-    //         studentName: 'Jane Smith',
-    //         step: '2',
-    //         status: 'Completed',
-    //         date: '2023-05-31',
-    //     },
-    // ];
+        if (date.value === 'Ascending') {
+            sortedApplications.sort((a, b) => {
+                const dateA = new Date(a.studentSubmission.dateSubmission.replace(/(\d{1,2})\/(\d{1,2})\/(\d{4})/, '$2/$1/$3'));
+                const dateB = new Date(b.studentSubmission.dateSubmission.replace(/(\d{1,2})\/(\d{1,2})\/(\d{4})/, '$2/$1/$3'));
+                return dateA - dateB;
+            });
+        } else if (date.value === 'Descending') {
+            sortedApplications.sort((a, b) => {
+                const dateA = new Date(a.studentSubmission.dateSubmission.replace(/(\d{1,2})\/(\d{1,2})\/(\d{4})/, '$2/$1/$3'));
+                const dateB = new Date(b.studentSubmission.dateSubmission.replace(/(\d{1,2})\/(\d{1,2})\/(\d{4})/, '$2/$1/$3'));
+                return dateB - dateA;
+            });
+        } else if (name.value === 'Ascending') {
+            sortedApplications.sort((a, b) => {
+                return a.student.lastName.localeCompare(b.student.lastName);
+            });
+        } else if (name.value === 'Descending') {
+            sortedApplications.sort((a, b) => {
+                return b.student.lastName.localeCompare(a.student.lastName);
+            });
+        }
+
+        setCurrentPendingApplications(sortedApplications);
+    };
+
+    // parameters for table
+    const attributeName = ['student.studentNumber', 'student.fullName', 'step', 'status', 'studentSubmission.dateSubmission']
+
+    const columns = ['Student Number', 'Student Name (LN, FN, MN)', 'Step', 'Status', 'Date', 'Application']
 
     return (
         <div className="wrapper">
-            <Header data={approverInfo} />
+            <Header data={userInfo} />
 
             <div id="approver-content">
                 {/* Sidebar */}
@@ -195,72 +280,22 @@ export default function MainScreen() {
                                 {/* Month */}
                                 <Controller
                                     render={({ field }) =>
-                                        <input type="number" id="month" placeholder="MM" {...field} />}
-                                    name="month"
+                                        <input type="text" id="dateFilter" placeholder="MM/DD/YYYY" disabled={filterValue("date")} {...field} />}
+                                    name="dateFilter"
                                     control={control}
                                     rules={{
-                                        onChange: handleMonth,
-                                        min: {
-                                            value: 1,
-                                            message: "Month (1-12)"
-                                        },
-                                        max: {
-                                            value: 12,
-                                            message: "Month (1-12)"
-                                        }
+                                        onChange: handleDateFilter,
                                     }}
                                     defaultValue=""
                                 />
-                                {errors.month && <p id="error-message">{errors.month.message}</p>}
-
-                                {/* Day */}
-                                <Controller
-                                    render={({ field }) =>
-                                        <input type="number" id="day" placeholder="DD" {...field} />}
-                                    name="day"
-                                    control={control}
-                                    rules={{
-                                        onChange: handleDay,
-                                        min: {
-                                            value: 1,
-                                            message: "Day (1-31)"
-                                        },
-                                        max: {
-                                            value: 31,
-                                            message: "Day (1-31)"
-                                        }
-                                    }}
-                                    defaultValue=""
-                                />
-                                {errors.day && <p id="error-message">{errors.day.message}</p>}
-
-                                {/* Year */}
-                                <Controller
-                                    render={({ field }) =>
-                                        <input type="number" id="year" placeholder="YYYY" {...field} />}
-                                    name="year"
-                                    control={control}
-                                    rules={{
-                                        onChange: handleYear,
-                                        min: {
-                                            value: 1995,
-                                            message: "Year (1995-2023)"
-                                        },
-                                        max: {
-                                            value: 2023,
-                                            message: "Year (1995-2023)"
-                                        }
-                                    }}
-                                    defaultValue=""
-                                />
-                                {errors.year && <p id="error-message">{errors.year.message}</p>}
+                                {errors.dateFilter && <p id="error-message">{errors.dateFilter.message}</p>}
                             </div>
 
                             {/* Adviser Name */}
                             <div className="filters">
                                 <Controller
                                     render={({ field }) =>
-                                        <input type="text" id="adviser-name" placeholder="Adviser Name" {...field} />}
+                                        <input type="text" id="adviser-name" placeholder="Adviser Name" disabled={filterValue("adviser")}{...field} />}
                                     name="adviser-name"
                                     control={control}
                                     rules={{
@@ -282,6 +317,7 @@ export default function MainScreen() {
                                         <Select
                                             className="filter-dropdown"
                                             options={status}
+                                            isDisabled={filterValue("status")}
                                             {...field}
                                             placeholder="Status"
                                             styles={colourStyles}
@@ -303,6 +339,7 @@ export default function MainScreen() {
                                         <Select
                                             className="filter-dropdown"
                                             options={step}
+                                            isDisabled={filterValue("step")}
                                             {...field}
                                             placeholder="Step"
                                             styles={colourStyles}
@@ -314,7 +351,14 @@ export default function MainScreen() {
                             </div>
 
                             {/* Reset & Apply Buttons */}
-                            <button className="filter-button" id="reset-btn" onClick={reset} >Reset Filters</button>
+                            <button className="filter-button" id="reset-btn" onClick={() => {
+                                reset();
+                                setDateFilterValue('');
+                                setAdviserValue('');
+                                setStatusValue('');
+                                setStepValue('');
+                                fetchPendingApplications();
+                            }} >Reset Filters</button>
                             <button className="filter-button" type="submit">Apply Filters</button>
                         </form>
                     </div>
@@ -326,10 +370,10 @@ export default function MainScreen() {
                     <div id="approver-search-sort">
 
                         {/* Search Bar */}
-                        <form className="search-bar" key={2} onSubmit={handleSubmit2(onSearch)}>
+                        <form className="approver-search-bar" id="search-bar" key={2} onSubmit={handleSubmit2(onSearch)}>
                             <Controller
                                 render={({ field }) =>
-                                    <input type="text" id="search" placeholder="Search" {...field} />}
+                                    <input type="text" id="search" placeholder="Search (Student Number or LN, FN, MN)" {...field} />}
                                 name="search"
                                 control={control2}
                                 rules={{
@@ -343,7 +387,7 @@ export default function MainScreen() {
                         </form>
 
                         {/* Sort By */}
-                        <form className="search-bar" key={3} onSubmit={handleSubmit3(onSort)}>
+                        <form className="approver-search-bar" key={3} onSubmit={handleSubmit3(onSort)}>
                             <p id="sidebar-title"> Sort by: </p>
                             {/* Date */}
                             {<Controller
@@ -355,6 +399,7 @@ export default function MainScreen() {
                                         <Select
                                             className="filter-dropdown"
                                             options={date}
+                                            isDisabled={sortValue("date")}
                                             {...field}
                                             placeholder="Date"
                                             styles={colourStyles}
@@ -371,10 +416,11 @@ export default function MainScreen() {
                                 control={control3}
                                 defaultValue=""
                                 render={({ field }) => (
-                                    <div style={{ width: '170px' }}>
+                                    <div style={{ width: '180px' }}>
                                         <Select
                                             className="filter-dropdown"
                                             options={name}
+                                            isDisabled={sortValue("name")}
                                             {...field}
                                             placeholder="Name"
                                             styles={colourStyles}
@@ -386,7 +432,12 @@ export default function MainScreen() {
                             />}
 
                             {/* Reset & Apply */}
-                            <button className="sort-button" id="reset-btn" onClick={reset3} >Reset</button>
+                            <button className="sort-button" id="reset-btn" onClick={() => {
+                                reset3();
+                                setDateValue('');
+                                setNameValue('');
+                                fetchPendingApplications();
+                            }} >Reset</button>
                             <button className="sort-button" type="submit">Apply</button>
                         </form>
 
@@ -394,7 +445,7 @@ export default function MainScreen() {
 
                     {/* Table of Students */}
                     <div id="approver-list">
-                        <Table data={currentPendingApplications} columns={columns} attributes={attributeName} id={"approver"} />
+                        <Table data={currentPendingApplications} columns={columns} attributes={attributeName} id={"approver"} purpose={"view"} />
                     </div>
                 </div>
             </div>
