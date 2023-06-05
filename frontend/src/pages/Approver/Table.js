@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 // data = data/rows of table ----------------------------------------
 // e.g.
@@ -44,14 +44,14 @@ const Table = ({ data, columns, attributes, id }) => {
 
     // Calculate the student's full name
     const getStudentFullName = (student) => {
-        return `${student.firstName} ${student.middleName} ${student.lastName}`;
+        return `${student.lastName}, ${student.firstName}, ${student.middleName}`;
     };
 
     // Calculate the adviser's full name based on the student's adviser object
     const getAdviserFullName = (student) => {
         if (student.adviser) {
             const { firstName, middleName, lastName } = student.adviser;
-            return `${getStudentFullName(student)} (Adviser: ${firstName} ${middleName} ${lastName})`;
+            return `${getStudentFullName(student)} (Adviser: ${lastName}, ${firstName}, ${middleName} )`;
         }
         return getStudentFullName(student);
     };
