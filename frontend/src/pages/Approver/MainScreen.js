@@ -98,6 +98,28 @@ export default function MainScreen() {
 
     const { reset: reset3, control: control3, handleSubmit: handleSubmit3 } = useForm({ mode: 'onChange' });
 
+    const filterValue = (inputName) => {
+        if (dateFilterValue.length > 0) {
+            return inputName !== "date";
+        } else if (adviserValue.length > 0) {
+            return inputName !== "adviser";
+        } else if (statusValue.length > 0) {
+            return inputName !== "status";
+        } else if (stepValue.length > 0) {
+            return inputName !== "step";
+        }
+        return false;
+    };
+
+    const sortValue = (inputName) => {
+        if (dateValue.length > 0) {
+            return inputName !== "date";
+        } else if (nameValue.length > 0) {
+            return inputName !== "name";
+        }
+        return false;
+    };
+
     const onSubmit = (data) => {
         // Extract the filter values from the form data
         const { dateFilter, "adviser-name": adviserName, status, step } = data;
@@ -215,7 +237,7 @@ export default function MainScreen() {
                                 {/* Month */}
                                 <Controller
                                     render={({ field }) =>
-                                        <input type="text" id="dateFilter" placeholder="MM/DD/YYYY" {...field} />}
+                                        <input type="text" id="dateFilter" placeholder="MM/DD/YYYY" disabled={filterValue("date")} {...field} />}
                                     name="dateFilter"
                                     control={control}
                                     rules={{
@@ -230,7 +252,7 @@ export default function MainScreen() {
                             <div className="filters">
                                 <Controller
                                     render={({ field }) =>
-                                        <input type="text" id="adviser-name" placeholder="Adviser Name" {...field} />}
+                                        <input type="text" id="adviser-name" placeholder="Adviser Name" disabled={filterValue("adviser")}{...field} />}
                                     name="adviser-name"
                                     control={control}
                                     rules={{
@@ -252,6 +274,7 @@ export default function MainScreen() {
                                         <Select
                                             className="filter-dropdown"
                                             options={status}
+                                            isDisabled={filterValue("status")}
                                             {...field}
                                             placeholder="Status"
                                             styles={colourStyles}
@@ -273,6 +296,7 @@ export default function MainScreen() {
                                         <Select
                                             className="filter-dropdown"
                                             options={step}
+                                            isDisabled={filterValue("step")}
                                             {...field}
                                             placeholder="Step"
                                             styles={colourStyles}
@@ -286,7 +310,11 @@ export default function MainScreen() {
                             {/* Reset & Apply Buttons */}
                             <button className="filter-button" id="reset-btn" onClick={() => {
                                 reset();
-                                fetchPendingApplications()
+                                setDateFilterValue('');
+                                setAdviserValue('');
+                                setStatusValue('');
+                                setStepValue('');
+                                fetchPendingApplications();
                             }} >Reset Filters</button>
                             <button className="filter-button" type="submit">Apply Filters</button>
                         </form>
@@ -328,6 +356,7 @@ export default function MainScreen() {
                                         <Select
                                             className="filter-dropdown"
                                             options={date}
+                                            isDisabled={sortValue("date")}
                                             {...field}
                                             placeholder="Date"
                                             styles={colourStyles}
@@ -348,6 +377,7 @@ export default function MainScreen() {
                                         <Select
                                             className="filter-dropdown"
                                             options={name}
+                                            isDisabled={sortValue("name")}
                                             {...field}
                                             placeholder="Name"
                                             styles={colourStyles}
@@ -361,7 +391,9 @@ export default function MainScreen() {
                             {/* Reset & Apply */}
                             <button className="sort-button" id="reset-btn" onClick={() => {
                                 reset3();
-                                fetchPendingApplications()
+                                setDateValue('');
+                                setNameValue('');
+                                fetchPendingApplications();
                             }} >Reset</button>
                             <button className="sort-button" type="submit">Apply</button>
                         </form>
