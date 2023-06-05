@@ -9,16 +9,28 @@ import ApproverIcon from './assets/approver.png';
 // user info ; changes depending on who is logged in
 export async function getCurrentStudent(upMail) {
     try {
-      const response = await fetch("http://localhost:3001/get-current-student?" + "upMail=" + upMail);
-  
-      const studentData = await response.json();
-      
-      return studentData;
+        const response = await fetch("http://localhost:3001/get-current-student?" + "upMail=" + upMail);
+
+        const studentData = await response.json();
+
+        return studentData;
     } catch (error) {
-      console.error("Error fetching data:", error);
-      return null;
+        console.error("Error fetching data:", error);
+        return null;
     }
-  }
+}
+
+// export const getCurrentStudent = async (req, res) => {
+//     try {
+//         const studentNumber = req.query.studentNumber; // Get the studentNumber from the query parameter
+//         const student = await Student.findOne({ studentNumber: studentNumber }).populate('application'); // Query the student with the specified email
+//         console.log(student);
+//         res.send(student);
+//     } catch (error) {
+//         console.error(error);
+//         res.status(500).send("Internal Server Error");
+//     }
+// };
 
 export const adminInfo = {
     name: "Juan Dela Cruz",

@@ -147,13 +147,13 @@ input#search {
     text-align: left;
     position: none;
     border-radius: 0;
-    width: 26vw !important;
+    width: 18vw !important;
     height: 37px;
     min-width: 100%;
     margin: 0;
 }
 
-button#search-btn {
+button.search-btn {
     cursor: pointer;
     height: 37px;
     margin: 0;
@@ -163,17 +163,26 @@ button#search-btn {
     box-shadow: none;
 }
 
+button#refresh-btn {
+    background-color: black;
+}
+
 .sort-button {
     cursor: pointer;
     margin: 4px 0;
     font-size: 11px;
     background-color: #094C9F;
     color: white;
-    border-radius: 20px;
+    border-radius: 4px;
     border: none;
     padding: 8px 0;
-    width: 50px;
+    width: 37px;
     margin: 4px;
+}
+
+i {
+    margin: 0;
+    padding: 4px;
 }
 
 .table {
