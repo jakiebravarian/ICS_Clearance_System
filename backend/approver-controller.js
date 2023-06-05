@@ -1,16 +1,13 @@
 import mongoose from 'mongoose';
 import { User, UserSchema } from './models/user.js';
-import { AppSchema } from './models/application.js';
-const User = mongoose.model("users",UserSchema);
-const Application = mongoose.model("Application",AppSchema);
+import {Application, AppSchema } from './models/application.js';
+import bcrypt from "bcrypt";
 
 export const getAllPendingApplications = async (req, res) => {
     try {
-        const upMail = req.upMail;
+        const upMail = req.query.upMail;
         const approver = await User.findOne({ upMail: upMail });
-
         let currentPendingApplications = [];
-
         if (approver.title === "Adviser") {
             const users = await User.find({ adviser: approver._id });
             for (const user of users) {
@@ -24,9 +21,22 @@ export const getAllPendingApplications = async (req, res) => {
             }
             res.send(currentPendingApplications);
         }else{
-            const application = Application.find({status:"Pending"});
-            currentPendingApplications.push(application);
-            res.send(currentPendingApplications);
+          const applicationsQuery = Application.find({ status: "Open" });
+          applicationsQuery
+            .then((applications) => {
+              // Handle the applications array
+              console.log(applications);
+              // Push the applications to the array
+              currentPendingApplications.push(...applications);
+              // Send the response
+              res.send(currentPendingApplications);
+            })
+            .catch((error) => {
+              // Handle the error
+              console.error(error);
+              // Send an error response
+              res.status(500).send('Internal Server Error');
+            });
         }
     }catch (error) {
       console.error(error);
@@ -238,3 +248,54 @@ export const getAllPendingApplications = async (req, res) => {
         }
       };
    
+      export const createApprover = async (req, res) => {
+    
+        const emailChecker =  await User.findOne({upMail: req.body.upMail.toLowerCase()});
+    
+        //function for validationg upmail
+        function matchRegex(email){
+            return /^([a-z0-9]+)@up\.edu\.ph$/i.test(email)
+        }
+    
+        //check if upmail is already existing (findone)
+        if(emailChecker)
+        {
+            return res.send({emailExist: true}) ;
+        }
+        else
+        {
+        
+            //check if follows regex
+            if(!matchRegex(req.body.upMail.toLowerCase()))
+            {
+              console.log(req.body);  
+              res.send({success : false})
+            }
+            else
+            {
+                const {  firstName, middleName, lastName, upMail, password, studentNumber,degreeProgram, college, userType, title, adviser, application } = req.body;
+                console.log(req.body);
+                bcrypt.hash(password, 10).then((hash) => {
+                    User.create({
+                        firstName: firstName,
+                        middleName: middleName,
+                        lastName: lastName,
+                        upMail: upMail,
+                        password: hash,
+                        userType: userType,
+                        title: title,
+                    })
+                        .then(() => {
+                            res.send({success : true});
+                        })
+                        .catch((err) => {
+                            if (err){
+                                res.send({success : false})
+                                console.log(err);
+                            }
+                        })
+                })
+            }
+    
+        }
+    }
