@@ -19,7 +19,7 @@ export default function ManageApprovers() {
     //Display default
     const fetchData = async () => {
         try {
-            fetch('http://localhost:3001/get-approver', 
+            await fetch('http://localhost:3001/get-approver', 
             {
                 method: 'GET',
                 headers: {

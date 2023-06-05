@@ -29,8 +29,8 @@ const setUpRoutes = (app) => {
 
   //admin-approver routes
   app.post("/search-approver-by-name", searchApproverByName);
-  app.get("/sort-approver-by-name-asc", filterNameAscending);
-  app.get("/sort-approver-by-name-desc", filterNameDescending);
+  app.post("/sort-approver-by-name-asc", filterNameAscending);
+  app.post("/sort-approver-by-name-desc", filterNameDescending);
   app.get("/get-current-application", getCurrentApplication);
   app.get("/get-current-applications", getCurrentApplications);
   app.post("/delete-approver", deleteApprover);

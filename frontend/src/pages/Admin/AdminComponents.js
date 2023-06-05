@@ -42,12 +42,14 @@ function ApproverSort(prop) {
     const changeSortOption = (e) => {
         if(e.target.value === "desc")
         {
-            fetch(`http://localhost:3001/sort-approver-by-name-desc${search}`, {
-            method: 'GET',
+            fetch(`http://localhost:3001/sort-approver-by-name-desc`, {
+            method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
-            },
+            },body: JSON.stringify({
+                search: search
             })
+        })
             .then(response => response.json())
             .then((body) => {
                 console.log("desc")
@@ -58,12 +60,14 @@ function ApproverSort(prop) {
         }
         else
         {
-            fetch(`http://localhost:3001/sort-approver-by-name-asc${search}`, 
+            fetch(`http://localhost:3001/sort-approver-by-name-asc`, 
             {
-                method: 'GET',
+                method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
-                },
+                },body: JSON.stringify({
+                    search: search
+                })
             })  .then(response => response.json())
                 .then((body) => {
                     console.log("asc")

@@ -77,9 +77,9 @@ const filterNameAscending = async (req, res) => {
 
   try{
       //check first if search name is not empty
-      const searchName = req.query.search;
+      const searchName = req.body.search;
       console.log(searchName)
-      console.log(req.query)
+      console.log(req.body)
       
       if(searchName == ""){
           const sortAppNameAsc = await User.find({userType: "Approver"}).sort({firstName: 'asc', lastName:'asc'})
@@ -115,9 +115,9 @@ const filterNameDescending = async (req, res) => {
 
 try{
     //check first if search name is not empty
-    const searchName = req.query.search;
+    const searchName = req.body.search;
     console.log(searchName)
-    console.log(req.query)
+    console.log(req.body)
 
     if(searchName == ""){
         const sortAppNameDesc = await User.find({userType: "Approver"}).sort({firstName: 'desc', lastName:'desc'})
