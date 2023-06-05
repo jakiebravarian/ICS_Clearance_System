@@ -270,7 +270,7 @@ function AssignAdviserModal(prop) {
     )
 }
 
-function CreateApproverModal() {
+function CreateApproverModal(props) {
     const [isOpen, setIsOpen] = useState(false);
     const [formData, setFormData] = useState({
         firstName: '',
@@ -347,6 +347,7 @@ function CreateApproverModal() {
             })
         }).then(response => response.json())
             .then((body) => {
+            props.setChangedApprov(!props.changedApprov); 
             console.log(body);
     }) 
     }
