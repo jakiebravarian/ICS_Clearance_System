@@ -107,56 +107,22 @@ function Form({ onClick }) {
             <form action="">
                 <div className="form-section">
                     {/* first row */}
-                    <div className="row">
-                        <div>
-                            <label htmlFor="first-name">First name</label><br />
-                            <input placeholder="Juan" id="first-name" /><br></br>
+                    <form>
+                        <div className="row input-divs">
+                            <div className="github-link-div">
+                                <label htmlFor="github-link-input">Github link</label><br />
+                                <input placeholder="github.com/username" id="github-link-input" /><br></br>
+                            </div>
+                            <div className="remarks-div">
+                                <label htmlFor="remarks-input">Remarks</label><br />
+                                <input placeholder="Write your remarks here" id="remarks-input" /><br></br>
+                            </div>
                         </div>
-                        <div>
-                            <label htmlFor="middle-name">Middle name</label><br />
-                            <input placeholder="Martinez" id="middle-name" /><br></br>
+                        {/* button */}
+                        <div className="centered">
+                            <button type='submit' className='button' onClick={handleSubmit}>SUBMIT APPLICATION</button>
                         </div>
-                        <div>
-                            <label htmlFor="Last-name">Last name</label><br />
-                            <input placeholder="dela Cruz" id="last-name" /><br></br>
-                        </div>
-                    </div>
-
-                    {/* second row */}
-                    <div className="row">
-                        <div>
-                            <label htmlFor="student-number">Student number</label><br />
-                            <input placeholder="20xx-xxxx" id="student-number" /><br></br>
-                        </div>
-                        <div>
-                            <label htmlFor="degree-program">Degree program</label><br />
-                            <input placeholder="e.g. BSCS" id="degree-program" /><br></br>
-                        </div>
-                        <div>
-                            <label htmlFor="college">College</label><br />
-                            <input placeholder="e.g. CAS" id="college" /><br></br>
-                        </div>
-                    </div>
-
-                    {/* third row */}
-                    <div className="row">
-                        <div>
-                            <label htmlFor="github-link">Github link</label><br />
-                            <input placeholder="github.com/username" id="github-link" /><br></br>
-                        </div>
-                        <div>
-                            <label htmlFor="date-applied">Date applied</label><br />
-                            <input id="date-applied" /><br></br>
-                        </div>
-                        <div>
-                            <label htmlFor="remarks">Remarks</label><br />
-                            <input placeholder="Skip if not a returned application" id="remarks" /><br></br>
-                        </div>
-                    </div>
-                    {/* button */}
-                    <div className="centered">
-                        <button type='submit' className='button' onClick={handleSubmit}>SUBMIT APPLICATION</button>
-                    </div>
+                    </form>
                 </div>
             </form>
             <br></br>

@@ -327,3 +327,15 @@ body {
     color: white;
     margin-bottom: 40px;
 }
+
+.github-link-div {
+    margin: 20px;
+}
+
+.remarks-div {
+    margin: 20px;
+}
+
+.input-divs {
+    flex-wrap: wrap;
+}
