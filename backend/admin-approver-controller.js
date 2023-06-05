@@ -53,7 +53,7 @@ const searchApproverByName = async (req, res) => {
       await User.collection.createIndex({ firstName: 'text', middleName: 'text', lastName: 'text' });
   
       // Perform the text search
-      const searchedApprover = await User.find({ $text: { $search: searchName } });
+      const searchedApprover = await User.find({userType: "Approver" ,$text: { $search: searchName } });
   
       res.send(searchedApprover);
     } catch (error) {
@@ -77,15 +77,17 @@ const filterNameAscending = async (req, res) => {
 
   try{
       //check first if search name is not empty
-      const searchName = req.body.search;
+      const searchName = req.query.search;
+      console.log(searchName)
+      console.log(req.query)
       
       if(searchName == ""){
-          const sortAppNameAsc = await User.find({userType: "Approver"}).sort({firstName: 'desc', lastName:'desc'})
+          const sortAppNameAsc = await User.find({userType: "Approver"}).sort({firstName: 'asc', lastName:'asc'})
           returnResult(sortAppNameAsc)
       }
       else
       {
-          const sortAppNameAsc = await User.find({userType: "Approver", $text: { $search: searchName }}).sort({firstName: 'desc', lastName:'desc'})
+          const sortAppNameAsc = await User.find({userType: "Approver", $text: { $search: searchName }}).sort({firstName: 'asc', lastName:'asc'})
           if(!sortAppNameAsc){
               res.send({found: false});
           }
@@ -113,8 +115,10 @@ const filterNameDescending = async (req, res) => {
 
 try{
     //check first if search name is not empty
-    const searchName = req.body.search;
-    
+    const searchName = req.query.search;
+    console.log(searchName)
+    console.log(req.query)
+
     if(searchName == ""){
         const sortAppNameDesc = await User.find({userType: "Approver"}).sort({firstName: 'desc', lastName:'desc'})
         returnResult(sortAppNameDesc)
@@ -157,6 +161,7 @@ const editApprover = async (req,res) => {
 }
   try{
     const editApp = await User.findOne({upMail: req.body.upMail});
+    console.log(req.body);
   
     //check if new email is a upmail
     if(!matchRegex(req.body.newUpMail)){
@@ -178,4 +183,14 @@ const editApprover = async (req,res) => {
   }
 }
 
-export {searchApproverByName, filterNameAscending, filterNameDescending, deleteApprover, editApprover, approverLogin};
+const getApprover = async (req, res) => {
+  try{
+    const approver =  await User.find({userType: "Approver"});
+    res.send(approver)
+  }catch(err){
+   // res.status(500).send('An error occurred');
+   res.send(err);
+  }
+}
+
+export {searchApproverByName, filterNameAscending, filterNameDescending, deleteApprover, editApprover, approverLogin, getApprover};

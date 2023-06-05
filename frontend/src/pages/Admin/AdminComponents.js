@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {useState, useEffect} from "react";
 import Modal from 'react-modal';
 
 // renders a menu with 2 options
@@ -34,41 +34,64 @@ function Menu(props) {
     )
 }
 
-function StudentSort() {
-    return (
-        <div className="row student-sort">
-            <div>
-                <p><b>Sort by: </b></p>
-            </div>
-            <form className="sort-form">
-                <input className="sort-radio" name="sort" type="radio" id="studno-sort-input"></input>
-                <label className="radio-label" htmlFor="studno-sort-input">Student number</label>
-                <input className="sort-radio" name="sort" type="radio" id="studname-sort-input"></input>
-                <label className="radio-label" htmlFor="studname-sort-input">Student name</label>
-            </form>
-        </div>
-    )
-}
 
-function ApproverSort() {
-    return (
+function ApproverSort(prop) {
+    const search = prop.search;
+    const setApprover = prop.setApprover;
+
+    const changeSortOption = (e) => {
+        if(e.target.value === "desc")
+        {
+            fetch(`http://localhost:3001/sort-approver-by-name-desc${search}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            })
+            .then(response => response.json())
+            .then((body) => {
+                console.log("desc")
+                console.log(body)
+                setApprover(body)
+            })
+            
+        }
+        else
+        {
+            fetch(`http://localhost:3001/sort-approver-by-name-asc${search}`, 
+            {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+            })  .then(response => response.json())
+                .then((body) => {
+                    console.log("asc")
+                    console.log(body)
+                    setApprover(body) 
+                })
+        }
+    };
+
+    return(
         <div className="row approver-sort">
             <div>
                 <p><b>Sort by: </b></p>
             </div>
             <form className="sort-form">
-                <input className="sort-radio" name="sort" type="radio" id="name-asc"></input>
-                <label className="radio-label" htmlFor="name-asc">Name (Ascending)</label>
-                <input className="sort-radio" name="sort" type="radio" id="name-desc"></input>
-                <label className="radio-label" htmlFor="name-desc">Name (Descending)</label>
+                <input className="sort-radio" name="sort" type="radio" id="name-asc" value="asc" onChange={changeSortOption}></input>
+                <label className="radio-label">Name (Ascending)</label>
+                <input className="sort-radio" name="sort" type="radio" id="name-desc" value="desc" onChange={changeSortOption} ></input>
+                <label className="radio-label">Name (Descending)</label>
             </form>
         </div>
     )
 }
 
 function StudentAppsList(props) {
-    var studentsList = props.data;
 
+    var studentsList = props.data;
+  
     return (
         <div className="column student-apps-list">
             {/* header */}
@@ -79,14 +102,14 @@ function StudentAppsList(props) {
                 </div>
             </div>
             {
-                studentsList.map((student) => (
-                    <div className="row apps-list">
+                studentsList.map((student, index) => (
+                    <div className="row apps-list" key = {index}>
                         <p className="first-col">{student.studentNumber}</p>
-                        <p>{student.studentName}</p>
-
+                        <p>{student.lastName.toUpperCase()}, {student.firstName} {student.middleName}</p>
+                        
                         {/* buttons */}
                         <div className="row admin-buttons">
-                            <AssignAdviserModal />
+                            <AssignAdviserModal student = {student}/>
                             <button className="reject-button">Reject</button>
                         </div>
                     </div>
@@ -99,6 +122,22 @@ function StudentAppsList(props) {
 function ApproversList(props) {
     var approversList = props.data;
 
+    function deleteApprover(email) {
+        fetch('http://localhost:3001/delete-approver', 
+        {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+                body: JSON.stringify({
+                    upMail: email
+                })
+        }) .then(response => response.json())
+            .then((body) => {
+            console.log(body);
+          })
+    }
+
     return (
         <div className="column student-apps-list">
             {/* header */}
@@ -108,14 +147,14 @@ function ApproversList(props) {
                 </div>
             </div>
             {
-                approversList.map((approver) => (
-                    <div className="row apps-list">
-                        <p className="first-col">{approver.lastName}, {approver.firstName} {approver.middleName}</p>
-
+                approversList.map((approver, index) => (
+                    <div className="row apps-list"  key= {index}>
+                        <p className="first-col">{approver.lastName.toUpperCase()}, {approver.firstName} {approver.middleName}</p>
+                        
                         {/* buttons */}
                         <div className="row admin-buttons">
-                            <EditApproverModal data={approver} />
-                            <button className="reject-button">Delete</button>
+                            <EditApproverModal data={approver}/>
+                            <button className="reject-button" onClick={() => deleteApprover(approver.upMail)}>Delete</button>
                         </div>
                     </div>
                 ))
@@ -124,14 +163,16 @@ function ApproversList(props) {
     )
 }
 
-function AssignAdviserModal() {
+function AssignAdviserModal(prop) {
+    let student = prop.student;
     const [isOpen, setIsOpen] = useState(false);
     const [formData, setFormData] = useState({
         firstName: '',
         middleName: '',
         lastName: '',
-        studno: ''
+        studentNumber: student.studentNumber
     }); // initially empty strings
+
 
     // opens the modal when called
     const openModal = () => {
@@ -161,7 +202,7 @@ function AssignAdviserModal() {
             firstName: '',
             middleName: '',
             lastName: '',
-            studno: ''
+            studentNumber: student.studentNumber
         });
 
         // close the modal
@@ -180,7 +221,27 @@ function AssignAdviserModal() {
         },
     };
 
-    return (
+    function handleAsssign(){
+        fetch('http://localhost:3001/assign-adviser', 
+        {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+                body: JSON.stringify({
+                    firstName: formData.firstName,
+                    middleName: formData.middleName ,
+                    lastName: formData.lastName,
+                    studentNumber: student.studentNumber
+
+                })
+        }) .then(response => response.json())
+            .then((body) => {
+            console.log(body);
+        }) 
+    }
+
+    return(
         <div className="modal-window">
             <button className="approve-button" onClick={openModal}>Approve</button>
             <Modal style={modalStyle} isOpen={isOpen} onRequestClose={closeModal}>
@@ -190,11 +251,11 @@ function AssignAdviserModal() {
                 </div>
                 <div className="centered modal-form-div">
                     <form onSubmit={handleSubmit} className="modal-form">
-                        <input type="text" name="firstName" value={formData.firstName || ''} onChange={handleChange} placeholder="Adviser's First Name" /><br></br>
-                        <input type="text" name="middleName" value={formData.middleName || ''} onChange={handleChange} placeholder="Adviser's Middle Name" /><br></br>
-                        <input type="text" name="lastName" value={formData.lastName || ''} onChange={handleChange} placeholder="Adviser's Last Name" /><br></br>
-                        <input type="text" name="studno" value={formData.studno || ''} onChange={handleChange} placeholder="Student number" /><br></br>
-                        <button className="assign-button" type="submit">Assign</button>
+                        <input type="text" name="firstName" value={formData.firstName || ''} onChange={handleChange} placeholder="Adviser's First Name"/><br></br>
+                        <input type="text" name="middleName" value={formData.middleName || ''} onChange={handleChange} placeholder="Adviser's Middle Name"/><br></br>
+                        <input type="text" name="lastName" value={formData.lastName || ''} onChange={handleChange} placeholder="Adviser's Last Name"/><br></br>
+                        <input type="text" name="studno" value={formData.studentNumber || ''} onChange={handleChange} placeholder="Student number"/><br></br>
+                        <button className="assign-button" type="submit" onClick={handleAsssign}>Assign</button>
                     </form>
                 </div>
             </Modal>
@@ -208,9 +269,9 @@ function CreateApproverModal() {
         firstName: '',
         middleName: '',
         lastName: '',
-        email: '',
+        upMail: '',
         password: '',
-        approverType: ''
+        title: 'Adviser'
     }); // initially empty strings
 
     // opens the modal when called
@@ -241,9 +302,9 @@ function CreateApproverModal() {
             firstName: '',
             middleName: '',
             lastName: '',
-            email: '',
+            upMail: '',
             password: '',
-            approverType: ''
+            title: ''
         });
 
         // close the modal
@@ -262,7 +323,28 @@ function CreateApproverModal() {
         },
     };
 
-    return (
+    function createApprover () {
+        console.log("isCLicked")
+        fetch('http://localhost:3001/create-approver', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                firstName: formData.firstName,
+                middleName: formData.middleName,
+                lastName: formData.lastName,
+                upMail: formData.upMail,
+                password:formData.password,
+                userType: "Approver",
+                title: formData.title
+            })
+        }).then(response => response.json())
+            .then((body) => {
+            console.log(body);
+    }) 
+    }
+    return(
         <div className="modal-window">
             <button className="create-approver-button" onClick={openModal}>Create Approver Account</button>
             <Modal style={modalStyle} isOpen={isOpen} onRequestClose={closeModal}>
@@ -272,18 +354,18 @@ function CreateApproverModal() {
                 </div>
                 <div className="centered modal-form-div">
                     <form onSubmit={handleSubmit} className="modal-form">
-                        <input type="text" name="firstName" value={formData.firstName || ''} onChange={handleChange} placeholder="First Name" /><br></br>
-                        <input type="text" name="middleName" value={formData.middleName || ''} onChange={handleChange} placeholder="Middle Name" /><br></br>
-                        <input type="text" name="lastName" value={formData.lastName || ''} onChange={handleChange} placeholder="Last Name" /><br></br>
-                        <input type="text" name="email" value={formData.email || ''} onChange={handleChange} placeholder="Email" /><br></br>
-                        <input type="password" name="password" value={formData.password || ''} onChange={handleChange} placeholder="Password" /><br></br>
-                        {/* should be a dropdown */}
-                        <label for="approver-type" className="approver-type-label">Approver Type:  </label>
+                        <input type="text" name="firstName" value={formData.firstName || ''} onChange={handleChange} placeholder="First Name"/><br></br>
+                        <input type="text" name="middleName" value={formData.middleName || ''} onChange={handleChange} placeholder="Middle Name"/><br></br>
+                        <input type="text" name="lastName" value={formData.lastName || ''} onChange={handleChange} placeholder="Last Name"/><br></br>
+                        <input type="text" name="upMail" value={formData.upMail || ''} onChange={handleChange} placeholder="Email"/><br></br>
+                        <input type="password" name="password" value={formData.password || ''} onChange={handleChange} placeholder="Password"/><br></br>
+                         {/* should be a dropdown */}
+                         <label className="approver-type-label">Approver Type:  </label>
                         <select className="approver-type-dropdown" id="approver-type" name="approverType">
-                            <option value="Adviser">Adviser</option>
-                            <option value="Clearance Officer">Clearance Officer</option>
+                            <option  name="title" value="Adviser" onChange={handleChange}>Adviser</option>
+                            <option name="title" value="Clearance Officer" onChange={handleChange}>Clearance Officer</option>
                         </select>
-                        <button className="assign-button" type="submit">Create Account</button>
+                        <button className="assign-button" type="submit" onClick={createApprover}>Create Account</button>
                     </form>
                 </div>
             </Modal>
@@ -291,6 +373,8 @@ function CreateApproverModal() {
     )
 }
 
+
+//TODO auto refresh 
 function EditApproverModal(props) {
     let approver = props.data;
 
@@ -299,11 +383,11 @@ function EditApproverModal(props) {
         firstName: approver.firstName,
         middleName: approver.middleName,
         lastName: approver.lastName,
-        email: approver.email,
+        upMail: approver.upMail,
         password: approver.password,
-        approverType: approver.approverType
-    });
-
+        title: approver.title
+    }); 
+    
     // opens the modal when called
     const openModal = () => {
         setIsOpen(true);
@@ -332,15 +416,36 @@ function EditApproverModal(props) {
             firstName: approver.firstName,
             middleName: approver.middleName,
             lastName: approver.lastName,
-            email: approver.email,
+            upMail: approver.upMail,
             password: approver.password,
-            approverType: approver.approverType
+            title: approver.title
         });
 
         // close the modal
         setIsOpen(false);
     };
 
+    function handleSumbitEdit ()  {
+        fetch('http://localhost:3001/edit-approver', 
+        {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+                body: JSON.stringify({
+                    firstName: formData.firstName,
+                    lastName: formData.lastName,
+                    middleName: formData.middleName,
+                    upMail: approver.upMail,
+                    newUpMail: formData.upMail,
+                    password: formData.password,
+                    title: formData.approverType
+                })
+        }) .then(response => response.json())
+        .then((body) => {
+            console.log(body);
+          })
+ }
     // resizing of the modal
     const modalStyle = {
         content: {
@@ -363,17 +468,19 @@ function EditApproverModal(props) {
                 </div>
                 <div className="centered modal-form-div">
                     <form onSubmit={handleSubmit} className="modal-form">
-                        <input type="text" name="firstName" value={formData.firstName || ''} onChange={handleChange} placeholder="First Name" /><br></br>
-                        <input type="text" name="middleName" value={formData.middleName || ''} onChange={handleChange} placeholder="Middle Name" /><br></br>
-                        <input type="text" name="lastName" value={formData.lastName || ''} onChange={handleChange} placeholder="Last Name" /><br></br>
-                        <input type="text" name="email" value={formData.email || ''} onChange={handleChange} placeholder="Email" /><br></br>
-                        <input type="password" name="password" value={formData.password || ''} onChange={handleChange} placeholder="Password" /><br></br>
+                        <input type="text" name="firstName" value={formData.firstName || ''} onChange={handleChange} placeholder="First Name"/><br></br>
+                        <input type="text" name="middleName" value={formData.middleName || ''} onChange={handleChange} placeholder="Middle Name"/><br></br>
+                        <input type="text" name="lastName" value={formData.lastName || ''} onChange={handleChange} placeholder="Last Name"/><br></br>
+                        <input type="text" name="upMail" value={formData.upMail || ''} onChange={handleChange} placeholder="UP Mmail"/><br></br>
+                        <input type="password" name="password" value={formData.password || ''} onChange={handleChange} placeholder="Password"/><br></br>
+                         {/* should be a dropdown */}
+                         {/* to fix css */}
                         <label for="approver-type" className="approver-type-label">Approver Type:  </label>
                         <select className="approver-type-dropdown" id="approver-type" name="approverType">
-                            <option value="Adviser">Adviser</option>
-                            <option value="Clearance Officer">Clearance Officer</option>
+                            <option  name="approverType" value="Adviser" onChange={handleChange}>Adviser</option>
+                            <option name="approverType" value="Clearance Officer" onChange={handleChange}>Clearance Officer</option>
                         </select>
-                        <button className="assign-button" type="submit">Confirm</button>
+                        <button className="assign-button" type="submit" onClick={handleSumbitEdit}>Confirm</button>
                     </form>
                 </div>
             </Modal>
@@ -381,4 +488,4 @@ function EditApproverModal(props) {
     )
 }
 
-export { Menu, StudentSort, StudentAppsList, AssignAdviserModal, CreateApproverModal, ApproverSort, ApproversList }
+export { Menu, StudentAppsList, AssignAdviserModal, CreateApproverModal, ApproverSort, ApproversList }
