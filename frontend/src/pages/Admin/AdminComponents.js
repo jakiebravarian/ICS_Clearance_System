@@ -110,6 +110,7 @@ function StudentAppsList(props) {
     
           if (response.ok) {
             console.log("Succesfully resubmitted application!");
+            props.setBoolRes(!props.boolRes);
           } else {
             console.error("Failed to resubmit application");
           }

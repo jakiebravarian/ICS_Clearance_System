@@ -101,7 +101,7 @@ export default function ManageApplications() {
             </div>
 
             {/* list of students */}
-            <StudentAppsList data={result}/>
+            <StudentAppsList data={result} setBoolRes = {setBoolRes} boolRes = {boolRes}/>
         </div>
     )
 }
