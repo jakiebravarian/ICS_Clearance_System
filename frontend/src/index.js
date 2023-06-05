@@ -60,7 +60,7 @@ const router = createBrowserRouter([
   { path: '/approver', element: <MainScreen /> },
   { path: '/view', element: <ViewStudentApplication /> },
   { path: '/student', element: <Student /> },
-  { path: '/returned', element: <Returned /> },
+  { path: '/returned/:appId', element: <Returned /> },
   { path: '/manage-applications', element: <ManageApplications /> },
   { path: '/manage-approvers', element: <ManageApprovers /> },
   { path: '/pdf-generator', element: <PDFGenerator /> },

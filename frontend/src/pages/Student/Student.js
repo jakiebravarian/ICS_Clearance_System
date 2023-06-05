@@ -23,7 +23,7 @@ export default  function Student() {
           if (studentData) {
             setStudent(studentData);
             setUserInfo({
-                userId: studentData._id,
+              userId: studentData._id,
               name: studentData.firstName + " " + studentData.middleName + " " + studentData.lastName,
               studno: studentData.studentNumber,
               course: studentData.degreeProgram,
@@ -48,7 +48,7 @@ export default  function Student() {
       var newApplication = {
         upMail: student.upMail,
         dateApplied: studentSubmission.dateSubmission,
-        status: "Pending",
+        status: "Open",
         step: 1, // Set the initial value for the step field
         remarks: [], // Initialize an empty array for remarks
         studentSubmission: {

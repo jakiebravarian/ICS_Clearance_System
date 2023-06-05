@@ -22,22 +22,44 @@ export default function MainScreen() {
     const [dateValue, setDateValue] = useState('');
     const [nameValue, setNameValue] = useState('');
 
-    // data for table
-    const data = [
-        {
-            studentNumber: '2023-12345',
-            studentName: 'John Doe',
-            step: '1',
-            status: 'In Progress',
-            date: '2023-05-30',
-        },
-        {
-            studentNumber: '2021-45698',
-            studentName: 'Jane Smith',
-            step: '2',
-            status: 'Completed',
-            date: '2023-05-31',
-        },
+    const upMail1 = localStorage.getItem("upMail");
+    const [currentPendingApplications, setCurrentPendingApplications] = useState([]);
+
+    // Fetch all pending applications
+    useEffect(() => {
+        console.log(upMail1);
+        const fetchPendingApplications = () => {
+            fetch(`http://localhost:3001/get-all-pending-applications?upMail=${upMail1}`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            })
+                .then(response => response.json())
+                .then(data => {
+                    // Handle the response if needed
+                    console.log(data);
+                    // Update the state or perform any other actions
+                    setCurrentPendingApplications([...currentPendingApplications, ...data]);
+                    console.log(currentPendingApplications);
+                })
+                .catch(error => {
+                    // Handle errors if needed
+                    console.error(error);
+                });
+        };
+
+        fetchPendingApplications();
+    }, []);
+
+
+    //   fetchPendingApplications();
+
+    // values for dropdown menu
+    let step = [
+        { label: "1 - Pre Adviser", value: "1" },
+        { label: "2 - Adviser", value: "2" },
+        { label: "3 - Clearance Officer", value: "3" },
     ];
 
     const attributeName = ['studentNumber', 'studentName', 'step', 'status', 'date']
@@ -163,6 +185,23 @@ export default function MainScreen() {
         }
         return false;
     }
+
+    const data = [
+        {
+            studentNumber: '2023-12345',
+            studentName: 'John Doe',
+            step: '1',
+            status: 'In Progress',
+            date: '2023-05-30',
+        },
+        {
+            studentNumber: '2021-45698',
+            studentName: 'Jane Smith',
+            step: '2',
+            status: 'Completed',
+            date: '2023-05-31',
+        },
+    ];
 
     return (
         <div className="wrapper">
