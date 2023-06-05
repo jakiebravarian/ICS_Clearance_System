@@ -135,7 +135,7 @@ function StudentAppsList(props) {
                         
                         {/* buttons */}
                         <div className="row admin-buttons">
-                            <AssignAdviserModal student = {student}/>
+                            <AssignAdviserModal student = {student} boolRes = {props.boolRes} setBoolRes = {props.setBoolRes}/>
                             <button className="reject-button" onClick={() => rejected(student)}>Reject</button>
                         </div>
                     </div>
@@ -267,6 +267,7 @@ function AssignAdviserModal(prop) {
         }) .then(response => response.json())
             .then((body) => {
             console.log(body);
+            prop.setBoolRes(!prop.boolRes);
         }) 
     }
 
