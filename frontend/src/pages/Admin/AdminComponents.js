@@ -36,60 +36,60 @@ function Menu(props) {
 
 
 function ApproverSort(prop) {
-    const search = prop.search;
-    const setApprover = prop.setApprover;
+    // let search = prop.search;
+    // let setApprover = prop.setApprover;
 
-    const changeSortOption = (e) => {
-        if(e.target.value === "desc")
-        {
-            fetch(`http://localhost:3001/sort-approver-by-name-desc`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },body: JSON.stringify({
-                search: search
-            })
-        })
-            .then(response => response.json())
-            .then((body) => {
-                console.log("desc")
-                console.log(body)
-                setApprover(body)
-            })
+    // const changeSortOption = (e) => {
+    //     if(e.target.value === "desc")
+    //     {
+    //         fetch(`http://localhost:3001/sort-approver-by-name-desc`, {
+    //         method: 'POST',
+    //         headers: {
+    //             'Content-Type': 'application/json'
+    //         },body: JSON.stringify({
+    //             search: search
+    //         })
+    //     })
+    //         .then(response => response.json())
+    //         .then((body) => {
+    //             console.log("desc")
+    //             console.log(body)
+    //             setApprover(body)
+    //         })
             
-        }
-        else
-        {
-            fetch(`http://localhost:3001/sort-approver-by-name-asc`, 
-            {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },body: JSON.stringify({
-                    search: search
-                })
-            })  .then(response => response.json())
-                .then((body) => {
-                    console.log("asc")
-                    console.log(body)
-                    setApprover(body) 
-                })
-        }
-    };
+    //     }
+    //     else
+    //     {
+    //         fetch(`http://localhost:3001/sort-approver-by-name-asc`, 
+    //         {
+    //             method: 'POST',
+    //             headers: {
+    //                 'Content-Type': 'application/json'
+    //             },body: JSON.stringify({
+    //                 search: search
+    //             })
+    //         })  .then(response => response.json())
+    //             .then((body) => {
+    //                 console.log("asc")
+    //                 console.log(body)
+    //                 setApprover(body) 
+    //             })
+    //     }
+    // };
 
-    return(
-        <div className="row approver-sort">
-            <div>
-                <p><b>Sort by: </b></p>
-            </div>
-            <form className="sort-form">
-                <input className="sort-radio" name="sort" type="radio" id="name-asc" value="asc" onChange={changeSortOption}></input>
-                <label className="radio-label">Name (Ascending)</label>
-                <input className="sort-radio" name="sort" type="radio" id="name-desc" value="desc" onChange={changeSortOption} ></input>
-                <label className="radio-label">Name (Descending)</label>
-            </form>
-        </div>
-    )
+    // return(
+    //     <div className="row approver-sort">
+    //         <div>
+    //             <p><b>Sort by: </b></p>
+    //         </div>
+    //         <form className="sort-form">
+    //             <input className="sort-radio" name="sort" type="radio" id="name-asc" value="asc" onChange={changeSortOption}></input>
+    //             <label className="radio-label">Name (Ascending)</label>
+    //             <input className="sort-radio" name="sort" type="radio" id="name-desc" value="desc" onChange={changeSortOption} ></input>
+    //             <label className="radio-label">Name (Descending)</label>
+    //         </form>
+    //     </div>
+    // )
 }
 
 function StudentAppsList(props) {
@@ -124,8 +124,10 @@ function StudentAppsList(props) {
 }
 
 function ApproversList(props) {
-    var approversList = props.data;
-
+    let approversList = props.data;
+    let setApprover = props.setApprover;
+    console.log("app list")
+    console.log(approversList)
     function deleteApprover(email) {
         fetch('http://localhost:3001/delete-approver', 
         {
@@ -157,7 +159,7 @@ function ApproversList(props) {
                         
                         {/* buttons */}
                         <div className="row admin-buttons">
-                            <EditApproverModal data={approver}/>
+                            <EditApproverModal data={approversList[index]} setApprover={setApprover} list={approversList}/>
                             <button className="reject-button" onClick={() => deleteApprover(approver.upMail)}>Delete</button>
                         </div>
                     </div>
@@ -328,7 +330,6 @@ function CreateApproverModal() {
     };
 
     function createApprover () {
-        console.log("isCLicked")
         fetch('http://localhost:3001/create-approver', {
             method: 'POST',
             headers: {
@@ -381,6 +382,11 @@ function CreateApproverModal() {
 //TODO auto refresh 
 function EditApproverModal(props) {
     let approver = props.data;
+    let approversList = props.list;
+    let setApprover = props.setApprover;
+
+    console.log("approvers list edit")
+    console.log(approversList)
 
     const [isOpen, setIsOpen] = useState(false);
     const [formData, setFormData] = useState({
@@ -429,7 +435,15 @@ function EditApproverModal(props) {
         setIsOpen(false);
     };
 
+    const deleteObject = (upMail) => {
+        const updatedData = approversList.filter((obj) => obj.upMail !== upMail);
+        setApprover(updatedData);
+      };
+
     function handleSumbitEdit ()  {
+
+        deleteObject(approver.upMail);
+
         fetch('http://localhost:3001/edit-approver', 
         {
             method: 'POST',
@@ -448,6 +462,7 @@ function EditApproverModal(props) {
         }) .then(response => response.json())
         .then((body) => {
             console.log(body);
+            setApprover((prevData) => [...prevData, body]);
           })
  }
     // resizing of the modal
@@ -471,12 +486,12 @@ function EditApproverModal(props) {
                     <p>Edit Approver Account</p>
                 </div>
                 <div className="centered modal-form-div">
-                    <form onSubmit={handleSubmit} className="modal-form">
+                    <form className="modal-form" onSubmit={handleSubmit}>
                         <input type="text" name="firstName" value={formData.firstName || ''} onChange={handleChange} placeholder="First Name"/><br></br>
-                        <input type="text" name="middleName" value={formData.middleName || ''} onChange={handleChange} placeholder="Middle Name"/><br></br>
-                        <input type="text" name="lastName" value={formData.lastName || ''} onChange={handleChange} placeholder="Last Name"/><br></br>
-                        <input type="text" name="upMail" value={formData.upMail || ''} onChange={handleChange} placeholder="UP Mmail"/><br></br>
-                        <input type="password" name="password" value={formData.password || ''} onChange={handleChange} placeholder="Password"/><br></br>
+                        <input type="text" name="middleName" value={approver.middleName || ''} onChange={handleChange} placeholder="Middle Name"/><br></br>
+                        <input type="text" name="lastName" value={approver.lastName || ''} onChange={handleChange} placeholder="Last Name"/><br></br>
+                        <input type="text" name="upMail" value={approver.upMail || ''} onChange={handleChange} placeholder="UP Mmail"/><br></br>
+                        <input type="password" name="password" value={approver.password || ''} onChange={handleChange} placeholder="Password"/><br></br>
                          {/* should be a dropdown */}
                          {/* to fix css */}
                         <label for="approver-type" className="approver-type-label">Approver Type:  </label>
