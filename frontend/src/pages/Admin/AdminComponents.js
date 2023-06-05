@@ -141,6 +141,7 @@ function ApproversList(props) {
         }) .then(response => response.json())
             .then((body) => {
             console.log(body);
+            props.setChangedApprov(!props.changedApprov); 
           })
     }
 

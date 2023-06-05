@@ -10,11 +10,12 @@ export default function ManageApprovers() {
     
     const [approver, setApprover] = useState([]);
     const [search, setSearch] = useState("")
+    const [changedApprov, setChangedApprov] = useState(false);
 
      // Fetch data from API on component mount
      useEffect(() => {
         fetchData();
-    }, []);
+    }, [changedApprov]);
 
     //Display default
     const fetchData = async () => {
@@ -139,7 +140,7 @@ export default function ManageApprovers() {
             </div>
 
             {/* list of approvers */}
-            <ApproversList data={approver} setApprover={setApprover}/>
+            <ApproversList data={approver} setApprover={setApprover} setChangedApprov = {setChangedApprov} changedApprov = {changedApprov}/>
         </div>
     )
 }
