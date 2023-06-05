@@ -29,7 +29,7 @@ export const getAllPendingApplications = async (req, res) => {
           });
           
         }else{
-          const applicationsQuery = Application.find({ status: "Open" });
+          const applicationsQuery = Application.find({ status: "Open" }).populate("student");
           applicationsQuery
             .then((applications) => {
               // Handle the applications array
