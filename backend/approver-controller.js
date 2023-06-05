@@ -10,22 +10,24 @@ export const getAllPendingApplications = async (req, res) => {
         let currentPendingApplications = [];
         if (approver.title === "Adviser") {
           const applicationsQuery = Application.find({ status: "Open" }).populate("student");
+
           applicationsQuery
-            .then((applications) => {
-              // Handle the applications array
-              if(applications.student.adviser === approver._id){
-                  // Push the applications to the array
-                currentPendingApplications.push(...applications);
-                // Send the response
-                res.send(currentPendingApplications);
-              }
-            })
-            .catch((error) => {
-              // Handle the error
-              console.error(error);
-              // Send an error response
-              res.status(500).send('Internal Server Error');
-            });
+          .then((applications) => {
+            // Filter applications based on adviser
+            currentPendingApplications = applications.filter((application) =>
+              application.student.adviser.equals(approver._id)
+            );
+
+            // Send the response
+            res.send(currentPendingApplications);
+          })
+          .catch((error) => {
+            // Handle the error
+            console.error(error);
+            // Send an error response
+            res.status(500).send("Internal Server Error");
+          });
+          
         }else{
           const applicationsQuery = Application.find({ status: "Open" });
           applicationsQuery
