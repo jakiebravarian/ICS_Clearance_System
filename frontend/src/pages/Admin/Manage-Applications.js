@@ -10,12 +10,13 @@ import { Menu, StudentAppsList, AssignAdviserModal } from "./AdminComponents";
 export default function ManageApplications() {
     const [sortBy, setSortBy] = useState("");
     const [result, setResult] = useState([]);
+    const [boolRes, setBoolRes] = useState(false);
 
     
     // Fetch data from API on component mount
     useEffect(() => {
         fetchData();
-    }, [result]);
+    }, [boolRes]);
 
     //Display default
     const fetchData = async () => {
@@ -48,9 +49,9 @@ export default function ManageApplications() {
             })
             .then(response => response.json())
             .then((body) => {
-            setResult(body)
+                console.log(body)
+                setResult(body)
             })
-            
 
         }
         else
@@ -63,6 +64,7 @@ export default function ManageApplications() {
                 }
             })  .then(response => response.json())
                 .then((body) => {
+                    console.log(body)
                     setResult(body) 
                 })
         }

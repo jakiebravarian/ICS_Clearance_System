@@ -95,6 +95,7 @@ function ApproverSort(prop) {
 function StudentAppsList(props) {
 
     var studentsList = props.data;
+    console.log(studentsList);
   
     return (
         <div className="column student-apps-list">
