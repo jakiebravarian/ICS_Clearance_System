@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import Modal from 'react-modal';
 
 // renders a menu with 2 options
@@ -35,20 +35,63 @@ function Menu(props) {
 }
 
 
-function ApproverSort() {
-    // return(
-    //     <div className="row approver-sort">
-    //         <div>
-    //             <p><b>Sort by: </b></p>
-    //         </div>
-    //         <form className="sort-form">
-    //             <input className="sort-radio" name="sort" type="radio" id="name-asc"></input>
-    //             <label className="radio-label" for="name-asc">Name (Ascending)</label>
-    //             <input className="sort-radio" name="sort" type="radio" id="name-desc"></input>
-    //             <label classNames="radio-label" for="name-desc">Name (Descending)</label>
-    //         </form>
-    //     </div>
-    // )
+function ApproverSort(prop) {
+    const search = prop.search;
+    const setApprover = prop.setApprover;
+
+    const changeSortOption = (e) => {
+        if(e.target.value === "desc")
+        {
+            fetch('http://localhost:3001/sort-approver-by-name-desc', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+                body: JSON.stringify({
+                    search: search
+                })
+            })
+            .then(response => response.json())
+            .then((body) => {
+                // console.log("desc")
+                // console.log(body)
+                setApprover(body)
+            })
+            
+        }
+        else
+        {
+            fetch('http://localhost:3001/sort-approver-by-name-asc', 
+            {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                    body: JSON.stringify({
+                        search: search
+                    })
+            })  .then(response => response.json())
+                .then((body) => {
+                    // console.log("asc")
+                    // console.log(body)
+                    setApprover(body) 
+                })
+        }
+    };
+
+    return(
+        <div className="row approver-sort">
+            <div>
+                <p><b>Sort by: </b></p>
+            </div>
+            <form className="sort-form">
+                <input className="sort-radio" name="sort" type="radio" id="name-asc" value="asc" onChange={changeSortOption}></input>
+                <label className="radio-label">Name (Ascending)</label>
+                <input className="sort-radio" name="sort" type="radio" id="name-desc" value="desc" onChange={changeSortOption} ></input>
+                <label className="radio-label">Name (Descending)</label>
+            </form>
+        </div>
+    )
 }
 
 function StudentAppsList(props) {
@@ -85,6 +128,22 @@ function StudentAppsList(props) {
 function ApproversList(props) {
     var approversList = props.data;
 
+    function deleteApprover(email) {
+        fetch('http://localhost:3001/delete-approver', 
+        {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+                body: JSON.stringify({
+                    upMail: email
+                })
+        }) .then(response => response.json())
+            .then((body) => {
+            console.log(body);
+          })
+    }
+
     return (
         <div className="column student-apps-list">
             {/* header */}
@@ -101,7 +160,7 @@ function ApproversList(props) {
                         {/* buttons */}
                         <div className="row admin-buttons">
                             <EditApproverModal data={approver}/>
-                            <button className="reject-button">Delete</button>
+                            <button className="reject-button" onClick={() => deleteApprover(approver.upMail)}>Delete</button>
                         </div>
                     </div>
                 ))
@@ -277,6 +336,8 @@ function CreateApproverModal() {
     )
 }
 
+
+//TODO auto refresh 
 function EditApproverModal(props) {
     let approver = props.data;
 
@@ -285,11 +346,11 @@ function EditApproverModal(props) {
         firstName: approver.firstName,
         middleName: approver.middleName,
         lastName: approver.lastName,
-        email: approver.email,
+        upMail: approver.upMail,
         password: approver.password,
-        approverType: approver.approverType
+        title: approver.title
     }); 
-
+    
     // opens the modal when called
     const openModal = () => {
         setIsOpen(true);
@@ -318,15 +379,36 @@ function EditApproverModal(props) {
             firstName: approver.firstName,
             middleName: approver.middleName,
             lastName: approver.lastName,
-            email: approver.email,
+            upMail: approver.upMail,
             password: approver.password,
-            approverType: approver.approverType
+            title: approver.title
         });
 
         // close the modal
         setIsOpen(false);
     };
 
+    function handleSumbitEdit ()  {
+        fetch('http://localhost:3001/edit-approver', 
+        {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+                body: JSON.stringify({
+                    firstName: formData.firstName,
+                    lastName: formData.lastName,
+                    middleName: formData.middleName,
+                    upMail: approver.upMail,
+                    newUpMail: formData.upMail,
+                    password: formData.password,
+                    title: formData.approverType
+                })
+        }) .then(response => response.json())
+        .then((body) => {
+            console.log(body);
+          })
+ }
     // resizing of the modal
     const modalStyle = {
         content: {
@@ -352,10 +434,16 @@ function EditApproverModal(props) {
                         <input type="text" name="firstName" value={formData.firstName || ''} onChange={handleChange} placeholder="First Name"/><br></br>
                         <input type="text" name="middleName" value={formData.middleName || ''} onChange={handleChange} placeholder="Middle Name"/><br></br>
                         <input type="text" name="lastName" value={formData.lastName || ''} onChange={handleChange} placeholder="Last Name"/><br></br>
-                        <input type="text" name="email" value={formData.email || ''} onChange={handleChange} placeholder="Email"/><br></br>
+                        <input type="text" name="upMail" value={formData.upMail || ''} onChange={handleChange} placeholder="UP Mmail"/><br></br>
                         <input type="password" name="password" value={formData.password || ''} onChange={handleChange} placeholder="Password"/><br></br>
-                        <input type="text" name="approverType" value={formData.approverType || ''} onChange={handleChange} placeholder="Approver Type"/><br></br>
-                        <button className="assign-button" type="submit">Confirm</button>
+                         {/* should be a dropdown */}
+                         {/* to fix css */}
+                        <label for="approver-type" className="approver-type-label">Approver Type:  </label>
+                        <select className="approver-type-dropdown" id="approver-type" name="approverType">
+                            <option  name="approverType" value="Adviser" onChange={handleChange}>Adviser</option>
+                            <option name="approverType" value="Clearance Officer" onChange={handleChange}>Clearance Officer</option>
+                        </select>
+                        <button className="assign-button" type="submit" onClick={handleSumbitEdit}>Confirm</button>
                     </form>
                 </div>
             </Modal>
