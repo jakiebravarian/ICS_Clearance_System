@@ -131,11 +131,15 @@ input#adviser-name {
     justify-content: space-between;
 }
 
-.search-bar {
+.approver-search-bar {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-items: start;
+}
+
+#search-bar {
+    margin: 0 32px 0 0;
 }
 
 input#search {
@@ -143,7 +147,7 @@ input#search {
     text-align: left;
     position: none;
     border-radius: 0;
-    width: 15vw;
+    width: 26vw !important;
     height: 37px;
     min-width: 100%;
     margin: 0;

@@ -13,7 +13,7 @@ import ApproverIcon from '../../assets/approver.png';
 import { getCurrentStudent } from "../../data";
 
 export default function MainScreen() {
-    // use states
+    // use states for input
     const [searchOption, setSearchOption] = useState('Student Number');
     const [adviserValue, setAdviserValue] = useState('');
     const [dateFilterValue, setDateFilterValue] = useState('');
@@ -23,10 +23,10 @@ export default function MainScreen() {
     const [dateValue, setDateValue] = useState('');
     const [nameValue, setNameValue] = useState('');
 
+    // use states for userInfo and current pending applications
     const upMail1 = localStorage.getItem("upMail");
     const [userInfo, setUserInfo] = useState({}); // Define userInfo state
     const [currentPendingApplications, setCurrentPendingApplications] = useState([]); // List of applications
-    const [searchedStudent, setSearchedStudent] = useState('');
 
     // Fetch all pending applications
     const fetchPendingApplications = () => {
@@ -48,6 +48,7 @@ export default function MainScreen() {
                 // Handle errors if needed
                 console.error(error);
             });
+        console.log(JSON.stringify(currentPendingApplications));
     };
 
 
@@ -94,10 +95,11 @@ export default function MainScreen() {
     // for form validation
     const { reset, formState: { errors }, control, handleSubmit } = useForm({ mode: 'onChange' });
 
-    const { reset: reset2, formState: { errors: errors2 }, control: control2, handleSubmit: handleSubmit2 } = useForm({ mode: 'onChange' });
+    const { formState: { errors: errors2 }, control: control2, handleSubmit: handleSubmit2 } = useForm({ mode: 'onChange' });
 
     const { reset: reset3, control: control3, handleSubmit: handleSubmit3 } = useForm({ mode: 'onChange' });
 
+    // for value of isDisbled or disabled in filter input
     const filterValue = (inputName) => {
         if (dateFilterValue.length > 0) {
             return inputName !== "date";
@@ -111,6 +113,7 @@ export default function MainScreen() {
         return false;
     };
 
+    // for value of isDisbled or disabled in sort input
     const sortValue = (inputName) => {
         if (dateValue.length > 0) {
             return inputName !== "date";
@@ -164,28 +167,69 @@ export default function MainScreen() {
 
     };
 
-    const onSearch = (data) => {
-        try {
-            console.log(JSON.stringify(data));
-        } catch (error) {
-            console.log(error)
-        }
-    }
 
+    //  Retrieves the value of a nested attribute from an object.
+    const getObjectValue = (object, attribute) => {
+        const attributes = attribute.split('.');
+        let value = object;
+
+        for (const attr of attributes) {
+            if (value && value[attr] !== undefined) {
+                value = value[attr];
+            } else {
+                value = undefined;
+                break;
+            }
+        }
+        return value;
+    };
+
+
+    //  Handles the search functionality based on the selected search option and the provided search input.
+    const onSearch = (data) => {
+        const { search } = data;
+        let searchAttribute = '';
+
+        if (searchOption === 'Student Number') {
+            searchAttribute = 'student.studentNumber';
+        } else if (searchOption === 'Student Name') {
+            searchAttribute = 'student';
+        }
+
+        let filteredApplications = [];
+
+        if (searchAttribute && Array.isArray(currentPendingApplications)) {
+            filteredApplications = currentPendingApplications.filter((application) => {
+                if (searchAttribute === 'student') {
+                    const { firstName, middleName, lastName } = application.student;
+                    const fullName = `${lastName}, ${firstName}, ${middleName}`;
+                    return fullName.toLowerCase().includes(search.toLowerCase());
+                } else {
+                    const attributeValue = getObjectValue(application, searchAttribute);
+                    return attributeValue && attributeValue.includes(search);
+                }
+            });
+        }
+
+        setCurrentPendingApplications(filteredApplications);
+    };
+
+
+    // Handles the sorting functionality based on the selected sorting options.
     const onSort = (data) => {
         const { date, name } = data;
         let sortedApplications = [...currentPendingApplications];
 
         if (date.value === 'Ascending') {
             sortedApplications.sort((a, b) => {
-                const dateA = new Date(a.studentSubmission.dateSubmission.replace(/(\d{1,2})\/(\d{1,2})\/(\d{4})/, "$2/$1/$3"));
-                const dateB = new Date(b.studentSubmission.dateSubmission.replace(/(\d{1,2})\/(\d{1,2})\/(\d{4})/, "$2/$1/$3"));
+                const dateA = new Date(a.studentSubmission.dateSubmission.replace(/(\d{1,2})\/(\d{1,2})\/(\d{4})/, '$2/$1/$3'));
+                const dateB = new Date(b.studentSubmission.dateSubmission.replace(/(\d{1,2})\/(\d{1,2})\/(\d{4})/, '$2/$1/$3'));
                 return dateA - dateB;
             });
         } else if (date.value === 'Descending') {
             sortedApplications.sort((a, b) => {
-                const dateA = new Date(a.studentSubmission.dateSubmission.replace(/(\d{1,2})\/(\d{1,2})\/(\d{4})/, "$2/$1/$3"));
-                const dateB = new Date(b.studentSubmission.dateSubmission.replace(/(\d{1,2})\/(\d{1,2})\/(\d{4})/, "$2/$1/$3"));
+                const dateA = new Date(a.studentSubmission.dateSubmission.replace(/(\d{1,2})\/(\d{1,2})\/(\d{4})/, '$2/$1/$3'));
+                const dateB = new Date(b.studentSubmission.dateSubmission.replace(/(\d{1,2})\/(\d{1,2})\/(\d{4})/, '$2/$1/$3'));
                 return dateB - dateA;
             });
         } else if (name.value === 'Ascending') {
@@ -200,7 +244,6 @@ export default function MainScreen() {
 
         setCurrentPendingApplications(sortedApplications);
     };
-
 
     // parameters for table
     const attributeName = ['student.studentNumber', 'student.fullName', 'step', 'status', 'studentSubmission.dateSubmission']
@@ -327,10 +370,10 @@ export default function MainScreen() {
                     <div id="approver-search-sort">
 
                         {/* Search Bar */}
-                        <form className="search-bar" key={2} onSubmit={handleSubmit2(onSearch)}>
+                        <form className="approver-search-bar" id="search-bar" key={2} onSubmit={handleSubmit2(onSearch)}>
                             <Controller
                                 render={({ field }) =>
-                                    <input type="text" id="search" placeholder="Search" {...field} />}
+                                    <input type="text" id="search" placeholder="Search (Student Number or LN, FN, MN)" {...field} />}
                                 name="search"
                                 control={control2}
                                 rules={{
@@ -344,7 +387,7 @@ export default function MainScreen() {
                         </form>
 
                         {/* Sort By */}
-                        <form className="search-bar" key={3} onSubmit={handleSubmit3(onSort)}>
+                        <form className="approver-search-bar" key={3} onSubmit={handleSubmit3(onSort)}>
                             <p id="sidebar-title"> Sort by: </p>
                             {/* Date */}
                             {<Controller
