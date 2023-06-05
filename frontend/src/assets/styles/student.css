@@ -110,9 +110,11 @@ body {
 }
 
 .student-info-box {
+    background-color: #094C9F;
     border: 1px solid black;
     margin-left: 80px;
     margin-right: 80px;
+    flex-wrap: wrap;
 }
 
 #main-elements {
@@ -120,53 +122,37 @@ body {
 }
 
 .info-container {
+    flex-wrap: wrap;
     background-color: #094C9F;
     height: 36.5px;
     margin: 5px;
 }
 
-#name-container {
+.student-info-box > div {
     background-color: white;
-    width: 40%;
-    height: 26px;
-    margin-left: 1%;
-    margin-top: 5px;
-    border-radius: 20px;
-    position: absolute;
-    text-align: center;
+    margin: 15px;
+    padding: 10px;
+    border-radius: 12px;
+}
+
+#name-container {
+
 }
 
 #studno-container {
-    background-color: white;
-    width: 17%;
-    margin-left: 42.5%;
-    text-align: center;
-    border-radius: 20px;
-    height: 26px;
-    margin-top: 5px;
-    position: absolute;
+   
 }
 
 #course-container {
-    background-color: white;
-    width: 11%;
-    margin-left: 61.5%;
-    text-align: center;
-    border-radius: 20px;
-    height: 26px;
-    margin-top: 5px;
-    position: absolute;
+    
 }
 
 #college-container {
-    background-color: white;
-    width: 13%;
-    margin-left: 74%;
-    text-align: center;
-    border-radius: 20px;
-    height: 26px;
-    margin-top: 5px;
-    position: absolute;
+    
+}
+
+.labels {
+    flex-wrap: wrap;
 }
 
 .labels > p {

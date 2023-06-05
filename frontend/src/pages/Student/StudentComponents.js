@@ -45,33 +45,25 @@ function StudentInfo(props) {
     return (
         <div>
             <p className="student-info-text">Student info</p>
-            <div className="student-info-box">
-                {/* info container */}
-                <div className="info-container">
-                    {/* name */}
-                    <div id="name-container">
-                        {studentInfo.name}
-                    </div>
-                    {/* Student number */}
-                    <div id="studno-container">
-                        {studentInfo.studno}
-                    </div>
-                    {/* course */}
-                    <div id="course-container">
-                        {studentInfo.course}
-                    </div>
-                    {/* college */}
-                    <div id="college-container">
-                        {studentInfo.college}
-                    </div>
+            <div className="student-info-box row">
+                {/* name */}
+                <div id="name-container">
+                    Name: {studentInfo.name}
                 </div>
 
-                {/* labels */}
-                <div className="row labels">
-                    <p id="name-label">Name</p>
-                    <p id="studno-label">Student number</p>
-                    <p id="course-label">Course</p>
-                    <p id="college-label">College</p>
+                {/* student number */}
+                <div id="studno-container">
+                    Student number: {studentInfo.studentNumber}
+                </div>
+
+                {/* course */}
+                <div id="course-container">
+                    Course: {studentInfo.course}
+                </div>
+
+                {/* college */}
+                <div id="college-container">
+                    College: {studentInfo.college}
                 </div>
             </div>
         </div>
