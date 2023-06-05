@@ -21,6 +21,39 @@ export default function MainScreen() {
     const [dateValue, setDateValue] = useState('');
     const [nameValue, setNameValue] = useState('');
 
+    const upMail1 = localStorage.getItem("upMail");
+    const [currentPendingApplications, setCurrentPendingApplications] = useState([]);
+   
+    // Fetch all pending applications
+    useEffect(() => {
+        console.log(upMail1);
+        const fetchPendingApplications = () => {
+          fetch(`http://localhost:3001/get-all-pending-applications?upMail=${upMail1}`, {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+            }
+          })
+            .then(response => response.json())
+            .then(data => {
+              // Handle the response if needed
+              console.log(data);
+              // Update the state or perform any other actions
+              setCurrentPendingApplications([...currentPendingApplications, ...data]);
+              console.log(currentPendingApplications);
+            })
+            .catch(error => {
+              // Handle errors if needed
+              console.error(error);
+            });
+        };
+      
+        fetchPendingApplications();
+      }, []);
+      
+
+    //   fetchPendingApplications();
+
     // values for dropdown menu
     let step = [
         { label: "1 - Pre Adviser", value: "1" },

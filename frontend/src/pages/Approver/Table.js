@@ -1,6 +1,7 @@
 import React from 'react';
 
 const Table = (props) => {
+
     let studentNumber = props.studentNumber;
     let studentName = props.studentName;
     let step = props.step;
