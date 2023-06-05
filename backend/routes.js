@@ -2,7 +2,7 @@ import { signUp, login, checkifloggedin } from "./auth-controller.js";
 import { getAllStudents, getCurrentStudent, submitApplication, viewStudentClearanceStatus, updateStep, updateStudentSubmission,closeApplication,getCurrentApplication, getCurrentApplications} from "./student-controller.js";
 import { searchApproverByName, filterNameAscending, filterNameDescending, deleteApprover, editApprover, approverLogin} from "./admin-approver-controller.js"
 import { sortStudentByStudentNum, assignAdviser, sortStudentByName, getPendingStudent} from "./admin-student-controller.js";
-import { getAllPendingApplications, searchStudentByName, searchStudentByStudentNumber, filterApplicationsByDate, filterApplicationsByAdviser, filterApplicationsByStep, sortApplicationsByDate, sortApplicationsByName, approveApplicationAtCurrentStep, returnAppAtCurrentStep } from './application-controller.js';
+import { getAllPendingApplications, searchStudentByName, searchStudentByStudentNumber, filterApplicationsByDate, filterApplicationsByAdviser, filterApplicationsByStep, sortApplicationsByDate, sortApplicationsByName, approveApplicationAtCurrentStep, returnAppAtCurrentStep, createApprover } from './approver-controller.js';
 
 const setUpRoutes = (app) => {
   app.get("/", (req, res) => {
@@ -37,6 +37,7 @@ const setUpRoutes = (app) => {
   app.post("/approver-login", approverLogin);  
 
   //approver routes
+  app.post("/create-approver", createApprover);
   app.get("/get-all-pending-applications", getAllPendingApplications);
   app.get("/search-student-by-name", searchStudentByName);
   app.get("/search-student-by-student-number", searchStudentByStudentNumber);
