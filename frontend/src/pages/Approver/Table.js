@@ -30,6 +30,31 @@ import React from 'react';
 // id={"approver-remark"}
 
 const Table = ({ data, columns, attributes, id }) => {
+    const getColumnValue = (rowData, columnPath) => {
+        const pathArray = columnPath.split('.');
+        let value = rowData;
+        for (const path of pathArray) {
+            value = value[path];
+            if (value === undefined) {
+                break;
+            }
+        }
+        return value;
+    };
+
+    // Calculate the student's full name
+    const getStudentFullName = (student) => {
+        return `${student.firstName} ${student.middleName} ${student.lastName}`;
+    };
+
+    // Calculate the adviser's full name based on the student's adviser object
+    const getAdviserFullName = (student) => {
+        if (student.adviser) {
+            const { firstName, middleName, lastName } = student.adviser;
+            return `${getStudentFullName(student)} (Adviser: ${firstName} ${middleName} ${lastName})`;
+        }
+        return getStudentFullName(student);
+    };
 
     return (
         <table className="table" id={id + "-table"}>
@@ -43,10 +68,16 @@ const Table = ({ data, columns, attributes, id }) => {
             <tbody>
                 {data.map((row, index) => (
                     <tr className="table-items" key={index} id={id + "-table-items"}>
-                        {attributes.map((attributes, index) => (
-                            <td key={index}>{row[attributes]}</td>
-                        ))}
-
+                        {attributes.map((attribute, index) => {
+                            if (attribute === 'student.adviser.fullName' || attribute === 'student.fullName') {
+                                return (
+                                    <td key={index}>{getAdviserFullName(row.student)}</td>
+                                );
+                            }
+                            return (
+                                <td key={index}>{getColumnValue(row, attribute)}</td>
+                            );
+                        })}
                     </tr>
                 ))}
             </tbody>

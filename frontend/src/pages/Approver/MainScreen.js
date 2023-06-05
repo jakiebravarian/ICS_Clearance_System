@@ -5,9 +5,12 @@ import '../../assets/styles/ApproverMainScreen.css';
 import { useEffect, useState } from 'react';
 import { useForm, Controller } from "react-hook-form";
 import { Header, Footer } from '../ScreenComponents';
-import { approverInfo } from '../../data.js';
 import { step, status, date, name, colourStyles } from './ApproverDropdownValues';
 import { Table } from './Table.js';
+import ApproverIcon from '../../assets/approver.png';
+
+// import data
+import { getCurrentStudent } from "../../data";
 
 export default function MainScreen() {
     // use states
@@ -23,12 +26,29 @@ export default function MainScreen() {
     const [nameValue, setNameValue] = useState('');
 
     const upMail1 = localStorage.getItem("upMail");
+    const [userInfo, setUserInfo] = useState({}); // Define userInfo state
     const [currentPendingApplications, setCurrentPendingApplications] = useState([]);
     const [searchedStudent, setSearchedStudent] = useState('');
 
     // Fetch all pending applications
     useEffect(() => {
-        console.log(upMail1);
+        const fetchData = async () => {
+            const userData = await getCurrentStudent(upMail1);
+            if (userData) {
+                setUserInfo({
+                    userId: userData._id,
+                    name: userData.firstName + " " + userData.middleName + " " + userData.lastName,
+                    studno: userData.studentNumber,
+                    course: userData.degreeProgram,
+                    college: userData.college,
+                    classification: userData.userType,
+                    icon: ApproverIcon,
+                });
+            }
+        };
+
+        fetchData();
+
         const fetchPendingApplications = () => {
             fetch(`http://localhost:3001/get-all-pending-applications?upMail=${upMail1}`, {
                 method: 'GET',
@@ -52,45 +72,7 @@ export default function MainScreen() {
 
         fetchPendingApplications();
 
-        // const searchStudentViaName = () => {
-        //     fetch('http://localhost:3001/search-student-by-name', {
-        //         method: 'GET',
-        //         headers: {
-        //             'Content-Type': 'application/json',
-        //         },
-        //         body: JSON.stringify({
-        //             search: searchBar
-        //         })
-        //     })
-        //         .then(response => response.json())
-        //         .then(data => {
-        //             // Handle the response if needed
-        //             console.log(data);
-        //             // Update the state or perform any other actions
-        //             setSearchedStudent([...searchedStudent, ...data]);
-        //             console.log(setSearchedStudent);
-        //         })
-        //         .catch(error => {
-        //             // Handle errors if needed
-        //             console.error(error);
-        //         });
-        // };
     }, []);
-
-
-
-    //   fetchPendingApplications();
-
-    // values for dropdown menu
-    let step = [
-        { label: "1 - Pre Adviser", value: "1" },
-        { label: "2 - Adviser", value: "2" },
-        { label: "3 - Clearance Officer", value: "3" },
-    ];
-
-    const attributeName = ['studentNumber', 'studentName', 'step', 'status', 'studentSubmission[dateSubmission]']
-
-    const columns = ['Student Number', 'Student Name', 'Step', 'Status', 'Date', 'Application']
 
     //functions that handle changes on each input
     const handleSearch = (e) => {
@@ -148,26 +130,14 @@ export default function MainScreen() {
         }
     }
 
-    // const data = [
-    //     {
-    //         studentNumber: '2023-12345',
-    //         studentName: 'John Doe',
-    //         step: '1',
-    //         status: 'In Progress',
-    //         date: '2023-05-30',
-    //     },
-    //     {
-    //         studentNumber: '2021-45698',
-    //         studentName: 'Jane Smith',
-    //         step: '2',
-    //         status: 'Completed',
-    //         date: '2023-05-31',
-    //     },
-    // ];
+    // parameters for table
+    const attributeName = ['student.studentNumber', 'student.fullName', 'step', 'status', 'studentSubmission.dateSubmission']
+
+    const columns = ['Student Number', 'Student Name', 'Step', 'Status', 'Date', 'Application']
 
     return (
         <div className="wrapper">
-            <Header data={approverInfo} />
+            <Header data={userInfo} />
 
             <div id="approver-content">
                 {/* Sidebar */}
