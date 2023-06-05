@@ -43,6 +43,7 @@ const signUp = async (req, res) => {
                     userType: userType,
                     title: title,
                     adviser: adviser,
+                    isVerified: "Pending",
                     application: []
                 })
                     .then(() => {

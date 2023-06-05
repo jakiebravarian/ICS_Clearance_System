@@ -13,6 +13,7 @@ const UserSchema = new Schema({
   userType: { type: String, required: true },
   title: {type: String},
   adviser: { type: Schema.Types.ObjectId, ref: "User", required: false },
+  isVerified: {type: String},
   application: [{ type: Schema.Types.ObjectId, ref: "Application" }],
 });
 

@@ -96,7 +96,27 @@ function StudentAppsList(props) {
 
     var studentsList = props.data;
     console.log(studentsList);
-  
+    
+    async function rejected(student) {
+        console.log(student);
+        try {
+          const response = await fetch("http://localhost:3001/reject-student", {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ student}),
+          });
+    
+          if (response.ok) {
+            console.log("Succesfully resubmitted application!");
+          } else {
+            console.error("Failed to resubmit application");
+          }
+        } catch (error) {
+          console.error(error);
+        }
+      }
     return (
         <div className="column student-apps-list">
             {/* header */}
@@ -115,7 +135,7 @@ function StudentAppsList(props) {
                         {/* buttons */}
                         <div className="row admin-buttons">
                             <AssignAdviserModal student = {student}/>
-                            <button className="reject-button">Reject</button>
+                            <button className="reject-button" onClick={() => rejected(student)}>Reject</button>
                         </div>
                     </div>
                 ))
