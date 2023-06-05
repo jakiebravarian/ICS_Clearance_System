@@ -49,7 +49,11 @@ export default function ManageApprovers() {
             })
             .then(response => response.json())
             .then((body) => {
-                setApprover(body)
+                if(body.length!=0){
+                    setApprover(body)
+                    return
+                }
+                fetchData();
             })
     }
  
@@ -110,7 +114,7 @@ export default function ManageApprovers() {
 
                 {/* add approver button */}
                 <div className="create-approver-div">
-                    <CreateApproverModal />
+                    <CreateApproverModal setChangedApprov = {setChangedApprov} changedApprov = {changedApprov}/>
                 </div>
             </div>
 
