@@ -18,14 +18,14 @@ function Menu(props) {
     return (
         <div className="row admin-menu">
             {/* option 1 */}
-            <div>
+            <div className="manage-application-button">
                 <form action="/manage-applications">
                     <button type="submit" className={manageApps}>Manage Student Account Applications</button>
                 </form>
             </div>
 
             {/* option 2 */}
-            <div>
+            <div  className="manage-approver-button">
                 <form action="/manage-approvers">
                     <button type="submit" className={manageApprovers}>Manage Approver Accounts</button>
                 </form>

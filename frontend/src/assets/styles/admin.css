@@ -222,3 +222,11 @@
     width: 477.5px;
     min-width: 50px;
 }
+
+.manage-application-button:hover {
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.2);
+}
+
+.manage-approver-button:hover {
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.2);
+}
