@@ -21,8 +21,10 @@ export const getAllStudents = async (req, res) => {
 export const getCurrentStudent = async (req, res) => {
   try {
     const upMail = req.query.upMail; // Get the user email from the query parameter
-    const student = await Student.findOne({ upMail: upMail }).populate('application'); // Query the student with the specified email
-    res.send(student);
+    const student = await Student.findOne({ upMail: upMail }).populate({
+      path: "application",
+      populate: { path: "remarks", populate: { path: "commenter", model: "User" } },
+    });    res.send(student);
   } catch (error) {
     console.error(error);
     res.status(500).send("Internal Server Error");

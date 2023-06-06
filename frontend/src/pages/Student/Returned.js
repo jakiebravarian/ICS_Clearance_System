@@ -30,6 +30,11 @@ export default function Returned() {
           const studentData = await getCurrentStudent(upMail1);
           if (studentData) {
             setStudent(studentData);
+            console.log(studentData);
+            const currentApp = studentData.application.find(app => app._id   === appId);
+             setCurrentApplication(currentApp);
+             setRemarks(currentApp.remarks[currentApp.remarks.length - 1]);
+            
             setUserInfo({
                 userId: studentData._id,
               name: studentData.firstName + " " + studentData.middleName + " " + studentData.lastName,
@@ -42,9 +47,9 @@ export default function Returned() {
             });
              setApplications(studentData.application);
 
-             const currentApp = studentData.application.find(app => app._id   === appId);
-             setCurrentApplication(currentApp);
+             
              setRemarks(currentApp.remarks[currentApp.remarks.length - 1]);
+
           }
         };  
 
@@ -84,10 +89,8 @@ export default function Returned() {
             </div>
 
             <div className="remarks">
-                Remarks: {remarkss.remark }
-                Date of Remarks: { remarkss.dateRemark },
-                Commenter: {remarkss.commenter },
-                stepGivenRemark: { remarkss.stepGivenRemark},
+                Remarks: {remarkss.remark }    Date of Remarks: { remarkss.dateRemark } Commenter: {remarks.commenter} stepGivenRemark: { remarkss.stepGivenRemark}
+            
             </div>
             {/* form */}
             <Form onClick={resubmitApplication} currentApplication = {currentApplication} userInfo = {userInfo}/>
