@@ -58,7 +58,7 @@ const router = createBrowserRouter([
   { path: '/verify', element: <Verify /> },
   { path: '/reject', element: <Reject /> },
   { path: '/approver', element: <MainScreen /> },
-  { path: '/view', element: <ViewStudentApplication /> },
+  { path: '/view/:appId', element: <ViewStudentApplication /> },
   { path: '/student', element: <Student /> },
   { path: '/returned/:appId', element: <Returned /> },
   { path: '/manage-applications', element: <ManageApplications /> },

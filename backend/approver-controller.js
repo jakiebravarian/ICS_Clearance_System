@@ -179,7 +179,6 @@ export const sortApplicationsByDate = async (req, res) => {
   }
 };
 
-
 export const sortApplicationsByName = async (req, res) => {
   try {
     const sortOrder = req.query.sortOrder === 'desc' ? -1 : 1;
@@ -192,6 +191,18 @@ export const sortApplicationsByName = async (req, res) => {
   } catch (error) {
     console.error('An error occurred:', error);
     res.status(500).send('An error occurred');
+  }
+};
+
+export const getCurrentStudentByStudentNum = async (req, res) => {
+  try {
+    const studentNumber = req.query.studentNum; // Get the user email from the query parameter
+    const student = await Student.findOne({ studentNumber: studentNumber }).populate('application'); // Query the student with the specified email
+    console.log(student);
+    res.send(student);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Internal Server Error");
   }
 };
 
