@@ -143,6 +143,7 @@ export default function SignUp() {
                     <div className="dropdown-content">
                         <a href="/login">Student</a>
                         <a href="/login-approver">Approver</a>
+                        <a href="/login-admin">Admin</a>
                         {/* <a href="#">Admin</a> */}
                     </div>
                 </div>
