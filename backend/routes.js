@@ -29,8 +29,8 @@ const setUpRoutes = (app) => {
 
   //admin-approver routes
   app.post("/search-approver-by-name", searchApproverByName);
-  app.post("/sort-approver-by-name-asc", filterNameAscending);
-  app.post("/sort-approver-by-name-desc", filterNameDescending);
+  app.get("/sort-approver-by-name-asc", filterNameAscending);
+  app.get("/sort-approver-by-name-desc", filterNameDescending);
   app.get("/get-current-application", getCurrentApplication);
   app.get("/get-current-applications", getCurrentApplications);
   app.post("/delete-approver", deleteApprover);
@@ -49,7 +49,7 @@ const setUpRoutes = (app) => {
   app.get("/sort-applications-by-name", sortApplicationsByName);
   app.put("/approve-application-at-current-step", approveApplicationAtCurrentStep);
   app.put("/return-application-at-current-step", returnAppAtCurrentStep);
-  app.put("/reject-student", rejectStudent)
+
   app.get("/get-approver", getApprover);
 
   //approver routes
@@ -65,7 +65,6 @@ const setUpRoutes = (app) => {
   app.get("/get-current-student-application", getCurrentStudentByApplicationId);
   app.put("/approve-application-at-current-step", approveApplicationAtCurrentStep);
   app.put("/return-application-at-current-step", returnAppAtCurrentStep);
-  app.get("/get-current-student-application", getCurrentStudentByStudentNum);
 
   //admin routes
   app.post("/assign-adviser", assignAdviser);
@@ -74,4 +73,3 @@ const setUpRoutes = (app) => {
 
 };
 export default setUpRoutes;
-
