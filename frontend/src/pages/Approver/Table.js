@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Table = ({ data, columns, attributes, id, purpose }) => {
     const getColumnValue = (rowData, columnPath) => {
@@ -35,28 +36,36 @@ const Table = ({ data, columns, attributes, id, purpose }) => {
                 </tr>
             </thead>
             <tbody>
-                {data.map((row, rowIndex) => (
-                    <tr
-                        className="table-items"
-                        key={rowIndex}
-                        id={`${id}-table-items`}
-                    >
-                        {attributes.map((attribute, attrIndex) => {
-                            if (
-                                attribute === "student.adviser.fullName" ||
-                                attribute === "student.fullName"
-                            ) {
-                                return (
-                                    <td key={attrIndex}>
-                                        {getAdviserFullName(row.student)}
-                                    </td>
-                                );
-                            }
-                            return <td key={attrIndex}>{getColumnValue(row, attribute)}</td>;
-                        })}
-                        {purpose === "view" && <td><a id="view-button" href="/view">View</a></td>}
-                    </tr>
-                ))}
+                {data.map((row, rowIndex) => {
+                    return (
+                        <tr
+                            className="table-items"
+                            key={rowIndex}
+                            id={`${id}-table-items`}
+                        >
+                            {attributes.map((attribute, attrIndex) => {
+                                if (
+                                    attribute === "student.adviser.fullName" ||
+                                    attribute === "student.fullName"
+                                ) {
+                                    return (
+                                        <td key={attrIndex}>
+                                            {getAdviserFullName(row.student)}
+                                        </td>
+                                    );
+                                }
+                                return <td key={attrIndex}>{getColumnValue(row, attribute)}</td>;
+                            })}
+                            {purpose === "view" && (
+                                <td>
+                                    <Link to={`/view/${row._id}`} id="view-button">
+                                        View
+                                    </Link>
+                                </td>
+                            )}
+                        </tr>
+                    )
+                })}
             </tbody>
         </table>
     );

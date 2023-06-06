@@ -95,7 +95,7 @@ export default function MainScreen() {
     // for form validation
     const { reset, formState: { errors }, control, handleSubmit } = useForm({ mode: 'onChange' });
 
-    const { formState: { errors: errors2 }, control: control2, handleSubmit: handleSubmit2 } = useForm({ mode: 'onChange' });
+    const { reset: reset2, formState: { errors: errors2 }, control: control2, handleSubmit: handleSubmit2 } = useForm({ mode: 'onChange' });
 
     const { reset: reset3, control: control3, handleSubmit: handleSubmit3 } = useForm({ mode: 'onChange' });
 
@@ -351,6 +351,7 @@ export default function MainScreen() {
                             </div>
 
                             {/* Reset & Apply Buttons */}
+                            <button className="filter-button" type="submit">Apply Filters</button>
                             <button className="filter-button" id="reset-btn" onClick={() => {
                                 reset();
                                 setDateFilterValue('');
@@ -359,7 +360,7 @@ export default function MainScreen() {
                                 setStepValue('');
                                 fetchPendingApplications();
                             }} >Reset Filters</button>
-                            <button className="filter-button" type="submit">Apply Filters</button>
+
                         </form>
                     </div>
 
@@ -383,7 +384,11 @@ export default function MainScreen() {
                             />
                             {errors2.search && <p id="error-message">{errors2.search.message}</p>}
 
-                            <button id="search-btn" type="submit"><i className="fa fa-search" /></button>
+                            <button className="search-btn" type="submit" ><i className="fa fa-search" /></button>
+                            <button className="search-btn" id="refresh-btn" onClick={() => {
+                                reset2();
+                                fetchPendingApplications();
+                            }}><i className="fa fa-refresh" /></button>
                         </form>
 
                         {/* Sort By */}
@@ -395,7 +400,7 @@ export default function MainScreen() {
                                 control={control3}
                                 defaultValue=""
                                 render={({ field }) => (
-                                    <div style={{ width: '170px', padding: 8 }}>
+                                    <div style={{ width: '170px', padding: '0 8px' }}>
                                         <Select
                                             className="filter-dropdown"
                                             options={date}
@@ -432,13 +437,13 @@ export default function MainScreen() {
                             />}
 
                             {/* Reset & Apply */}
+                            <button className="sort-button" type="submit"><i className="fa fa-check-square-o" /></button>
                             <button className="sort-button" id="reset-btn" onClick={() => {
                                 reset3();
                                 setDateValue('');
                                 setNameValue('');
                                 fetchPendingApplications();
-                            }} >Reset</button>
-                            <button className="sort-button" type="submit">Apply</button>
+                            }} ><i className="fa fa-refresh" /></button>
                         </form>
 
                     </div>

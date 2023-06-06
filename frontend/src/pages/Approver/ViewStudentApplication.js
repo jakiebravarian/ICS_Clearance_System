@@ -2,31 +2,80 @@ import React from "react";
 import '../../assets/styles/Home.css';
 import '../../assets/styles/ViewStudentApplication.css';
 import { useEffect, useState } from 'react';
-import { useForm, Controller } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { Header, Footer } from '../ScreenComponents';
 import { approverInfo } from '../../data.js';
 import { Table } from "./Table";
+import ApproverIcon from '../../assets/approver.png';
+
+import { useParams } from 'react-router-dom';
+
+// import data
+import { getCurrentStudent } from "../../data";
 
 export default function ViewStudentApplication() {
     // use states
     const [remarks, setRemarks] = useState('');
+
+    // use states for userInfo and current student
+    const upMail1 = localStorage.getItem("upMail");
+    const [userInfo, setUserInfo] = useState({}); // Define userInfo state
+    const [currentApplication, setCurrentApplication] = useState([]);
+
+    const { appId } = useParams(); // Get the value from the URL path
+
+    useEffect(() => {
+        // Fetch user data
+        const fetchData = async () => {
+            const userData = await getCurrentStudent(upMail1);
+            if (userData) {
+                setUserInfo({
+                    userId: userData._id,
+                    name: userData.firstName + " " + userData.middleName + " " + userData.lastName,
+                    studno: userData.studentNumber,
+                    course: userData.degreeProgram,
+                    college: userData.college,
+                    classification: userData.userType,
+                    icon: ApproverIcon,
+                });
+            }
+        };
+
+        fetchData();
+
+        const fetchCurrentApplication = () => {
+            fetch(`http://localhost:3001/get-current-application?applicationId=${appId}`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            })
+                .then(response => response.json())
+                .then(data => {
+                    // Handle the response if needed
+                    console.log(data);
+                    // Update the state or perform any other actions
+                    setCurrentApplication([data]);
+                    console.log(currentApplication);
+                })
+                .catch(error => {
+                    // Handle errors if needed
+                    console.error(error);
+                });
+            console.log(JSON.stringify(currentApplication));
+        };
+
+        fetchCurrentApplication();
+
+    }, []);
+
 
     //functions that handle changes on each input
     const handleRemarks = (e) => {
         setRemarks(e.target.value);
     }
 
-    // data for student information
-    const studentInformation = [
-        {
-            studentName: "Brabante, Jakie Ashley, Cacho",
-            studentNumber: "20XX-XXXXX",
-            degreeProgram: "BS Computer Science",
-            college: "CAS"
-        }
-    ]
-
-    const studentInformationAttributes = ['studentName', 'studentNumber', 'degreeProgram', 'college']
+    const studentInformationAttributes = ['student.fullName', 'student.studentNumber', 'student.degreeProgram', 'student.college']
 
     const studentInformationColumns = ['Name (LN, FN, MN)', 'Student Number', 'Degree Program', 'College']
 
@@ -39,7 +88,7 @@ export default function ViewStudentApplication() {
         }
     ]
 
-    const applicationInformationAttributes = ['adviserName', 'status', 'currentStep']
+    const applicationInformationAttributes = ['student.fullName', 'status', 'step']
 
     const applicationInformationColumns = ['Academic Adviser (LN, FN, MN)', 'Status', 'Current Step']
 
@@ -90,15 +139,19 @@ export default function ViewStudentApplication() {
 
     return (
         <div className="wrapper">
-            <Header data={approverInfo} />
+            <Header data={userInfo} />
             <div className="content">
                 <div className="student-information">
                     <h3 className="section-title">Student Information</h3>
-                    <Table className="information-table" data={studentInformation} columns={studentInformationColumns} attributes={studentInformationAttributes} id={"student-information"} />
+                    {currentApplication && (
+                        <Table className="information-table" data={currentApplication} columns={studentInformationColumns} attributes={studentInformationAttributes} id="student-information" />
+                    )}
                 </div>
                 <div className="application-information">
                     <h3 className="section-title">Application Information</h3>
-                    <Table className="information-table" data={applicationInformation} columns={applicationInformationColumns} attributes={applicationInformationAttributes} id={"application-information"} />
+                    {currentApplication && (
+                        <Table className="information-table" data={currentApplication} columns={applicationInformationColumns} attributes={applicationInformationAttributes} id="application-information" />
+                    )}
                     <div className="remarks-student">
                         <p className="header-title">Submission / Remarks of Student</p>
                         <Table className="remarks-table" data={studentRemark} columns={studentRemarkColumns} attributes={studentRemarkAttributes} id={"student-remark"} />
