@@ -262,14 +262,15 @@ export const approveApplicationAtCurrentStep = async (req, res) => {
 
 export const returnAppAtCurrentStep = async (req, res) => {
   try {
-    const { applicationId, remarkSubmission } = req.body;
+    const { appId, remarkSubmission } = req.body;
+
     // Find the application by ID
-    const application = await Application.findById(applicationId);
+    const application = await Application.findById(appId);
     if (!application) {
       return res.status(404).send('Application not found');
     }
     application.remarks.push(remarkSubmission);
-    application.status
+    application.status = "Pending";
     application.save();
     res.send('Application returned to previous step successfully');
   } catch (error) {

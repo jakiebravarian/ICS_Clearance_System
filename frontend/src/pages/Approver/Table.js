@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const Table = ({ data, columns, attributes, id, purpose }) => {
+const Table = ({ data = [], columns, attributes, id, purpose }) => {
     const getColumnValue = (rowData, columnPath) => {
         const pathArray = columnPath.split(".");
         let value = rowData;
@@ -53,8 +53,13 @@ const Table = ({ data, columns, attributes, id, purpose }) => {
                                             {getAdviserFullName(row.student)}
                                         </td>
                                     );
+                                } else {
+                                    return (
+                                        <td key={attrIndex}>
+                                            {getColumnValue(row, attribute)}
+                                        </td>
+                                    );
                                 }
-                                return <td key={attrIndex}>{getColumnValue(row, attribute)}</td>;
                             })}
                             {purpose === "view" && (
                                 <td>
@@ -64,7 +69,7 @@ const Table = ({ data, columns, attributes, id, purpose }) => {
                                 </td>
                             )}
                         </tr>
-                    )
+                    );
                 })}
             </tbody>
         </table>
