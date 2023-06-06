@@ -171,17 +171,18 @@ function ApproversList(props) {
         <div className="column student-apps-list">
             {/* header */}
             <div className="row list-header">
-                <div className="row col-labels">
+                <div className="row col-labels-approver">
                     <p className="first-col-label">Approver Name</p>
+                    {/* <p className="second-label-approver">Approver Type</p> */}
                 </div>
             </div>
             {
                 approversList.map((approver, index) => (
                     <div className="row apps-list"  key= {index}>
                         <p className="first-col">{approver.lastName.toUpperCase()}, {approver.firstName} {approver.middleName}</p>
-                        
                         {/* buttons */}
                         <div className="row admin-buttons">
+                            <button className="approver-type"><b>Type: </b> {approver.title}</button>
                             <EditApproverModal data={approversList[index]} setApprover={setApprover} list={approversList}/>
                             <button className="reject-button" onClick={() => deleteApprover(approver.upMail)}>Delete</button>
                         </div>
