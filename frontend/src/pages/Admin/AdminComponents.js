@@ -314,7 +314,7 @@ function CreateApproverModal(props) {
         lastName: '',
         upMail: '',
         password: '',
-        title: 'Adviser'
+        title: ''
     }); // initially empty strings
 
     // opens the modal when called
@@ -404,9 +404,10 @@ function CreateApproverModal(props) {
                         <input type="password" name="password" value={formData.password || ''} onChange={handleChange} placeholder="Password"/><br></br>
                          {/* should be a dropdown */}
                          <label className="approver-type-label">Approver Type:  </label>
-                        <select className="approver-type-dropdown" id="approver-type" name="approverType">
-                            <option  name="title" value="Adviser" onChange={handleChange}>Adviser</option>
-                            <option name="title" value="Clearance Officer" onChange={handleChange}>Clearance Officer</option>
+                        <select className="approver-type-dropdown" id="approver-type" name="title" onChange={handleChange}>
+                            <option value="" disabled selected>Select Approver Type</option>
+                            <option  name="title" value="Adviser" >Adviser</option>
+                            <option name="title" value="Clearance Officer">Clearance Officer</option>
                         </select>
                         <button className="assign-button" type="submit" onClick={createApprover}>Create Account</button>
                     </form>
@@ -423,11 +424,15 @@ function EditApproverModal(props) {
     let approversList = props.list;
     let setApprover = props.setApprover;
 
-    console.log("approvers list edit")
-    console.log(approversList)
 
     const [isOpen, setIsOpen] = useState(false);
-    const [formData, setFormData] = useState([]); 
+    const [formData, setFormData] = useState({
+        firstName: '',
+        middleName: '',
+        lastName: '',
+        upMail: '',
+        password: '',
+        title: ''}); 
 
     useEffect(()=>{
         setFormData(approver);
@@ -477,6 +482,8 @@ function EditApproverModal(props) {
     function handleSumbitEdit ()  {
 
         deleteObject(approver.upMail);
+        console.log("edit formdata")
+        console.log(formData)
 
         fetch('http://localhost:3001/edit-approver', 
         {
@@ -491,11 +498,10 @@ function EditApproverModal(props) {
                     upMail: approver.upMail,
                     newUpMail: formData.upMail,
                     password: formData.password,
-                    title: formData.approverType
+                    title: formData.title
                 })
         }) .then(response => response.json())
         .then((body) => {
-            console.log(body);
             setApprover((prevData) => [...prevData, body]);
           })
  }
@@ -520,7 +526,7 @@ function EditApproverModal(props) {
                     <p>Edit Approver Account</p>
                 </div>
                 <div className="centered modal-form-div">
-                    <form className="modal-form" onSubmit={handleSubmit}>
+                    <form className="modal-form" onSubmit={handleSumbitEdit}>
                         <input type="text" name="firstName" value={formData.firstName || ''} onChange={handleChange} placeholder="First Name"/><br></br>
                         <input type="text" name="middleName" value={formData.middleName || ''} onChange={handleChange} placeholder="Middle Name"/><br></br>
                         <input type="text" name="lastName" value={formData.lastName || ''} onChange={handleChange} placeholder="Last Name"/><br></br>
@@ -529,11 +535,12 @@ function EditApproverModal(props) {
                          {/* should be a dropdown */}
                          {/* to fix css */}
                         <label for="approver-type" className="approver-type-label">Approver Type:  </label>
-                        <select className="approver-type-dropdown" id="approver-type" name="approverType">
-                            <option  name="approverType" value="Adviser" onChange={handleChange}>Adviser</option>
-                            <option name="approverType" value="Clearance Officer" onChange={handleChange}>Clearance Officer</option>
+                        <select className="approver-type-dropdown" id="approver-type" name="title" defaultValue= {formData.title} onChange={handleChange}>
+                            <option value="" disabled selected>Select Approver Type</option>
+                            <option  name="title" value="Adviser">Adviser</option>
+                            <option name="title" value="Clearance Officer">Clearance Officer</option>
                         </select>
-                        <button className="assign-button" type="submit" onClick={handleSumbitEdit}>Confirm</button>
+                        <button className="assign-button" type="submit" >Confirm</button>
                     </form>
                 </div>
             </Modal>
