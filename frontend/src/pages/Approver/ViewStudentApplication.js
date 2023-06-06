@@ -26,6 +26,7 @@ export default function ViewStudentApplication() {
     const { appId } = useParams(); // Get the value from the URL path
 
     const fetchCurrentApplication = () => {
+        console.log(appId);
         fetch(`http://localhost:3001/get-current-application?applicationId=${appId}`, {
             method: 'GET',
             headers: {
@@ -49,6 +50,7 @@ export default function ViewStudentApplication() {
         // Fetch user data
         const fetchData = async () => {
             const userData = await getCurrentStudent(upMail1);
+            console.log(userData);
             if (userData) {
                 setUserInfo({
                     userId: userData._id,
@@ -147,7 +149,7 @@ export default function ViewStudentApplication() {
                 commenter: userInfo.userId,
                 stepGivenRemark: currentApplication[0].step,
             };
-
+            
             returnApplication(remarkSubmission);
             fetchCurrentApplication();
 
@@ -182,27 +184,71 @@ export default function ViewStudentApplication() {
                         )}
                     </div>
                 </div>
+                {userInfo.title === "Clearance Officer" && currentApplication.step !== 3 && (
                 <div className="approve-return">
                     <h3 className="section-title">Approve/Return Application</h3>
                     <form onSubmit={handleSubmit(onSubmit)}>
-                        <input
-                            type="text"
-                            id="remark"
-                            placeholder="Write your remarks here. Write N/A if you want to approve the student's application."
-                            {...register("remark", {
+                    <input
+                        type="text"
+                        id="remark"
+                        placeholder="Write your remarks here. Write N/A if you want to approve the student's application."
+                        {...register("remark", {
+                        onChange: handleRemarks,
+                        required:
+                            "Please enter your remarks returning the student's application. Write N/A if you want to approve the student's application.",
+                        })}
+                    />
+                    {errors.remark && <p id="error-message">{errors.remark.message}</p>}
+
+                    <div className="buttons">
+                        <button
+                        type="submit"
+                        className="filter-button"
+                        id="approve-btn"
+                        onClick={handleSubmit(approveApplication)}
+                        >
+                        Approve
+                        </button>
+                        <button type="submit" className="filter-button" id="return-btn">
+                        Return
+                        </button>
+                    </div>
+    </form>
+  </div>
+)}
+                {userInfo.title === "Adviser" && (
+                    <div className="approve-return">
+                        <h3 className="section-title">Approve/Return Application</h3>
+                        <form onSubmit={handleSubmit(onSubmit)}>
+                            <input
+                                type="text"
+                                id="remark"
+                                placeholder="Write your remarks here. Write N/A if you want to approve the student's application."
+                                {...register("remark", {
                                 onChange: handleRemarks,
-                                required: "Please enter your remarks returning the student's application. Write N/A if you want to approve the student's application.",
-                            })}
-                        />
-                        {errors.remark && <p id="error-message">{errors.remark.message}</p>}
+                                required:
+                                    "Please enter your remarks returning the student's application. Write N/A if you want to approve the student's application.",
+                                })}
+                            />
+                            {errors.remark && <p id="error-message">{errors.remark.message}</p>}
 
-                        <div className="buttons">
-                            <button type="submit" className="filter-button" id="approve-btn" onClick={handleSubmit(approveApplication)}>Approve</button>
-                            <button type="submit" className="filter-button" id="return-btn">Return</button>
-                        </div>
+                            <div className="buttons">
+                                <button
+                                type="submit"
+                                className="filter-button"
+                                id="approve-btn"
+                                onClick={handleSubmit(approveApplication)}
+                                >
+                                Approve
+                                </button>
+                                <button type="submit" className="filter-button" id="return-btn">
+                                Return
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+)}
 
-                    </form>
-                </div>
             </div>
             <Footer id="view-footer" />
         </div >

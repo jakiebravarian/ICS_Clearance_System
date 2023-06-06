@@ -156,7 +156,7 @@ export const getCurrentApplication = async (req, res) => {
     const applicationId = req.query.applicationId; // Get the applicationId from the request parameters
     // Find the application by applicationId
     console.log(req.query);
-    const application = await Application.findById(applicationId).populate({ path: "student", populate: { path: "remarks.commenter" }  })
+    const application = await Application.findById(applicationId).populate({ path: "student", populate: "adviser" })
     .populate({ path: "remarks.commenter", model: "User" });;
     console.log(application);
     if (!application) {
