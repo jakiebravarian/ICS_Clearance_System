@@ -5,7 +5,7 @@ import Cookies from 'universal-cookie';
 import logo from '../../assets/ICS.png';
 import '../../assets/styles/Home.css';
 
-export default function LoginApprover() {
+export default function LoginAdmin() {
   const [upMail, setUpMail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -13,7 +13,7 @@ export default function LoginApprover() {
 
   useEffect(() => {
     if (isLoggedIn) {
-      navigate("/approver");
+      navigate("/manage-applications");
     }
   }, [isLoggedIn, navigate]);
 
@@ -48,7 +48,7 @@ export default function LoginApprover() {
             sameSite: false,
           });
           localStorage.setItem("upMail", upMail);
-          navigate("/approver");
+          navigate("/manage-applications");
         } else {
           alert("Log in failed");
         }
@@ -94,7 +94,7 @@ export default function LoginApprover() {
         <h3>CLEARANCE APPROVAL SYSTEM</h3>
       </div>
       <form className="form" onSubmit={handleSubmit(onSubmit)}>
-        <h1 id="login-h1">Welcome Back, Approver!</h1>
+        <h1 id="login-h1">Welcome Back, Admin!</h1>
         <input
           type="email"
           id="email-login"

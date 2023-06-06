@@ -7,6 +7,7 @@ import { redirect } from 'react-router-dom';
 import Home from './pages/Login-Signup/Home';
 import Login from './pages/Login-Signup/Login';
 import LoginAprrover from './pages/Login-Signup/Login-Approver';
+import LoginAdmin from './pages/Login-Signup/Login-Admin';
 import SignUp from './pages/Login-Signup/SignUp';
 import Verify from './pages/Login-Signup/Verify';
 import Student from './pages/Student/Student';
@@ -54,6 +55,7 @@ const router = createBrowserRouter([
   { path: '/', element: <Home /> },
   { path: '/login', element: <Login /> },
   { path: '/login-approver', element: <LoginAprrover /> },
+  { path: '/login-admin', element: <LoginAdmin /> },
   { path: '/signup', element: <SignUp /> },
   { path: '/verify', element: <Verify /> },
   { path: '/reject', element: <Reject /> },
