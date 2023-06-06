@@ -65,7 +65,7 @@ const router = createBrowserRouter([
   { path: '/returned/:appId', element: <Returned /> },
   { path: '/manage-applications', element: <ManageApplications /> },
   { path: '/manage-approvers', element: <ManageApprovers /> },
-  { path: '/pdf-generator', element: <PDFGenerator /> },
+  { path: '/pdf-generator/:appId', element: <PDFGenerator /> },
 ])
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
