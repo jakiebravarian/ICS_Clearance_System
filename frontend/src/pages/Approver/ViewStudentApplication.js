@@ -52,44 +52,83 @@ export default function ViewStudentApplication() {
                 .then(response => response.json())
                 .then(data => {
                     // Handle the response if needed
-                    console.log("data");
                     console.log(data);
                     // Update the state or perform any other actions
                     setCurrentApplication([data]);
-
-
                 })
                 .catch(error => {
                     // Handle errors if needed
                     console.error(error);
                 });
-
         };
 
         fetchCurrentApplication();
 
     }, []);
 
+    async function approveApplication() {
+        try {
+            const response = await fetch("http://localhost:3001/approve-application-at-current-step", {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ appId }),
+
+            });
+
+            if (response.ok) {
+                console.log("Application approved successfully");
+
+            } else {
+                console.error("Failed to approve application");
+            }
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+    async function returnApplication() {
+        // try {
+        //     const response = await fetch("http://localhost:3001/approve-application-at-current-step", {
+        //         method: "PUT",
+        //         headers: {
+        //             "Content-Type": "application/json",
+        //         },
+        //         body: JSON.stringify({ appId }),
+
+        //     });
+
+        //     if (response.ok) {
+        //         console.log("Application approved successfully");
+
+        //     } else {
+        //         console.error("Failed to approve application");
+        //     }
+        // } catch (error) {
+        //     console.error(error);
+        // }
+    }
 
     //functions that handle changes on each input
     const handleRemarks = (e) => {
         setRemarks(e.target.value);
     }
 
+    // for student info table
     const studentInformationAttributes = ['student.fullName', 'student.studentNumber', 'student.degreeProgram', 'student.college']
-
     const studentInformationColumns = ['Name (LN, FN, MN)', 'Student Number', 'Degree Program', 'College']
 
+    // for application info table
     const applicationInformationAttributes = ['student.fullName', 'status', 'step']
-
     const applicationInformationColumns = ['Academic Adviser (LN, FN, MN)', 'Status', 'Current Step']
 
+    // for student remark/s table
     const studentRemarkAttributes = ['studentSubmission.dateSubmission', 'studentSubmission.stepGivenSubmission', 'studentSubmission.remarkSubmission']
-
     const studentRemarkColumns = ['Date', 'Step', 'Link/Remark']
 
+    // for approver remark/s table
     const approverRemarkAttributes = ['remarks.dateRemark', 'remarks.stepGivenRemark', 'remarks.commenter', 'remarks.remark']
-
     const approverRemarkColumns = ['Date', 'Step', 'Commenter', 'Remark']
 
     // for form validation
@@ -98,6 +137,7 @@ export default function ViewStudentApplication() {
     const onSubmit = (data) => {
         try {
             console.log(JSON.stringify(data));
+            returnApplication(data);
         } catch (error) {
             console.log(error)
         }
@@ -142,7 +182,7 @@ export default function ViewStudentApplication() {
                         {errors.remark && <p id="error-message">{errors.remark.message}</p>}
 
                         <div className="buttons">
-                            <button type="submit" className="filter-button" id="approve-btn">Approve</button>
+                            <button type="submit" className="filter-button" id="approve-btn" onClick={handleSubmit(approveApplication)}>Approve</button>
                             <button type="submit" className="filter-button" id="return-btn">Return</button>
                         </div>
 

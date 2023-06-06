@@ -47,7 +47,7 @@ const setUpRoutes = (app) => {
   app.get("/filter-applications-by-step", filterApplicationsByStep);
   app.get("/sort-applications-by-date", sortApplicationsByDate);
   app.get("/sort-applications-by-name", sortApplicationsByName);
-  app.put("/approve-application-at-current-step", approveApplicationAtCurrentStep);
+  // app.put("/approve-application-at-current-step", approveApplicationAtCurrentStep);
   app.put("/return-application-at-current-step", returnAppAtCurrentStep);
 
   app.get("/get-approver", getApprover);
