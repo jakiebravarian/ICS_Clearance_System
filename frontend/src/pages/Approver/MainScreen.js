@@ -62,6 +62,7 @@ export default function MainScreen() {
                     course: userData.degreeProgram,
                     college: userData.college,
                     classification: userData.userType,
+                    title: userData.title,
                     icon: ApproverIcon,
                 });
             }

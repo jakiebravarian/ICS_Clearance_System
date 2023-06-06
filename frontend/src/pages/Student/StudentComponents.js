@@ -73,7 +73,10 @@ function StudentInfo(props) {
 }
 
 // renders form on the homepage
-function Form({ onClick }) {
+function Form(props) {
+    const[step,setStep] = useState(0);
+    const[bool,setBool] = useState(false);
+
     const handleSubmit = (event) => {
         event.preventDefault();
 
@@ -81,20 +84,39 @@ function Form({ onClick }) {
         const githubLink = document.getElementById("github-link-input").value;
         const dateApplied = new Date().toLocaleDateString();
         const remarkValue = document.getElementById("remarks-input").value;
+
         const studentSubmission = {
             dateSubmission: dateApplied,
         }
-        if (remarkValue.length === 0) {
-            studentSubmission.remarkSubmission = githubLink;
-            studentSubmission.stepGivenSubmission = 1;
-        } else {
-            studentSubmission.remarkSubmission = remarkValue;
-            studentSubmission.stepGivenSubmission = 2;
+        const conditions = {}
+        if (!props.userInfo.hasOpenedApplication){// di pa nagbukas ng application or puro closed
+               studentSubmission.remarkSubmission = githubLink;
+               studentSubmission.stepGivenSubmission = 2;
+               conditions.bool = true;
+               conditions.step = 1;
+            }else{
+            if(props.currentApplication.step === 1){ //binalik ang application ng adviser
+               studentSubmission.remarkSubmission = githubLink;
+               studentSubmission.stepGivenSubmission = 2;
+               console.log("haha1");
+               conditions.bool = false;
+               conditions.step = 1;
+               setStep(1);
+            }
+            if(props.currentApplication.step === 2){ // naapprove ng adviser // binalik ng clearance officer
+                studentSubmission.remarkSubmission = remarkValue;
+                studentSubmission.stepGivenSubmission = 3;
+                console.log("haha2");
+                conditions.bool = false;
+                conditions.step = 2;
+            }
         }
         console.log(studentSubmission);
+        
         // Call the onClick event handler and pass the values as parameters
-        onClick(event, studentSubmission);
+        props.onClick(event, studentSubmission,conditions);
     };
+
     return (
         <div>
             {/*form */}
@@ -129,7 +151,7 @@ function Form({ onClick }) {
 function Application(props) {
     const [applications, setApplications] = useState(props.data);
     const [allClosed, setAllApplicationsClosed] = useState(false);
-
+    
     useEffect(() => {
         const upMail1 = localStorage.getItem("upMail");
 
@@ -143,7 +165,6 @@ function Application(props) {
                     setApplications(data);
                     const allClosed = data.every((app) => app.status === "Closed");
                     setAllApplicationsClosed(allClosed);
-                    console.log(allClosed);
                 } else {
                     console.error("Failed to fetch applications");
                 }
@@ -154,32 +175,6 @@ function Application(props) {
 
         fetchData();
     });
-
-    if (applications.length === 0) {
-        return (
-            <div>
-                <div>
-                    <p className="form-prompt">
-                        No applications yet. To start one, please fill out the form below.
-                    </p>
-                </div>
-                <Form onClick={props.onClick} />
-            </div>
-        );
-    }
-
-    if (allClosed) {
-        return (
-            <div>
-                <div>
-                    <p className="form-prompt">
-                        You only have closed applications. To start a new application, please fill out the form below.
-                    </p>
-                </div>
-                <Form onClick={props.onClick} />
-            </div>
-        );
-    }
 
     async function closeApplication(application) {
         try {
@@ -210,6 +205,47 @@ function Application(props) {
         }
     }
 
+
+    if (applications.length === 0) {
+        return (
+            <div>
+                <div>
+                    <p className="form-prompt">
+                        No applications yet. To start one, please fill out the form below.
+                    </p>
+                </div>
+                <Form onClick={props.onClick} userInfo = {props.student}/>
+            </div>
+        );
+    }
+
+    if (allClosed) {
+        return (
+            <div>
+                <div>
+                    <p className="form-prompt">
+                        You only have closed applications. To start a new application, please fill out the form below.
+                    </p>
+                </div>
+                <Form onClick={props.onClick} userInfo = {props.student}/>
+            </div>
+        );
+    }
+
+    if (props.currentApplication.step === 2) {
+        return (
+            <div>
+                <div>
+                    <p className="form-prompt">
+                        Your application has been approved by your adviser,please proceed to the next step, you may enter your remark
+                    </p>
+                </div>
+                <Form onClick={props.onClick} currentApplication = {props.currentApplication}/>
+            </div>
+        );
+    }
+
+  
     // if there are applications show status and date
     return (
         <div className="apps-container">

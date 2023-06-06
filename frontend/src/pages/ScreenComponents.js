@@ -27,13 +27,14 @@ function ProfileHeader(props) {
 // renders header on the page
 function Header(props) {
     let userInfo = props.data;
+    console.log(userInfo);
 
     return (
         <div id="page-header-user">
             <h1 id="page-header-h1">Institute of Computer Science - Clearance Approval System</h1>
             <h1 id="page-header-h1-M">ICS - Clearance Approval System</h1>
             {/* profile indicator */}
-            <ProfileHeader name={userInfo.name} classification={userInfo.classification} icon={userInfo.icon} />
+            <ProfileHeader name={userInfo.name} classification={userInfo.title} icon={userInfo.icon} />
         </div>
     )
 }

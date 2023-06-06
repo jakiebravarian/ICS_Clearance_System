@@ -245,7 +245,7 @@ export const approveApplicationAtCurrentStep = async (req, res) => {
 
     // Update the application status and increment the step
     application.step += 1;
-    if (application.step == 4) {
+    if (application.step == 3) {
       application.status = "Cleared";
     }
 
@@ -325,4 +325,6 @@ export const createApprover = async (req, res) => {
     }
 
   }
+
+  
 }

@@ -22,11 +22,35 @@ export default function ViewStudentApplication() {
     const upMail1 = localStorage.getItem("upMail");
     const [userInfo, setUserInfo] = useState({}); // Define userInfo state
     const [currentApplication, setCurrentApplication] = useState([]);
+    const [boolApprov, setBoolApprov] = useState([]);
+
 
     const { appId } = useParams(); // Get the value from the URL path
 
-    const fetchCurrentApplication = () => {
-        console.log(appId);
+
+ 
+
+    useEffect(() => {
+        // Fetch user data
+        const fetchData = async () => {
+            const userData = await getCurrentStudent(upMail1);
+            console.log(userData);
+
+            if (userData) {
+                setUserInfo({
+                    userId: userData._id,
+                    name: userData.firstName + " " + userData.middleName + " " + userData.lastName,
+                    studno: userData.studentNumber,
+                    course: userData.degreeProgram,
+                    college: userData.college,
+                    classification: userData.userType,
+                    title: userData.title,
+                    icon: ApproverIcon,
+                });
+            }
+        };
+
+        fetchData();
         fetch(`http://localhost:3001/get-current-application?applicationId=${appId}`, {
             method: 'GET',
             headers: {
@@ -39,38 +63,17 @@ export default function ViewStudentApplication() {
                 console.log(data);
                 // Update the state or perform any other actions
                 setCurrentApplication([data]);
+                console.log(currentApplication);
             })
             .catch(error => {
                 // Handle errors if needed
                 console.error(error);
             });
-    };
+        console.log(currentApplication);
 
-    useEffect(() => {
-        // Fetch user data
-        const fetchData = async () => {
-            const userData = await getCurrentStudent(upMail1);
-            console.log(userData);
-            if (userData) {
-                setUserInfo({
-                    userId: userData._id,
-                    name: userData.firstName + " " + userData.middleName + " " + userData.lastName,
-                    studno: userData.studentNumber,
-                    course: userData.degreeProgram,
-                    college: userData.college,
-                    classification: userData.userType,
-                    icon: ApproverIcon,
-                });
-            }
-        };
+    }, [boolApprov]);
 
-        fetchData();
-
-
-
-        fetchCurrentApplication();
-
-    }, []);
+    
 
     async function approveApplication() {
         try {
@@ -85,6 +88,7 @@ export default function ViewStudentApplication() {
             if (response.ok) {
                 console.log("Application approved successfully");
                 alert("Application approved successfully!")
+                setBoolApprov(!boolApprov);
                 navigate("/approver", { replace: true });
             } else {
                 console.error("Failed to approve application");
@@ -108,6 +112,7 @@ export default function ViewStudentApplication() {
             if (response.ok) {
                 console.log("Application returned to previous step successfully");
                 alert("Application returned to previous step successfully!");
+                setBoolApprov(!boolApprov);
                 navigate("/approver", { replace: true });
             } else {
                 console.error("Failed to return application");
@@ -151,7 +156,6 @@ export default function ViewStudentApplication() {
             };
             
             returnApplication(remarkSubmission);
-            fetchCurrentApplication();
 
         } catch (error) {
             console.log(error)
@@ -184,7 +188,8 @@ export default function ViewStudentApplication() {
                         )}
                     </div>
                 </div>
-                {userInfo.title === "Clearance Officer" && currentApplication.step !== 3 && (
+
+       
                 <div className="approve-return">
                     <h3 className="section-title">Approve/Return Application</h3>
                     <form onSubmit={handleSubmit(onSubmit)}>
@@ -213,41 +218,9 @@ export default function ViewStudentApplication() {
                         Return
                         </button>
                     </div>
-    </form>
-  </div>
-)}
-                {userInfo.title === "Adviser" && (
-                    <div className="approve-return">
-                        <h3 className="section-title">Approve/Return Application</h3>
-                        <form onSubmit={handleSubmit(onSubmit)}>
-                            <input
-                                type="text"
-                                id="remark"
-                                placeholder="Write your remarks here. Write N/A if you want to approve the student's application."
-                                {...register("remark", {
-                                onChange: handleRemarks,
-                                required:
-                                    "Please enter your remarks returning the student's application. Write N/A if you want to approve the student's application.",
-                                })}
-                            />
-                            {errors.remark && <p id="error-message">{errors.remark.message}</p>}
+                    </form>
+                </div>
 
-                            <div className="buttons">
-                                <button
-                                type="submit"
-                                className="filter-button"
-                                id="approve-btn"
-                                onClick={handleSubmit(approveApplication)}
-                                >
-                                Approve
-                                </button>
-                                <button type="submit" className="filter-button" id="return-btn">
-                                Return
-                                </button>
-                            </div>
-                        </form>
-                    </div>
-)}
 
             </div>
             <Footer id="view-footer" />

@@ -37,6 +37,7 @@ export default function Returned() {
               course: studentData.degreeProgram,
               college: studentData.college,
               classification: studentData.userType,
+              hasOpenedApplication: studentData.hasOpenedApplication,
               icon: Pikachu,
             });
              setApplications(studentData.application);
@@ -50,7 +51,7 @@ export default function Returned() {
         fetchData();
       }, []);
 
-      async function resubmitApplication(event,studentSubmission) {
+      async function resubmitApplication(event,studentSubmission,step,bool) {
         currentApplication.updatedStudentSubmission = studentSubmission;
         try {
           const response = await fetch("http://localhost:3001/update-student-submission", {
@@ -83,14 +84,13 @@ export default function Returned() {
             </div>
 
             <div className="remarks">
-                Remarks: {remarks.remarks}
-                {/* Remarks: {remarkss.remark }
+                Remarks: {remarkss.remark }
                 Date of Remarks: { remarkss.dateRemark },
                 Commenter: {remarkss.commenter },
-                stepGivenRemark: { remarkss.stepGivenRemark}, */}
+                stepGivenRemark: { remarkss.stepGivenRemark},
             </div>
             {/* form */}
-            <Form onClick={resubmitApplication}/>
+            <Form onClick={resubmitApplication} currentApplication = {currentApplication} userInfo = {userInfo}/>
         </div>
     )
 }

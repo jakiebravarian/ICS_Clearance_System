@@ -61,6 +61,7 @@ export const submitApplication = async (req, res) => {
     user.application = user.application || []; // Set user.application to an empty array if it is null
 
     user.application.push(application);
+    user.hasOpenedApplication = true;
     await user.save();
     console.log("User application updated:", user); // Log the updated user object
 
@@ -71,6 +72,39 @@ export const submitApplication = async (req, res) => {
   }
 };
 
+export const submitApplication1 = async (req, res) => {
+  try {
+    console.log("Submit application request received"); // Check if the function is being called
+    console.log("Request body:", req.body); // Log the request body
+
+    const { upMail, status, step, remarks, studentSubmission } = req.body; // Get the necessary data from the request body
+
+    console.log("Received data:", { upMail, status, step, remarks, studentSubmission }); // Log the received data
+
+    // Find the user and push the newly created application to their application array
+    const user = await Student.findOne({ upMail: upMail });
+    if (!user) {
+      return res.status(404).send("User not found");
+    }
+
+    // Save the application to the database
+    await application.save();
+
+    console.log("Application saved:", application); // Log the saved application object
+
+    user.application = user.application || []; // Set user.application to an empty array if it is null
+
+    user.application.push(application);
+    user.hasOpenedApplication = true;
+    await user.save();
+    console.log("User application updated:", user); // Log the updated user object
+
+    res.send(application);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Internal Server Error");
+  }
+};
 
 export const viewStudentClearanceStatus = async (req, res) => {
   try {
@@ -135,15 +169,15 @@ export const closeApplication = async (req, res) => {
     const { applicationId } = req.body; // Get the applicationId from the request body
 
     // Find the application by applicationId
-    const application = await Application.findById(applicationId);
+    const application = await Application.findById(applicationId).populate("student");
     if (!application) {
       return res.status(404).send('Application not found');
     }
-
+    application.student.hasOpenedApplication = false;
     // Update the status of the application to "closed"
     application.status = 'Closed';
     await application.save();
-
+    
     res.send('Application closed successfully');
   } catch (error) {
     console.error(error);
@@ -156,13 +190,12 @@ export const getCurrentApplication = async (req, res) => {
     const applicationId = req.query.applicationId; // Get the applicationId from the request parameters
     // Find the application by applicationId
     console.log(req.query);
-    const application = await Application.findById(applicationId).populate({ path: "student", populate: "adviser" })
-    .populate({ path: "remarks.commenter", model: "User" });;
+    const application = await Application.findById(applicationId).populate({ path: "student", populate: "adviser" }).populate({path:"remarks", populate: "commenter"});
     console.log(application);
     if (!application) {
       return res.status(404).send('Application not found');
     }
-
+    console.log(application);
     res.send(application);
   } catch (error) {
     console.error(error);

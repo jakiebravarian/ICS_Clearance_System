@@ -17,8 +17,9 @@ export default  function Student() {
     const [student, setStudent] = useState([]);
     const [userInfo, setUserInfo] = useState({}); // Define userInfo state
     const [isVerified, setVerified] = useState(false);
+    const [currentApplication, setCurrentApplication] = useState([]);
     const navigate = useNavigate();
-
+  
     useEffect(() => {
         const upMail1 = localStorage.getItem("upMail");
       
@@ -40,11 +41,18 @@ export default  function Student() {
               college: studentData.college,
               classification: studentData.userType,
               isVerified: studentData.isVerified,
+              hasOpenedApplication: studentData.hasOpenedApplication,
               icon: Pikachu,
             });
              setApplications(studentData.application);
              console.log(userInfo.isVerified);
-            
+            if(Applications.length !== 0){
+              Applications.forEach((application)=>{
+                if(application.status !== "Closed"){
+                  setCurrentApplication(application); // Assuming you want to set the current application state here
+                }
+              })
+            }
           }
         };
       
@@ -53,25 +61,25 @@ export default  function Student() {
     
     
     // add to list of applications when user inputs data
-    function eventHandler(event,studentSubmission) {
+    function eventHandler(event,studentSubmission,conditions) {
       event.preventDefault(); // prevent the form from submitting and refreshing the page
       
       console.log('onClick executed');
 
-      var newApplication = {
-        upMail: student.upMail,
-        dateApplied: studentSubmission.dateSubmission,
-        status: "Open",
-        step: 1, // Set the initial value for the step field
-        remarks: [], // Initialize an empty array for remarks
-        studentSubmission: {
-          remarkSubmission: studentSubmission.remarkSubmission,
-          dateSubmission: studentSubmission.dateSubmission,
-          stepGivenSubmission: studentSubmission.stepGivenSubmission,
-        },
-      };
-    
-      // Make a POST request to the backend API endpoint
+      if(conditions.bool){
+        var newApplication = {
+          upMail: student.upMail,
+          dateApplied: studentSubmission.dateSubmission,
+          status: "Open",
+          step: 1, // Set the initial value for the step field
+          remarks: [], // Initialize an empty array for remarks
+          studentSubmission: {
+            remarkSubmission: studentSubmission.remarkSubmission,
+            dateSubmission: studentSubmission.dateSubmission,
+            stepGivenSubmission: studentSubmission.stepGivenSubmission,
+          },
+        };  
+           // Make a POST request to the backend API endpoint
       fetch("http://localhost:3001/submit-application", {
         method: 'POST',
         headers: {
@@ -90,7 +98,40 @@ export default  function Student() {
           // Handle errors if needed
           console.error(error);
         });
+      }else{
+        var newApplication = {
+          studentSubmission: {
+            remarkSubmission: studentSubmission.remarkSubmission,
+            dateSubmission: studentSubmission.dateSubmission,
+            stepGivenSubmission: studentSubmission.stepGivenSubmission,
+          },
+        };
+        resubmitApplication(event,newApplication);
+      }
     }
+
+    async function resubmitApplication(event,studentSubmission) {
+      currentApplication.updatedStudentSubmission = studentSubmission;
+      try {
+        const response = await fetch("http://localhost:3001/update-student-submission", {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ currentApplication}),
+        });
+  
+        if (response.ok) {
+          console.log("Succesfully resubmitted application!");
+          navigate("/student");
+        } else {
+          console.error("Failed to resubmit application");
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    }
+   
     
     return (
         <div>
@@ -103,7 +144,7 @@ export default  function Student() {
             <StudentInfo data={userInfo}/>
 
             {/* application (either form or list) */}
-            <Application data={Applications} onClick={eventHandler} setApplications={setApplications} student={userInfo}/>
+            <Application data={Applications} onClick={eventHandler} setApplications={setApplications} student={userInfo} currentApplication = {currentApplication}/>
         </div>
     )
 }

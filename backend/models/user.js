@@ -14,6 +14,7 @@ const UserSchema = new Schema({
   title: {type: String},
   adviser: { type: Schema.Types.ObjectId, ref: "User", required: false },
   isVerified: {type: String},
+  hasOpenedApplication: {type: Boolean},
   application: [{ type: Schema.Types.ObjectId, ref: "Application" }],
 });
 
