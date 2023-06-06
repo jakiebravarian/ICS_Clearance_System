@@ -4,7 +4,6 @@ import '../../assets/styles/ViewStudentApplication.css';
 import { useEffect, useState } from 'react';
 import { useForm } from "react-hook-form";
 import { Header, Footer } from '../ScreenComponents';
-import { approverInfo } from '../../data.js';
 import { Table } from "./Table";
 import ApproverIcon from '../../assets/approver.png';
 
@@ -53,16 +52,18 @@ export default function ViewStudentApplication() {
                 .then(response => response.json())
                 .then(data => {
                     // Handle the response if needed
+                    console.log("data");
                     console.log(data);
                     // Update the state or perform any other actions
                     setCurrentApplication([data]);
-                    console.log(currentApplication);
+
+
                 })
                 .catch(error => {
                     // Handle errors if needed
                     console.error(error);
                 });
-            console.log(JSON.stringify(currentApplication));
+
         };
 
         fetchCurrentApplication();
@@ -79,50 +80,15 @@ export default function ViewStudentApplication() {
 
     const studentInformationColumns = ['Name (LN, FN, MN)', 'Student Number', 'Degree Program', 'College']
 
-    // data for student information
-    const applicationInformation = [
-        {
-            adviserName: "Dela Cruz, Juan, Hernandez",
-            status: "Pending",
-            currentStep: "2"
-        }
-    ]
-
     const applicationInformationAttributes = ['student.fullName', 'status', 'step']
 
     const applicationInformationColumns = ['Academic Adviser (LN, FN, MN)', 'Status', 'Current Step']
 
-
-    // data for student remark
-    const studentRemark = [
-        {
-            date: '06-01-2023',
-            step: '1',
-            remark: 'https://github.com/CMSC100-UV4L/san-agustin_bautista_brabante_pena_project'
-        },
-    ];
-
-    const studentRemarkAttributes = ['date', 'step', 'remark']
+    const studentRemarkAttributes = ['studentSubmission.dateSubmission', 'studentSubmission.stepGivenSubmission', 'studentSubmission.remarkSubmission']
 
     const studentRemarkColumns = ['Date', 'Step', 'Link/Remark']
 
-    // data for approver remark
-    const approverRemark = [
-        {
-            date: '06-01-2023',
-            step: '1',
-            commenter: 'Juan H. Dela Cruz',
-            remark: 'ngi'
-        },
-        {
-            date: '06-05-2023',
-            step: '3',
-            commenter: 'Juan H. Dela Cruz',
-            remark: 'yuck'
-        },
-    ];
-
-    const approverRemarkAttributes = ['date', 'step', 'commenter', 'remark']
+    const approverRemarkAttributes = ['remarks.dateRemark', 'remarks.stepGivenRemark', 'remarks.commenter', 'remarks.remark']
 
     const approverRemarkColumns = ['Date', 'Step', 'Commenter', 'Remark']
 
@@ -154,11 +120,11 @@ export default function ViewStudentApplication() {
                     )}
                     <div className="remarks-student">
                         <p className="header-title">Submission / Remarks of Student</p>
-                        <Table className="remarks-table" data={studentRemark} columns={studentRemarkColumns} attributes={studentRemarkAttributes} id={"student-remark"} />
+                        <Table className="remarks-table" data={currentApplication} columns={studentRemarkColumns} attributes={studentRemarkAttributes} id={"student-remark"} />
                     </div>
                     <div className="remarks-approver">
                         <p className="header-title">Remarks of Adviser / Clearance Officer</p>
-                        <Table className="remarks-table" data={approverRemark} columns={approverRemarkColumns} attributes={approverRemarkAttributes} id={"approver-remark"} />
+                        <Table className="remarks-table" data={currentApplication} columns={approverRemarkColumns} attributes={approverRemarkAttributes} id={"approver-remark"} />
                     </div>
                 </div>
                 <div className="approve-return">

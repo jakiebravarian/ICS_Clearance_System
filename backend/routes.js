@@ -2,7 +2,7 @@ import { signUp, login, checkifloggedin } from "./auth-controller.js";
 import { getAllStudents, getCurrentStudent, submitApplication, viewStudentClearanceStatus, updateStep, updateStudentSubmission, closeApplication, getCurrentApplication, getCurrentApplications } from "./student-controller.js";
 import { searchApproverByName, filterNameAscending, filterNameDescending, deleteApprover, editApprover, approverLogin, getApprover } from "./admin-approver-controller.js"
 import { sortStudentByStudentNum, assignAdviser, sortStudentByName, getPendingStudent, getStudent } from "./admin-student-controller.js";
-import { getAllPendingApplications, searchStudentByName, searchStudentByStudentNumber, filterApplicationsByDate, filterApplicationsByAdviser, filterApplicationsByStep, sortApplicationsByDate, sortApplicationsByName, getCurrentStudentByStudentNum, approveApplicationAtCurrentStep, returnAppAtCurrentStep, createApprover } from './approver-controller.js';
+import { getAllPendingApplications, searchStudentByName, searchStudentByStudentNumber, filterApplicationsByDate, filterApplicationsByAdviser, filterApplicationsByStep, sortApplicationsByDate, sortApplicationsByName, getCurrentStudentByApplicationId, approveApplicationAtCurrentStep, returnAppAtCurrentStep, createApprover } from './approver-controller.js';
 
 const setUpRoutes = (app) => {
   app.get("/", (req, res) => {
@@ -62,7 +62,7 @@ const setUpRoutes = (app) => {
   app.get("/filter-applications-by-step", filterApplicationsByStep);
   app.get("/sort-applications-by-date", sortApplicationsByDate);
   app.get("/sort-applications-by-name", sortApplicationsByName);
-  app.get("/get-current-student-application", getCurrentStudentByStudentNum);
+  app.get("/get-current-student-application", getCurrentStudentByApplicationId);
   app.put("/approve-application-at-current-step", approveApplicationAtCurrentStep);
   app.put("/return-application-at-current-step", returnAppAtCurrentStep);
 

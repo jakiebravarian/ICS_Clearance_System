@@ -194,10 +194,10 @@ export const sortApplicationsByName = async (req, res) => {
   }
 };
 
-export const getCurrentStudentByStudentNum = async (req, res) => {
+export const getCurrentStudentByApplicationId = async (req, res) => {
   try {
-    const studentNumber = req.query.studentNum; // Get the user email from the query parameter
-    const student = await Student.findOne({ studentNumber: studentNumber }).populate('application'); // Query the student with the specified email
+    const applicationId = req.query.applicationId; // Get the user email from the query parameter
+    const student = await Student.findOne({ applicationId: applicationId }).populate('application'); // Query the student with the specified email
     console.log(student);
     res.send(student);
   } catch (error) {

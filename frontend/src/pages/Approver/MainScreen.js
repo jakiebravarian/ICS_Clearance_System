@@ -42,13 +42,11 @@ export default function MainScreen() {
                 console.log(data);
                 // Update the state or perform any other actions
                 setCurrentPendingApplications(data);
-                console.log(currentPendingApplications);
             })
             .catch(error => {
                 // Handle errors if needed
                 console.error(error);
             });
-        console.log(JSON.stringify(currentPendingApplications));
     };
 
 
