@@ -256,14 +256,15 @@ export const approveApplicationAtCurrentStep = async (req, res) => {
 
 export const returnAppAtCurrentStep = async (req, res) => {
   try {
-    const { applicationId } = req.body;
-
+    const { applicationId, remarkSubmission } = req.body;
     // Find the application by ID
     const application = await Application.findById(applicationId);
     if (!application) {
       return res.status(404).send('Application not found');
     }
-
+    application.remarks.push(remarkSubmission);
+    application.status
+    application.save();
     res.send('Application returned to previous step successfully');
   } catch (error) {
     console.error('An error occurred:', error);
