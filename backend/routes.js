@@ -29,8 +29,8 @@ const setUpRoutes = (app) => {
 
   //admin-approver routes
   app.post("/search-approver-by-name", searchApproverByName);
-  app.get("/sort-approver-by-name-asc", filterNameAscending);
-  app.get("/sort-approver-by-name-desc", filterNameDescending);
+  app.post("/sort-approver-by-name-asc", filterNameAscending);
+  app.post("/sort-approver-by-name-desc", filterNameDescending);
   app.get("/get-current-application", getCurrentApplication);
   app.get("/get-current-applications", getCurrentApplications);
   app.post("/delete-approver", deleteApprover);
@@ -47,24 +47,11 @@ const setUpRoutes = (app) => {
   app.get("/filter-applications-by-step", filterApplicationsByStep);
   app.get("/sort-applications-by-date", sortApplicationsByDate);
   app.get("/sort-applications-by-name", sortApplicationsByName);
-  // app.put("/approve-application-at-current-step", approveApplicationAtCurrentStep);
-  app.put("/return-application-at-current-step", returnAppAtCurrentStep);
-
-  app.get("/get-approver", getApprover);
-
-  //approver routes
-  app.post("/create-approver", createApprover);
-  app.get("/get-all-pending-applications", getAllPendingApplications);
-  app.get("/search-student-by-name", searchStudentByName);
-  app.get("/search-student-by-student-number", searchStudentByStudentNumber);
-  app.get("/filter-applications-by-date", filterApplicationsByDate);
-  app.get("/filter-applications-by-adviser", filterApplicationsByAdviser);
-  app.get("/filter-applications-by-step", filterApplicationsByStep);
-  app.get("/sort-applications-by-date", sortApplicationsByDate);
-  app.get("/sort-applications-by-name", sortApplicationsByName);
-  app.get("/get-current-student-application", getCurrentStudentByApplicationId);
   app.put("/approve-application-at-current-step", approveApplicationAtCurrentStep);
   app.put("/return-application-at-current-step", returnAppAtCurrentStep);
+  app.get("/get-approver", getApprover);
+
+
 
   //admin routes
   app.post("/assign-adviser", assignAdviser);
