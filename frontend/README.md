@@ -86,7 +86,7 @@ Download the repository to any of your working local directory. Using a terminal
 
 1. Clone the repo
    ```sh
-   git clone https://github.com/github_username/repo_name.git
+   git clone https://github.com/CMSC100-UV4L/san-agustin_bautista_brabante_pena_project.git
    ```
 2. Navigate to the frontend folder
     ```sh
@@ -112,7 +112,7 @@ Download the repository to any of your working local directory. Using a terminal
 - Students can sign up for an account which is to be approved by the admin.
 - Students can submit clearance applications which are to be approved by both the adviser and clearance officer. 
 - An approver can be either an adviser or a clearance approver depending on what is assigned by the admin.
-- Adviser and clearance officer can view clerance applications and can approve or reject them and leave remarks.
+- Adviser and clearance officer can view clearance applications and can approve or reject them and leave remarks.
 - Students can add, edit, view and update clearance applications from their homepage. 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -162,10 +162,10 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 
 <!-- CONTACT -->
 ## Contact
-Adrianne Bautista
-Jakie Brabante
-Joseph Pena
-Sophia San Agustin - smsanagustin@up.edu.ph
+- Adrianne Bautista
+- Jakie Brabante
+- Joseph Pena
+- Sophia San Agustin - smsanagustin@up.edu.ph
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
