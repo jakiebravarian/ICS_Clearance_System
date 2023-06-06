@@ -1,6 +1,6 @@
 import { signUp, login, checkifloggedin } from "./auth-controller.js";
 import { getAllStudents, getCurrentStudent, submitApplication, viewStudentClearanceStatus, updateStep, updateStudentSubmission, closeApplication, getCurrentApplication, getCurrentApplications } from "./student-controller.js";
-import { searchApproverByName, filterNameAscending, filterNameDescending, deleteApprover, editApprover, approverLogin, getApprover, getAdviser } from "./admin-approver-controller.js"
+import { searchApproverByName, filterNameAscending, filterNameDescending, deleteApprover, editApprover, approverLogin, getApprover, getAdivser } from "./admin-approver-controller.js"
 import { sortStudentByStudentNum, assignAdviser, sortStudentByName, getPendingStudent, getStudent, rejectStudent } from "./admin-student-controller.js";
 import { getAllPendingApplications, searchStudentByName, searchStudentByStudentNumber, filterApplicationsByDate, filterApplicationsByAdviser, filterApplicationsByStep, sortApplicationsByDate, sortApplicationsByName, getCurrentStudentByApplicationId, approveApplicationAtCurrentStep, returnAppAtCurrentStep, createApprover } from './approver-controller.js';
 
