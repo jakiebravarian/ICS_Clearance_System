@@ -2,6 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { Document, Page, Text, View, PDFViewer } from '@react-pdf/renderer';
 import { styles } from './pdfStyles';
+import { useParams} from 'react-router-dom';
 
 // header profile component
 function ProfileHeader(props) {
@@ -245,7 +246,7 @@ function Application(props) {
                         <button className="app-button" onClick={() => closeApplication(application)}>Close application</button>
                         )}
                         {application.status === 'Cleared' ? (
-                          <form action={`/pdf-generator`}>
+                          <form action={`/pdf-generator/${application._id}`}>
                              <button className="print-button">
                                 Print PDF
                              </button>   
@@ -263,9 +264,10 @@ function Application(props) {
 }
 
 export function PDFGenerator() {
+    const params = useParams();    
     const dateGenerated = new Date().toLocaleDateString();
     const application = {
-        name: 'John Doe',
+        name: "John Smith",
         studentNumber: '12345',
         academicAdviser: 'Jane Smith',
         clearanceOfficer: 'John Smith',
