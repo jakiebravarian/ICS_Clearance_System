@@ -36,60 +36,60 @@ function Menu(props) {
 
 
 function ApproverSort(prop) {
-    // let search = prop.search;
-    // let setApprover = prop.setApprover;
+    let search = prop.search;
+    let setApprover = prop.setApprover;
 
-    // const changeSortOption = (e) => {
-    //     if(e.target.value === "desc")
-    //     {
-    //         fetch(`http://localhost:3001/sort-approver-by-name-desc`, {
-    //         method: 'POST',
-    //         headers: {
-    //             'Content-Type': 'application/json'
-    //         },body: JSON.stringify({
-    //             search: search
-    //         })
-    //     })
-    //         .then(response => response.json())
-    //         .then((body) => {
-    //             console.log("desc")
-    //             console.log(body)
-    //             setApprover(body)
-    //         })
+    const changeSortOption = (e) => {
+        if(e.target.value === "desc")
+        {
+            fetch(`http://localhost:3001/sort-approver-by-name-desc`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },body: JSON.stringify({
+                search: search
+            })
+        })
+            .then(response => response.json())
+            .then((body) => {
+                console.log("desc")
+                console.log(body)
+                setApprover(body)
+            })
             
-    //     }
-    //     else
-    //     {
-    //         fetch(`http://localhost:3001/sort-approver-by-name-asc`, 
-    //         {
-    //             method: 'POST',
-    //             headers: {
-    //                 'Content-Type': 'application/json'
-    //             },body: JSON.stringify({
-    //                 search: search
-    //             })
-    //         })  .then(response => response.json())
-    //             .then((body) => {
-    //                 console.log("asc")
-    //                 console.log(body)
-    //                 setApprover(body) 
-    //             })
-    //     }
-    // };
+        }
+        else
+        {
+            fetch(`http://localhost:3001/sort-approver-by-name-asc`, 
+            {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },body: JSON.stringify({
+                    search: search
+                })
+            })  .then(response => response.json())
+                .then((body) => {
+                    console.log("asc")
+                    console.log(body)
+                    setApprover(body) 
+                })
+        }
+    };
 
-    // return(
-    //     <div className="row approver-sort">
-    //         <div>
-    //             <p><b>Sort by: </b></p>
-    //         </div>
-    //         <form className="sort-form">
-    //             <input className="sort-radio" name="sort" type="radio" id="name-asc" value="asc" onChange={changeSortOption}></input>
-    //             <label className="radio-label">Name (Ascending)</label>
-    //             <input className="sort-radio" name="sort" type="radio" id="name-desc" value="desc" onChange={changeSortOption} ></input>
-    //             <label className="radio-label">Name (Descending)</label>
-    //         </form>
-    //     </div>
-    // )
+    return(
+        <div className="row approver-sort">
+            <div>
+                <p><b>Sort by: </b></p>
+            </div>
+            <form className="sort-form">
+                <input className="sort-radio" name="sort" type="radio" id="name-asc" value="asc" onChange={changeSortOption}></input>
+                <label className="radio-label">Name (Ascending)</label>
+                <input className="sort-radio" name="sort" type="radio" id="name-desc" value="desc" onChange={changeSortOption} ></input>
+                <label className="radio-label">Name (Descending)</label>
+            </form>
+        </div>
+    )
 }
 
 function StudentAppsList(props) {
@@ -195,14 +195,28 @@ function ApproversList(props) {
 function AssignAdviserModal(prop) {
     let student = prop.student;
     const [isOpen, setIsOpen] = useState(false);
-    const [formData, setFormData] = useState({
-        firstName: '',
-        middleName: '',
-        lastName: '',
-        studentNumber: student.studentNumber
-    }); // initially empty strings
+    const [options, setOptions] = useState([]);
+    const [formData, setFormData] = useState("")
 
 
+    useEffect(() => {
+        // Fetch data from the backend API endpoint
+        fetch('http://localhost:3001/get-approver', 
+        {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        })
+        .then(response => response.json())
+            .then((body) => {
+                setOptions(body) 
+            })
+        .catch(error => {
+            console.error('Error fetching dropdown values:', error);
+        });
+    }, []);
+    
     // opens the modal when called
     const openModal = () => {
         setIsOpen(true);
@@ -213,13 +227,12 @@ function AssignAdviserModal(prop) {
         setIsOpen(false);
     }
 
-    const handleChange = (event) => {
-        const { name, value } = event.target;
-        setFormData((prevData) => ({
-            ...prevData,
-            [name]: value,
-        }));
-    };
+
+    //get id of selected
+    const handleChange = (e) => {
+        const selectedOption = e.target.value;      
+        setFormData(selectedOption);
+      };
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -227,12 +240,7 @@ function AssignAdviserModal(prop) {
         // send data to backend
 
         // reset the form data
-        setFormData({
-            firstName: '',
-            middleName: '',
-            lastName: '',
-            studentNumber: student.studentNumber
-        });
+        setFormData("");
 
         // close the modal
         setIsOpen(false);
@@ -242,7 +250,7 @@ function AssignAdviserModal(prop) {
     const modalStyle = {
         content: {
             width: '40%', // Set your desired width
-            height: '50%', // Set your desired height
+            height: '30%', // Set your desired height
             top: '50%',
             left: '50%',
             transform: 'translate(-50%, -50%)',
@@ -251,6 +259,7 @@ function AssignAdviserModal(prop) {
     };
 
     function handleAsssign(){
+     
         fetch('http://localhost:3001/assign-adviser', 
         {
             method: 'POST',
@@ -258,9 +267,7 @@ function AssignAdviserModal(prop) {
                 'Content-Type': 'application/json'
             },
                 body: JSON.stringify({
-                    firstName: formData.firstName,
-                    middleName: formData.middleName ,
-                    lastName: formData.lastName,
+                    adviserId: formData,
                     studentNumber: student.studentNumber
 
                 })
@@ -277,16 +284,21 @@ function AssignAdviserModal(prop) {
             <Modal style={modalStyle} isOpen={isOpen} onRequestClose={closeModal}>
                 <button className="exit-button" onClick={closeModal}>X</button>
                 <div className="modal-heading">
-                    <p>Assign Adviser</p>
+                    <p>Assign Adviser to {student.studentNumber}</p>
                 </div>
                 <div className="centered modal-form-div">
                     <form onSubmit={handleSubmit} className="modal-form">
-                        <input type="text" name="firstName" value={formData.firstName || ''} onChange={handleChange} placeholder="Adviser's First Name"/><br></br>
-                        <input type="text" name="middleName" value={formData.middleName || ''} onChange={handleChange} placeholder="Adviser's Middle Name"/><br></br>
-                        <input type="text" name="lastName" value={formData.lastName || ''} onChange={handleChange} placeholder="Adviser's Last Name"/><br></br>
-                        <input type="text" name="studno" value={formData.studentNumber || ''} onChange={handleChange} placeholder="Student number"/><br></br>
+                        <select className="d" onChange={handleChange}>
+                        <option value="" disabled selected>Select Adviser</option>
+                        {options.map(option => (
+                            <option key={option._id} value={option._id}>
+                            {option.lastName.toUpperCase()}, {option.firstName} {option.middleName}
+                            </option>
+                        ))}
+                        </select>
                         <button className="assign-button" type="submit" onClick={handleAsssign}>Assign</button>
                     </form>
+                     
                 </div>
             </Modal>
         </div>

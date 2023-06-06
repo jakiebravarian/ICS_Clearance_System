@@ -188,4 +188,15 @@ const getApprover = async (req, res) => {
   }
 }
 
-export {searchApproverByName, filterNameAscending, filterNameDescending, deleteApprover, editApprover, approverLogin, getApprover};
+const getAdivser = async (req, res) => {
+  try{
+    const advisers =  await User.find({userType: "Approver", title: "Adviser"});
+    res.send(advisers)
+  }catch(err){
+   // res.status(500).send('An error occurred');
+   res.send(err);
+  }
+}
+
+
+export {searchApproverByName, filterNameAscending, filterNameDescending, deleteApprover, editApprover, approverLogin, getApprover, getAdivser};

@@ -20,50 +20,24 @@ const getPendingStudent = async (req,res) => {
 
 const assignAdviser = async (req,res) => {
     try{
-
-        if(req.body.middleName == "") //if no middle name
-        {
-            const assignedAdviser = await User.findOne({firstName: req.body.firstName, lastName: req.body.lastName});
+        
+        const assignedAdviser = await User.findOne({_id: req.body.adviserId});
             
-            if(!assignedAdviser || assignedAdviser.title == "Clearance Office")
-            {
-                res.send({success: false});
-            }
-            else
-            {
-                const student = await User.findOne({studentNumber: req.body.studentNumber});
-    
-                student.adviser = assignedAdviser._id;
-                student.isVerified = "Verified";
-    
-                student.save();
-    
-                res.send({success: true});
-            }
-        }
-        else //if theres middle name
+        if(!assignedAdviser || assignedAdviser.title == "Clearance Office")
         {
-            const assignedAdviser = await User.findOne({firstName: req.body.firstName, middleName: req.body.middleName, lastName: req.body.lastName});
-            
-            if(!assignedAdviser || assignedAdviser.title == "Clearance Office"){
-                res.send({success: false});
-            }
-            else
-            {
-                const student = await User.findOne({studentNumber: req.body.studentNumber});
-    
-                student.adviser = assignedAdviser._id;
-                student.isVerified ="Verified";
-    
-                student.save();
-    
-                res.send({success: true});
-            }
-
+            res.send({success: false});
         }
-        
-        
-        
+        else
+        {
+            const student = await User.findOne({studentNumber: req.body.studentNumber});
+
+            student.adviser = assignedAdviser._id;
+            student.isVerified = "Verified";
+
+            student.save();
+
+            res.send({success: true});
+        }
 
     }
     catch(err)

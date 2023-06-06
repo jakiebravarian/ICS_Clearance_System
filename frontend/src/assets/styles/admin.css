@@ -17,12 +17,24 @@
     border: 1px solid #094C9F;
 }
 
+.blue-background:hover {
+    cursor: pointer;
+    background-color: #073C7F;
+    color: white;
+}
+
 .white-background {
     background-color: white;
     color: #094C9F;
     padding: 8px;
     font-size: 15px;
     border: 1px solid #094C9F;
+}
+
+.white-background:hover {
+    cursor: pointer;
+    background-color: #d3d3d3;
+    color: #094C9F;
 }
 
 .admin-menu {
@@ -116,6 +128,7 @@
 }
 
 .approve-button:hover {
+    cursor: pointer;
     background-color: white;
     color: black;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
@@ -129,12 +142,14 @@
 }
 
 .create-approver-button:hover{
+    cursor: pointer;
     background-color: white;
     color: black;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .reject-button:hover {
+    cursor: pointer;
     background-color: white;
     color: black;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
@@ -166,6 +181,13 @@
     border: none;
 }
 
+.exit-button:hover {
+    cursor: pointer;
+    color: black;
+    background-color: white;
+    border: none;
+}
+
 .modal-heading {
     font-weight: bold;
     font-family: Roboto Slab;
@@ -186,6 +208,13 @@
     border-radius: 15px;
 }
 
+.assign-button:hover {
+    cursor: pointer;
+    background-color: white;
+    color: black;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
 .create-approver-button {
     width: 270px;
     border-radius: 12px;
@@ -203,6 +232,8 @@
 
 .search-input {
     border-radius: 0px;
+    margin: 0px;
+    height: 38.5px;
 }
 
 .search-button {
@@ -213,7 +244,15 @@
     border: none;
 }
 
+.search-button:hover {
+    cursor: pointer;
+    cursor: pointer;
+    background-color:  #073C7F;
+    color: white;
+}
+
 .search-bar {
+    display: flex;
     margin-left: 65px;
 }
 
@@ -242,3 +281,13 @@
 .fa.fa-search{
     margin: 0px;
 }
+
+.dropdown-select-adviser{
+    margin-top: 6px;
+    border-radius: 10px;
+    height: 38px;
+    width: 72%;
+    min-width: 50px;
+}
+
+  

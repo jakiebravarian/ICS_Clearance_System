@@ -27,6 +27,8 @@ export default  function Student() {
           console.log(studentData);
           if(studentData.isVerified === "Pending"){
             navigate("/verify");
+           }else if(studentData.isVerified === "Rejected"){
+            navigate("/reject");
            }
           if (studentData) {
             setStudent(studentData);
