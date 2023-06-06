@@ -1,10 +1,11 @@
 import React from "react";
 import { useEffect, useState } from "react";
-import Pikachu from '../../assets/pikachu.png';
+import StudentIcon from '../../assets/student_icon.jpg';
 import {useNavigate} from "react-router-dom";
 
 // import other components
-import { Header, StudentInfo, ProfileHeader, Application, Footer } from "./StudentComponents";
+import { Header } from '../ScreenComponents';
+import { StudentInfo, ProfileHeader, Application, Footer } from "./StudentComponents";
 
 // import data
 import { getCurrentStudent } from "../../data";
@@ -40,7 +41,7 @@ export default  function Student() {
               college: studentData.college,
               classification: studentData.userType,
               isVerified: studentData.isVerified,
-              icon: Pikachu,
+              icon: StudentIcon,
             });
              setApplications(studentData.application);
              console.log(userInfo.isVerified);
