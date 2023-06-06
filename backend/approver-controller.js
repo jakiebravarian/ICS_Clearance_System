@@ -229,10 +229,10 @@ export const getSubmissionByStudentAtAnyStep = async (req, res) => {
 
 export const approveApplicationAtCurrentStep = async (req, res) => {
   try {
-    const { applicationId } = req.body;
+    const { appId } = req.body;
 
     // Find the application by ID
-    const application = await Application.findById(applicationId);
+    const application = await Application.findById(appId);
     if (!application) {
       return res.status(404).send('Application not found');
     }

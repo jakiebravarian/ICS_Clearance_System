@@ -74,7 +74,6 @@ export default function ViewStudentApplication() {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({ appId }),
-
             });
 
             if (response.ok) {
