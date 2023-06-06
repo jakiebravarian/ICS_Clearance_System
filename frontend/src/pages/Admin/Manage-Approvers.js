@@ -10,16 +10,17 @@ export default function ManageApprovers() {
     
     const [approver, setApprover] = useState([]);
     const [search, setSearch] = useState("")
+    const [changedApprov, setChangedApprov] = useState(false);
 
      // Fetch data from API on component mount
      useEffect(() => {
         fetchData();
-    }, [approver]);
+    }, [changedApprov]);
 
     //Display default
     const fetchData = async () => {
         try {
-            fetch('http://localhost:3001/get-approver', 
+            await fetch('http://localhost:3001/get-approver', 
             {
                 method: 'GET',
                 headers: {
@@ -48,10 +49,51 @@ export default function ManageApprovers() {
             })
             .then(response => response.json())
             .then((body) => {
-                setApprover(body)
+                if(body.length!=0){
+                    setApprover(body)
+                    return
+                }
+                fetchData();
             })
     }
  
+    const changeSortOption = (e) => {
+        if(e.target.value === "desc")
+        {
+            fetch(`http://localhost:3001/sort-approver-by-name-desc`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },body: JSON.stringify({
+                search: search
+            })
+        })
+            .then(response => response.json())
+            .then((body) => {
+                console.log("desc")
+                console.log(body)
+                setApprover(body)
+            })
+            
+        }
+        else
+        {
+            fetch(`http://localhost:3001/sort-approver-by-name-asc`, 
+            {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },body: JSON.stringify({
+                    search: search
+                })
+            })  .then(response => response.json())
+                .then((body) => {
+                    console.log("asc")
+                    console.log(body)
+                    setApprover(body) 
+                })
+        }
+    };
 
     return (
         <div>
@@ -72,7 +114,7 @@ export default function ManageApprovers() {
 
                 {/* add approver button */}
                 <div className="create-approver-div">
-                    <CreateApproverModal />
+                    <CreateApproverModal setChangedApprov = {setChangedApprov} changedApprov = {changedApprov}/>
                 </div>
             </div>
 
@@ -86,11 +128,23 @@ export default function ManageApprovers() {
                 </div>
 
                 {/* sort options */}
-                <ApproverSort setApprover= {setApprover} search = {search}/>
+                {/* <ApproverSort setApprover= {setApprover} search = {search}/> */}
+                <div className="row approver-sort">
+                    <div>
+                        <p><b>Sort by: </b></p>
+                    </div>
+                    <form className="sort-form">
+                        <input className="sort-radio" name="sort" type="radio" id="name-asc" value="asc" onChange={changeSortOption}></input>
+                        <label className="radio-label">Name (Ascending)</label>
+                        <input className="sort-radio" name="sort" type="radio" id="name-desc" value="desc" onChange={changeSortOption} ></input>
+                        <label className="radio-label">Name (Descending)</label>
+                    </form>
+                </div>
+
             </div>
 
             {/* list of approvers */}
-            <ApproversList data={approver}/>
+            <ApproversList data={approver} setApprover={setApprover} setChangedApprov = {setChangedApprov} changedApprov = {changedApprov}/>
         </div>
     )
 }

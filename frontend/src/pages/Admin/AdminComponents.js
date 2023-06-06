@@ -36,62 +36,88 @@ function Menu(props) {
 
 
 function ApproverSort(prop) {
-    const search = prop.search;
-    const setApprover = prop.setApprover;
+    // let search = prop.search;
+    // let setApprover = prop.setApprover;
 
-    const changeSortOption = (e) => {
-        if(e.target.value === "desc")
-        {
-            fetch(`http://localhost:3001/sort-approver-by-name-desc${search}`, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            })
-            .then(response => response.json())
-            .then((body) => {
-                console.log("desc")
-                console.log(body)
-                setApprover(body)
-            })
+    // const changeSortOption = (e) => {
+    //     if(e.target.value === "desc")
+    //     {
+    //         fetch(`http://localhost:3001/sort-approver-by-name-desc`, {
+    //         method: 'POST',
+    //         headers: {
+    //             'Content-Type': 'application/json'
+    //         },body: JSON.stringify({
+    //             search: search
+    //         })
+    //     })
+    //         .then(response => response.json())
+    //         .then((body) => {
+    //             console.log("desc")
+    //             console.log(body)
+    //             setApprover(body)
+    //         })
             
-        }
-        else
-        {
-            fetch(`http://localhost:3001/sort-approver-by-name-asc${search}`, 
-            {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-            })  .then(response => response.json())
-                .then((body) => {
-                    console.log("asc")
-                    console.log(body)
-                    setApprover(body) 
-                })
-        }
-    };
+    //     }
+    //     else
+    //     {
+    //         fetch(`http://localhost:3001/sort-approver-by-name-asc`, 
+    //         {
+    //             method: 'POST',
+    //             headers: {
+    //                 'Content-Type': 'application/json'
+    //             },body: JSON.stringify({
+    //                 search: search
+    //             })
+    //         })  .then(response => response.json())
+    //             .then((body) => {
+    //                 console.log("asc")
+    //                 console.log(body)
+    //                 setApprover(body) 
+    //             })
+    //     }
+    // };
 
-    return(
-        <div className="row approver-sort">
-            <div>
-                <p><b>Sort by: </b></p>
-            </div>
-            <form className="sort-form">
-                <input className="sort-radio" name="sort" type="radio" id="name-asc" value="asc" onChange={changeSortOption}></input>
-                <label className="radio-label">Name (Ascending)</label>
-                <input className="sort-radio" name="sort" type="radio" id="name-desc" value="desc" onChange={changeSortOption} ></input>
-                <label className="radio-label">Name (Descending)</label>
-            </form>
-        </div>
-    )
+    // return(
+    //     <div className="row approver-sort">
+    //         <div>
+    //             <p><b>Sort by: </b></p>
+    //         </div>
+    //         <form className="sort-form">
+    //             <input className="sort-radio" name="sort" type="radio" id="name-asc" value="asc" onChange={changeSortOption}></input>
+    //             <label className="radio-label">Name (Ascending)</label>
+    //             <input className="sort-radio" name="sort" type="radio" id="name-desc" value="desc" onChange={changeSortOption} ></input>
+    //             <label className="radio-label">Name (Descending)</label>
+    //         </form>
+    //     </div>
+    // )
 }
 
 function StudentAppsList(props) {
 
     var studentsList = props.data;
-  
+    console.log(studentsList);
+    
+    async function rejected(student) {
+        console.log(student);
+        try {
+          const response = await fetch("http://localhost:3001/reject-student", {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ student}),
+          });
+    
+          if (response.ok) {
+            console.log("Succesfully resubmitted application!");
+            props.setBoolRes(!props.boolRes);
+          } else {
+            console.error("Failed to resubmit application");
+          }
+        } catch (error) {
+          console.error(error);
+        }
+      }
     return (
         <div className="column student-apps-list">
             {/* header */}
@@ -109,8 +135,8 @@ function StudentAppsList(props) {
                         
                         {/* buttons */}
                         <div className="row admin-buttons">
-                            <AssignAdviserModal student = {student}/>
-                            <button className="reject-button">Reject</button>
+                            <AssignAdviserModal student = {student} boolRes = {props.boolRes} setBoolRes = {props.setBoolRes}/>
+                            <button className="reject-button" onClick={() => rejected(student)}>Reject</button>
                         </div>
                     </div>
                 ))
@@ -120,8 +146,10 @@ function StudentAppsList(props) {
 }
 
 function ApproversList(props) {
-    var approversList = props.data;
-
+    let approversList = props.data;
+    let setApprover = props.setApprover;
+    console.log("app list")
+    console.log(approversList)
     function deleteApprover(email) {
         fetch('http://localhost:3001/delete-approver', 
         {
@@ -135,6 +163,7 @@ function ApproversList(props) {
         }) .then(response => response.json())
             .then((body) => {
             console.log(body);
+            props.setChangedApprov(!props.changedApprov); 
           })
     }
 
@@ -153,7 +182,7 @@ function ApproversList(props) {
                         
                         {/* buttons */}
                         <div className="row admin-buttons">
-                            <EditApproverModal data={approver}/>
+                            <EditApproverModal data={approversList[index]} setApprover={setApprover} list={approversList}/>
                             <button className="reject-button" onClick={() => deleteApprover(approver.upMail)}>Delete</button>
                         </div>
                     </div>
@@ -238,6 +267,7 @@ function AssignAdviserModal(prop) {
         }) .then(response => response.json())
             .then((body) => {
             console.log(body);
+            prop.setBoolRes(!prop.boolRes);
         }) 
     }
 
@@ -263,7 +293,7 @@ function AssignAdviserModal(prop) {
     )
 }
 
-function CreateApproverModal() {
+function CreateApproverModal(props) {
     const [isOpen, setIsOpen] = useState(false);
     const [formData, setFormData] = useState({
         firstName: '',
@@ -324,7 +354,6 @@ function CreateApproverModal() {
     };
 
     function createApprover () {
-        console.log("isCLicked")
         fetch('http://localhost:3001/create-approver', {
             method: 'POST',
             headers: {
@@ -341,6 +370,7 @@ function CreateApproverModal() {
             })
         }).then(response => response.json())
             .then((body) => {
+            props.setChangedApprov(!props.changedApprov); 
             console.log(body);
     }) 
     }
@@ -377,17 +407,18 @@ function CreateApproverModal() {
 //TODO auto refresh 
 function EditApproverModal(props) {
     let approver = props.data;
+    let approversList = props.list;
+    let setApprover = props.setApprover;
+
+    console.log("approvers list edit")
+    console.log(approversList)
 
     const [isOpen, setIsOpen] = useState(false);
-    const [formData, setFormData] = useState({
-        firstName: approver.firstName,
-        middleName: approver.middleName,
-        lastName: approver.lastName,
-        upMail: approver.upMail,
-        password: approver.password,
-        title: approver.title
-    }); 
-    
+    const [formData, setFormData] = useState([]); 
+
+    useEffect(()=>{
+        setFormData(approver);
+    },[props.data])
     // opens the modal when called
     const openModal = () => {
         setIsOpen(true);
@@ -425,7 +456,15 @@ function EditApproverModal(props) {
         setIsOpen(false);
     };
 
+    const deleteObject = (upMail) => {
+        const updatedData = approversList.filter((obj) => obj.upMail !== upMail);
+        setApprover(updatedData);
+      };
+
     function handleSumbitEdit ()  {
+
+        deleteObject(approver.upMail);
+
         fetch('http://localhost:3001/edit-approver', 
         {
             method: 'POST',
@@ -444,6 +483,7 @@ function EditApproverModal(props) {
         }) .then(response => response.json())
         .then((body) => {
             console.log(body);
+            setApprover((prevData) => [...prevData, body]);
           })
  }
     // resizing of the modal
@@ -467,7 +507,7 @@ function EditApproverModal(props) {
                     <p>Edit Approver Account</p>
                 </div>
                 <div className="centered modal-form-div">
-                    <form onSubmit={handleSubmit} className="modal-form">
+                    <form className="modal-form" onSubmit={handleSubmit}>
                         <input type="text" name="firstName" value={formData.firstName || ''} onChange={handleChange} placeholder="First Name"/><br></br>
                         <input type="text" name="middleName" value={formData.middleName || ''} onChange={handleChange} placeholder="Middle Name"/><br></br>
                         <input type="text" name="lastName" value={formData.lastName || ''} onChange={handleChange} placeholder="Last Name"/><br></br>

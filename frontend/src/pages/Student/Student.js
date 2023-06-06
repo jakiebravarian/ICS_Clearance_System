@@ -1,6 +1,7 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import Pikachu from '../../assets/pikachu.png';
+import {useNavigate} from "react-router-dom";
 
 // import other components
 import { Header, StudentInfo, ProfileHeader, Application, Footer } from "./StudentComponents";
@@ -15,11 +16,18 @@ export default  function Student() {
     const [Applications, setApplications] = useState([])
     const [student, setStudent] = useState([]);
     const [userInfo, setUserInfo] = useState({}); // Define userInfo state
+    const [isVerified, setVerified] = useState(false);
+    const navigate = useNavigate();
+
     useEffect(() => {
         const upMail1 = localStorage.getItem("upMail");
       
         const fetchData = async () => {
           const studentData = await getCurrentStudent(upMail1);
+          console.log(studentData);
+          if(studentData.isVerified === "Pending"){
+            navigate("/verify");
+           }
           if (studentData) {
             setStudent(studentData);
             setUserInfo({
@@ -29,9 +37,12 @@ export default  function Student() {
               course: studentData.degreeProgram,
               college: studentData.college,
               classification: studentData.userType,
+              isVerified: studentData.isVerified,
               icon: Pikachu,
             });
              setApplications(studentData.application);
+             console.log(userInfo.isVerified);
+            
           }
         };
       

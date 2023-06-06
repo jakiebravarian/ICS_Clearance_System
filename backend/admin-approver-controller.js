@@ -77,9 +77,7 @@ const filterNameAscending = async (req, res) => {
 
   try{
       //check first if search name is not empty
-      const searchName = req.query.search;
-      console.log(searchName)
-      console.log(req.query)
+      const searchName = req.body.search;
       
       if(searchName == ""){
           const sortAppNameAsc = await User.find({userType: "Approver"}).sort({firstName: 'asc', lastName:'asc'})
@@ -115,9 +113,7 @@ const filterNameDescending = async (req, res) => {
 
 try{
     //check first if search name is not empty
-    const searchName = req.query.search;
-    console.log(searchName)
-    console.log(req.query)
+    const searchName = req.body.search;
 
     if(searchName == ""){
         const sortAppNameDesc = await User.find({userType: "Approver"}).sort({firstName: 'desc', lastName:'desc'})
@@ -161,7 +157,6 @@ const editApprover = async (req,res) => {
 }
   try{
     const editApp = await User.findOne({upMail: req.body.upMail});
-    console.log(req.body);
   
     //check if new email is a upmail
     if(!matchRegex(req.body.newUpMail)){
@@ -173,9 +168,9 @@ const editApprover = async (req,res) => {
       editApp.lastName = req.body.lastName;
       editApp.upMail = req.body.newUpMail;
       editApp.password = req.body.password;
-  
+      
       await editApp.save();
-      res.send({success: true});
+      res.send(editApp);
     }
 
   }catch(err){

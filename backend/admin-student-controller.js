@@ -34,6 +34,7 @@ const assignAdviser = async (req,res) => {
                 const student = await User.findOne({studentNumber: req.body.studentNumber});
     
                 student.adviser = assignedAdviser._id;
+                student.isVerified = "Verified";
     
                 student.save();
     
@@ -52,6 +53,7 @@ const assignAdviser = async (req,res) => {
                 const student = await User.findOne({studentNumber: req.body.studentNumber});
     
                 student.adviser = assignedAdviser._id;
+                student.isVerified ="Verified";
     
                 student.save();
     
@@ -73,7 +75,7 @@ const assignAdviser = async (req,res) => {
 
 const sortStudentByStudentNum = async (req,res) => {
     try{
-        const sortByStudNum =  await User.find({userType: "Student"}).sort({studentNumber: "desc"});
+        const sortByStudNum =  await User.find({userType: "Student", adviser: null,  isVerified: "Pending"}).sort({studentNumber: "desc"});
         res.send(sortByStudNum);
         // console.log("sn" + sortByStudNum);
     }catch(err){
@@ -86,7 +88,7 @@ const sortStudentByName = async (req,res) => {
 
 
     try{
-        const sortbyName =  await User.find({userType: "Student"}).sort({lastName: "asc"});
+        const sortbyName =  await User.find({userType: "Student", adviser: null,  isVerified: "Pending"}).sort({lastName: "asc"});
         // res.send(sortbyName);
         // console.log(sortbyName);
         res.send(sortbyName)
@@ -98,7 +100,7 @@ const sortStudentByName = async (req,res) => {
 
 const getStudent = async (req, res) => {
     try{
-        const student =  await User.find({userType: "Student", adviser: null});
+        const student =  await User.find({userType: "Student", adviser: null, isVerified: "Pending"});
         res.send(student)
       }catch(err){
        // res.status(500).send('An error occurred');
@@ -106,4 +108,18 @@ const getStudent = async (req, res) => {
       }
 }
 
-export {sortStudentByName, getPendingStudent, assignAdviser, sortStudentByStudentNum, getStudent}
+const rejectStudent = async (req,res) =>{
+    try{
+        const currStud = req.body.student
+        console.log(currStud);
+        const student =  await User.findOne({upMail: currStud.upMail});
+        student.isVerified = "Rejected";
+        student.save();
+        res.send(student);
+      }catch(err){
+       // res.status(500).send('An error occurred');
+       res.send(err);
+      }
+}
+
+export {sortStudentByName, getPendingStudent, assignAdviser, sortStudentByStudentNum, getStudent,rejectStudent}
