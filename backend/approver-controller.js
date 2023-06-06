@@ -17,7 +17,7 @@ export const getAllPendingApplications = async (req, res) => {
 
           // Filter applications based on adviser
           applications.forEach(function (application) {
-            if (application.student.adviser === approver._id) {
+            if (application.student.adviser.toString() === approver._id.toString()) {
               currentPendingApplications = currentPendingApplications.concat(application);
             }
           });
@@ -256,7 +256,7 @@ export const approveApplicationAtCurrentStep = async (req, res) => {
 
 export const returnAppAtCurrentStep = async (req, res) => {
   try {
-    const { appId } = req.body;
+    const { appId, remarkSubmission } = req.body;
 
     // Find the application by ID
     const application = await Application.findById(appId);
@@ -264,7 +264,7 @@ export const returnAppAtCurrentStep = async (req, res) => {
       return res.status(404).send('Application not found');
     }
     application.remarks.push(remarkSubmission);
-    application.status
+    application.status = "Pending";
     application.save();
     res.send('Application returned to previous step successfully');
   } catch (error) {
