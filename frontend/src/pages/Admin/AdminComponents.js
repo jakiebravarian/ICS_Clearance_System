@@ -289,7 +289,7 @@ function AssignAdviserModal(prop) {
                 </div>
                 <div className="centered modal-form-div">
                     <form onSubmit={handleSubmit} className="modal-form">
-                        <select className="d" onChange={handleChange}>
+                        <select className="dropdown-select-adviser" onChange={handleChange}>
                         <option value="" disabled selected>Select Adviser</option>
                         {options.map(option => (
                             <option key={option._id} value={option._id}>
@@ -482,8 +482,6 @@ function EditApproverModal(props) {
     function handleSumbitEdit ()  {
 
         deleteObject(approver.upMail);
-        console.log("edit formdata")
-        console.log(formData)
 
         fetch('http://localhost:3001/edit-approver', 
         {
