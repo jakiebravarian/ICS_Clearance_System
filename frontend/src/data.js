@@ -2,7 +2,7 @@
 
 // placeholder image
 import Pikachu from './assets/pikachu.png';
-import AdminIcon from './assets/admin_icon.jpg';
+import AdminIcon from './assets/admin.png';
 import { useEffect, useState } from "react";
 import ApproverIcon from './assets/approver.png';
 
