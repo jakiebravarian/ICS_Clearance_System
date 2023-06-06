@@ -34,6 +34,7 @@ const assignAdviser = async (req,res) => {
                 const student = await User.findOne({studentNumber: req.body.studentNumber});
     
                 student.adviser = assignedAdviser._id;
+                student.isVerified = "Verified";
     
                 student.save();
     
@@ -52,6 +53,7 @@ const assignAdviser = async (req,res) => {
                 const student = await User.findOne({studentNumber: req.body.studentNumber});
     
                 student.adviser = assignedAdviser._id;
+                student.isVerified ="Verified";
     
                 student.save();
     
