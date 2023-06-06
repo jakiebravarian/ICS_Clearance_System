@@ -12,11 +12,11 @@ export default function Login() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if (isLoggedIn) {
-      navigate("/student");
-    }
-  }, [isLoggedIn, navigate]);
+  // useEffect(() => {
+  //   if (isLoggedIn) {
+  //     navigate("/student");
+  //   }
+  // }, [isLoggedIn, navigate]);
 
   const handleUpMail = (e) => {
     setUpMail(e.target.value);
@@ -40,11 +40,12 @@ export default function Login() {
     })
       .then((response) => response.json())
       .then((body) => {
+        console.log(body.token);
         if (body.success) {
           setIsLoggedIn(true);
           const cookies = new Cookies();
-          cookies.set("authToken", body.token, {
-            path: "/localhost:3001/",
+            cookies.set("authToken", body.token, {
+            path: "localhost:3001/",
             maxAge: 60 * 60,
             sameSite: false,
           });

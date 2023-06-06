@@ -8,12 +8,12 @@ import Cookies from 'universal-cookie';
 
 
 export default function Verify() {
-  const upMail = localStorage.getItem("upMail");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
     const authToken = new Cookies().get("authToken");
+    console.log(authToken);
     if (!authToken) {
       navigate("/");
     } else {
