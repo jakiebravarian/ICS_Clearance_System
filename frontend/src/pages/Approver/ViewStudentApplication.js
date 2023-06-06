@@ -88,25 +88,25 @@ export default function ViewStudentApplication() {
     }
 
     async function returnApplication() {
-        // try {
-        //     const response = await fetch("http://localhost:3001/approve-application-at-current-step", {
-        //         method: "PUT",
-        //         headers: {
-        //             "Content-Type": "application/json",
-        //         },
-        //         body: JSON.stringify({ appId }),
+        try {
+            const response = await fetch("http://localhost:3001/return-application-at-current-step", {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ appId }),
 
-        //     });
+            });
 
-        //     if (response.ok) {
-        //         console.log("Application approved successfully");
+            if (response.ok) {
+                console.log("Application returned to previous step successfully");
 
-        //     } else {
-        //         console.error("Failed to approve application");
-        //     }
-        // } catch (error) {
-        //     console.error(error);
-        // }
+            } else {
+                console.error("Failed to return application");
+            }
+        } catch (error) {
+            console.error(error);
+        }
     }
 
     //functions that handle changes on each input
@@ -135,8 +135,17 @@ export default function ViewStudentApplication() {
 
     const onSubmit = (data) => {
         try {
-            console.log(JSON.stringify(data));
-            returnApplication(data);
+            const remarkSubmission = {
+                remark: data.remark,
+                dateRemark: new Date().toLocaleDateString(),
+                commenter: userInfo.userId,
+                stepGivenRemark: currentApplication.step,
+            };
+
+            console.log(currentApplication);
+
+            console.log(remarkSubmission);
+
         } catch (error) {
             console.log(error)
         }
