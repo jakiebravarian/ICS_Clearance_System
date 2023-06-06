@@ -50,22 +50,22 @@ function StudentInfo(props) {
             <div className="student-info-box row">
                 {/* name */}
                 <div id="name-container">
-                    Name: {studentInfo.name}
+                    <b>Name:</b> {studentInfo.name}
                 </div>
 
                 {/* student number */}
                 <div id="studno-container">
-                    Student number: {studentInfo.studno}
+                    <b>Student number:</b> {studentInfo.studno}
                 </div>
 
                 {/* course */}
                 <div id="course-container">
-                    Course: {studentInfo.course}
+                    <b>Course:</b> {studentInfo.course}
                 </div>
 
                 {/* college */}
                 <div id="college-container">
-                    College: {studentInfo.college}
+                    <b>College:</b> {studentInfo.college}
                 </div>
             </div>
         </div>
