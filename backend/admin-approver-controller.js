@@ -167,6 +167,7 @@ const editApprover = async (req,res) => {
       editApp.middleName = req.body.middleName;
       editApp.lastName = req.body.lastName;
       editApp.upMail = req.body.newUpMail;
+      editApp.title = req.body.title;
       editApp.password = req.body.password;
       
       await editApp.save();
