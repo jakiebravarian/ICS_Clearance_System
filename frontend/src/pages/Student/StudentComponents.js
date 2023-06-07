@@ -2,14 +2,33 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { Document, Page, Text, View, PDFViewer } from '@react-pdf/renderer';
 import { styles } from './pdfStyles';
+import Cookies from "universal-cookie";
+import { useNavigate, useLoaderData } from 'react-router-dom';
+
 
 // header profile component
 function ProfileHeader(props) {
     let name = props.name       // name of logged in user
     let icon = props.icon;      // icon of the logged in user
     let classification = props.classification // classification of the user
+    const useremail= localStorage.getItem("upMail")
+    const [isLoggedIn, setIsLoggedIn] = useState(false)
+    const navigate = useNavigate()
 
+    // useEffect(() => {
+    //     if (!isLoggedIn) {
+    //       navigate("/")
+    //     }
+    //   }, [isLoggedIn, navigate])
     
+    //   function logout() {
+    //     const cookies = new Cookies();
+    //     cookies.remove("authToken");
+    
+    //     localStorage.removeItem("upMail");
+    
+    //     setIsLoggedIn(false)
+    //   }
 
     return(
         // renders logged in user's name and icon
@@ -22,7 +41,9 @@ function ProfileHeader(props) {
             </div>
             <div>
                 <img className="profile-icon-img" src={icon}></img>
+                
             </div>
+            {/* <button onClick={logout}>Log Out</button> */}
         </div>
     )
 }
@@ -35,7 +56,8 @@ function Header(props) {
         <div id="page-header">
             <h1 id="page-header-h1">Institute of Computer Science - Clearance Approval System</h1>
             {/* profile indicator */}
-            <ProfileHeader name={userInfo.name} classification={userInfo.classification} icon={userInfo.icon} />
+            <ProfileHeader name={userInfo.name} classification={userInfo.classification} icon={userInfo.icon} email={userInfo.upMail}/>
+            
         </div>
     )
 }
@@ -79,7 +101,7 @@ function Form(props) {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-
+        
         // Retrieve form input values
         const githubLink = document.getElementById("github-link-input").value;
         const dateApplied = new Date().toLocaleDateString();
@@ -111,7 +133,8 @@ function Form(props) {
                 conditions.step = 2;
             }
         }
-        console.log(studentSubmission);
+        console.log("current application")
+        console.log(props.userInfo);
         
         // Call the onClick event handler and pass the values as parameters
         props.onClick(event, studentSubmission,conditions);
@@ -214,7 +237,7 @@ function Application(props) {
                         No applications yet. To start one, please fill out the form below.
                     </p>
                 </div>
-                <Form onClick={props.onClick} userInfo = {props.student}/>
+                <Form onClick={props.onClick} userInfo = {props.student} currentApplication={props.currentApplication}/>
             </div>
         );
     }
@@ -227,7 +250,7 @@ function Application(props) {
                         You only have closed applications. To start a new application, please fill out the form below.
                     </p>
                 </div>
-                <Form onClick={props.onClick} userInfo = {props.student}/>
+                <Form onClick={props.onClick} userInfo = {props.student} currentApplication={props.currentApplication}/>
             </div>
         );
     }

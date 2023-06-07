@@ -65,7 +65,8 @@ export default  function Student() {
       event.preventDefault(); // prevent the form from submitting and refreshing the page
       
       console.log('onClick executed');
-
+      console.log(studentSubmission);
+      console.log(conditions)
       if(conditions.bool){
         var newApplication = {
           upMail: student.upMail,
@@ -111,14 +112,16 @@ export default  function Student() {
     }
 
     async function resubmitApplication(event,studentSubmission) {
-      currentApplication.updatedStudentSubmission = studentSubmission;
+      // currentApplication.updatedStudentSubmission = studentSubmission;
+      console.log("sumbission")
+      console.log(studentSubmission)
       try {
         const response = await fetch("http://localhost:3001/update-student-submission", {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ currentApplication}),
+          body: JSON.stringify({studentSubmission}),
         });
   
         if (response.ok) {

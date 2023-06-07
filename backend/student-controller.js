@@ -150,7 +150,7 @@ export const updateStudentSubmission = async (req, res) => {
   try {
     const app = req.body.currentApplication; // Get the applicationId and new studentSubmission value from the request body
     // Update the studentSubmission of the application
-    console.log(app._id);
+    console.log(req.body);
     const application = await Application.findById(app._id);
     if (!application) {
       return res.status(404).send('Application not found');
