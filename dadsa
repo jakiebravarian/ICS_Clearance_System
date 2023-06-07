@@ -1,0 +1,524 @@
+[33mcommit 60962bf09cfb23267c5337ded3875d4e393236c5[m[33m ([m[1;36mHEAD -> [m[1;32mpena-backend[m[33m, [m[1;31morigin/pena-backend[m[33m)[m
+Author: jrppena <jppena@up.edu.ph>
+Date:   Wed Jun 7 02:24:24 2023 +0800
+
+    fixed pdf generator
+
+[33mcommit 6f81da39ab5457433113b6169f5b5d7c9c8adfd9[m
+Author: jrppena <jppena@up.edu.ph>
+Date:   Wed Jun 7 02:24:20 2023 +0800
+
+    chore: fixed pdfgenerator
+
+[33mcommit 43fe2563ca900fdfbfc7b8300019f260df59c68d[m
+Author: jrppena <jppena@up.edu.ph>
+Date:   Wed Jun 7 01:51:56 2023 +0800
+
+    fix: fixed import
+
+[33mcommit 0cef1521ab1c91eb592cd89ed622075abf7f38e2[m
+Merge: 18a1453 2f19df5
+Author: jrppena <jppena@up.edu.ph>
+Date:   Wed Jun 7 01:50:53 2023 +0800
+
+    Merge branch 'bautista-backend' of https://github.com/CMSC100-UV4L/san-agustin_bautista_brabante_pena_project into backend
+
+[33mcommit 18a14532813fc4aacc8ad32c9610944644958020[m
+Author: jrppena <jppena@up.edu.ph>
+Date:   Wed Jun 7 01:48:51 2023 +0800
+
+    chore: fixed controllers and implementation for both approver and student
+
+[33mcommit 2f19df5de090404fa702a3d821d35adc2f68d31a[m
+Author: bautistaAD <aqbautista@up.edu.ph>
+Date:   Wed Jun 7 01:43:54 2023 +0800
+
+    ui: change cursor type when hovered
+
+[33mcommit 6e9623715fefa919acc71738dfdba283c7321f90[m
+Author: bautistaAD <aqbautista@up.edu.ph>
+Date:   Wed Jun 7 01:34:26 2023 +0800
+
+    chore: put back approversort to admincomponents
+
+[33mcommit be3013eaca29e12ba41a719c54b4173dd2415c52[m
+Author: bautistaAD <aqbautista@up.edu.ph>
+Date:   Wed Jun 7 01:33:51 2023 +0800
+
+    refactor:  approverSort and change assignadviserModal
+
+[33mcommit f19998f6ca7a360c1add3124b71fe6c3b8a59fd4[m
+Author: bautistaAD <aqbautista@up.edu.ph>
+Date:   Wed Jun 7 01:32:50 2023 +0800
+
+    refactor:  assign adviser refator
+
+[33mcommit effaf871121650797fe7b9c36f7b29d23e035a6d[m
+Author: bautistaAD <aqbautista@up.edu.ph>
+Date:   Wed Jun 7 01:32:10 2023 +0800
+
+    feat: added function get adviser
+
+[33mcommit 1f3506707b45fdac96ddeeaa6bd45b025c815a71[m
+Author: bautistaAD <aqbautista@up.edu.ph>
+Date:   Wed Jun 7 01:31:29 2023 +0800
+
+    ui: added hover
+
+[33mcommit 98e61c829f57822e072d37b487fd1918110a44a7[m
+Author: jrppena <jppena@up.edu.ph>
+Date:   Tue Jun 6 23:42:40 2023 +0800
+
+    feat: modifed controller for returningAppAtCurrentStep
+
+[33mcommit 82ec68b287a01fefaa78e0b9e7ffa9d0562544d6[m
+Author: jrppena <jppena@up.edu.ph>
+Date:   Tue Jun 6 23:24:03 2023 +0800
+
+    fix: fixed routes
+
+[33mcommit 29158c5e98198b9f327b1f6180816d7577da1679[m
+Merge: 1026fac 4bb59de
+Author: jrppena <jppena@up.edu.ph>
+Date:   Tue Jun 6 23:11:26 2023 +0800
+
+    Merge branch 'brabante-backend' of https://github.com/CMSC100-UV4L/san-agustin_bautista_brabante_pena_project into backend
+
+[33mcommit 4bb59de803d84df2b415ea511061a8e846bcec7e[m
+Author: jrppena <jppena@up.edu.ph>
+Date:   Tue Jun 6 23:10:03 2023 +0800
+
+    chore: removed redundant routes
+
+[33mcommit 7dd95acfb74c97a6b0bbffad5c9e227d64cb122c[m
+Author: jakiebravarian <jcbrabante@up.edu.ph>
+Date:   Tue Jun 6 23:07:19 2023 +0800
+
+    fix: approve application works
+
+[33mcommit e62a0857ff3477eda198ccd0f55c8e10a6534f19[m
+Author: jakiebravarian <jcbrabante@up.edu.ph>
+Date:   Tue Jun 6 22:51:37 2023 +0800
+
+    chore: added eventhandlers for approve/return buttons
+
+[33mcommit 1026fac4bd095dc3297b2b827e27acacd21918b8[m
+Author: jrppena <jppena@up.edu.ph>
+Date:   Tue Jun 6 22:42:47 2023 +0800
+
+    fix: sort approver routes
+
+[33mcommit ab80ffc068f55c26401d417204a6e5790d54f0e5[m
+Author: smsanagustin <smsanagustin@up.edu.ph>
+Date:   Tue Jun 6 22:24:37 2023 +0800
+
+    ui: added login page for admin
+
+[33mcommit b2bf436a57cc6eea517ba152dc659fba2bd0274d[m
+Author: jakiebravarian <jcbrabante@up.edu.ph>
+Date:   Tue Jun 6 22:15:18 2023 +0800
+
+    fix: data retrieval via routes working now
+
+[33mcommit 23ca902abf51f8b91dac544c542ff77c0f261665[m[33m ([m[1;32msanagustin-backend[m[33m)[m
+Merge: 01fb45d 79fde5e
+Author: jakiebravarian <jcbrabante@up.edu.ph>
+Date:   Tue Jun 6 22:08:56 2023 +0800
+
+    Merge branch 'backend' of https://github.com/CMSC100-UV4L/san-agustin_bautista_brabante_pena_project into brabante-backend
+
+[33mcommit 01fb45daddff11a81e2703e557cc4b2fb4fc5b2b[m
+Author: jakiebravarian <jcbrabante@up.edu.ph>
+Date:   Tue Jun 6 22:07:51 2023 +0800
+
+    chore: replaced hardcoded values in remarks table
+
+[33mcommit 79fde5eb31051042e7b33d5ce123ece8fa5db0a0[m
+Merge: 2bcd386 69989c5
+Author: jrppena <jppena@up.edu.ph>
+Date:   Tue Jun 6 22:06:58 2023 +0800
+
+    Merge branch 'backend' of https://github.com/CMSC100-UV4L/san-agustin_bautista_brabante_pena_project into pena-backend
+
+[33mcommit 69989c5de08498aaf354e69091ebabd0620c72ad[m
+Merge: 990d725 7460542
+Author: jrppena <jppena@up.edu.ph>
+Date:   Tue Jun 6 22:06:32 2023 +0800
+
+    Merge branch 'brabante-backend' of https://github.com/CMSC100-UV4L/san-agustin_bautista_brabante_pena_project into backend
+
+[33mcommit 2bcd3865bd31ebda1e27da3a69c0076f68655911[m
+Author: jrppena <jppena@up.edu.ph>
+Date:   Tue Jun 6 22:03:24 2023 +0800
+
+    feat: stores cookies properly and redirects them to verify page if not yet logged in
+
+[33mcommit c20726c215bdad8336bfbf37dba6523db4f1baa3[m
+Author: jrppena <jppena@up.edu.ph>
+Date:   Tue Jun 6 22:02:46 2023 +0800
+
+    chore: updated admin-student controllers
+
+[33mcommit 74605420b19327a13c107365052850856de28056[m
+Author: jakiebravarian <jcbrabante@up.edu.ph>
+Date:   Tue Jun 6 06:33:29 2023 +0800
+
+    chore: changed hardcoded values and fixed some UI
+
+[33mcommit 990d725994b5ac27312cf7b085b552b3752a7059[m
+Merge: 9573760 de19d54
+Author: jrppena <jppena@up.edu.ph>
+Date:   Tue Jun 6 03:34:40 2023 +0800
+
+    Merge branch 'brabante-backend' of https://github.com/CMSC100-UV4L/san-agustin_bautista_brabante_pena_project into backend
+
+[33mcommit 9573760ce151619fe6fa5661228ead5aebdda5e4[m
+Author: jrppena <jppena@up.edu.ph>
+Date:   Tue Jun 6 03:33:55 2023 +0800
+
+    fix: rerender when adding adviser to student
+
+[33mcommit 90f61a6211807deca737c50c341ae788760c7e04[m
+Author: jrppena <jppena@up.edu.ph>
+Date:   Tue Jun 6 03:30:23 2023 +0800
+
+    fix: after rejecting no need to reload to reflect changes
+
+[33mcommit 34a8b84e19e655d99f189fe35954ae4fad75fdb6[m
+Author: jrppena <jppena@up.edu.ph>
+Date:   Tue Jun 6 03:27:00 2023 +0800
+
+    feat: admin can now reject student
+
+[33mcommit d696f79e9ffeab28a529ed80cfb830423280f2c9[m
+Author: jrppena <jppena@up.edu.ph>
+Date:   Tue Jun 6 03:22:54 2023 +0800
+
+    feat: added controller for rejecting student
+
+[33mcommit de19d5436b502731dc30a1005edacba796b589f7[m
+Author: jakiebravarian <jcbrabante@up.edu.ph>
+Date:   Tue Jun 6 03:13:50 2023 +0800
+
+    feat: implemented Search
+
+[33mcommit e87d814f1dbb63a2e8e7ee9afd7eb2b7d65b24a1[m
+Author: jrppena <jppena@up.edu.ph>
+Date:   Tue Jun 6 02:25:38 2023 +0800
+
+    fix: fixed sorting controller for admin-student
+
+[33mcommit 35d73528409dd0662045cde94bbfc4857b084770[m
+Author: jakiebravarian <jcbrabante@up.edu.ph>
+Date:   Tue Jun 6 02:14:56 2023 +0800
+
+    feat: added View button
+
+[33mcommit c1251a5224215e6c747d8a83a0ef6a9467a899ab[m
+Author: jrppena <jppena@up.edu.ph>
+Date:   Tue Jun 6 02:05:02 2023 +0800
+
+    fix: fixed search
+
+[33mcommit 09c743b8e6a9250dd5fc79854c697aa6e7bac95e[m
+Author: jrppena <jppena@up.edu.ph>
+Date:   Tue Jun 6 02:04:51 2023 +0800
+
+    fix: fixed rendering of create approver
+
+[33mcommit 7762ad9690314f4f962d3f896f5ce051f88f5640[m
+Author: jrppena <jppena@up.edu.ph>
+Date:   Tue Jun 6 01:51:11 2023 +0800
+
+    fix: needing to refresh to delete approver
+
+[33mcommit 2015c7ef799b9026dc5a6f071edef34e37547d9a[m
+Author: jakiebravarian <jcbrabante@up.edu.ph>
+Date:   Tue Jun 6 01:50:25 2023 +0800
+
+    chore: added isDisabled attributes to input
+
+[33mcommit a15a9964f808077ab02ab19f31d8916660721d02[m
+Author: jakiebravarian <jcbrabante@up.edu.ph>
+Date:   Tue Jun 6 01:35:24 2023 +0800
+
+    feat: implemented Filter and Sort
+
+[33mcommit eb486813b89a871bcdec50f1cce38b3a8e861d13[m[33m ([m[1;32mbautista-backend[m[33m)[m
+Author: jrppena <jppena@up.edu.ph>
+Date:   Tue Jun 6 01:04:45 2023 +0800
+
+    fix: fixed edittttt
+
+[33mcommit 7ba56544cb2cc4d3e5b43599e64fbe1ae0230963[m
+Author: bautistaAD <aqbautista@up.edu.ph>
+Date:   Tue Jun 6 00:15:59 2023 +0800
+
+    chore: fix edit
+
+[33mcommit 4f09e71f9560aa6e715848d1258ba1c74f8fa644[m
+Author: jakiebravarian <jcbrabante@up.edu.ph>
+Date:   Mon Jun 5 23:42:46 2023 +0800
+
+    chore: fixed Table and Header
+
+[33mcommit 5fdcf1598ba0148369f3665822fa856e1c45eae8[m
+Author: bautistaAD <aqbautista@up.edu.ph>
+Date:   Mon Jun 5 23:05:25 2023 +0800
+
+    chore: update
+
+[33mcommit 238bef74b84283144da5fab7c8fb5b65ea503d59[m
+Author: jakiebravarian <jcbrabante@up.edu.ph>
+Date:   Mon Jun 5 22:04:49 2023 +0800
+
+    chore: removed duplicate import
+
+[33mcommit 5fb958c520d9bff507b284d7185f2ebec6ab1345[m
+Author: jakiebravarian <jcbrabante@up.edu.ph>
+Date:   Mon Jun 5 22:02:15 2023 +0800
+
+    chore: fixed retrieval of data
+
+[33mcommit ac1a5eb962ffb4127e803d0749956d7e9d2b978c[m
+Merge: 3a080e4 9810e34
+Author: jrppena <jppena@up.edu.ph>
+Date:   Mon Jun 5 21:58:13 2023 +0800
+
+    Merge branch 'bautista-backend' of https://github.com/CMSC100-UV4L/san-agustin_bautista_brabante_pena_project into backend
+
+[33mcommit 3a080e40b849f7adf5994c995fb1a4ae6d340936[m
+Author: jrppena <jppena@up.edu.ph>
+Date:   Mon Jun 5 21:53:20 2023 +0800
+
+    chore: added populate to applicationsQuery
+
+[33mcommit 9810e342b2b164e83d4e63bef4eee09e1fc12d32[m
+Author: bautistaAD <aqbautista@up.edu.ph>
+Date:   Mon Jun 5 21:43:52 2023 +0800
+
+    feat: added create approver
+
+[33mcommit 3b0371dee45d51aeb4a0179835bc4ca4f5134771[m
+Author: jrppena <jppena@up.edu.ph>
+Date:   Mon Jun 5 20:22:07 2023 +0800
+
+    chore: change again currentpendingapplications
+
+[33mcommit 8f3c248c2f488f8f76b313acf8b567a93f47e285[m
+Author: jrppena <jppena@up.edu.ph>
+Date:   Mon Jun 5 20:17:12 2023 +0800
+
+    chore: edited getAllPendingApplications function
+
+[33mcommit e4ff400d2367a9f1f8b9d783be50e935163ae07a[m
+Author: bautistaAD <aqbautista@up.edu.ph>
+Date:   Mon Jun 5 20:06:35 2023 +0800
+
+    feat: add approver-controller
+
+[33mcommit febcf7b7fcf3887a811cb1d71cc67be1e7c7cf11[m
+Author: bautistaAD <aqbautista@up.edu.ph>
+Date:   Mon Jun 5 20:06:13 2023 +0800
+
+    chore:: update routes
+
+[33mcommit b9f29fe787f68ce1d5aafa72547cbe1570e6f9d8[m
+Author: bautistaAD <aqbautista@up.edu.ph>
+Date:   Mon Jun 5 18:25:52 2023 +0800
+
+    feat: added assign adviser function
+
+[33mcommit 01f551bc55f4adef5c265b413790bfe92a01cce6[m
+Author: bautistaAD <aqbautista@up.edu.ph>
+Date:   Mon Jun 5 18:24:36 2023 +0800
+
+    feat: added search filter
+
+[33mcommit b769b5b4b9df0f3d3a66ba39b389c2cfc440a1d6[m
+Author: bautistaAD <aqbautista@up.edu.ph>
+Date:   Mon Jun 5 16:36:31 2023 +0800
+
+    feat:  implement new functions
+
+[33mcommit bb47488e5e7f9846ef0fa1ce718a700add8ff7da[m
+Author: bautistaAD <aqbautista@up.edu.ph>
+Date:   Mon Jun 5 15:50:24 2023 +0800
+
+    feat: integrate edit and delete functions
+
+[33mcommit a419c0b546af170e501fff3a2a415b14ed028df2[m
+Author: jrppena <jppena@up.edu.ph>
+Date:   Mon Jun 5 15:45:10 2023 +0800
+
+    refactor: changed variable name of stud num
+
+[33mcommit 78a4fd9279134f11529cf852c2266a96b33db643[m
+Merge: ed9ed6e 37f797a
+Author: jrppena <jppena@up.edu.ph>
+Date:   Mon Jun 5 15:35:59 2023 +0800
+
+    Merge branch 'backend' of https://github.com/CMSC100-UV4L/san-agustin_bautista_brabante_pena_project into frontend
+
+[33mcommit ed9ed6ef97d752016ab6a968efeaaf8c2d6a6cd1[m[33m ([m[1;31morigin/new-sanagustin-frontend[m[33m)[m
+Author: smsanagustin <smsanagustin@up.edu.ph>
+Date:   Mon Jun 5 15:10:57 2023 +0800
+
+    ui: added a style when admin hovers over the menu
+
+[33mcommit 37f797af7400052ad5fdecb3a9334db91109fa11[m
+Author: jrppena <jppena@up.edu.ph>
+Date:   Mon Jun 5 15:09:08 2023 +0800
+
+    feat: able to fetch current pending applications
+
+[33mcommit 828339b5f4726c55e45af2e7f2fa1df61add0c57[m
+Author: jrppena <jppena@up.edu.ph>
+Date:   Mon Jun 5 15:06:23 2023 +0800
+
+    core: updated packages to include nodemon
+
+[33mcommit e485a3b65dc5dd9cfb1484de1df6371f6450c5df[m
+Author: jrppena <jppena@up.edu.ph>
+Date:   Mon Jun 5 15:06:03 2023 +0800
+
+    chore: updated routes
+
+[33mcommit d90df9867907e796d8f7a91c84c8fe73cd94d132[m
+Author: jrppena <jppena@up.edu.ph>
+Date:   Mon Jun 5 15:05:55 2023 +0800
+
+    chore: made some changes to approver-controller
+
+[33mcommit cca1b148ddeb6ccfc9d16dc7c4c581aef2ca544f[m
+Author: jrppena <jppena@up.edu.ph>
+Date:   Mon Jun 5 15:05:15 2023 +0800
+
+    feat: fix login page, working login-approver
+
+[33mcommit 05bb8ca6655ebba740c3822d8db0f7dafa404e25[m
+Author: jrppena <jppena@up.edu.ph>
+Date:   Mon Jun 5 15:04:56 2023 +0800
+
+    fix: changed status when submit/resubmit an application to open
+
+[33mcommit 7fdeb0fcc5a72884f1bdd40ba25c0cb4d2f29414[m
+Author: jrppena <jppena@up.edu.ph>
+Date:   Mon Jun 5 15:04:18 2023 +0800
+
+    chore: added reference to student in app schema
+
+[33mcommit f88dee10cad6a1d2dfb75eb708f102bce5708a72[m
+Author: smsanagustin <smsanagustin@up.edu.ph>
+Date:   Mon Jun 5 14:56:10 2023 +0800
+
+    ui: improved the desing of the student info section
+
+[33mcommit 036e3c64b04ad5453a2fb4ea7180b7bff193281e[m
+Author: smsanagustin <smsanagustin@up.edu.ph>
+Date:   Mon Jun 5 14:34:16 2023 +0800
+
+    ui: removed unnecessary form fields
+
+[33mcommit 878babeb7c7757799d8260459e5d404a6520e01b[m
+Author: bautistaAD <aqbautista@up.edu.ph>
+Date:   Mon Jun 5 07:35:57 2023 +0800
+
+    feat: added sorting function and search function
+
+[33mcommit fc39128cba20886ce6579b42013243c1921415dd[m
+Author: bautistaAD <aqbautista@up.edu.ph>
+Date:   Mon Jun 5 07:14:30 2023 +0800
+
+    fix: alignment, margins and sizes
+
+[33mcommit 411a31ec64626255a215657e615b5b9cce1aafaa[m
+Author: bautistaAD <aqbautista@up.edu.ph>
+Date:   Mon Jun 5 06:27:09 2023 +0800
+
+    chore: added filter on find
+
+[33mcommit 7a394d511f62fb6b40fe33783ee1e18215e9fbe2[m
+Author: bautistaAD <aqbautista@up.edu.ph>
+Date:   Mon Jun 5 06:26:43 2023 +0800
+
+    feat: added get approver; add filter on find
+
+[33mcommit 21ba369fb225750f3e81d256d876233aaeeb6a92[m
+Author: bautistaAD <aqbautista@up.edu.ph>
+Date:   Mon Jun 5 06:25:57 2023 +0800
+
+    fix: added get approver,; change get to post
+
+[33mcommit 0d9dafb28d5634b67139b5446672dc829e66ed95[m
+Author: smsanagustin <smsanagustin@up.edu.ph>
+Date:   Mon Jun 5 05:45:42 2023 +0800
+
+    ui: removed unneccessary css attributes
+
+[33mcommit 32b76ad263c67d2078397bc459a40a0e5a2bd556[m
+Author: smsanagustin <smsanagustin@up.edu.ph>
+Date:   Mon Jun 5 05:39:38 2023 +0800
+
+    ui: adjusted the size of the dropdown input
+
+[33mcommit 3ba49094a24d61c7d1750f46a77d50683b9a0067[m
+Author: bautistaAD <aqbautista@up.edu.ph>
+Date:   Mon Jun 5 05:31:49 2023 +0800
+
+    feat: added default display
+
+[33mcommit e26d31bb7182acf05670e8f5688e855878c2544a[m
+Author: smsanagustin <smsanagustin@up.edu.ph>
+Date:   Mon Jun 5 05:23:36 2023 +0800
+
+    ui: changed approvertype input to a dropdown
+
+[33mcommit f5000fcf8e93dfe9ff049b6c494186f5c7251c74[m
+Author: smsanagustin <smsanagustin@up.edu.ph>
+Date:   Mon Jun 5 05:21:44 2023 +0800
+
+    ui: changed the approver type input to a dropdown input
+
+[33mcommit 6304a1d357fcecc52450cd34a32af648c505a1c6[m
+Author: smsanagustin <smsanagustin@up.edu.ph>
+Date:   Mon Jun 5 05:06:41 2023 +0800
+
+    ui: imported footer component
+
+[33mcommit e873ad251eb5cf99b4d62c8be94fefd3f9597c50[m
+Author: bautistaAD <aqbautista@up.edu.ph>
+Date:   Mon Jun 5 04:42:43 2023 +0800
+
+    fix: update
+
+[33mcommit 91b916eef51738fde3e339e3ab7f6441d542b4e7[m
+Author: bautistaAD <aqbautista@up.edu.ph>
+Date:   Mon Jun 5 04:42:26 2023 +0800
+
+    feat: integrated from backend
+
+[33mcommit 97a7b5f3a69bfc484eac5e152d8eee4149497568[m
+Author: bautistaAD <aqbautista@up.edu.ph>
+Date:   Mon Jun 5 04:40:53 2023 +0800
+
+    fix: updates
+
+[33mcommit eeebf302d0923871d776e0417b9d521438cde9e0[m
+Merge: 37c7921 621c04a
+Author: jakiebravarian <jcbrabante@up.edu.ph>
+Date:   Mon Jun 5 03:23:50 2023 +0800
+
+    Merge branch 'frontend' of https://github.com/CMSC100-UV4L/san-agustin_bautista_brabante_pena_project into frontend
+
+[33mcommit 37c7921233c9953acc9dcce8978f1031f788826d[m
+Author: jakiebravarian <jcbrabante@up.edu.ph>
+Date:   Mon Jun 5 03:21:10 2023 +0800
+
+    chore: fixed DOM errors (class => className, etc.)
+
+[33mcommit 06d0177e0f354c80b54bdd341d526877f1869a33[m
+Author: jakiebravarian <jcbrabante@up.edu.ph>
+Date:   Mon Jun 5 03:12:05 2023 +0800
+
+    docs: added documentation to Table component
