@@ -10,17 +10,14 @@ export const getAllPendingApplications = async (req, res) => {
     // console.log(approver._id);
     let currentPendingApplications = [];
     if (approver.title === "Adviser") {
-      
-      const applicationsQuery = Application.find({ status: "Open" }).populate({
-        path: "student",
-        populate: { path: "adviser" },
-      });
+      const applicationsQuery = Application.find({ status: "Open" }).populate("student");
+
       applicationsQuery
         .then((applications) => {
 
           // Filter applications based on adviser
           applications.forEach(function (application) {
-            if (application.student.adviser._id.toString() === approver._id.toString()) {
+            if (application.student.adviser === approver._id) {
               currentPendingApplications = currentPendingApplications.concat(application);
             }
           });
@@ -36,10 +33,7 @@ export const getAllPendingApplications = async (req, res) => {
         });
 
     } else {
-      const applicationsQuery = Application.find({ status: "Open" }).populate("student").populate({
-        path: "student",
-        populate: { path: "adviser" },
-      });
+      const applicationsQuery = Application.find({ status: "Open" }).populate("student");
       applicationsQuery
         .then((applications) => {
           // Handle the applications array

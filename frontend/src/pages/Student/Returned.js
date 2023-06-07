@@ -19,10 +19,8 @@ export default function Returned() {
     const [student, setStudent] = useState([]);
     const [userInfo, setUserInfo] = useState({}); // Define userInfo state
     const [Applications, setApplications] = useState([])
-    const [currentApplication, setCurrentApplication] = useState();
-    const [remarkss, setRemarks] = useState([]);
+    const [currentApplication, setCurrentApplication] = useState()
     const navigate = useNavigate();
-    
     useEffect(() => {
         const upMail1 = localStorage.getItem("upMail");
       
@@ -43,7 +41,6 @@ export default function Returned() {
 
              const currentApp = studentData.application.find(app => app._id   === appId);
              setCurrentApplication(currentApp);
-             setRemarks(currentApp.remarks[currentApp.remarks.length - 1]);
           }
         };  
 
@@ -84,10 +81,6 @@ export default function Returned() {
 
             <div className="remarks">
                 Remarks: {remarks.remarks}
-                {/* Remarks: {remarkss.remark }
-                Date of Remarks: { remarkss.dateRemark },
-                Commenter: {remarkss.commenter },
-                stepGivenRemark: { remarkss.stepGivenRemark}, */}
             </div>
             {/* form */}
             <Form onClick={resubmitApplication}/>
